@@ -21,7 +21,7 @@ def make_comment(request):
         return HttpResponse(json.dumps({
             'status': -1,
             'errMsg': '缺失信息',
-        }))
+        }), content_type="application/json")
     else:
         try:
             c=Comment(content=content)
@@ -34,7 +34,7 @@ def make_comment(request):
             return HttpResponse(json.dumps({
                 'status': -1,
                 'errMsg': '发表评论失败',
-            }))
+            }), content_type="application/json")
         else:
             return HttpResponse(json.dumps({
                 'status': 1,
@@ -42,7 +42,7 @@ def make_comment(request):
                 'body': {
                     'message': "发表评论成功"
                 }
-            }))
+            }), content_type="application/json")
 
 def get_comment_by_course(request):
     """
@@ -67,13 +67,13 @@ def get_comment_by_course(request):
         return HttpResponse(json.dumps({
             'status': -1,
             'errMsg': '获取评论失败',
-        }))
+        }), content_type="application/json")
     else:
         return HttpResponse(json.dumps({
             'status': 1,
             'length': len(rawList),
             'body': retList
-        }))
+        }), content_type="application/json")
     finally:
         pass
 
@@ -90,12 +90,12 @@ def edit_comment(request):
         return HttpResponse(json.dumps({
             'status': -1,
             'errMsg': '更新评论失败',
-        }))
+        }), content_type="application/json")
     else:
         return HttpResponse(json.dumps({
             'status': 1,
             'length': 1,
             'body': {'message': "新建授课信息成功"}
-        }))
+        }), content_type="application/json")
 
 
