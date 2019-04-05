@@ -94,6 +94,18 @@
   }
 },
 {
+  "model": "rateMyCourse.user",
+  "pk": 6,
+  "fields": {
+    "username": "rbq",
+    "mail": "rbq@test.com",
+    "password": "rbq",
+    "role": "O",
+    "self_introduction": "",
+    "gender": "A"
+  }
+},
+{
   "model": "rateMyCourse.course",
   "pk": 1,
   "fields": {
