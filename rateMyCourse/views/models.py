@@ -27,12 +27,12 @@ def addTeacher(request):
             return HttpResponse(json.dumps({
                 'status': -1,
                 'errMsg': 'teacher already exist',
-            }))
+            }), content_type="application/json")
         else:
             return HttpResponse(json.dumps({
                 'status': -1,
                 'errMsg': 'Operation Error',
-            }))
+            }), content_type="application/json")
     else:
         return HttpResponse(json.dumps({
             'status': 1,
@@ -40,7 +40,7 @@ def addTeacher(request):
             'body': {
                 'message': "新建教师{0}成功".format(name)
             }
-        }))
+        }), content_type="application/json")
     finally:
         pass
 
@@ -61,7 +61,7 @@ def addCourse(request):
         return HttpResponse(json.dumps({
             'status': -1,
             'errMsg': 'Operation Error',
-        }))
+        }), content_type="application/json")
     else:
         return HttpResponse(json.dumps({
             'status': 1,
@@ -69,7 +69,7 @@ def addCourse(request):
             'body': {
                 'message': "新建课程{0}成功".format(name)
             }
-        }))
+        }), content_type="application/json")
     finally:
         pass
 
@@ -90,7 +90,7 @@ def addTeachCourse(request):
         return HttpResponse(json.dumps({
             'status': -1,
             'errMsg': 'Operation Error',
-        }))
+        }), content_type="application/json")
     else:
         return HttpResponse(json.dumps({
             'status': 1,
@@ -98,7 +98,7 @@ def addTeachCourse(request):
             'body': {
                 'message': "新建授课信息成功"
             }
-        }))
+        }), content_type="application/json")
     finally:
         pass
 

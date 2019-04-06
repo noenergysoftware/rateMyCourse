@@ -106,7 +106,9 @@ class Course(models.Model):
     course_ID: char, length = 50, unique ID of the class, primary key \n
     description: char, length = 512, the description of the class, including time, place and so on \n
     # average_rank: float, the average rank of the class \n
-    course_type: tuple, the type of the course \n
+
+    course_type: the type of the course \n
+
     credit: float, the credit of a course
     """
     '''# todo mo detailed course type
@@ -118,12 +120,12 @@ class Course(models.Model):
 
     # attributes
     name = models.CharField(max_length=64)
-    website = models.URLField()
+    website = models.URLField(blank=True)
     course_ID = models.CharField(max_length=50, unique=True, null=True)
     description = models.CharField(max_length=512, blank=True)
     # average_rank = models.FloatField()
     course_type = models.CharField(max_length=64, blank=True)
-    credit = models.IntegerField()
+    credit = models.FloatField()
 
     def __str__(self):
         return self.name
@@ -137,7 +139,6 @@ class Course(models.Model):
             'course_type': self.course_type,
             'credit': self.credit
         }
-
 
 class TeachCourse(models.Model):
     """
@@ -204,7 +205,7 @@ class SelectCourse(models.Model):
         on_delete=models.CASCADE,
     )
 
-
+    
 class Comment(models.Model):
     """
     details of each comment. \n
@@ -217,10 +218,6 @@ class Comment(models.Model):
     create_time = models.DateTimeField(default=datetime.datetime.now)
     edit_time = models.DateTimeField(default=datetime.datetime.now)
     parent_comment = models.IntegerField(default=-1)
-
-    def __str__(self):
-        return self.content
-
 
     def ret(self):
         return {
@@ -254,7 +251,7 @@ class MakeComment(models.Model):
 
 class HitCount(models.Model):
     name = models.CharField(max_length=50)
-    count = models.IntegerField()
+    count = models.BigIntegerField()
 
     def ret(self):
         return {

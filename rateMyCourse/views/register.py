@@ -24,7 +24,7 @@ def sign_up(request):
         return HttpResponse(json.dumps({
             'status': -1,
             'errMsg': '未能获取到用户名，邮箱或密码',
-        }))
+        }), content_type="application/json")
     try:
         User(username=username, mail=mail, password=password).save()
     except Exception as err:
@@ -33,17 +33,17 @@ def sign_up(request):
             return HttpResponse(json.dumps({
                 'status': -1,
                 'errMsg': '此邮箱已经被注册过',
-            }))
+            }), content_type="application/json")
         elif "username" in errmsg:
             return HttpResponse(json.dumps({
                 'status': -1,
                 'errMsg': '此用户名已经被注册过',
-            }))
+            }), content_type="application/json")
         else:
             return HttpResponse(json.dumps({
                 'status': -1,
                 'errMsg': '邮箱或用户名已经被注册过',
-            }))
+            }), content_type="application/json")
     else:
         return HttpResponse(json.dumps({
             'status': 1,
@@ -51,7 +51,7 @@ def sign_up(request):
             'body': {
                 'message': "新建用户{0}成功".format(username)
             }
-        }))
+        }), content_type="application/json")
 
 
 def update_user(request):
@@ -67,7 +67,7 @@ def update_user(request):
         return HttpResponse(json.dumps({
             'status': -1,
             'errMsg': '不存在此用户',
-        }))
+        }), content_type="application/json")
     else:
         try:
             user.gender = request.POST['gender']
@@ -78,7 +78,7 @@ def update_user(request):
             return HttpResponse(json.dumps({
                 'status': -1,
                 'errMsg': '保存失败，请检查内容正确性',
-            }))
+            }), content_type="application/json")
         else:
             return HttpResponse(json.dumps({
                 'status': 1,
@@ -86,7 +86,7 @@ def update_user(request):
                 'body': {
                     'message': "用户{0}信息更新成功".format(username)
                 }
-            }))
+            }), content_type="application/json")
 
 
 def sign_in(request):
@@ -97,7 +97,7 @@ def sign_in(request):
         return HttpResponse(json.dumps({
             'status': -1,
             'errMsg': '未能获取到用户名，邮箱或密码',
-        }))
+        }), content_type="application/json")
     try:
         u = User.objects.get(username=username)
     except Exception:
@@ -107,12 +107,12 @@ def sign_in(request):
             return HttpResponse(json.dumps({
                 'status': -2,
                 'errMsg': '用户名或邮箱不存在',
-            }))
+            }), content_type="application/json")
     if (password != u.password):
         return HttpResponse(json.dumps({
             'status': -3,
             'errMsg': '密码错误',
-        }))
+        }), content_type="application/json")
     else:
         return HttpResponse(json.dumps({
             'status': 0,
@@ -120,6 +120,6 @@ def sign_in(request):
             'body':{
                 'username':username
             }
-        }))
+        }), content_type="application/json")
 
 
