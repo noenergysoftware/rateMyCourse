@@ -18,7 +18,7 @@ def searchTeacher(request):
     """
     retlist = []
     try:
-        username = request.POST['username']
+        username = request.GET['username']
         teacher_list = Teacher.objects.filter(name=username)
         for teacher in teacher_list:
             retlist.append(teacher.ret())
@@ -43,7 +43,7 @@ def searchCourse(request):
     """
     retlist = []
     try:
-        courseName = request.POST['Course']
+        courseName = request.GET['Course']
         course_list = Course.objects.filter(name=courseName)
         for course in course_list:
             retlist.append(course.ret())
@@ -66,7 +66,7 @@ def searchUser(request):
     """
     retlist = []
     try:
-        username = request.POST['username']
+        username = request.GET['username']
         user_list = User.objects.filter(name=username)
         for user in user_list:
             retlist.append(user.ret())
