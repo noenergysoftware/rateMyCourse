@@ -142,6 +142,18 @@
   }
 },
 {
+  "model": "rateMyCourse.course",
+  "pk": 4,
+  "fields": {
+    "name": "rbq",
+    "website": "http://www.rbq.com",
+    "course_ID": "000000",
+    "description": "",
+    "course_type": "",
+    "credit": 1
+  }
+},
+{
   "model": "rateMyCourse.teachcourse",
   "pk": 1,
   "fields": {
@@ -216,6 +228,16 @@
   }
 },
 {
+  "model": "rateMyCourse.comment",
+  "pk": 5,
+  "fields": {
+    "content": "rbq",
+    "create_time": "2019-04-06T13:58:06Z",
+    "edit_time": "2019-04-06T13:58:06Z",
+    "parent_comment": -1
+  }
+},
+{
   "model": "rateMyCourse.makecomment",
   "pk": 1,
   "fields": {
@@ -249,6 +271,15 @@
     "user": 5,
     "course": 3,
     "comment": 4
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 5,
+  "fields": {
+    "user": 6,
+    "course": 4,
+    "comment": 5
   }
 },
 {
