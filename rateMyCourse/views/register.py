@@ -115,7 +115,7 @@ def sign_in(request):
         }), content_type="application/json")
     else:
         return HttpResponse(json.dumps({
-            'status': 0,
+            'status': 1,
             'length': 1,
             'body':{
                 'username':username
