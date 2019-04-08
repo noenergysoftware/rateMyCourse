@@ -27,7 +27,10 @@ def searchTeacher(request):
             'status': -1,
             'errMsg': 'teacher name Error',
         }), content_type="application/json")
+<<<<<<< HEAD
 
+=======
+>>>>>>> d123996... Merge branch 'backend_refactoring' of https://github.com/supplient/rateMyCourse into backend_refactoring
     return HttpResponse(json.dumps({
         'status': 1,
         'length': len(teacher_list),
@@ -57,6 +60,10 @@ def searchCourse(request):
         'length': len(course_list),
         'body': retlist,
     }), content_type="application/json")
+<<<<<<< HEAD
+=======
+
+>>>>>>> d123996... Merge branch 'backend_refactoring' of https://github.com/supplient/rateMyCourse into backend_refactoring
 
 def searchUser(request):
     """

@@ -22,7 +22,10 @@ def make_comment(request):
             'status': -1,
             'errMsg': '缺失信息',
         }), content_type="application/json")
+<<<<<<< HEAD
 
+=======
+>>>>>>> d123996... Merge branch 'backend_refactoring' of https://github.com/supplient/rateMyCourse into backend_refactoring
     else:
         try:
             c = Comment(content=content)
@@ -35,7 +38,10 @@ def make_comment(request):
             return HttpResponse(json.dumps({
                 'status': -1,
                 'errMsg': '发表评论失败',
+<<<<<<< HEAD
 
+=======
+>>>>>>> d123996... Merge branch 'backend_refactoring' of https://github.com/supplient/rateMyCourse into backend_refactoring
             }), content_type="application/json")
         else:
             return HttpResponse(json.dumps({
