@@ -80,17 +80,18 @@ def addTeachCourse(request):
     增加课授课信息，需求教师列表，课程，部门
     """
     try:
-        department = Department.objects.get(name=request.Post['department'])
-        course = Course.objects.get(name=request.Post['course'])
+        department = Department.objects.get(name=request.POST['department'])
+        course = Course.objects.get(name=request.POST['course'])
         c = TeachCourse(department=department, course=course)
         c.save()
-        for i in request.Post['teacherList']:
+        tmp=request.POST.getlist('teacherList')
+        for i in tmp:
             c.teachers.add(Teacher.objects.get(name=i))
         c.save()
-    except Exception:
+    except Exception as err:
         return HttpResponse(json.dumps({
             'status': -1,
-            'errMsg': 'Operation Error',
+            'errMsg': str(err),
         }), content_type="application/json")
     else:
         return HttpResponse(json.dumps({
