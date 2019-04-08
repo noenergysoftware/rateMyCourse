@@ -18,8 +18,8 @@ def searchTeacher(request):
     """
     retlist = []
     try:
-        username = request.GET['username']
-        teacher_list = Teacher.objects.filter(name=username)
+        name = request.GET['name']
+        teacher_list = Teacher.objects.filter(name__icontains=name)
         for teacher in teacher_list:
             retlist.append(teacher.ret())
     except Exception:
@@ -47,7 +47,7 @@ def searchCourse(request):
     retlist = []
     try:
         courseName = request.GET['Course']
-        course_list = Course.objects.filter(name=courseName)
+        course_list = Course.objects.filter(name__icontains=courseName)
         for course in course_list:
             retlist.append(course.ret())
     except Exception:
@@ -74,7 +74,7 @@ def searchUser(request):
     retlist = []
     try:
         username = request.GET['username']
-        user_list = User.objects.filter(name=username)
+        user_list = User.objects.filter(name__icontains=username)
         for user in user_list:
             retlist.append(user.ret())
     except Exception:
