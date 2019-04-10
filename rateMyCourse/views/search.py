@@ -66,6 +66,11 @@ def search_user(request):
     retlist = []
     try:
         username = request.GET['username']
+        if username=='':
+            return HttpResponse(json.dumps({
+                'status': -1,
+                'errMsg': 'user name Error',
+            }), content_type="application/json")
         user_list = User.objects.filter(name__icontains=username)
         for user in user_list:
             retlist.append(user.ret())
