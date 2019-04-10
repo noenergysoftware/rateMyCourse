@@ -110,8 +110,7 @@ def search_course_by_department(request):
 
 def get_department(request):
     '''
-    按所属部门搜索课程
-    要求准确的部门名称，返回该部门的课程
+    得到部门列表
     '''
     retlist=[]
     try:
