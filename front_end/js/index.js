@@ -33,11 +33,11 @@ function addcourse(id){
       url: "http://127.0.0.1:8000/addCourse/",
       dataType:"json",
       data:{              
-          name:"数学",
-          website:"no",
-          courseID:id,
-          description:"计算机组成原理",
-          courseType:"计算机科学与技术"+(id-30),
+          name:"数学"+id,
+          website:""+id,
+          course_ID:""+id,
+          description:"计算机组成原理"+id,
+          course_type:"计算机科学与技术"+(id),
           credit:"4"
       },
       success:function(data){
@@ -49,7 +49,7 @@ function addcourse(id){
               var a=1;
           }
           else{
-            alert(data.errMsg);
+            console.log(data.errMsg);
           }
           //window.setTimeout("location.href='./login.html'", 1200);
       },
@@ -92,11 +92,11 @@ $(document).ready(function(){
   function search(){
 
       $.ajax({
-            type:"POST",
+            type:"GET",
             url: "http://127.0.0.1:8000/searchCourse/",
             dataType:"json",
             data:{              
-                Course: $("#searchboxCourse").val(),
+                course_name: $("#searchboxCourse").val(),
             },
             success:function(data){
               //	alert("ajax success");
@@ -128,7 +128,7 @@ $(document).ready(function(){
       }
       else if (event.keyCode == 113) {
           //F2 to add course
-          for(var id=40;id<80;id++)
+          for(var id=60;id<80;id++)
             addcourse(id);
       }
   });

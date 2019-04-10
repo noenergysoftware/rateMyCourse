@@ -9,7 +9,9 @@
   <link rel="stylesheet" href="./css/new-age.css">
   
   <link rel="stylesheet" href="./css/coursePage.css" type="text/css">
-  <script src="./js/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+
+  <script src="./js/jquery-3.2.1.min.js" ></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="./js/jquery.cookie.js"></script>
   <script src="./js/bootstrap.bundle.js"></script>
@@ -20,6 +22,7 @@
   
   <script src="./js/animations.js"></script>
   <script src="./js/coursePage.js"></script>
+  <!--<script src="./js/coursePage_old.js"></script>-->
 
   <title>课程信息</title>
   <link rel="shortcut icon" href="./resource/favicon.ico"/>
@@ -101,7 +104,7 @@
 
     <div class="container py-5">
       <div class="text-center text-dark">
-        <h1 class="lead display-4">{{course_name}}</h1>
+        <h1  id="course_name" class="lead display-4"></h1>
       </div>
       <div style="width:100%; margin-top:86px">
         <table style="width:100%; margin:auto">
@@ -119,13 +122,13 @@
             </tr>
             <tr>
               <td>
-                <p class="text-dark text-center" style="margin-top:8px">{{course_credit}}</p>
+                <p class="text-dark text-center" id="course_credit" style="margin-top:8px"></p>
               </td>
               <td>
-                <p class="text-dark text-center" style="margin-top:8px">{{course_profession}}</p>
+                <p class="text-dark text-center" id="course_school"style="margin-top:8px"></p>
               </td>
               <td>
-                <p class="text-dark text-center" style="margin-top:8px">{{course_type}}</p>
+                <p class="text-dark text-center" id="course_type" style="margin-top:8px"></p>
               </td>
             </tr>
           </tbody>
@@ -141,29 +144,21 @@
 
         <div class="row show-grid" style="width:100%;margin-left:16px">
             <div class="col-md-8"><h3 class="text-dark"> 总分：{{course_scores}}</h3></div>
-            <div class="col-md-4" ><a class="btn btn-outline-primary btn-lg btn-default" id="toComment" href="rate">撰写评价</a></div>
+            <div class="col-md-4" ><a class="btn btn-outline-primary btn-lg btn-default" id="toComment" href="#" onclick="testAddComment()">撰写评价</a></div>
         </div>
 
-        <table style="width:100%; margin-top:16px; margin-left:32px">
-          <tbody>
-            <tr>
-              <td>
-                <p>{{detail1}}</p>
-              </td>
-              <td>
-                <p>{{detail2}}</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p>{{detail3}}</p>
-              </td>
-              <td>
-                <p>{{detail4}}</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        
+        
+        <br/>
+        
+        <div style="margin-top: 20px"class="card col-12">
+          <div class="card-header">课程简介</div>
+          <div id="coursedescription" class="card-body">
+            
+            
+          </div>
+         
+        </div>
       <!--</div>-->
       
       <!--
@@ -179,13 +174,19 @@
           </a>
         </div>
       </div>
-       -->
+      -->
+
+      <div id="locationid" ></div>
     </div>
   </div>
   <hr>
+
+
   <div class="container py-5">
       <div id="commentDiv" style="margin-left:32px"></div>
-    </div>
+  </div>
+
+  
   <div class="row">
       <div class="col-md-12 mt-3">
         <p class="text-center text-dark my-5">© Copyright 2019  - All rights reserved. </p>

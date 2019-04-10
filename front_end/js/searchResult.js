@@ -115,9 +115,12 @@ function lastPage(){
     toPage(parseInt($("#pagenum").text())-1);
 }
 
-function toCourse(){
+function toCourse(number){
+    console.log("to course"+number);
+    window.sessionStorage.setItem("coursetoload",number);
+    //console.log("to course"+number);
+    window.setTimeout("location.href='./coursePage.html'", 1000);
 
-    window.setTimeout("location.href='./searchResult.html'", 0);
 }
 
 $(document).ready(function(){
