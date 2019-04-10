@@ -18,7 +18,7 @@
   <script src="./js/jquery.cookie.js"></script>
   <script src="./js/bootstrap.bundle.js"></script>
   <script src="./js/jquery.validate.js"></script>
-
+  <script src="./js/index.js"></script>
   
 </head>
 
@@ -127,9 +127,10 @@
                 </div>
                 
                 <div class="col-md-1.5  ">
-                  <a class="btn btn-light btn-lg my-1" href="./searchResult.html" id="buttonSearchCourse" >搜索课程</a>
+                  <a class="btn btn-light btn-lg my-1" href="#" id="buttonSearchCourse" >搜索课程</a>
                 </div>
 
+                <!-- 暂时不支持其他学校
                 <div class="col-md-1.5">
                   <div class="btn-group">
                     <a class="btn btn-light btn-lg dropdown-toggle my-1" data-toggle="dropdown" id="buttonSelectSchool">选择学校</a>
@@ -144,13 +145,13 @@
                     </ul>
                   </div>
                 </div>
-                
+                 -->
                 <div class="col-md-1.5">
                     <div class="btn-group">
-                      <a class="btn btn-light btn-lg dropdown-toggle my-1" data-toggle="dropdown" id="buttonSelectMajor">选择专业</a>
+                      <a class="btn btn-light btn-lg dropdown-toggle my-1" data-toggle="dropdown" id="buttonSelectMajor">选择学院</a>
                       <ul class="dropdown-menu" role="menu">
                         <li>
-                          <a class="dropdown-item" herf="#" onclick="selectMajor($(this).text())">计算机科学与技术</a>
+                          <a class="dropdown-item" herf="#" onclick="selectMajor($(this).text())">计算机学院</a>
                         </li>
                         <div class="dropdown-divider"></div>
                         <li>
@@ -183,32 +184,34 @@
       <div class="container">
         <div class="row">
           <div class="p-4 col-md-4">
-            <h2 class="mb-4">Flamenco
+            <h2 class="mb-4">###
               <br> </h2>
             <p class="text-white">六人小型开发团队</p>
           </div>
           <div class="p-4 col-md-4">
             <h2 class="mb-4">关于我们</h2>
             <ul class="list-unstyled">
-              <a href="http://www.cnblogs.com/Flamenco/p/7662953.html" class="text-white">弗朗明戈舞步团队</a>
+              <a href="http://www.cnblogs.com/tbqjxjkwg/" class="text-white">提不起劲想赶紧完工</a>
               <br>
               <br> </ul>
           </div>
           <div class="p-4 col-md-4">
             <h2 class="mb-4">联系方式</h2>
             <p>
-              <a href="javascript:void(0)" class="text-white" data-toggle="modal" data-target="#contactModal">
+              <!--
+                <a href="javascript:void(0)" class="text-white" data-toggle="modal" data-target="#contactModal">
                 <i class="fa d-inline mr-2 fa-qq text"></i>公客们</a>
+              -->
             </p>
             <p>
-              <a href="mailto:flamenquer@163.com" class="text-white">
-                <i class="fa d-inline mr-2 text fa-envelope-o"></i>flamenquer@163.com</a>
+              <a href="#" class="text-white">
+                <i class="fa d-inline mr-2 text fa-envelope-o"></i>###</a>
             </p>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12 mt-3">
-            <p class="text-center text-white">© Copyright 2017 Flamenco - All rights reserved. </p>
+            <p class="text-center text-white">© Copyright 2017 #### - All rights reserved. </p>
           </div>
         </div>
       </div>
@@ -240,144 +243,5 @@
  
 
 
-  <script>
-  //cookies
-      function setCookie(cname,cvalue,exdays)
-      {
-        var d = new Date();
-        d.setTime(d.getTime()+(exdays*24*60*60*1000));
-        var expires = "expires="+d.toGMTString();
-        document.cookie = cname + "=" + cvalue + "; " + expires + ";path=/";
-      }
-
-        function getCookie(cname)
-      {
-        var name = cname + "=";
-        var ca = document.cookie.split(';');
-        for(var i=0; i<ca.length; i++) 
-        {
-          var c = ca[i].trim();
-          if (c.indexOf(name)==0) return c.substring(name.length,c.length);
-        }
-        return "";
-      }
-
-  </script>
-
-
-  <script>
-  
-  function selectSchool(a) {
-      document.getElementById("buttonSelectSchool").innerText=a;
-  }
-
-  function selectMajor(a) {
-      document.getElementById("buttonSelectMajor").innerText=a;
-  }
-
-  function addcourse(){
-      $.ajax({
-          type:"POST",
-          url: "http://127.0.0.1:8000/addCourse/",
-          dataType:"json",
-          data:{              
-              name:"计算机组成原理2",
-              website:"no",
-              courseID:"2",
-              description:"计算机组成原理",
-              courseType:"计算机科学与技术",
-              credit:"4"
-          },
-          success:function(data){
-            //	alert("ajax success");
-              console.log(data);
-              console.log(data.status)
-              if(data.status=="1"){
-                  alert(data.body.message);
-              }
-              else{
-                alert(data.errMsg);
-              }
-              //window.setTimeout("location.href='./login.html'", 1200);
-          },
-          error:function(data){
-            alert(JSON.stringify(data));
-          }
-      });
-  }
-
-  function storedata(data){
-    //  setCookie("coursenum",data.length,0);
-      window.sessionStorage.setItem("coursenum",data.length);
-      for (var i=0;i<data.length;i++){
-          /*setCookie("course"+i+"name",data.body[i].name,1);
-          setCookie("course"+i+"website",data.body[i].website,1);
-          setCookie("course"+i+"course_ID",data.body[i].course_ID,1);
-          setCookie("course"+i+"course_type",data.body[i].course_type,1);
-          setCookie("course"+i+"description",data.body[i].description,1);
-          setCookie("course"+i+"credit",data.body[i].credit,1);
-          console.log(getCookie("course"+i+"description"));
-          console.log("course"+i+"description   "+data.body[i].description);
-          setCookie("username","WTF???",365);
-          console.log(getCookie("username"));
-          var x=document.cookie;
-          console.log(x);*/
-          console.log("test DOM storage");
-          if (window.sessionStorage) { 
-              window.sessionStorage.setItem("course"+i+"name",data.body[i].name);
-              window.sessionStorage.setItem("course"+i+"website",data.body[i].website);
-              window.sessionStorage.setItem("course"+i+"course_ID",data.body[i].course_ID);
-              window.sessionStorage.setItem("course"+i+"course_type",data.body[i].course_type);
-              window.sessionStorage.setItem("course"+i+"description",data.body[i].description);
-              window.sessionStorage.setItem("course"+i+"credit",data.body[i].credit);
-              console.log(window.sessionStorage.getItem("course"+i+"website"));
-          }
-      }
-  }
-  
-  $(document).ready(function(){
-      function search(){
-          $.ajax({
-								type:"POST",
-								url: "http://127.0.0.1:8000/searchCourse/",
-								dataType:"json",
-								data:{              
-										Course: $("#searchboxCourse").val(),
-								},
-								success:function(data){
-									//	alert("ajax success");
-										console.log(data);
-										//console.log(data.status)
-										if(data.status=="1"){
-												//alert(data.body.message);
-                        console.log("Successfully searched");
-                        storedata(data);
-										}
-										else{
-											alert(data.errMsg);
-										}
-										//window.setTimeout("location.href='./login.html'", 1200);
-								},
-								error:function(data){
-									alert(JSON.stringify(data));
-								}
-						});
-      }
-      $("#buttonSearchCourse").click(function(){
-					search();
-      });
-      $("html").keydown(function (event) {
-          if (event.keyCode == 13) {
-              //enter to search
-              search();
-          }
-          else if (event.keyCode == 113) {
-              //F2 to add course
-              addcourse();
-          }
-      });
-  });
-
-</script>
 </body>
 </html>
