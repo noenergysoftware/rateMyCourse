@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^searchCourse/$', search.search_course, name='searchCourse'),
     url(r'^searchUser/$', search.search_user, name='searchUser'),
     url(r'^searchCourseByDepartment/$', search.search_course_by_department,name='searchCourseByDepartment'),
+    url(r'^getDepartment/$', search.get_department, name='getDepartment'),
 
     url(r'^addTeacher/$',models.add_teacher, name="addTeacher"),
     url(r'^addCourse/$',models.add_course, name="addCourse"),

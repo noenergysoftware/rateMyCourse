@@ -107,3 +107,24 @@ def search_course_by_department(request):
         'length': len(department),
         'body': retlist,
     }), content_type="application/json")
+
+def get_department(request):
+    '''
+    按所属部门搜索课程
+    要求准确的部门名称，返回该部门的课程
+    '''
+    retlist=[]
+    try:
+        department=Department.objects.all()
+        for dep in department:
+            retlist.append(dep.ret())
+    except:
+        return HttpResponse(json.dumps({
+            'status': -1,
+            'errMsg': '获取学院列表失败',
+        }), content_type="application/json")
+    return HttpResponse(json.dumps({
+        'status': 1,
+        'length': len(retlist),
+        'body': retlist,
+    }), content_type="application/json")
