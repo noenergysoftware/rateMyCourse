@@ -111,7 +111,7 @@ def search_course_by_department(request):
         }), content_type="application/json")
     return HttpResponse(json.dumps({
         'status': 1,
-        'length': len(department),
+        'length': len(retlist),
         'body': retlist,
     }), content_type="application/json")
 
