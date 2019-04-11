@@ -1,13 +1,7 @@
 import json
-import smtplib
-from email.header import Header
-from email.mime.text import MIMEText
-from random import Random  # 用于生成随机码
-
-from django.conf import settings
 from django.http import HttpResponse
-
 from rateMyCourse.models import *
+
 
 def make_comment(request):
     """
@@ -44,6 +38,7 @@ def make_comment(request):
                 }
             }), content_type="application/json")
 
+
 def get_comment_by_course(request):
     """
     获取某节课的评论，需求课程号
@@ -77,6 +72,7 @@ def get_comment_by_course(request):
     finally:
         pass
 
+
 def edit_comment(request):
     """
     编辑评论，需求评论ID,新的content
@@ -95,7 +91,7 @@ def edit_comment(request):
         return HttpResponse(json.dumps({
             'status': 1,
             'length': 1,
-            'body': {'message': "新建授课信息成功"}
+            'body': {'message': "更新评论成功"}
         }), content_type="application/json")
 
 
