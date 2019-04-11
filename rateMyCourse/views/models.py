@@ -51,7 +51,7 @@ def add_course(request):
     """
     try:
         name = request.POST['name']
-        website = request.Post['website']
+        website = request.POST['website']
         course_ID = request.POST['course_ID']
         description = request.POST['description']
         course_type = request.POST['course_type']

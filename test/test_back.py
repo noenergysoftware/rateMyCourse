@@ -14,6 +14,16 @@ class BackBasicTestCase(TestCase):
     # Prepare the database by using fixture.
     fixtures = ["fixture.json"]
 
+    def logError(self, error_msg, case_name=None, response=None):
+        if case_name and response:
+            log.error("(%s) Test Fail. Response is [%s].\n%s", case_name, response.content, error_msg)
+        elif case_name and not response:
+            log.error("(%s) Test Fail. \n%s", case_name, error_msg)
+        elif not case_name and response:
+            log.error("Test Fail. Response is [%s].\n%s", response.content, error_msg)
+        else:
+            log.error("Test Fail. \n%s", error_msg)
+
 
 class BackPostCheckDBTC(BackBasicTestCase):
     def setUp(self):
@@ -39,13 +49,16 @@ class BackPostCheckDBTC(BackBasicTestCase):
         except Exception as e:
             log.error("Error when checking response. The response is %s", response.content)
             raise e
+        return response
 
     def postAndCheck(self, url, model_name, prop_dict, text=""):
         # Send Request & Response Check
-        self.postContainTest(url, prop_dict, text=text)
+        response = self.postContainTest(url, prop_dict, text=text)
         # Side Effect Check
         #   Check whether the side effects take place.
         self.checker.check(model_name, prop_dict)
+
+        return response
 
     def autoTest(self, testcase_file):
         # Read Testcases from json
@@ -66,14 +79,14 @@ class BackPostCheckDBTC(BackBasicTestCase):
             # Do Test
             with self.subTest(case_name=case_name):
                 try:
-                    self.postAndCheck(
+                    response = self.postAndCheck(
                         url,
                         model_name,
                         prop_dict,
                         text
                     )
                 except Exception as e:
-                    log.error("(%s) Test Fail.", case_name)
+                    self.logError(str(e), case_name, response)
                     raise e
 
 
@@ -88,7 +101,7 @@ class BackGetCheckBodyTC(BackBasicTestCase):
         except Exception as e:
             log.error("Error when checking response. The response is %s", response.content)
             raise e
-        return (body, retlist)
+        return (body, retlist, response)
 
     def checkDictEntry(self, dicta, dictb):
         for key, value in dictb.items():
@@ -104,7 +117,7 @@ class BackGetCheckBodyTC(BackBasicTestCase):
             self.assertEquals(dicta[key], dictb[key])
 
     def getAndCheck(self, url, prop_dict, length, exp_list=[]):
-        body, retlist = self.getJsonBody(url, prop_dict)
+        body, retlist, response = self.getJsonBody(url, prop_dict)
         self.assertDictEntry(
             body,
             {
@@ -118,6 +131,7 @@ class BackGetCheckBodyTC(BackBasicTestCase):
                     exist = True
                     break
             self.assertTrue(exist)
+        return response
 
 
     def autoTest(self, testcase_file):
@@ -139,14 +153,14 @@ class BackGetCheckBodyTC(BackBasicTestCase):
             # Do Test
             with self.subTest(case_name=case_name):
                 try:
-                    self.getAndCheck(
+                    response = self.getAndCheck(
                         url,
                         prop_dict,
                         length,
                         exp_list
                     )
                 except Exception as e:
-                    log.error("(%s) Test Fail. [%s]", case_name, str(e))
+                    self.logError(str(e), case_name, response)
                     raise e
 
 # Test Cases
