@@ -18,26 +18,26 @@ def make_comment(request):
             'errMsg': '缺失信息',
         }), content_type="application/json")
     else:
-        #try:
-        c = Comment(content=content,teacher=Teacher.objects.get(name=teacher_name))
-        c.save()
-        b = MakeComment(user=User.objects.get(username=username),
-                      course=Course.objects.get(course_ID=course_ID),
-                      comment=c)
-        b.save()
-        #except:
-        #    return HttpResponse(json.dumps({
-        #        'status': -1,
-        #        'errMsg': '发表评论失败',
-        #    }), content_type="application/json")
-        #else:
-        return HttpResponse(json.dumps({
-            'status': 1,
-            'length': 1,
-            'body': {
-                'message': "发表评论成功"
-            }
-        }), content_type="application/json")
+        try:
+            c = Comment(content=content,teacher=Teacher.objects.get(name=teacher_name))
+            c.save()
+            b = MakeComment(user=User.objects.get(username=username),
+                          course=Course.objects.get(course_ID=course_ID),
+                          comment=c)
+            b.save()
+        except:
+            return HttpResponse(json.dumps({
+                'status': -1,
+                'errMsg': '发表评论失败',
+            }), content_type="application/json")
+        else:
+            return HttpResponse(json.dumps({
+                'status': 1,
+                'length': 1,
+                'body': {
+                    'message': "发表评论成功"
+                }
+            }), content_type="application/json")
 
 
 def get_comment_by_course(request):
