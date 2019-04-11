@@ -217,12 +217,18 @@ class Comment(models.Model):
     edit_time = models.DateTimeField(default=datetime.datetime.now)
     parent_comment = models.IntegerField(default=-1)
 
+    teacher = models.ForeignKey(
+        Teacher,
+        on_delete=models.CASCADE,
+        default=None,
+    )
     def ret(self):
         return {
             'content': self.content,
             'create_time': str(self.create_time),
             'edit_time': str(self.edit_time),
-            'parent_comment': self.parent_comment
+            'parent_comment': self.parent_comment,
+            'teacher': str(self.teacher.name)
         }
 
 
@@ -245,6 +251,7 @@ class MakeComment(models.Model):
         Comment,
         on_delete=models.CASCADE,
     )
+
 
 
 class HitCount(models.Model):
