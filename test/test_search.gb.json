@@ -50,7 +50,7 @@
         ]
     ],
     [
-        "get_comment",
+        "get_comment_by_course",
         "/getCommentsByCourse/",
         {
             "course_ID": 110
@@ -64,6 +64,22 @@
             {
                 "username": "police",
                 "content": "那你很棒棒哦"
+            }
+        ]
+    ],
+    [
+        "search_course_by_department",
+        "/searchCourseByDepartment/",
+        {
+            "department": "Office"
+        },
+        2,
+        [
+            {
+                "course_name": "论持久战"
+            },
+            {
+                "course_name": "第三次世界大战"
             }
         ]
     ]

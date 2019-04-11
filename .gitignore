@@ -19,3 +19,6 @@ rateMyCourse/migrations/*
 
 # document
 *.pdf
+
+# test log
+test/test.log

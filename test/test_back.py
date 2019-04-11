@@ -16,13 +16,13 @@ class BackBasicTestCase(TestCase):
 
     def logError(self, error_msg, case_name=None, response=None):
         if case_name and response:
-            log.error("(%s) Test Fail. Response is [%s].\n%s", case_name, response.content, error_msg)
+            log.error("(%s) Test Fail. Response is [%s].\n\t%s", case_name, response.content, error_msg)
         elif case_name and not response:
-            log.error("(%s) Test Fail. \n%s", case_name, error_msg)
+            log.error("(%s) Test Fail. \n\t%s", case_name, error_msg)
         elif not case_name and response:
-            log.error("Test Fail. Response is [%s].\n%s", response.content, error_msg)
+            log.error("Test Fail. Response is [%s].\n\t%s", response.content, error_msg)
         else:
-            log.error("Test Fail. \n%s", error_msg)
+            log.error("Test Fail. \n\t%s", error_msg)
 
 
 class BackPostCheckDBTC(BackBasicTestCase):
@@ -56,9 +56,11 @@ class BackPostCheckDBTC(BackBasicTestCase):
         response = self.postContainTest(url, prop_dict, text=text)
         # Side Effect Check
         #   Check whether the side effects take place.
-        self.checker.check(model_name, prop_dict)
-
-        return response
+        try:
+            self.checker.check(model_name, prop_dict)
+        except Exception as e:
+            log.error("Error when checking body. Response is %s", response.content)
+            raise e
 
     def autoTest(self, testcase_file):
         # Read Testcases from json
@@ -79,14 +81,14 @@ class BackPostCheckDBTC(BackBasicTestCase):
             # Do Test
             with self.subTest(case_name=case_name):
                 try:
-                    response = self.postAndCheck(
+                    self.postAndCheck(
                         url,
                         model_name,
                         prop_dict,
                         text
                     )
                 except Exception as e:
-                    self.logError(str(e), case_name, response)
+                    self.logError(str(e), case_name)
                     raise e
 
 
@@ -118,20 +120,23 @@ class BackGetCheckBodyTC(BackBasicTestCase):
 
     def getAndCheck(self, url, prop_dict, length, exp_list=[]):
         body, retlist, response = self.getJsonBody(url, prop_dict)
-        self.assertDictEntry(
-            body,
-            {
-                "length": length
-            }
-        )
-        for i in range(len(exp_list)):
-            exist = False
-            for j in range(len(retlist)):
-                if self.checkDictEntry(retlist[j], exp_list[i]):
-                    exist = True
-                    break
-            self.assertTrue(exist)
-        return response
+        try:
+            self.assertDictEntry(
+                body,
+                {
+                    "length": length
+                }
+            )
+            for i in range(len(exp_list)):
+                exist = False
+                for j in range(len(retlist)):
+                    if self.checkDictEntry(retlist[j], exp_list[i]):
+                        exist = True
+                        break
+                self.assertTrue(exist)
+        except Exception as e:
+            log.error("Error when checking body. Response is %s", response.content)
+            raise e
 
 
     def autoTest(self, testcase_file):
@@ -153,14 +158,14 @@ class BackGetCheckBodyTC(BackBasicTestCase):
             # Do Test
             with self.subTest(case_name=case_name):
                 try:
-                    response = self.getAndCheck(
+                    self.getAndCheck(
                         url,
                         prop_dict,
                         length,
                         exp_list
                     )
                 except Exception as e:
-                    self.logError(str(e), case_name, response)
+                    self.logError(str(e), case_name)
                     raise e
 
 # Test Cases
