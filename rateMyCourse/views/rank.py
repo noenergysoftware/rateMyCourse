@@ -1,7 +1,7 @@
 import json
 from django.http import HttpResponse
 from rateMyCourse.models import *
-
+from django.core.exceptions import ObjectDoesNotExist
 
 def make_rank(request):
     """
@@ -21,22 +21,20 @@ def make_rank(request):
         }), content_type="application/json")
     else:
         try:
+            b = MakeRank.objects.get(user=User.objects.get(username=username),
+                          course=Course.objects.get(course_ID=course_ID))
+        except ObjectDoesNotExist:
+            # create new
             r = Rank(difficulty_score=difficulty_score,
                     funny_score=funny_score,
                     gain_score=gain_score,
                     recommend_score=recommend_score,
             )
             r.save()
-            b = MakeRank(user=User.objects.get(username=username),
+            b1 = MakeRank(user=User.objects.get(username=username),
                           course=Course.objects.get(course_ID=course_ID),
                           rank=r)
-            b.save()
-        except:
-            return HttpResponse(json.dumps({
-                'status': -1,
-                'errMsg': '发表评分失败',
-            }), content_type="application/json")
-        else:
+            b1.save()
             return HttpResponse(json.dumps({
                 'status': 1,
                 'length': 1,
@@ -44,6 +42,28 @@ def make_rank(request):
                     'message': "发表评分成功"
                 }
             }), content_type="application/json")
+        except:
+            return HttpResponse(json.dumps({
+                'status': -1,
+                'errMsg': '缺失信息',
+            }), content_type="application/json")
+        else:
+            # edit
+            r=b.rank
+            r.difficulty_score = difficulty_score
+            r.funny_score = funny_score
+            r.gain_score = gain_score
+            r.recommend_score = recommend_score
+            r.edit_time=datetime.datetime.now()
+            r.save()
+            return HttpResponse(json.dumps({
+                'status': 1,
+                'length': 1,
+                'body': {
+                    'message': "更新评分成功"
+                }
+            }), content_type="application/json")
+
 
 
 def get_rank_by_course(request):
@@ -81,30 +101,5 @@ def get_rank_by_course(request):
         }), content_type="application/json")
     finally:
         pass
-
-
-def edit_rank(request):
-    """
-    编辑评分，需求评分ID,新的评分
-    """
-    try:
-        c = MakeRank.objects.get(id=request.POST['rank_ID'])
-        c.rank.difficulty_score = request.POST['difficulty_score']
-        c.rank.funny_score = request.POST['funny_score']
-        c.rank.gain_score = request.POST['gain_score']
-        c.rank.recommend_score = request.POST['recommend_score']
-        c.rank.edit_time = datetime.datetime.now()
-        c.rank.save()
-    except:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': '更新评分失败',
-        }), content_type="application/json")
-    else:
-        return HttpResponse(json.dumps({
-            'status': 1,
-            'length': 1,
-            'body': {'message': "更新评分成功"}
-        }), content_type="application/json")
 
 

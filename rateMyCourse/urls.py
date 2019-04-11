@@ -24,7 +24,7 @@ urlpatterns = [
 
     url(r'^makeRank/$', rank.make_rank, name="makeRank"),
     url(r'^getRankByCourse/$', rank.get_rank_by_course, name="getRankByCourse"),
-    url(r'^editRank/$', rank.edit_rank, name="editRank"),
+
 ]
 '''
 urlpatterns = [
