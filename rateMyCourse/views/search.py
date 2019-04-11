@@ -41,16 +41,23 @@ def search_course(request):
     姓名包含关键字的所有课程
     """
     retlist = []
-    try:
-        course_name = request.GET['course_name']
-        course_list = Course.objects.filter(name__icontains=course_name)
-        for course in course_list:
-            retlist.append(course.ret())
-    except Exception:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': 'course name Error',
-        }), content_type="application/json")
+    #try:
+    course_name = request.GET['course_name']
+    course_list = Course.objects.filter(name__icontains=course_name)
+    for course in course_list:
+        tl=TeachCourse.objects.filter(course=course)
+        teacher_list=[]
+        for tc in tl:
+            for tmp in tc.teachers.all():
+                if tmp.name not in teacher_list:
+                    teacher_list.append(tmp.name)
+        retlist.append(course.ret())
+        retlist[-1]['teacher_list']=teacher_list
+    #except Exception:
+     #   return HttpResponse(json.dumps({
+    #        'status': -1,
+     #       'errMsg': 'course name Error',
+     #   }), content_type="application/json")
     return HttpResponse(json.dumps({
         'status': 1,
         'length': len(course_list),
