@@ -25,7 +25,7 @@ def search_teacher(request):
     except Exception:
         return HttpResponse(json.dumps({
             'status': -1,
-            'errMsg': 'teacher name Error',
+            'errMsg': 'search teacher Error',
         }), content_type="application/json")
     return HttpResponse(json.dumps({
         'status': 1,
@@ -41,23 +41,23 @@ def search_course(request):
     姓名包含关键字的所有课程
     """
     retlist = []
-    #try:
-    course_name = request.GET['course_name']
-    course_list = Course.objects.filter(name__icontains=course_name)
-    for course in course_list:
-        tl=TeachCourse.objects.filter(course=course)
-        teacher_list=[]
-        for tc in tl:
-            for tmp in tc.teachers.all():
-                if tmp.name not in teacher_list:
-                    teacher_list.append(tmp.name)
-        retlist.append(course.ret())
-        retlist[-1]['teacher_list']=teacher_list
-    #except Exception:
-     #   return HttpResponse(json.dumps({
-    #        'status': -1,
-     #       'errMsg': 'course name Error',
-     #   }), content_type="application/json")
+    try:
+        course_name = request.GET['course_name']
+        course_list = Course.objects.filter(name__icontains=course_name)
+        for course in course_list:
+            tl=TeachCourse.objects.filter(course=course)
+            teacher_list=[]
+            for tc in tl:
+                for tmp in tc.teachers.all():
+                    if tmp.name not in teacher_list:
+                        teacher_list.append(tmp.name)
+            retlist.append(course.ret())
+            retlist[-1]['teacher_list']=teacher_list
+    except Exception:
+        return HttpResponse(json.dumps({
+            'status': -1,
+            'errMsg': 'search course Error',
+        }), content_type="application/json")
     return HttpResponse(json.dumps({
         'status': 1,
         'length': len(course_list),
@@ -78,7 +78,7 @@ def search_user(request):
                 'status': -1,
                 'errMsg': 'user name Error',
             }), content_type="application/json")
-        user_list = User.objects.filter(name__icontains=username)
+        user_list = User.objects.filter(username__icontains=username)
         for user in user_list:
             retlist.append(user.ret())
     except Exception:
