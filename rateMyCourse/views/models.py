@@ -100,9 +100,7 @@ def add_teach_course(request):
         teacher_list = request.POST.getlist('teacher_list[]')
         c = TeachCourse(department=department, course=course)
         c.save()
-        print(teacher_list)
         for teacher_name in teacher_list:
-            print(teacher_name)
             c.teachers.add(Teacher.objects.get(name=teacher_name))
         c.save()
     except Exception as err:
