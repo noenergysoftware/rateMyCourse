@@ -97,10 +97,12 @@ def add_teach_course(request):
             }), content_type="application/json")
         department = Department.objects.get(name=request.POST['department'])
         course = Course.objects.get(name=request.POST['course'])
+        teacher_list = request.POST.getlist('teacher_list[]')
         c = TeachCourse(department=department, course=course)
         c.save()
-        teacher_list = request.POST.getlist('teacher_list')
+        print(teacher_list)
         for teacher_name in teacher_list:
+            print(teacher_name)
             c.teachers.add(Teacher.objects.get(name=teacher_name))
         c.save()
     except Exception as err:
