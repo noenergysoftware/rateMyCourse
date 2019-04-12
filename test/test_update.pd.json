@@ -5,9 +5,9 @@
         "User",
         {
             "username": "rbq",
-            "role": "Teacher",
-            "gender": "Male",
-            "selfintroduction": "hhh"
+            "role": "T",
+            "gender": "M",
+            "self_introduction": "hhh"
         }
     ]
 ]

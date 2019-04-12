@@ -3,7 +3,7 @@
         "search_teacher",
         "/searchTeacher/",
         {
-            "name": "qiang"
+            "teacher_name": "qiang"
         },
         1,
         [
@@ -18,14 +18,14 @@
         "search_course",
         "/searchCourse/",
         {
-            "Course": "如何进牢子"
+            "course_name": "如何进牢子"
         },
         1,
         [
             {
                 "name": "如何进牢子",
                 "website": "http://www.jubao.com",
-                "course_ID": 110,
+                "course_ID": "110",
                 "description": "很简单",
                 "course_type": "必修",
                 "credit": 3
@@ -43,14 +43,14 @@
             {
                 "username": "ming",
                 "mail": "ming@test.com",
-                "role": "Student",
-                "gender": "Male",
+                "role": "S",
+                "gender": "M",
                 "self_introduction": "mingming"
             }
         ]
     ],
     [
-        "get_comment",
+        "get_comment_by_course",
         "/getCommentsByCourse/",
         {
             "course_ID": 110
@@ -64,6 +64,22 @@
             {
                 "username": "police",
                 "content": "那你很棒棒哦"
+            }
+        ]
+    ],
+    [
+        "search_course_by_department",
+        "/searchCourseByDepartment/",
+        {
+            "department": "Office"
+        },
+        2,
+        [
+            {
+                "course_name": "论持久战"
+            },
+            {
+                "course_name": "第三次世界大战"
             }
         ]
     ]

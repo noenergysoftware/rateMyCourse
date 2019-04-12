@@ -66,7 +66,7 @@ def search_user(request):
     retlist = []
     try:
         username = request.GET['username']
-        user_list = User.objects.filter(name__icontains=username)
+        user_list = User.objects.filter(username__icontains=username)
         for user in user_list:
             retlist.append(user.ret())
     except Exception:
