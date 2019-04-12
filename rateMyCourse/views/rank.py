@@ -2,12 +2,17 @@ import json
 from django.http import HttpResponse
 from rateMyCourse.models import *
 from django.core.exceptions import ObjectDoesNotExist
-
+import rateMyCourse.views.authentication as auth
 def make_rank(request):
     """
     发表评分，需要用户名，课程ID，以及分数
     """
     try:
+        if not auth.auth(request):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")
         username = request.POST['username']
         course_ID = request.POST['course_ID']
         difficulty_score = request.POST['difficulty_score']
@@ -72,6 +77,11 @@ def get_rank_by_course(request):
     返回一个字典，关键字为四项评分的名字，内容为平均分
     """
     try:
+        if not auth.auth(request):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")
         course_ID = request.GET['course_ID']
         rawList = MakeRank.objects.filter(course_id=Course.objects.get(course_ID=course_ID).id)
 

@@ -8,7 +8,7 @@ from django.conf import settings
 from django.http import HttpResponse
 
 from rateMyCourse.models import *
-
+import rateMyCourse.views.authentication as auth
 
 def sign_up(request):
     """
@@ -61,6 +61,11 @@ def update_user(request):
     其他非法情况返回错误信息（status=-1） 错误信息保存在errMsg中 \n
     """
     try:
+        if not auth.auth(request):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")
         username = request.POST['username']
         user = User.objects.get(username=username)
     except Exception:
@@ -122,12 +127,18 @@ def sign_in(request):
             'errMsg': '密码错误',
         }), content_type="application/json")
     else:
-        return HttpResponse(json.dumps({
+        # set cookies and sessions
+        request.session['auth_sess']=username
+        response=HttpResponse(json.dumps({
             'status': 1,
             'length': 1,
             'body': {
                 'username': username
             }
         }), content_type="application/json")
+        response.set_cookie('username',username,max_age=3600*24) # 1day
+        response.set_cookie('password',password,max_age=3600*24) # 1day
+        return response
+
 
 

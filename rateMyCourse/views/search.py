@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 
 from rateMyCourse.models import *
-
+import rateMyCourse.views.authentication as auth
 detail_names = ['有趣程度', '充实程度', '课程难度', '课程收获']
 
 
@@ -18,6 +18,11 @@ def search_teacher(request):
     """
     retlist = []
     try:
+        if not auth.auth(request):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")
         teacher_name = request.GET['teacher_name']
         teacher_list = Teacher.objects.filter(name__icontains=teacher_name)
         for teacher in teacher_list:
@@ -42,6 +47,11 @@ def search_course(request):
     """
     retlist = []
     try:
+        if not auth.auth(request):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")
         course_name = request.GET['course_name']
         course_list = Course.objects.filter(name__icontains=course_name)
         for course in course_list:
@@ -72,6 +82,11 @@ def search_user(request):
     """
     retlist = []
     try:
+        if not auth.auth(request):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")
         username = request.GET['username']
         if username=='':
             return HttpResponse(json.dumps({
@@ -100,6 +115,11 @@ def search_course_by_department(request):
     '''
     retlist=[]
     try:
+        if not auth.auth(request):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")
         department=request.GET['department']
         course_list=TeachCourse.objects.filter(department=Department.objects.get(name=department).id)
         tmplist=[]
@@ -133,6 +153,11 @@ def get_department(request):
     '''
     retlist=[]
     try:
+        if not auth.auth(request):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")
         department=Department.objects.all()
         for dep in department:
             retlist.append(dep.ret())
