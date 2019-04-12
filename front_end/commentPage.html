@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/new-age.css">
+  
+  <title>评价</title>
+  <link rel="shortcut icon" href="./resource/favicon.ico"/>
+  <link rel="bookmark" href="./resource/favicon.ico"/>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="./js/jquery-3.2.1.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="./js/jquery.cookie.js"></script>
+  <script src="./js/bootstrap.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/jquery.validate.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+  <script src="./js/animations.js"></script>
+  <script src="./js/addRatePage.js"></script>
+
+</head>
+
+<body>
+  <!-- Headers -->
+  <div class="container mb-4">
+    <div class="row my-1">
+      <div class="col-md-12 text-white">
+        <h1 class="display-5 mb-4 text-dark" id="course_name"></h1>
+        <!--<nav role="navigation">
+          <ol class="breadcrumb">
+            <li id="course_school" class="breadcrumb-item active"></li>
+            <li id="course"" class="breadcrumb-item active">{{course.department}}</li>
+          </ol>
+        </nav>-->
+      </div>
+    </div>
+    <hr />
+  </div>
+  <!-- Contents -->
+  <div class="container">
+
+    <!--  开课学期 暂时不需要
+    <div class="row my-1">
+      <div class="col-md-2">
+        <p class="lead my-2 text-dark text-right">开课学期</p>
+      </div>
+      <div class="col-md-10 px-5">
+        <p class="my-2">{{course.term}}</p>
+      </div>
+    </div>-->
+
+    <!-- 授课教师 -->
+    <div class="row  " style="margin-left: 60px">
+      <div class="btn-group">
+        <a class="btn btn-light btn-lg dropdown-toggle my-1" data-toggle="dropdown" id="buttonSelectTeacher">选择教师</a>
+        <ul id="teacherlist" class="dropdown-menu" role="menu">
+
+          <!-- load teacher
+          <li>
+            <a class="dropdown-item" herf="#" onclick="selectTeacher($(this).text())">计算机学院</a>
+          </li>
+          <div class="dropdown-divider"></div>
+          <li>
+            <a class="dropdown-item" herf="#" onclick="selectTeacher($(this).text())">temp</a>
+          </li>
+          -->
+        </ul>
+      </div>
+    </div>
+
+
+    <!--
+    <div class="row my-1">
+      <div class="col-md-2">
+        <p class="lead my-2 text-dark text-right">授课教师</p>
+      </div>
+      <div class="col-md-10 px-5">
+        <p class="my-2">
+          {{course.teacher}}
+        </p>
+      </div>
+    </div>
+    -->
+
+    <!-- 原先的评价？？ 暂时不需要
+    <div class="row my-1">
+      <div class="col-md-2">
+        <p class="lead my-2 text-dark text-right">原评价</p>
+      </div>
+      <div class="col-md-10 px-5">
+        <p class="w-75 my-2">
+          {{originalRate}}
+        </p>
+      </div>
+    </div>
+    -->
+
+    <div class="row my-1">
+      <div class="col-md-2">
+        <p class="lead my-2 text-dark text-right">评价</p>
+      </div>
+      <div class="col-md-10 px-5">
+        <textarea class="w-100 my-2"  id="comment" rows="15"></textarea>
+      </div>
+    </div>
+
+    
+    <div class="row my-1">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-10 px-5">
+        <a class="btn btn-outline-success px-3" href="javascript:void(0)" onclick="return Func_submit()">提交</a>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mt-3">
+        <p class="text-center text-dark my-5">© Copyright 2017 Flamenco - All rights reserved. </p>
+      </div>
+    </div>
+  </div>
+    
+</body>
+
+</html>

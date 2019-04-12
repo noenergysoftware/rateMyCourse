@@ -80,7 +80,8 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iTotal, text, time, 
 
 
 function testAddComment(){
-    $.ajax({
+    window.setTimeout("location.href='./commentPage.html'", 0);
+    /*$.ajax({
         type:"POST",
         url: "http://127.0.0.1:8000/makeComment/",
         dataType:"json",
@@ -106,7 +107,7 @@ function testAddComment(){
         error:function(data){
             alert(JSON.stringify(data));
         }
-    });
+    });*/
 }
 
 

@@ -59,6 +59,65 @@ function addcourse(id){
   });
 }
 
+function addteachcourse(id){
+
+
+  /*$.ajax({
+    type:"POST",
+    url: "http://127.0.0.1:8000/addTeacher/",
+    dataType:"json",
+    data:{ 
+        name:"教师1",
+        title:"教授"
+    },
+    success:function(data){
+      //	alert("ajax success");
+        console.log(data);
+        console.log(data.status)
+        if(data.status=="1"){
+            //alert(data.body.message);
+            var a=1;
+        }
+        else{
+          console.log(data.errMsg);
+        }
+        //window.setTimeout("location.href='./login.html'", 1200);
+    },
+    error:function(data){
+      alert(JSON.stringify(data));
+    }
+});*/
+
+
+  $.ajax({
+      type:"POST",
+      url: "http://127.0.0.1:8000/addTeachCourse/",
+      dataType:"json",
+      data:{ 
+          teacher_list:["老师1"],             
+          course:"数学"+id,
+          department:"计算机学院"
+      },
+      success:function(data){
+        //	alert("ajax success");
+          console.log(data);
+          console.log(data.status)
+          if(data.status=="1"){
+              //alert(data.body.message);
+              var a=1;
+          }
+          else{
+            console.log(data.errMsg);
+          }
+          //window.setTimeout("location.href='./login.html'", 1200);
+      },
+      error:function(data){
+        alert(JSON.stringify(data));
+      }
+  });
+}
+
+
 function storedata(data){
 //  setCookie("coursenum",data.length,0);
   window.sessionStorage.setItem("coursenum",data.length);
@@ -83,7 +142,9 @@ function storedata(data){
           window.sessionStorage.setItem("course"+i+"course_type",data.body[i].course_type);
           window.sessionStorage.setItem("course"+i+"description",data.body[i].description);
           window.sessionStorage.setItem("course"+i+"credit",data.body[i].credit);
+          window.sessionStorage.setItem("course"+i+"teacher_list",data.body[i].teacherlist);
           console.log(window.sessionStorage.getItem("course"+i+"website"));
+          console.log("1111111"+window.sessionStorage.getItem("course"+i+"teacher_list"))
       }
   }
 }
@@ -106,7 +167,7 @@ $(document).ready(function(){
                     //alert(data.body.message);
                     console.log("Successfully searched");
                     storedata(data);
-                    window.setTimeout("location.href='./searchResult.html'", 0);
+                    window.setTimeout("location.href='./searchResult.html'",100000);
                 }
                 else{
                   alert(data.errMsg);
@@ -131,5 +192,10 @@ $(document).ready(function(){
           for(var id=60;id<80;id++)
             addcourse(id);
       }
+      else if (event.keyCode == 114) {
+        //F3 to add  teach course
+        
+          addteachcourse(60);
+    }
   });
 });
