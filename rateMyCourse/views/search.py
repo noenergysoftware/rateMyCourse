@@ -102,8 +102,20 @@ def search_course_by_department(request):
     try:
         department=request.GET['department']
         course_list=TeachCourse.objects.filter(department=Department.objects.get(name=department).id)
+        tmplist=[]
         for course in course_list:
-            retlist.append(Course.objects.get(id=course.course_id).ret())
+            if Course.objects.get(id=course.course_id).name not in tmplist:
+                tmplist.append(Course.objects.get(id=course.course_id).name)
+                tl = TeachCourse.objects.filter(course=course.course_id)
+                teacher_list = []
+                for tc in tl:
+                    for tmp in tc.teachers.all():
+                        if tmp.name not in teacher_list:
+                            teacher_list.append(tmp.name)
+                retlist.append(Course.objects.get(id=course.course_id).ret())
+                retlist[-1]['teacher_list'] = teacher_list
+
+
     except:
         return HttpResponse(json.dumps({
             'status': -1,
