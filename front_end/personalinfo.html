@@ -7,11 +7,29 @@
     <title>个人信息</title>
     <!-- css -->
     <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
-    <link href="./css/base.min.css" rel="stylesheet">
-    <link href="./css/project.min.css" rel="stylesheet">
-    <link href="./css/auth.css" rel="stylesheet">
+    
     <link href="./css/css.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/personalInfo.css" type="text/css">
+    <!--
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    -->
 
+    <!-- js -->
+    <script src="./js/jquery-3.2.1.min.js"></script>
+
+    <script src="./js/jquery.cookie.js"></script>
+    <script src="./js/bootstrap.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.validate.js"></script>
+    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+
+    <script src="./js/animations.js"></script>
+    <script src="./js/personalinfo.js"></script>
+    <script src="./js/head.js"></script>
+
+    
 </head>
 
 <body>
@@ -44,8 +62,8 @@
                                 id="personalInfo" style="display:none">个人信息</a>
                         </li>
                         <li class="item">
-                            <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpLogOut()" id="logOut"
-                                style="display:none">注销</a>
+                            <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpLogOut()"
+                                id="logOut" style="display:none">注销</a>
                         </li>
                     </ul>
                 </div>
@@ -53,63 +71,39 @@
         </nav>
     </div>
 
-    <div class="py-5">
-        <div class="container py-5">
-            <div class="text-center text-dark">
-                <!--用户头像-->
-                <h1 class="lead display-4"> </h1>
-            </div>
-            <div style="width:100%; margin-top:86px">
+   
+    <div class="Content-Main">
+            <form  action="" method="POST" class="form-userInfo">
+                <h1>个人信息</h1>
+                <span class="text1">请在文本框中完善您的个人信息</span>
+                <p>
+                <div class="fileInputContainer">
+                    <input class="fileInput" id="" type="file" name="">
 
-                <form action="" method="POST">
-                    <fieldset style="text-align: center">
-                        <legend>用户登录</legend>
-                        <p>
-                            <label for="username">用户名: </label><input type="text" id="username">
-                            <span>*(不得少于3个字符)</span>
-                        </p>
-                        <p>
-                            <label for="role">角色: </label><input type="text" id="role">
-                            span>*只可填写T,S,O('T':teacher; 'S':student; 'O':other)</span>
-                        </p>
-                        <p class="text-dark text-center">
-                            <label for="gender">性别: </label><input type="text" id="gender">
-                            <span>*只可填写F,M,A('F':female; 'M':male; 'A':anonymous)</span>
-                        </p>
-                        <p>
-                            <label for="personalIntroduce">个人简介: </label><textarea id="personalIntroduce"
-                                onKeyUp="if(this.value.length > 256) this.value=this.value.substr(0,256)"></textarea>
-                        </p>
-                        <p>
-                            <input type="button" value="确认修改" onclick="modifier()">
-                        </p>
-                    </fieldset>
-                </form>
-
-              
-            </div>
+                </div>
+                <label>
+                    <span>Your name:</span>
+                    <input type="text"  name="name" placeholder="不得少于3个字符">
+                </label>
+                <label>
+                    <span>Your rloe:</span>
+                    <input type="text" id="role" placeholder="只可填写T,S,O('T':teacher; 'S':student; 'O':other)">
+                </label>
+                <label>
+                    <span>Your sex:</span>
+                    <input type="text" id="gender" placeholder="只可填写F,M,A('F':female; 'M':male; 'A':anonymous)">
+                </label>
+                
+                <label>
+                    <span>Introduce:</span>
+                    <textarea id="personalIntroduce"
+                    onKeyUp="if(this.value.length > 256) this.value=this.value.substr(0,256)"></textarea>
+                </label>
+                <label>
+                        <input type="button" value="确认修改" onclick="modifier()">
+                </label>
+            </form>
         </div>
-    </div>
-
-    <div class="container py-5">
-        <div id="commentDiv" style="margin-left:32px"></div>
-    </div>
-
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <!-- js -->
-    <script src="./js/jquery-3.2.1.min.js"></script>
-
-    <script src="./js/jquery.cookie.js"></script>
-    <script src="./js/bootstrap.bundle.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="./js/jquery.validate.js"></script>
-    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
-
-    <script src="./js/animations.js"></script>
-    <script src="./js/personalinfo.js"></script>
-    <script src="./js/head.js"></script>
-
 
 
 </body>
