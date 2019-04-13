@@ -186,7 +186,7 @@ $(document).ready(function () {
     //2 获取评论信息
     $.ajax({
         type:"GET",
-        url: "http://127.0.0.1:8000/getCommentsByCourse/",
+        url: "https://api.ratemycourse.tk/getCommentsByCourse/",
         dataType:"json",
         data:{              
             course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID"),

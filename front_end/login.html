@@ -34,15 +34,15 @@
                 <div class="auth-main auth-row auth-col-one">
                     <div class="auth-top auth-row">
                         <!--点击返回首页的链接-->
-                        <a class="boardtop-left" href="./index.html">
+                        <a class="boardtop-left" href="https://ratemycourse.tk/index.html">
                             <div>首 页</div>
                         </a>
                         <!--添加中间图片-->
                         <div class="auth-logo">
-                            <img src="./resource/authlogo.jpg" alt="">
+                            <img src="/resource/authlogo.jpg" alt="">
                         </div>
                         <!--点击跳转至注册链接-->
-                        <a href="./signup.html" class="boardtop-right">
+                        <a href="https://ratemycourse.tk/signup.html" class="boardtop-right">
                             <div>注 册</div>
                         </a>
                     </div>
@@ -102,7 +102,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "http://127.0.0.1:8000/signIn/",
+                url: "https://api.ratemycourse.tk/signIn/",
                 dataType: "json",
                 data: {
                     username: $("#name").val(),

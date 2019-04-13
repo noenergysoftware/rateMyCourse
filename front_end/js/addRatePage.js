@@ -88,7 +88,7 @@ function Func_submit() {
   $.ajax({
       type: "POST",
       dataType: "json",
-      url: "http://127.0.0.1:8000/makeComment/",
+      url: "https://api.ratemycourse.tk/makeComment/",
       data: {
         'username': username,
         'course_ID': "60",

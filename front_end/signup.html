@@ -23,13 +23,13 @@
 				<section class="content-inner">
 					<div class="auth-main auth-row">
 						<div class="auth-top auth-row">
-							<a class="boardtop-left" href="./index.html">
+							<a class="boardtop-left" href="https://ratemycourse.tk/index.html">
 								<div>首 页</div>
 							</a>
 							<div class="auth-logo">
 								<img src="./resource/authlogo.jpg" alt="">
 							</div>
-							<a href="./login.html" class="boardtop-right">
+							<a href="https://ratemycourse.tk/login.html" class="boardtop-right">
 								<div>登 录</div>
 							</a>
 						</div>
@@ -84,9 +84,9 @@
 							</div>
 						</div>
 						
-						<div class="auth-bottom auth-row auth-reg">
+						<div class="auth-bottom auth-row auth-reg" style="display:none">
 							<div class="tgauth">
-								<p>注册即代表同意<a href="">服务条款</a>，以及保证所录入信息的真实性，如有不实信息会导致账号被删除。</p>
+								<p>注册即代表同意<a href="#">服务条款</a>，以及保证所录入信息的真实性，如有不实信息会导致账号被删除。</p>
 							</div>
 						</div>
 
@@ -126,7 +126,7 @@
 						
 						$.ajax({
 								type:"POST",
-								url: "http://127.0.0.1:8000/signUp/",
+								url: "https://api.ratemycourse.tk/signUp/",
 								dataType:"json",
 								data:{              
 										username: $("#name").val(),

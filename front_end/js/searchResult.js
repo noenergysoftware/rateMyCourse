@@ -140,6 +140,7 @@ $(document).ready(function(){
     if(coursenum==0 || coursenum==null){
       $("#noresult").show();
       $("#jumpbutton").hide();
+      $("#serachedCourseNum").html(0);
       return ;
     }
     $("#noresult").hide();

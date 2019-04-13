@@ -30,7 +30,7 @@ function selectDepartment(a) {
 function addcourse(id){
   $.ajax({
       type:"POST",
-      url: "http://127.0.0.1:8000/addCourse/",
+      url: "https://api.ratemycourse.tk/addCourse/",
       dataType:"json",
       data:{              
           name:"数学"+id,
@@ -64,7 +64,7 @@ function addteachcourse(id){
 
   $.ajax({
     type:"POST",
-    url: "http://127.0.0.1:8000/addTeacher/",
+    url: "https://api.ratemycourse.tk/addTeacher/",
     dataType:"json",
     data:{ 
         name:"教师2",
@@ -91,7 +91,7 @@ function addteachcourse(id){
 
   $.ajax({
       type:"POST",
-      url: "http://127.0.0.1:8000/addTeachCourse/",
+      url: "https://api.ratemycourse.tk/addTeachCourse/",
       dataType:"json",
       data:{ 
           teacher_list:["教师2"],             
@@ -169,7 +169,7 @@ $(document).ready(function(){
   
   $.ajax({
       type:"GET",
-      url: "http://127.0.0.1:8000/getDepartment/",
+      url: "https://api.ratemycourse.tk/getDepartment/",
       dataType:"json",
       success:function(data){
         //	alert("ajax success");
@@ -204,7 +204,7 @@ $(document).ready(function(){
       
       $.ajax({
             type:"GET",
-            url: "http://127.0.0.1:8000/searchCourse/",
+            url: "https://api.ratemycourse.tk/searchCourse/",
             dataType:"json",
             data:{              
                 course_name: $("#searchboxCourse").val(),
