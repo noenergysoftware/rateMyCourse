@@ -71,7 +71,7 @@ function storedata(data){
 
 $(document).ready(function(){
 
-  if (window.sessionStorage.getItem("status")== "1"){
+  if ($.cookie("username")!=undefined){
     document.getElementById("signIn").style.display = "none";
     document.getElementById("signUp").style.display = "none";
     document.getElementById("personalInfo").style.display = "block"

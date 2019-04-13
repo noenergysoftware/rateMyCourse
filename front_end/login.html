@@ -79,6 +79,7 @@
    
     <!-- js -->
     <script src="./js/jquery.js"></script>
+    <script src="./js/jquery.cookie.js"></script>
     <script src="./js/base.min.js"></script>
     <script src="./js/project.min.js"></script>
     <script color="255,0,255" opacity="0.7" count="88" src="./js/canvas-nest.js"></script>
@@ -116,8 +117,9 @@
                     console.log(JSON.stringify(data));
                     console.log(data.status);
                     if (data.status == "1"){
-                        window.sessionStorage.setItem("status",data.status);           //登录成功"status"="0",用于切换导航栏
-                        window.sessionStorage.setItem("username",data.body.username);
+                        $.cookie("username",data.body.username);
+                        //window.sessionStorage.setItem("status",data.status);           //登录成功"status"="0",用于切换导航栏
+                        //window.sessionStorage.setItem("username",data.body.username);
                         console.log("status"+window.sessionStorage.getItem("status"));
                         alert(data.body.username+"登录成功！");
                         window.setTimeout("location.href='./index.html'", 1200);

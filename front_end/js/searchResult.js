@@ -119,13 +119,13 @@ function toCourse(number){
     console.log("to course"+number);
     window.sessionStorage.setItem("coursetoload",number);
     //console.log("to course"+number);
-    window.setTimeout("location.href='./coursePage.html'", 1000);
+    window.setTimeout("location.href='./coursePage.html'", 0);
 
 }
 
 $(document).ready(function(){
 
-    if (window.sessionStorage.getItem("status")== "1"){
+    if ($.cookie("username")!=undefined){
         document.getElementById("signIn").style.display = "none";
         document.getElementById("signUp").style.display = "none";
         document.getElementById("personalInfo").style.display = "block"

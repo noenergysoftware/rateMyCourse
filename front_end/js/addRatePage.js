@@ -7,6 +7,8 @@ function selectTeacher(name){
 
 $(document).ready(function() {
 
+
+  if($.cookie("username")!=undefined)
   if (window.sessionStorage.getItem("status")== "1"){
     document.getElementById("signIn").style.display = "none";
     document.getElementById("signUp").style.display = "none";
@@ -61,15 +63,10 @@ function Func_submit() {
     alert("提交评价前请先登录")
     return false
   }*/
-  var usename="";
-  if (window.sessionStorage.getItem("status")== "1"){
-    document.getElementById("signIn").style.display = "none";
-    document.getElementById("signUp").style.display = "none";
-    document.getElementById("personalInfo").style.display = "block";
-    username=window.sessionStorage.getItem("username");
-  }
-  else{
-    alert("用户未登录！");
+  
+  if ($.cookie("username")== undefined){
+    alert("用户未登录！ 登录后即可发表评论");
+    return false;
   }
   
   if($("#comment").val().length < 10){
