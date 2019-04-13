@@ -109,6 +109,9 @@
                     password: $("#password").val()
                    // code: $("#code").val(), remember_me: $("#remember_me:checked").val()
                 },
+                xhrFields: {
+                    withCredentials: true
+                },
                 success: function (data) {
                     console.log(JSON.stringify(data));
                     console.log(data.status);

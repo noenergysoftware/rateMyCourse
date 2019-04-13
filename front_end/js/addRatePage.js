@@ -99,6 +99,9 @@ function Func_submit() {
         'content' : $("#comment").val(),
         'teacher_name' : $("#buttonSelectTeacher").text()
       },
+      xhrFields: {
+        withCredentials: true
+      },
       success:function(data){
         //	alert("ajax success");
         console.log(data);

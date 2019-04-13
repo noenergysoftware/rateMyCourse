@@ -55,6 +55,9 @@ $(document).ready(function () {
                 gender: $("#gender").val(),
                 self_introductino: $("#personalIntroduce").val()
             },
+            xhrFields: {
+                    withCredentials: true
+            },
             success: function (data) {
                 console.log(JSON.stringify(data));
                 console.log(data.status);

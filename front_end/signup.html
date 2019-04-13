@@ -133,6 +133,9 @@
 										mail: $("#email").val(),
 										password: $("#passwd").val()
 								},
+                                xhrFields: {
+                                    withCredentials: true
+                                },
 								success:function(data){
 									//	alert("ajax success");
 										console.log(data);
