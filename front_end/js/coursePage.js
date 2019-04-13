@@ -168,7 +168,7 @@ function lastPage(){
 
 $(document).ready(function () {
     //generateGrid("#", "aya", "2016", "ruan", 20, "good", "2018", "1", "1", "2");
-    if ($.cookie("username")!=undefined){
+    if ($.cookie("username") != undefined){
         document.getElementById("signIn").style.display = "none";
         document.getElementById("signUp").style.display = "none";
         document.getElementById("personalInfo").style.display = "block"

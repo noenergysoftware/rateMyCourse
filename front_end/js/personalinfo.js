@@ -38,7 +38,7 @@ function infoCheck() {
 
 $(document).ready(function () {
     //console.log(window.sessionStorage.getItem("status")== "1");
-    if ($.cookie("username")!=undefined){
+    if ($.cookie("username") != undefined){
         document.getElementById("signIn").style.display = "none";
         document.getElementById("signUp").style.display = "none";
         document.getElementById("personalInfo").style.display = "block"

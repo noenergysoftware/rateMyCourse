@@ -8,8 +8,7 @@ function selectTeacher(name){
 $(document).ready(function() {
 
 
-  if($.cookie("username")!=undefined)
-  if (window.sessionStorage.getItem("status")== "1"){
+  if($.cookie("username") != undefined){
     document.getElementById("signIn").style.display = "none";
     document.getElementById("signUp").style.display = "none";
     document.getElementById("personalInfo").style.display = "block"
@@ -64,7 +63,7 @@ function Func_submit() {
     return false
   }*/
   
-  if ($.cookie("username")== undefined){
+  if ($.cookie("username") == undefined){
     alert("用户未登录！ 登录后即可发表评论");
     return false;
   }
