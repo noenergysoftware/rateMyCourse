@@ -11,7 +11,7 @@ function adddiv(number){
         "<p>"+"北京航空航天大学"+"</p>\n"+
         "</div>\n"+
         "<div class=\"col-md-3 text-md-left text-center align-self-center my-4\"> 学院\n"+
-        "<p>"+"计算机学院"+"</p>\n"+
+        "<p>"+window.sessionStorage.getItem("course"+number+"department")+"</p>\n"+
         "</div>\n"+
         "<div class=\"col-md-3 text-md-left text-center align-self-center my-4\"> 类型\n"+
         "<p>"+window.sessionStorage.getItem("course"+number+"course_type")+"</p>\n"+

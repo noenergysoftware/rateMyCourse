@@ -181,7 +181,7 @@ $(document).ready(function () {
     $("#course_name").html(window.sessionStorage.getItem("course"+coursenum+"name"));
     $("#course_credit").html(window.sessionStorage.getItem("course"+coursenum+"credit"));
     $("#course_type").html(window.sessionStorage.getItem("course"+coursenum+"course_type"));
-    $("#course_school").html("计算机学院");
+    $("#course_school").html(window.sessionStorage.getItem("course"+coursenum+"department"));
     $("#coursedescription").html(window.sessionStorage.getItem("course"+coursenum+"description"))
     //2 获取评论信息
     $.ajax({

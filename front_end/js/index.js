@@ -52,7 +52,7 @@ function storedata(data){
           window.sessionStorage.setItem("course"+i+"course_type",data.body[i].course_type);
           window.sessionStorage.setItem("course"+i+"description",data.body[i].description);
           window.sessionStorage.setItem("course"+i+"credit",data.body[i].credit);
-
+          window.sessionStorage.setItem("course"+i+"department",data.body[i].department);
           //console.log(data.body[i].teacher_list);
           window.sessionStorage.setItem("course"+i+"teacher_list",data.body[i].teacher_list);
           console.log(window.sessionStorage.getItem("course"+i+"website"));
