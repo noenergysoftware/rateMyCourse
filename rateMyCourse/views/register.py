@@ -61,7 +61,7 @@ def update_user(request):
     其他非法情况返回错误信息（status=-1） 错误信息保存在errMsg中 \n
     """
     try:
-        if not auth.auth(request):
+        if not auth.auth_with_user(request,request.POST['username']):
             return HttpResponse(json.dumps({
                 'status': -100,
                 'errMsg': 'cookies 错误',

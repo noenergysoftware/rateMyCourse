@@ -8,7 +8,7 @@ def make_rank(request):
     发表评分，需要用户名，课程ID，以及分数
     """
     try:
-        if not auth.auth(request):
+        if not auth.auth_with_user(request,request.POST['username']):
             return HttpResponse(json.dumps({
                 'status': -100,
                 'errMsg': 'cookies 错误',
@@ -77,11 +77,11 @@ def get_rank_by_course(request):
     返回一个字典，关键字为四项评分的名字，内容为平均分
     """
     try:
-        if not auth.auth(request):
+        '''if not auth.auth(request):
             return HttpResponse(json.dumps({
                 'status': -100,
                 'errMsg': 'cookies 错误',
-            }), content_type="application/json")
+            }), content_type="application/json")'''
         course_ID = request.GET['course_ID']
         rawList = MakeRank.objects.filter(course_id=Course.objects.get(course_ID=course_ID).id)
 

@@ -29,3 +29,29 @@ def auth(request):
         return True
     finally:
         pass
+
+def auth_with_user(request,usernamein):
+    try:
+        username=request.COOKIES.get('username')
+        password=request.COOKIES.get('password')
+        u = User.objects.get(username=username)
+        if u.password!=password:
+            # auth failed
+            return False
+    except:
+        return False
+    try:
+        sess=request.session.get('auth_sess',None)
+        if sess!=username:
+            return False
+        if usernamein != request.COOKIES.get('username'):
+            return False
+        if usernamein != request.session.get('auth_sess', None):
+            return False
+    except:
+        return False
+    else:
+        return True
+    finally:
+        pass
+

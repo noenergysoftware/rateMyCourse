@@ -1,14 +1,17 @@
 import json
+
 from django.http import HttpResponse
-from rateMyCourse.models import *
+
 import rateMyCourse.views.authentication as auth
+from rateMyCourse.models import *
+
 
 def make_comment(request):
     """
     发表评论，需要用户名，课程ID，以及内容
     """
     try:
-        if not auth.auth(request):
+        if not auth.auth_with_user(request, request.POST['username']):
             return HttpResponse(json.dumps({
                 'status': -100,
                 'errMsg': 'cookies 错误',
@@ -24,11 +27,11 @@ def make_comment(request):
         }), content_type="application/json")
     else:
         try:
-            c = Comment(content=content,teacher=Teacher.objects.get(name=teacher_name))
+            c = Comment(content=content, teacher=Teacher.objects.get(name=teacher_name))
             c.save()
             b = MakeComment(user=User.objects.get(username=username),
-                          course=Course.objects.get(course_ID=course_ID),
-                          comment=c)
+                            course=Course.objects.get(course_ID=course_ID),
+                            comment=c)
             b.save()
         except:
             return HttpResponse(json.dumps({
@@ -51,11 +54,11 @@ def get_comment_by_course(request):
     返回一个列表，每项为一条评论，时间顺序
     """
     try:
-        if not auth.auth(request):
+        '''if not auth.auth(request):
             return HttpResponse(json.dumps({
                 'status': -100,
                 'errMsg': 'cookies 错误',
-            }), content_type="application/json")
+            }), content_type="application/json")'''
         course_ID = request.GET['course_ID']
         rawList = MakeComment.objects.filter(course_id=Course.objects.get(course_ID=course_ID).id)
 
@@ -90,12 +93,12 @@ def edit_comment(request):
     编辑评论，需求评论ID,新的content
     """
     try:
-        if not auth.auth(request):
+        c = MakeComment.objects.get(id=request.POST['comment_ID'])
+        if not auth.auth_with_user(request,c.user.username):
             return HttpResponse(json.dumps({
                 'status': -100,
                 'errMsg': 'cookies 错误',
             }), content_type="application/json")
-        c = MakeComment.objects.get(id=request.POST['comment_ID'])
         c.comment.content = request.POST['content']
 
         c.comment.teacher = request.POST['teacher']
@@ -112,5 +115,3 @@ def edit_comment(request):
             'length': 1,
             'body': {'message': "更新评论成功"}
         }), content_type="application/json")
-
-
