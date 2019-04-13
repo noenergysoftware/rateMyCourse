@@ -41,7 +41,8 @@ $(document).ready(function () {
     if ($.cookie("username") != undefined){
         document.getElementById("signIn").style.display = "none";
         document.getElementById("signUp").style.display = "none";
-        document.getElementById("personalInfo").style.display = "block"
+        document.getElementById("personalInfo").style.display = "block";
+        document.getElementById("logOut").style.display = "block"
       } 
 
     function modifier() {

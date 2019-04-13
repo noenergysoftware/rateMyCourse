@@ -128,7 +128,8 @@ $(document).ready(function(){
     if ($.cookie("username") != undefined){
         document.getElementById("signIn").style.display = "none";
         document.getElementById("signUp").style.display = "none";
-        document.getElementById("personalInfo").style.display = "block"
+        document.getElementById("personalInfo").style.display = "block";
+        document.getElementById("logOut").style.display = "block"
       }
     // alert("!!!")
     // Form validation for Sign in / Sign up forms

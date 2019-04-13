@@ -11,7 +11,8 @@ $(document).ready(function() {
   if($.cookie("username") != undefined){
     document.getElementById("signIn").style.display = "none";
     document.getElementById("signUp").style.display = "none";
-    document.getElementById("personalInfo").style.display = "block"
+    document.getElementById("personalInfo").style.display = "block";
+    document.getElementById("logOut").style.display = "block"
   }
   //1 加载课程名称 学院
   var coursenum=parseInt(window.sessionStorage.getItem("coursetoload"));
