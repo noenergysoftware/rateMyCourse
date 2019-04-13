@@ -10,7 +10,7 @@ django.setup()
 from rateMyCourse.models import *
 import pandas as pd
 
-for m in [Teacher, Course, Department, TeachCourse, Ranks, SelectCourse, Comment, MakeComment]:
+for m in [Teacher, Course, Department, TeachCourse, Rank, MakeRank, Comment, MakeComment]:
    m.objects.all().delete()
 
 staticFilePath = "static/courseInfo/"
