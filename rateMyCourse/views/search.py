@@ -121,9 +121,12 @@ def search_course_by_department(request):
                 'errMsg': 'cookies 错误',
             }), content_type="application/json")'''
         department=request.GET['department']
+        course_name=request.GET['course_name']
         course_list=TeachCourse.objects.filter(department=Department.objects.get(name=department).id)
         tmplist=[]
         for course in course_list:
+            if course_name not in Course.objects.get(id=course.course_id).name:
+                continue
             if Course.objects.get(id=course.course_id).name not in tmplist:
                 tmplist.append(Course.objects.get(id=course.course_id).name)
                 tl = TeachCourse.objects.filter(course=course.course_id)
