@@ -23,8 +23,8 @@ function selectSchool(a) {
   document.getElementById("buttonSelectSchool").innerText=a;
 }
 
-function selectMajor(a) {
-  document.getElementById("buttonSelectMajor").innerText=a;
+function selectDepartment(a) {
+  document.getElementById("buttonSelectDepartment").innerText=a;
 }
 
 function addcourse(id){
@@ -164,10 +164,42 @@ $(document).ready(function(){
   if (window.sessionStorage.getItem("status")== "1"){
     document.getElementById("signIn").style.display = "none";
     document.getElementById("signUp").style.display = "none";
-    document.getElementById("personalInfo").style.display = "block";
-    document.getElementById("logOut").style.display = "block";
+    document.getElementById("personalInfo").style.display = "block"
   } 
   
+  $.ajax({
+      type:"GET",
+      url: "http://127.0.0.1:8000/getDepartment/",
+      dataType:"json",
+      success:function(data){
+        //	alert("ajax success");
+          //console.log(data);
+          //console.log(data.status)
+          if(data.status=="1"){
+              //alert(data.body.message);
+              var data2="";
+              for(var i=0; i<data.body.length;i++){
+                data2+="<li>\n"+
+                        "  <a class=\"dropdown-item\" herf=\"#\" onclick=\"selectDepartment($(this).text())\">"+data.body[i].name+"</a>\n"+
+                        "</li>\n";
+                //console.log(data.body[i]);
+                if(i<(data.body.length-1)){
+                  data2+= "<div class=\"dropdown-divider\"></div>"
+                }
+                $("#departments").html(data2);
+              }
+          }
+          else{
+            alert(data.errMsg);
+          }
+          
+      },
+      error:function(data){
+        alert(JSON.stringify(data));
+      }
+  });
+
+
   function search(){
       
       $.ajax({

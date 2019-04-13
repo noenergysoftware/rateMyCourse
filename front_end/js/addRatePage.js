@@ -23,7 +23,7 @@ $(document).ready(function() {
              "  <a class=\"dropdown-item\" herf=\"#\" onclick=\"selectTeacher($(this).text())\">"+teacher_list[i]+"</a>\n"+
              "</li>\n";
     console.log(teacher_list[i]);
-    if(i!=teacher_list-1){
+    if(i<(teacher_list.length-1)){
       data+= "<div class=\"dropdown-divider\"></div>"
     }
     $("#teacherlist").html(data);

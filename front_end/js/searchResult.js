@@ -132,11 +132,21 @@ $(document).ready(function(){
       }
     // alert("!!!")
     // Form validation for Sign in / Sign up forms
-    var coursenum=window.sessionStorage.getItem("coursenum")
-    $("#serachedCourseNum").html(coursenum);
-    console.log("coursenum!!!"+coursenum);
+    var coursenum=window.sessionStorage.getItem("coursenum");
     
+    $("#serachedCourseNum").html(coursenum);
+    
+    console.log("coursenum!!!"+coursenum);
+    if(coursenum==0 || coursenum==null){
+      $("#noresult").show();
+      $("#jumpbutton").hide();
+      return ;
+    }
+    $("#noresult").hide();
+    $("#jumpbutton").show();
     //test to gen div
+    //console.log(233333);
+
 
     for(var number=0;number<coursenum;number++){
         adddiv(number);

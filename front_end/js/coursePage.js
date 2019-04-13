@@ -7,12 +7,17 @@ function feedback(node){
   }
 
 //加载评论
-function generateGrid(imageUrls, userName, iTerm, iTeacher, iTotal, text, time, commentid, cnum, snum) {
+function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, commentid, cnum, snum) {
     var ScreenGridHtml = `
         <div>   
             <p>
         </div>
-            
+        <table>
+            <tr>
+                <td><p></td>
+                <td><p></td>
+            </tr>
+        <table>
         <div>
             <p>
         </div>
@@ -29,7 +34,8 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iTotal, text, time, 
         // create div
         var commentGrid = document.createElement("div");
         commentGrid.setAttribute("class", "card col-md-12");
-        commentGrid.id = commentid;
+        commentGrid.setAttribute("style","margin-top:8px");
+        commentGrid.id = number;
         commentGrid.innerHTML = ScreenGridHtml;
         //insert user image and name
         //暂时没有用户头像
@@ -41,21 +47,22 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iTotal, text, time, 
 
         // insert information
         var term = document.createTextNode("学期");
-        var teacher = document.createTextNode("上课老师");
+        var teacher = document.createTextNode("教师");
         var total = document.createTextNode("总评");
         var vTerm = document.createTextNode(iTerm);
         var vTeacher = document.createTextNode(iTeacher);
         var vTotal = document.createTextNode(iTotal.toFixed(1));
         //这些东西暂时都没有 就不显示了
-
+        pTags[1].appendChild(teacher);
+        pTags[2].appendChild(vTeacher);
 
         //insert text
-        pTags[1].innerHTML = text;
-        pTags[1].setAttribute("style", "margin-top:16px;margin-left:16px;text-align:left; width:70%")
+        pTags[3].innerHTML = text;
+        pTags[3].setAttribute("style", "margin-top:16px;margin-left:16px;text-align:left; width:70%")
         //inset time
         var timenode = document.createTextNode(time);
-        pTags[2].appendChild(timenode);
-        pTags[2].setAttribute("style", "float:left;text-align:left;margin-top:16px")
+        pTags[4].appendChild(timenode);
+        pTags[4].setAttribute("style", "float:left;text-align:left;margin-top:16px")
 
        
 
@@ -66,8 +73,8 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iTotal, text, time, 
         divTags[2].setAttribute("class", "text-center");
         //divTags[0].setAttribute("style", "width:100%;border-bottom:1px #e4e4e4 solid;");
         //divTags[3].setAttribute("style", "width:100%;border-bottom:1px #e4e4e4 solid;margin-bottom:16px");
-       // var tableTag = commentGrid.getElementsByTagName("table");
-       // tableTag[0].setAttribute("style", "width:70%; margin-top:8px;border-bottom:1px #e4e4e4 solid");
+        var tableTag = commentGrid.getElementsByTagName("table");
+        tableTag[0].setAttribute("style", "width:50%; margin-top:2px;border-bottom:1px #e4e4e4 solid");
         
         /*var a=document.getElementById("locationid");
         a.parentNode.insertBefore(commentGrid , a);*/
@@ -81,91 +88,82 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iTotal, text, time, 
 
 function testAddComment(){
     window.setTimeout("location.href='./commentPage.html'", 0);
-    /*$.ajax({
-        type:"POST",
-        url: "http://127.0.0.1:8000/makeComment/",
-        dataType:"json",
-        data:{              
-            username:"xmw7874",
-            course_ID:60,
-            content: "非常棒 啊啊啊啊"
-        },
-        success:function(data){
-            //	alert("ajax success");
-            console.log(data);
-            //console.log(data.status)
-            if(data.status=="1"){
-                //alert(data.body.message);
-                console.log("Successfully add comment of course id 60 ");
-                
-            }
-            else{
-                alert(data.errMsg);
-            }
-            
-        },
-        error:function(data){
-            alert(JSON.stringify(data));
-        }
-    });*/
 }
 
 
-
-//获得评论
-function setComments() {//get comments list from service
-    if($.cookie('username') == undefined){
-        $.ajax('/getComment', {
-            dataType: 'json',
-            data: {
-                'course_number': window.location.pathname.split('/')[2]
-            },
-        }).done(function(data){
-            var imgurl = "../../static/ratemycourse/images/user.png";
-            var parents = document.getElementById("commentDiv");
-            var child = parents.children;
-            if(child.length!=0){
-               $("#commentDiv").empty();
-            }
-            for(var i=0; i<data.comments.length; i++){
-                //generate a new row
-                var cmt = data.comments[i]
-                var Grid = generateGrid(imgurl, cmt.userName, cmt.iTerm, cmt.iTeacher, cmt.iTotal, cmt.text, cmt.time, cmt.iId, cmt.cnum, cmt.snum);
-                //insert this new row
-                parents.appendChild(Grid);
-            }
-        })
-    }else{
-        $.ajax('/getComment', {
-            dataType: 'json',
-            data: {
-                'course_number': window.location.pathname.split('/')[2],
-                'username': $.cookie('username'),
-            },
-        }).done(function(data){
-            var imgurl = "../../static/ratemycourse/images/user.png";
-            var parents = document.getElementById("commentDiv");
-            var child = parents.children;
-            if(child.length!=0){
-               $("#commentDiv").empty();
-            }
-            for(var i=0; i<data.comments.length; i++){
-                //generate a new row
-                var cmt = data.comments[i]
-                var Grid = generateGrid(imgurl, cmt.userName, cmt.iTerm, cmt.iTeacher, cmt.iTotal, cmt.text, cmt.time, cmt.iId, cmt.cnum, cmt.snum);
-                //insert this new row
-                parents.appendChild(Grid);
-                //show delete
-                if(cmt.isSelf==1){
-                    Grid.getElementsByClassName('delete')[0].style.display='block';
-                    Grid.getElementsByClassName('change')[0].style.display='block';
-                }
-                if(cmt.support==1) Grid.getElementsByClassName('good')[0].setAttribute("class", "goodclick");
-            }
-        })
+function toPage(pagenum){
+    
+    var coursetoshow=(pagenum-1)*5;
+    var coursenum=window.sessionStorage.getItem("coursenum")
+    var totalpagenumber=$("#totalpage").html();
+    console.log(totalpagenumber+" "+pagenum);
+    if(pagenum>totalpagenumber || pagenum<=0){
+      alert("页码错误"+"***"+pagenum+"***");
+      return;
     }
 
+    for(var i=0;i<coursenum;i++){
+        $("#"+i).hide();
+    }
+    for(var i=coursetoshow;i<coursenum && i<coursetoshow+5;i++){
+        $("#"+i).show();
+    }
+
+    for(var i=1;i<=totalpagenumber;i++){
+        $("#page"+i).hide();
+    }
+    
+    if(pagenum<=3){
+        for(var i=1;i<=5 && i<=totalpagenumber ;i++){
+            $("#page"+i).show();
+        }
+    }
+    else if((totalpagenumber-pagenum)<=2){
+        for(var i=totalpagenumber;i>totalpagenumber-5 && i>=1 ;i--){
+            $("#page"+i).show();
+        }
+    }
+    else{
+        for(var i=pagenum-2;i<=pagenum+2 ;i++){
+            $("#page"+i).show();
+        }
+    }
+    //console.log("pagenum before last"+pagenum);
+    if(pagenum>1){
+   
+      $("#lastpage").show();
+     
+    }
+    else{
+      $("#lastpage").hide();
+    }
+
+    if(pagenum<totalpagenumber){
+      $("#nextpage").show();
+    }
+    else{
+      
+      $("#nextpage").hide();
+    }
+    
+    $("#pagenum").html(pagenum);
+    
+   
 }
+
+
+function jumpPage(){
+    toPage($("#jumpPage").val());
+}
+
+function nextPage(){
+    toPage(parseInt($("#pagenum").text())+1);
+}
+function lastPage(){
+    toPage(parseInt($("#pagenum").text())-1);
+}
+
+
 
 
 $(document).ready(function () {
@@ -200,10 +198,57 @@ $(document).ready(function () {
             if(data.status=="1"){
                 //alert(data.body.message);
                 console.log("Successfully get comment of id "+coursenum);
-                for(var i=0;i<data.length;i++){
-                    var x=generateGrid("#",data.body[i].username,"#","#",0,data.body[i].content,data.body[i].editTime,data.body[i].commentID,0,0);
-                    var a=document.getElementById("locationid");
-                    a.parentNode.insertBefore(x , a);
+                if(data.length==0){
+                    $("#noresult").show();
+                    $("#jumpbutton").hide();
+                }
+                else{
+                    $("#noresult").hide();
+                    $("#jumpbutton").show();
+                    for(var i=0;i<data.length;i++){
+                        var x=generateGrid(i,"#",data.body[i].username,"#",data.body[i].teacher,0,data.body[i].content,data.body[i].editTime,data.body[i].commentID,0,0);
+                        var a=document.getElementById("locationid");
+                        a.parentNode.insertBefore(x , a);
+                        if(i>=5){
+                            $("#"+i).hide();
+                        }
+                    }
+                    var totalpagenumber=Math.ceil(data.length/5);
+                    console.log(totalpagenumber+"?????");
+                    $("#pagenum").html(1);
+                    $("#totalpage").html(totalpagenumber);
+                    if(totalpagenumber>1){
+                        $("#jump").show();
+                        $("#nextpage").show();
+                    // document.getElementById("jump").style.display="";
+                    // document.getElementById("nextpage").style.display="";
+
+                        //add page button
+                        for(var i=1;i<=totalpagenumber;i++){
+                            var x = document.createElement("li");
+                            x.setAttribute("class","page-item");
+                            x.setAttribute("id","page"+i);
+                            x.innerHTML="<a class=\"page-link\" onclick=\"toPage("+i+")\" href=\"#\">"+i+"</a>";
+                            
+                            var a=document.getElementById("nextpage");
+                            a.parentNode.insertBefore(x , a);
+                            console.log("add page");
+                            if(i>5){
+                            console.log("hide");
+                            $("#page"+i).hide();
+                            }
+                        }
+                    }
+                    else{
+                    //$("#nextpage").show();
+                        var x = document.createElement("li");
+                        x.setAttribute("class","page-item");
+                        x.setAttribute("id","page"+i);
+                        x.innerHTML="<a class=\"page-link\" onclick=\"toPage(1)\" href=\"#\">1</a>";
+                        var a=document.getElementById("nextpage");
+                        a.parentNode.insertBefore(x , a);
+                        console.log("add page");
+                    }
                 }
             }
             else{
