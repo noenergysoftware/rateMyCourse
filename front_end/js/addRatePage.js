@@ -71,7 +71,6 @@ function Func_submit() {
   else{
     alert("用户未登录！");
   }
-
   
   if($("#comment").val().length < 10){
     alert("评价内容至少需要10字")
@@ -81,6 +80,11 @@ function Func_submit() {
     alert("评价内容不能多于2048字")
 	   return false
   }
+  else if($("#buttonSelectTeacher").text()=="选择教师"){
+    alert("必须要选择任课教师")
+    return false
+  }
+
   var coursenum=parseInt(window.sessionStorage.getItem("coursetoload"));
   console.log(window.sessionStorage.getItem("course"+coursenum+"course_ID")+" "+$("#comment").val()+" "+$("#buttonSelectTeacher").text());
   var teacher=$("#buttonSelectTeacher").text();

@@ -27,96 +27,6 @@ function selectDepartment(a) {
   document.getElementById("buttonSelectDepartment").innerText=a;
 }
 
-function addcourse(id){
-  $.ajax({
-      type:"POST",
-      url: "https://api.ratemycourse.tk/addCourse/",
-      dataType:"json",
-      data:{              
-          name:"数学"+id,
-          website:""+id,
-          course_ID:""+id,
-          description:"计算机组成原理"+id,
-          course_type:"计算机科学与技术"+(id),
-          credit:"4"
-      },
-      success:function(data){
-        //	alert("ajax success");
-          console.log(data);
-          console.log(data.status)
-          if(data.status=="1"){
-              //alert(data.body.message);
-              var a=1;
-          }
-          else{
-            console.log(data.errMsg);
-          }
-          //window.setTimeout("location.href='./login.html'", 1200);
-      },
-      error:function(data){
-        alert(JSON.stringify(data));
-      }
-  });
-}
-
-function addteachcourse(id){
-  
-
-  $.ajax({
-    type:"POST",
-    url: "https://api.ratemycourse.tk/addTeacher/",
-    dataType:"json",
-    data:{ 
-        name:"教师2",
-        title:"教授"
-    },
-    success:function(data){
-      //	alert("ajax success");
-        console.log(data);
-        console.log(data.status)
-        if(data.status=="1"){
-            //alert(data.body.message);
-            var a=1;
-        }
-        else{
-          console.log(data.errMsg);
-        }
-        //window.setTimeout("location.href='./login.html'", 1200);
-    },
-    error:function(data){
-      alert(JSON.stringify(data));
-    }
-});
-
-
-  $.ajax({
-      type:"POST",
-      url: "https://api.ratemycourse.tk/addTeachCourse/",
-      dataType:"json",
-      data:{ 
-          teacher_list:["教师2"],             
-          course:"数学60",
-          department:"计算机学院"
-      },
-      success:function(data){
-        //	alert("ajax success");
-          console.log(data);
-          console.log(data.status)
-          if(data.status=="1"){
-              //alert(data.body.message);
-              var a=1;
-          }
-          else{
-            console.log(data.errMsg);
-          }
-          //window.setTimeout("location.href='./login.html'", 1200);
-      },
-      error:function(data){
-        alert(JSON.stringify(data));
-      }
-  });
-}
-
 
 function storedata(data){
 //  setCookie("coursenum",data.length,0);
@@ -202,32 +112,69 @@ $(document).ready(function(){
 
   function search(){
       
-      $.ajax({
-            type:"GET",
-            url: "https://api.ratemycourse.tk/searchCourse/",
-            dataType:"json",
-            data:{              
-                course_name: $("#searchboxCourse").val(),
-            },
-            success:function(data){
-              //	alert("ajax success");
-                console.log(data);
-                //console.log(data.status)
-                if(data.status=="1"){
-                    //alert(data.body.message);
-                    console.log("Successfully searched");
-                    storedata(data);
-                    window.setTimeout("location.href='./searchResult.html'",0);
-                }
-                else{
-                  alert(data.errMsg);
-                }
-                
-            },
-            error:function(data){
-              alert(JSON.stringify(data));
-            }
-        });
+      var department=$("#buttonSelectDepartment").text();
+
+      if (department=="选择学院"){
+        //没有选择学院
+          $.ajax({
+              type:"GET",
+              url: "https://api.ratemycourse.tk/searchCourse/",
+              dataType:"json",
+              data:{              
+                  course_name: $("#searchboxCourse").val(),
+              },
+              success:function(data){
+                //	alert("ajax success");
+                  console.log(data);
+                  //console.log(data.status)
+                  if(data.status=="1"){
+                      //alert(data.body.message);
+                      console.log("Successfully searched");
+                      storedata(data);
+                      window.setTimeout("location.href='./searchResult.html'",0);
+                  }
+                  else{
+                    alert(data.errMsg);
+                  }
+                  
+              },
+              error:function(data){
+                alert(JSON.stringify(data));
+              }
+          });
+      }
+      else{
+        //选择了学院
+          $.ajax({
+              type:"GET",
+              url: "https://api.ratemycourse.tk/searchCourseByDepartment/",
+              dataType:"json",
+              data:{              
+                  course_name: $("#searchboxCourse").val(),
+                  department: $("#buttonSelectDepartment").text()
+              },
+              success:function(data){
+                //	alert("ajax success");
+                  console.log(data);
+                  //console.log(data.status)
+                  if(data.status=="1"){
+                      //alert(data.body.message);
+                      console.log("Successfully searched");
+                      storedata(data);
+                      window.setTimeout("location.href='./searchResult.html'",0);
+                  }
+                  else{
+                    alert(data.errMsg);
+                  }
+                  
+              },
+              error:function(data){
+                alert(JSON.stringify(data));
+              }
+          });
+      }
+
+      
   }
   $("#buttonSearchCourse").click(function(){
       search();
