@@ -5,7 +5,7 @@ function jumpLogin(){
 }
 
 function jumpSignUp(){
-  window.location.href = "https://ratemycourse.tk/signUp.html";
+  window.location.href = "https://ratemycourse.tk/signup.html";
 }
 
 function jumpPersonalInfo(){
