@@ -91,7 +91,7 @@ function Func_submit() {
       url: "https://api.ratemycourse.tk/makeComment/",
       data: {
         'username': username,
-        'course_ID': "60",
+        'course_ID': window.sessionStorage.getItem("course"+coursenum+"course_ID"),
         'content' : $("#comment").val(),
         'teacher_name' : $("#buttonSelectTeacher").text()
       },
