@@ -124,6 +124,12 @@ function toCourse(number){
 }
 
 $(document).ready(function(){
+
+    if (window.sessionStorage.getItem("status")== "1"){
+        document.getElementById("signIn").style.display = "none";
+        document.getElementById("signUp").style.display = "none";
+        document.getElementById("personalInfo").style.display = "block"
+      }
     // alert("!!!")
     // Form validation for Sign in / Sign up forms
     var coursenum=window.sessionStorage.getItem("coursenum")

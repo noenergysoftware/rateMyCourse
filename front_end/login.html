@@ -34,7 +34,7 @@
                 <div class="auth-main auth-row auth-col-one">
                     <div class="auth-top auth-row">
                         <!--点击返回首页的链接-->
-                        <a class="boardtop-left" href="/">
+                        <a class="boardtop-left" href="./index.html">
                             <div>首 页</div>
                         </a>
                         <!--添加中间图片-->
@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="btn-auth auth-row">
-                        <button id="login" type="submit" class="btn btn-block btn-brand waves-attach waves-light">
+                        <button id="login" type="button" class="btn btn-block btn-brand waves-attach waves-light">
                             确认登录
                         </button>
                     </div>
@@ -112,11 +112,15 @@
                 success: function (data) {
                     console.log(JSON.stringify(data));
                     console.log(data.status);
-                    if (data.status == "0"){
-                        alert(data.body.username+"登录成功");
+                    if (data.status == "1"){
+                        window.sessionStorage.setItem("status",data.status);           //登录成功"status"="0",用于切换导航栏
+                        window.sessionStorage.setItem("username",data.body.username);
+                        console.log("status"+window.sessionStorage.getItem("status"));
+                        alert(data.body.username+"登录成功！");
+                        window.setTimeout("location.href='./index.html'", 1200);
                     }
                     else {
-                        alert(data.errmsg);
+                        alert(data.errMsg);
                     }
                         //window.setTimeout("location.href='/user'", 1200);
                     

@@ -6,10 +6,16 @@ function selectTeacher(name){
 
 
 $(document).ready(function() {
+
+  if (window.sessionStorage.getItem("status")== "1"){
+    document.getElementById("signIn").style.display = "none";
+    document.getElementById("signUp").style.display = "none";
+    document.getElementById("personalInfo").style.display = "block"
+  }
   //1 加载课程名称 学院
   var coursenum=parseInt(window.sessionStorage.getItem("coursetoload"));
   $("#course_name").html(window.sessionStorage.getItem("course"+coursenum+"name"));
-  var teacher_list=window.sessionStorage.getItem("course"+coursenum+"teacher_list");
+  var teacher_list=window.sessionStorage.getItem("course"+coursenum+"teacher_list").split(',');
   //var teacher_list=["教师1","教师2","教师3","教师4"];
   var data="";
   for(var i=0; i<teacher_list.length;i++){
@@ -55,7 +61,18 @@ function Func_submit() {
     alert("提交评价前请先登录")
     return false
   }*/
+  var usename="";
+  if (window.sessionStorage.getItem("status")== "1"){
+    document.getElementById("signIn").style.display = "none";
+    document.getElementById("signUp").style.display = "none";
+    document.getElementById("personalInfo").style.display = "block";
+    username=window.sessionStorage.getItem("username");
+  }
+  else{
+    alert("用户未登录！");
+  }
 
+  
   if($("#comment").val().length < 10){
     alert("评价内容至少需要10字")
 	   return false
@@ -73,7 +90,7 @@ function Func_submit() {
       dataType: "json",
       url: "http://127.0.0.1:8000/makeComment/",
       data: {
-        'username': "xmw7874",
+        'username': username,
         'course_ID': "60",
         'content' : $("#comment").val(),
         'teacher_name' : $("#buttonSelectTeacher").text()
@@ -85,7 +102,8 @@ function Func_submit() {
         if(data.status=="1"){
             //alert(data.body.message);
             console.log("Successfully makeComment "+coursenum);
-            
+            alert("评论成功！");
+            window.setTimeout("location.href='./coursePage.html'", 1000);
         }
         else{
             alert(data.errMsg);

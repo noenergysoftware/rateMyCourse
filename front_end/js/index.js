@@ -60,14 +60,14 @@ function addcourse(id){
 }
 
 function addteachcourse(id){
+  
 
-
-  /*$.ajax({
+  $.ajax({
     type:"POST",
     url: "http://127.0.0.1:8000/addTeacher/",
     dataType:"json",
     data:{ 
-        name:"教师1",
+        name:"教师2",
         title:"教授"
     },
     success:function(data){
@@ -86,7 +86,7 @@ function addteachcourse(id){
     error:function(data){
       alert(JSON.stringify(data));
     }
-});*/
+});
 
 
   $.ajax({
@@ -94,8 +94,8 @@ function addteachcourse(id){
       url: "http://127.0.0.1:8000/addTeachCourse/",
       dataType:"json",
       data:{ 
-          teacher_list:["老师1"],             
-          course:"数学"+id,
+          teacher_list:["教师2"],             
+          course:"数学60",
           department:"计算机学院"
       },
       success:function(data){
@@ -142,16 +142,34 @@ function storedata(data){
           window.sessionStorage.setItem("course"+i+"course_type",data.body[i].course_type);
           window.sessionStorage.setItem("course"+i+"description",data.body[i].description);
           window.sessionStorage.setItem("course"+i+"credit",data.body[i].credit);
-          window.sessionStorage.setItem("course"+i+"teacher_list",data.body[i].teacherlist);
+
+          //console.log(data.body[i].teacher_list);
+          window.sessionStorage.setItem("course"+i+"teacher_list",data.body[i].teacher_list);
           console.log(window.sessionStorage.getItem("course"+i+"website"));
-          console.log("1111111"+window.sessionStorage.getItem("course"+i+"teacher_list"))
+          //console.log("1111111"+window.sessionStorage.getItem("course"+i+"teacher_list"))
+          if(i==0)
+          console.log("1111222"+sessionStorage.getItem("course"+i+"teacher_list").split(","));
       }
   }
 }
 
-$(document).ready(function(){
-  function search(){
 
+
+
+
+
+
+$(document).ready(function(){
+
+  if (window.sessionStorage.getItem("status")== "1"){
+    document.getElementById("signIn").style.display = "none";
+    document.getElementById("signUp").style.display = "none";
+    document.getElementById("personalInfo").style.display = "block";
+    document.getElementById("logOut").style.display = "block";
+  } 
+  
+  function search(){
+      
       $.ajax({
             type:"GET",
             url: "http://127.0.0.1:8000/searchCourse/",
@@ -167,7 +185,7 @@ $(document).ready(function(){
                     //alert(data.body.message);
                     console.log("Successfully searched");
                     storedata(data);
-                    window.setTimeout("location.href='./searchResult.html'",100000);
+                    window.setTimeout("location.href='./searchResult.html'",0);
                 }
                 else{
                   alert(data.errMsg);

@@ -170,7 +170,11 @@ function setComments() {//get comments list from service
 
 $(document).ready(function () {
     //generateGrid("#", "aya", "2016", "ruan", 20, "good", "2018", "1", "1", "2");
-    
+    if (window.sessionStorage.getItem("status")== "1"){
+        document.getElementById("signIn").style.display = "none";
+        document.getElementById("signUp").style.display = "none";
+        document.getElementById("personalInfo").style.display = "block"
+      }
 
     //1 从sessonStorage获取课程信息
     var coursenum=parseInt(window.sessionStorage.getItem("coursetoload"));
