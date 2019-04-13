@@ -140,5 +140,31 @@ def sign_in(request):
         response.set_cookie('password',password,max_age=3600*24) # 1day
         return response
 
+def logout(request):
+    '''
+    用户登出：提供username
+    '''
+    try:
+        if not auth.auth_with_user(request, request.POST['username']):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")
+        del request.session['auth_sess']
+        response = HttpResponse(json.dumps({
+            'status': 1,
+            'length': 1,
+            'body': {
+                'message': '登出成功'
+            }
+        }), content_type="application/json")
+        response.delete_cookie('username')
+        response.delete_cookie('password')
 
-
+    except:
+        return HttpResponse(json.dumps({
+            'status': -1,
+            'errMsg': '登出失败',
+        }), content_type="application/json")
+    else:
+        return response
