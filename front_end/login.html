@@ -97,8 +97,14 @@
 
 <script>
     $(document).ready(function () {
+        /* if($("#entMail").val().indexOf("@") == -1 ){       //true:是name登录
+            var name = 
+        }*/
+        var name = $("#name").val;
+        console.log(name);
+        
         function login() {
-
+            
             //document.getElementById("login").disabled = true;
 
             $.ajax({

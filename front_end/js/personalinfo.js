@@ -45,6 +45,28 @@ $(document).ready(function () {
         document.getElementById("logOut").style.display = "block"
       } 
 
+      var name;
+      var gender;
+      var role;
+      if ($("#role").val() == "教师"){
+          role = "T";
+      }else if($("#role").val() == "学生"){
+          role = "S";
+      }else {
+          role = "O";
+      }
+  
+      if ($("#gender").val() == "男"){
+          gender = "M";
+      }else if ($("#gender").val() == "女"){
+          gender = "F";
+      }else {
+          gender = "A";
+      }
+      
+      console.log("role: "+role.val());
+      console.log("gender: "+gender.val());
+
     function modifier() {
         $.ajax({
             type: "POST",
@@ -52,8 +74,8 @@ $(document).ready(function () {
             dataType: "json",
             data: {
                 username: $("#username").val(),
-                role: $("#role").val(),
-                gender: $("#gender").val(),
+                role: role.val(),
+                gender: gender.val(),
                 self_introductino: $("#personalIntroduce").val()
             },
             xhrFields: {

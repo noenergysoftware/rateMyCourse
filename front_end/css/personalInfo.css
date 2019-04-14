@@ -7,8 +7,8 @@
     -webkit-border-radius: 5px;
     font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-shadow: 1px 1px 1px #444;
-    color: #D3D3D3;
-    background: #555;
+    color: #D3D3;
+    background: white;
 }
 .Content-Main h1{
     padding: 8px 0px 40px 10px;
