@@ -27,7 +27,7 @@ function jumpLogOut(){
     success:function(data){
       //console.log("status "+data.status);
       if (data.status > 0 ){
-          $.cookie("username",null)
+          $.cookie("username",undefined);
           alert("注销成功");
           window.setTimeout("location.href='./index.html'", 500);
       }
