@@ -18,14 +18,22 @@ function jumpLogOut(){
     type:"POST",
     url: "https://api.ratemycourse.tk/logout/",
     dataType:"json",
-    data:{username: $.cookie("username")},
+    data:{
+      username: $.cookie("username")
+    },
+    xhrFields: {
+      withCredentials: true
+    },
     success:function(data){
-      console.log("status "+data.status);
-      if (data.status > "0"){
+      //console.log("status "+data.status);
+      if (data.status > 0 ){
+          $.cookie("username",null)
           alert("注销成功");
-          window.setTimeout("location.href='./index.html'", 1200);
+          window.setTimeout("location.href='./index.html'", 500);
       }
-      
+      else{
+        alert("注销失败");
+      }
     },
     error:function(data){
       alert("注销失败");

@@ -1,12 +1,9 @@
 
 function selectTeacher(name){
-  $("#buttonSelectTeacher").html(name);
-  
+  $("#buttonSelectTeacher").html(name); 
 }
 
-
 $(document).ready(function() {
-
 
   if($.cookie("username") != undefined){
     document.getElementById("signIn").style.display = "none";
@@ -18,7 +15,7 @@ $(document).ready(function() {
   var coursenum=parseInt(window.sessionStorage.getItem("coursetoload"));
   $("#course_name").html(window.sessionStorage.getItem("course"+coursenum+"name"));
   var teacher_list=window.sessionStorage.getItem("course"+coursenum+"teacher_list").split(',');
-  //var teacher_list=["教师1","教师2","教师3","教师4"];
+  
   var data="";
   for(var i=0; i<teacher_list.length;i++){
     data+="<li>\n"+
@@ -31,38 +28,10 @@ $(document).ready(function() {
     $("#teacherlist").html(data);
   }
 
-
-  // alert("!!!")
-  // Animation settings
-  /*setAnimations()
-
-  // Form validation for Sign in / Sign up forms
-  validateSignUp()
-  validateSignIn()
-
-  // Login widget set according to cookie
-  setCookie()
-
-  ////////// csrf set up //////////
-  function csrfSafeMethod(method) {
-      // these HTTP methods do not require CSRF protection
-      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-  }
-  $.ajaxSetup({
-      beforeSend: function(xhr, settings) {
-          if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-              xhr.setRequestHeader("X-CSRFToken", $.cookie("csrftoken"));
-          }
-      }
-  });
-  /////////////////////////////////*/
 })
 
 function Func_submit() {
-  /*if($.cookie('username') == undefined){
-    alert("提交评价前请先登录")
-    return false
-  }*/
+
   
   if ($.cookie("username") == undefined){
     alert("用户未登录！ 登录后即可发表评论");
@@ -70,15 +39,15 @@ function Func_submit() {
   }
   
   if($("#comment").val().length < 10){
-    alert("评价内容至少需要10字")
+    alert("评价内容至少需要10字");
 	   return false
   }
   else if($("#comment").val().length > 2048){
-    alert("评价内容不能多于2048字")
+    alert("评价内容不能多于2048字");
 	   return false
   }
   else if($("#buttonSelectTeacher").text()=="选择教师"){
-    alert("必须要选择任课教师")
+    alert("必须要选择任课教师");
     return false
   }
 
@@ -101,11 +70,11 @@ function Func_submit() {
       },
       success:function(data){
         //	alert("ajax success");
-        console.log(data);
+        //console.log(data);
         //console.log(data.status)
         if(data.status=="1"){
             //alert(data.body.message);
-            console.log("Successfully makeComment "+coursenum);
+            //console.log("Successfully makeComment "+coursenum);
             alert("评论成功！");
             window.setTimeout("location.href='./coursePage.html'", 1000);
         }

@@ -23,26 +23,8 @@ function adddiv(number){
         "<br>\n";
     var a=document.getElementById("c_pagination");
     a.parentNode.insertBefore(x , a);
-    console.log("success");
+    //console.log("success");
 
-  /*
-      "<div class=\"col-md-3 text-md-left text-center align-self-center my-4\"> 学校\n"+
-      "<p>"+window.sessionStorage.getItem("course"+number+"")+"</p>\n"+
-      "</div>\n"+
-      "<div class=\"col-md-3 text-md-left text-center align-self-center my-4\"> 专业\n"+
-      "<p>"+window.sessionStorage.getItem("course"+number+"course_type")+"</p>\n"+
-      "</div>\n"+
-
-      
-      "<div class=\"row\" style=\"background:#eeeeee\">\n"+
-      "<ic class=\"fa fa-star-o text-dark\" id=\"ic{{forloop.counter}}1\" aria-hidden=\"true\" style=\"font-size:32px;\"></ic>\n"+
-      "<ic class=\"fa fa-star-o text-dark\" id=\"ic{{forloop.counter}}2\" aria-hidden=\"true\" style=\"font-size:32px;\"></ic>\n"+
-      "<ic class=\"fa fa-star-o text-dark\" id=\"ic{{forloop.counter}}3\" aria-hidden=\"true\" style=\"font-size:32px;\"></ic>\n"+
-      "<ic class=\"fa fa-star-o text-dark\" id=\"ic{{forloop.counter}}4\" aria-hidden=\"true\" style=\"font-size:32px;\"></ic>\n"+
-      "<ic class=\"fa fa-star-o text-dark\" id=\"ic{{forloop.counter}}5\" aria-hidden=\"true\" style=\"font-size:32px;\"></ic>\n"+
-      "<div class=\"mx-3\" style=\"font-size:15px;color:#CCBBCC\"> 评价数：{{course.ratenumber}} </div>\n"+
-      "</div>\n"+
-   */
 }
 
 function toPage(pagenum){
@@ -81,7 +63,7 @@ function toPage(pagenum){
             $("#page"+i).show();
         }
     }
-    console.log("pagenum before last"+pagenum);
+   // console.log("pagenum before last"+pagenum);
     if(pagenum>1){
    
       $("#lastpage").show();
@@ -116,7 +98,7 @@ function lastPage(){
 }
 
 function toCourse(number){
-    console.log("to course"+number);
+   // console.log("to course"+number);
     window.sessionStorage.setItem("coursetoload",number);
     //console.log("to course"+number);
     window.setTimeout("location.href='./coursePage.html'", 0);
@@ -137,7 +119,7 @@ $(document).ready(function(){
     
     $("#serachedCourseNum").html(coursenum);
     
-    console.log("coursenum!!!"+coursenum);
+    //console.log("coursenum!!!"+coursenum);
     if(coursenum==0 || coursenum==null){
       $("#noresult").show();
       $("#jumpbutton").hide();
@@ -158,7 +140,7 @@ $(document).ready(function(){
     }
     
     var totalpagenumber=Math.ceil(coursenum/5);
-    console.log(totalpagenumber+"?????");
+  //  console.log(totalpagenumber+"?????");
     $("#pagenum").html(1);
     $("#totalpage").html(totalpagenumber);
     if(totalpagenumber>1){
@@ -176,7 +158,7 @@ $(document).ready(function(){
             
             var a=document.getElementById("nextpage");
             a.parentNode.insertBefore(x , a);
-            console.log("add page");
+          //  console.log("add page");
             if(i>5){
               console.log("hide");
               $("#page"+i).hide();
@@ -191,6 +173,6 @@ $(document).ready(function(){
         x.innerHTML="<a class=\"page-link\" onclick=\"toPage(1)\" href=\"#\">1</a>";
         var a=document.getElementById("nextpage");
         a.parentNode.insertBefore(x , a);
-        console.log("add page");
+       // console.log("add page");
     }
 })

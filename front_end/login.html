@@ -120,7 +120,7 @@
                         $.cookie("username",data.body.username,{ path: '/' });
                         //window.sessionStorage.setItem("status",data.status);           //登录成功"status"="0",用于切换导航栏
                         //window.sessionStorage.setItem("username",data.body.username);
-                        console.log("status"+window.sessionStorage.getItem("status"));
+                        //console.log("status"+window.sessionStorage.getItem("status"));
                         alert(data.body.username+"登录成功！");
                         window.setTimeout("location.href='./index.html'", 1200);
                     }

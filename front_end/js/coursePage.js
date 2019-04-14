@@ -1,11 +1,4 @@
 
-//暂时不知道拿来干嘛的
-function feedback(node){
-    var text = $(node).parent().next().next().text();
-    var textarea=$(node).parents("ul").find(".texta");
-    textarea.val("").focus().val("@"+text); 
-  }
-
 //加载评论
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, commentid, cnum, snum) {
     var ScreenGridHtml = `
@@ -68,17 +61,14 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
 
         //css
         var divTags = commentGrid.getElementsByTagName("div");
-        //divTags[0].setAttribute("class", "row text-center col-md-1");
+       
         divTags[1].setAttribute("class", "row text-center");
         divTags[2].setAttribute("class", "text-center");
-        //divTags[0].setAttribute("style", "width:100%;border-bottom:1px #e4e4e4 solid;");
-        //divTags[3].setAttribute("style", "width:100%;border-bottom:1px #e4e4e4 solid;margin-bottom:16px");
+        
         var tableTag = commentGrid.getElementsByTagName("table");
         tableTag[0].setAttribute("style", "width:50%; margin-top:2px;border-bottom:1px #e4e4e4 solid");
-        
-        /*var a=document.getElementById("locationid");
-        a.parentNode.insertBefore(commentGrid , a);*/
-        console.log("successfully establish comment");
+     
+     //   console.log("successfully establish comment");
 
         return commentGrid;
 
@@ -86,7 +76,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
 }
 
 
-function testAddComment(){
+function AddComment(){
     window.setTimeout("location.href='./commentPage.html'", 0);
 }
 
@@ -177,8 +167,8 @@ $(document).ready(function () {
 
     //1 从sessonStorage获取课程信息
     var coursenum=parseInt(window.sessionStorage.getItem("coursetoload"));
-    console.log("now in "+coursenum);
-    console.log("course ID "+window.sessionStorage.getItem("course"+coursenum+"course_ID"));
+    //console.log("now in "+coursenum);
+    //console.log("course ID "+window.sessionStorage.getItem("course"+coursenum+"course_ID"));
     $("#course_name").html(window.sessionStorage.getItem("course"+coursenum+"name"));
     $("#course_credit").html(window.sessionStorage.getItem("course"+coursenum+"credit"));
     $("#course_type").html(window.sessionStorage.getItem("course"+coursenum+"course_type"));
@@ -194,11 +184,11 @@ $(document).ready(function () {
         },
         success:function(data){
             //	alert("ajax success");
-            console.log(data);
+           // console.log(data);
             //console.log(data.status)
             if(data.status=="1"){
                 //alert(data.body.message);
-                console.log("Successfully get comment of id "+coursenum);
+                //console.log("Successfully get comment of id "+coursenum);
                 if(data.length==0){
                     $("#noresult").show();
                     $("#jumpbutton").hide();
@@ -233,9 +223,9 @@ $(document).ready(function () {
                             
                             var a=document.getElementById("nextpage");
                             a.parentNode.insertBefore(x , a);
-                            console.log("add page");
+                           // console.log("add page");
                             if(i>5){
-                            console.log("hide");
+                            //console.log("hide");
                             $("#page"+i).hide();
                             }
                         }
@@ -248,7 +238,7 @@ $(document).ready(function () {
                         x.innerHTML="<a class=\"page-link\" onclick=\"toPage(1)\" href=\"#\">1</a>";
                         var a=document.getElementById("nextpage");
                         a.parentNode.insertBefore(x , a);
-                        console.log("add page");
+                       // console.log("add page");
                     }
                 }
             }
