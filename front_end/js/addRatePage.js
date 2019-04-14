@@ -60,7 +60,7 @@ function Func_submit() {
       dataType: "json",
       url: "https://api.ratemycourse.tk/makeComment/",
       data: {
-        'username': username,
+        'username': $.cookie("username"),
         'course_ID': window.sessionStorage.getItem("course"+coursenum+"course_ID"),
         'content' : $("#comment").val(),
         'teacher_name' : $("#buttonSelectTeacher").text()
