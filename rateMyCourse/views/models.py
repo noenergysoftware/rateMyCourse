@@ -8,6 +8,7 @@ from django.conf import settings
 from django.http import HttpResponse
 
 from rateMyCourse.models import *
+import rateMyCourse.views.authentication as auth
 
 
 def add_teacher(request):
@@ -15,6 +16,11 @@ def add_teacher(request):
     增加教师，需求教师的基本信息：姓名，职称
     """
     try:
+        if not auth.auth(request):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")
         name = request.POST['name']
         title = request.POST['title']
         try:
@@ -50,6 +56,11 @@ def add_course(request):
     增加课程，需求课程的基本信息：名字，网站，ID，描述，类型，学分
     """
     try:
+        if not auth.auth(request):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")
         name = request.POST['name']
         website = request.POST['website']
         course_ID = request.POST['course_ID']
@@ -80,11 +91,19 @@ def add_teach_course(request):
     增加课授课信息，需求教师列表，课程，部门
     """
     try:
+        if not auth.auth(request):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")
         department = Department.objects.get(name=request.POST['department'])
         course = Course.objects.get(name=request.POST['course'])
+        teacher_list = request.POST.getlist('teacher_list[]')
         c = TeachCourse(department=department, course=course)
         c.save()
+
         teacher_list = request.POST.getlist('teacher_list')
+
         for teacher_name in teacher_list:
             c.teachers.add(Teacher.objects.get(name=teacher_name))
         c.save()

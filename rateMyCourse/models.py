@@ -158,7 +158,7 @@ class TeachCourse(models.Model):
     )
 
 
-class Ranks(models.Model):
+class Rank(models.Model):
     """
     rank records. \n
     difficulty_score: difficulty of the course \n
@@ -183,7 +183,7 @@ class Ranks(models.Model):
         }
 
 
-class SelectCourse(models.Model):
+class MakeRank(models.Model):
     """
     match student with their courses. \n
     user: foreign key to table USER, defines who selects the course \n
@@ -198,12 +198,22 @@ class SelectCourse(models.Model):
         Course,
         on_delete=models.CASCADE,
     )
-    ranks = models.ForeignKey(
-        Ranks,
+    rank = models.ForeignKey(
+        Rank,
         on_delete=models.CASCADE,
     )
 
-    
+class rankCache(models.Model):
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+    )
+    count = models.IntegerField(default=0)
+    difficulty_score = models.FloatField(default=0)
+    funny_score = models.FloatField(default=0)
+    gain_score = models.FloatField(default=0)
+    recommend_score = models.FloatField(default=0)
+
 class Comment(models.Model):
     """
     details of each comment. \n
@@ -217,12 +227,18 @@ class Comment(models.Model):
     edit_time = models.DateTimeField(default=datetime.datetime.now)
     parent_comment = models.IntegerField(default=-1)
 
+    teacher = models.ForeignKey(
+        Teacher,
+        on_delete=models.CASCADE,
+        default=None,
+    )
     def ret(self):
         return {
             'content': self.content,
             'create_time': str(self.create_time),
             'edit_time': str(self.edit_time),
-            'parent_comment': self.parent_comment
+            'parent_comment': self.parent_comment,
+            'teacher': str(self.teacher.name)
         }
 
 
@@ -245,6 +261,7 @@ class MakeComment(models.Model):
         Comment,
         on_delete=models.CASCADE,
     )
+
 
 
 class HitCount(models.Model):

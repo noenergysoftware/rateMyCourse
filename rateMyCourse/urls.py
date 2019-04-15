@@ -1,25 +1,34 @@
 from django.conf.urls import url, include
 from django.contrib import admin
-from .views import search,  register, models, comments
+
+from .views import search,  register, models, comments,rank
+
 
 urlpatterns = [
     url(r'^signIn/$', register.sign_in, name='signIn'),
     url(r'^signUp/$', register.sign_up, name='signUp'),
     url(r'^updateUser/$', register.update_user, name='updateUser'),
+    url(r'^logout/$', register.logout, name='logout'),
 
 
     url(r'^searchTeacher/$', search.search_teacher, name='searchTeacher'),
     url(r'^searchCourse/$', search.search_course, name='searchCourse'),
     url(r'^searchUser/$', search.search_user, name='searchUser'),
     url(r'^searchCourseByDepartment/$', search.search_course_by_department,name='searchCourseByDepartment'),
+    url(r'^getDepartment/$', search.get_department, name='getDepartment'),
 
-    url(r'^addTeacher/$',models.add_teacher, name="addTeacher"),
-    url(r'^addCourse/$',models.add_course, name="addCourse"),
-    url(r'^addTeachCourse/$',models.add_teach_course, name="addTeachCourse"),
 
-    url(r'^makeComment/$',comments.make_comment, name="makeComment"),
-    url(r'^getCommentsByCourse/$',comments.get_comment_by_course, name="getCommentsByCourse"),
-    url(r'^editComment/$',comments.edit_comment, name="editComments")
+    url(r'^addTeacher/$', models.add_teacher, name="addTeacher"),
+    url(r'^addCourse/$', models.add_course, name="addCourse"),
+    url(r'^addTeachCourse/$', models.add_teach_course, name="addTeachCourse"),
+
+    url(r'^makeComment/$', comments.make_comment, name="makeComment"),
+    url(r'^getCommentsByCourse/$', comments.get_comment_by_course, name="getCommentsByCourse"),
+    url(r'^editComment/$', comments.edit_comment, name="editComments"),
+
+    url(r'^makeRank/$', rank.make_rank, name="makeRank"),
+    url(r'^getRankByCourse/$', rank.get_rank_by_course, name="getRankByCourse"),
+
 
 ]
 '''
