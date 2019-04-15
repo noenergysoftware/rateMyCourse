@@ -18,11 +18,13 @@ def search_teacher(request):
     """
     retlist = []
     try:
+
         '''if not auth.auth(request):
             return HttpResponse(json.dumps({
                 'status': -100,
                 'errMsg': 'cookies 错误',
             }), content_type="application/json")'''
+
         teacher_name = request.GET['teacher_name']
         teacher_list = Teacher.objects.filter(name__icontains=teacher_name)
         for teacher in teacher_list:
@@ -47,11 +49,13 @@ def search_course(request):
     """
     retlist = []
     try:
+
         '''if not auth.auth(request):
             return HttpResponse(json.dumps({
                 'status': -100,
                 'errMsg': 'cookies 错误',
             }), content_type="application/json")'''
+
         course_name = request.GET['course_name']
         course_list = Course.objects.filter(name__icontains=course_name)
         for course in course_list:
@@ -91,11 +95,13 @@ def search_user(request):
                 'errMsg': 'cookies 错误',
             }), content_type="application/json")'''
         username = request.GET['username']
+
         if username=='':
             return HttpResponse(json.dumps({
                 'status': -1,
                 'errMsg': 'user name Error',
             }), content_type="application/json")
+
         user_list = User.objects.filter(username__icontains=username)
         for user in user_list:
             retlist.append(user.ret())
@@ -118,6 +124,7 @@ def search_course_by_department(request):
     '''
     retlist=[]
     try:
+
         '''if not auth.auth(request):
             return HttpResponse(json.dumps({
                 'status': -100,
@@ -142,7 +149,6 @@ def search_course_by_department(request):
                 retlist[-1]['teacher_list'] = teacher_list
                 retlist[-1]['department'] = department
 
-
     except:
         return HttpResponse(json.dumps({
             'status': -1,
@@ -150,6 +156,7 @@ def search_course_by_department(request):
         }), content_type="application/json")
     return HttpResponse(json.dumps({
         'status': 1,
+
         'length': len(retlist),
         'body': retlist,
     }), content_type="application/json")

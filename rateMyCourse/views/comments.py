@@ -94,11 +94,13 @@ def edit_comment(request):
     """
     try:
         c = MakeComment.objects.get(id=request.POST['comment_ID'])
+
         if not auth.auth_with_user(request,c.user.username):
             return HttpResponse(json.dumps({
                 'status': -100,
                 'errMsg': 'cookies 错误',
             }), content_type="application/json")
+
         c.comment.content = request.POST['content']
 
         c.comment.teacher = request.POST['teacher']
