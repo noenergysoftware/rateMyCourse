@@ -203,7 +203,17 @@ class MakeRank(models.Model):
         on_delete=models.CASCADE,
     )
 
-    
+class rankCache(models.Model):
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+    )
+    count = models.IntegerField(default=0)
+    difficulty_score = models.FloatField(default=0)
+    funny_score = models.FloatField(default=0)
+    gain_score = models.FloatField(default=0)
+    recommend_score = models.FloatField(default=0)
+
 class Comment(models.Model):
     """
     details of each comment. \n
