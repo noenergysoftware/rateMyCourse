@@ -10,6 +10,7 @@ from django.http import HttpResponse
 from rateMyCourse.models import *
 import rateMyCourse.views.authentication as auth
 
+
 def add_teacher(request):
     """
     增加教师，需求教师的基本信息：姓名，职称
@@ -100,6 +101,9 @@ def add_teach_course(request):
         teacher_list = request.POST.getlist('teacher_list[]')
         c = TeachCourse(department=department, course=course)
         c.save()
+
+        teacher_list = request.POST.getlist('teacher_list')
+
         for teacher_name in teacher_list:
             c.teachers.add(Teacher.objects.get(name=teacher_name))
         c.save()

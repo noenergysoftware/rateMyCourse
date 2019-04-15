@@ -1,6 +1,8 @@
 from django.conf.urls import url, include
 from django.contrib import admin
-from .views import search,  register, models, comments, rank
+
+from .views import search,  register, models, comments
+
 
 urlpatterns = [
     url(r'^signIn/$', register.sign_in, name='signIn'),
@@ -15,6 +17,7 @@ urlpatterns = [
     url(r'^searchCourseByDepartment/$', search.search_course_by_department,name='searchCourseByDepartment'),
     url(r'^getDepartment/$', search.get_department, name='getDepartment'),
 
+
     url(r'^addTeacher/$', models.add_teacher, name="addTeacher"),
     url(r'^addCourse/$', models.add_course, name="addCourse"),
     url(r'^addTeachCourse/$', models.add_teach_course, name="addTeachCourse"),
@@ -25,6 +28,7 @@ urlpatterns = [
 
     url(r'^makeRank/$', rank.make_rank, name="makeRank"),
     url(r'^getRankByCourse/$', rank.get_rank_by_course, name="getRankByCourse"),
+
 
 ]
 '''

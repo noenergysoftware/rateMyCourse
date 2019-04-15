@@ -16,3 +16,9 @@ rateMyCourse/migrations/*
 
 # vs code
 .vscode
+
+# document
+*.pdf
+
+# test log
+test/test.log
