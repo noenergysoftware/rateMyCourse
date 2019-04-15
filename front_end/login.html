@@ -48,7 +48,7 @@
                     </div>
                     <div class="auth-row">
                         <div class="form-group-label auth-row row-login">
-                            <label class="floating-label" for="email">邮箱</label>
+                            <label class="floating-label" for="email">邮箱/用户名</label>
                             <input class="form-control maxwidth-auth" id="name" type="text" name="Email">
                         </div>
                     </div>
@@ -97,11 +97,17 @@
 
 <script>
     $(document).ready(function () {
-        /* if($("#entMail").val().indexOf("@") == -1 ){       //true:是name登录
-            var name = 
-        }*/
-        var name = $("#name").val;
-        console.log(name);
+        var name;
+        var email;
+        if($("#name").val().indexOf("@") == -1 ){       //true:是name登录
+            var name = $("#name").val();
+            var email = null;
+        }else {
+            var name = null;
+            var email = $("#name").val();
+        }
+
+       
         
         function login() {
             
@@ -112,9 +118,9 @@
                 url: "https://api.ratemycourse.tk/signIn/",
                 dataType: "json",
                 data: {
-                    username: $("#name").val(),
+                    username: name.val(),
+                    mail: email.val(),
                     password: $("#password").val()
-                   // code: $("#code").val(), remember_me: $("#remember_me:checked").val()
                 },
                 xhrFields: {
                     withCredentials: true

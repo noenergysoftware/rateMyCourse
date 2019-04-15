@@ -34,10 +34,33 @@ function infoCheck() {
     return true;
 }
 
-
+function getUserData(){
+    var name = $.cookie("username");
+    $.ajax({
+        type:"get",
+        url: "https://api.ratemycourse.tk/searchUser/",
+        data:{username:name.val()},
+        dataType:"json",
+        success:function(data){
+            if (data.status == "1"){
+                document.getElementById("name").value = data.body.self.name;
+                document.getElementById("role").value = data.body.self.role;
+                document.getElementById("gender").value = data.body.self.gender;
+                document.getElementById("personalIntroduce").value = data.body.self.self_introductino;
+            }else {
+                alert(data.errMsg);
+            }
+        },
+        error:function(data){
+            alert(JSON.stringify(data));
+        }
+    });
+}
 
 $(document).ready(function () {
-    //console.log(window.sessionStorage.getItem("status")== "1");
+    
+    getUserData();
+
     if ($.cookie("username") != undefined){
         document.getElementById("signIn").style.display = "none";
         document.getElementById("signUp").style.display = "none";
@@ -67,6 +90,7 @@ $(document).ready(function () {
       console.log("role: "+role.val());
       console.log("gender: "+gender.val());
 
+
     function modifier() {
         $.ajax({
             type: "POST",
@@ -95,6 +119,8 @@ $(document).ready(function () {
             }
         });
     }
+
+
     $("#submit").click(function () {
         if (infoCheck == true) {
             modifier();
