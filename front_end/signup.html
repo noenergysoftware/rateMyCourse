@@ -118,6 +118,7 @@
 	<script src="./js/project.min.js"></script>
 	<script src="./js/jquery.validate.js"></script>
 	<script color="255,0,255" opacity="0.7" count="88" src="./js/canvas-nest.js"></script>
+	<script src="./js/md5.min.js"></script>
 	<canvas id="c_n5" width="1500" height="600" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas>
 
 <script>
@@ -131,11 +132,11 @@
 								data:{              
 										username: $("#name").val(),
 										mail: $("#email").val(),
-										password: $("#passwd").val()
+										password: md5($("#passwd").val())
 								},
-                                xhrFields: {
-                                    withCredentials: true
-                                },
+								xhrFields: {
+										withCredentials: true
+								},
 								success:function(data){
 									//	alert("ajax success");
 										console.log(data);
