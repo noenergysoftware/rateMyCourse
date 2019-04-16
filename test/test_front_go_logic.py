@@ -1,26 +1,10 @@
 from unittest import skip
 
-from django.test.testcases import TestCase
 from django.test import tag
-
-from selenium.webdriver.edge.webdriver import WebDriver
 
 from page_objects import *
 from user_actions import *
-
-class FrontBasicTC(TestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.driver = WebDriver()
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.driver.close()
-        super().tearDownClass()
-
-    def setUp(self):
-        self.domain = "127.0.0.1"
+from front_basic import FrontBasicTC
 
 @tag("front")
 class FrontHomeGoLogicTC(FrontBasicTC):
@@ -44,10 +28,10 @@ class FrontHomeGoLogicTC(FrontBasicTC):
 
     def test_person(self):
         page = self.createInitPage()
-        page = logAction(page, "rbq", "rbq")
-        page.alertAccept()
-        page = page.goPersonPage()
         try:
+            page = logAction(page, "rbq", "rbq")
+            page.alertAccept()
+            page = page.goPersonPage()
             page.checkIsSelf()
         finally:
             page.clearCookies()
@@ -82,8 +66,14 @@ class FrontSearchGoLogicTC(FrontBasicTC):
         detailpage.checkIsSelf()
 
     def test_person(self):
-        # TODO need login
-        pass
+        page = self.createInitPage()
+        try:
+            page = logAction(page, "rbq", "rbq")
+            page.alertAccept()
+            page = page.goPersonPage()
+            page.checkIsSelf()
+        finally:
+            page.clearCookies()
 
 
 @tag("front")
@@ -115,8 +105,14 @@ class FrontDetailGoLogicTC(FrontBasicTC):
         pass
 
     def test_person(self):
-        # TODO need login
-        pass
+        page = self.createInitPage()
+        try:
+            page = logAction(page, "rbq", "rbq")
+            page.alertAccept()
+            page = page.goPersonPage()
+            page.checkIsSelf()
+        finally:
+            page.clearCookies()
 
     def test_comment(self):
         page = self.createInitPage()
@@ -126,12 +122,15 @@ class FrontDetailGoLogicTC(FrontBasicTC):
 
 @tag("front")
 class FrontCommentGoLogicTC(FrontBasicTC):
-    def createInitPage(self):
-        homepage = HomePage(self.driver, self.domain)
+    def goInitPage(self, homepage):
         searchpage = homepage.search("rbq")
         detailpage = searchpage.goDetailPage("0")
         commonpage = detailpage.goCommentPage()
         return commonpage
+
+    def createInitPage(self):
+        homepage = HomePage(self.driver, self.domain)
+        return self.goInitPage(homepage)
 
     def test_home(self):
         page = self.createInitPage()
@@ -149,12 +148,26 @@ class FrontCommentGoLogicTC(FrontBasicTC):
         registpage.checkIsSelf()
 
     def test_person(self):
-        # TODO need login
-        pass
+        page = self.createInitPage()
+        try:
+            page = logAction(page, "rbq", "rbq")
+            page = page.goPersonPage()
+            page.checkIsSelf()
+        finally:
+            page.clearCookies()
 
     def test_detail(self):
-        # TODO need test database to reroll
-        pass
+        # TODO This not pass, may somewhat wrong.
+        page = HomePage(self.driver, self.domain)
+        try:
+            page = logAction(page, "rbq", "rbq")
+            page = self.goInitPage(page)
+            page.selectTeacher(0)
+            page.editComment("kkkkkkkkkk")
+            page = page.submitComment()
+            page.checkIsSelf()
+        finally:
+            page.clearCookies()
 
 
 @tag("front")
