@@ -8,6 +8,12 @@
             "role": "T",
             "gender": "M",
             "self_introduction": "hhh"
+        },
+        {
+            "auth":{
+                "username": "rbq",
+                "password": "rbq"
+            }
         }
     ]
 ]

@@ -131,7 +131,7 @@
     "course_ID": "0",
     "description": "\u732b\u771f\u53ef\u7231",
     "course_type": "\u5fc5\u4fee",
-    "credit": 1
+    "credit": 1.0
   }
 },
 {
@@ -143,7 +143,7 @@
     "course_ID": "1",
     "description": "",
     "course_type": "",
-    "credit": 1
+    "credit": 1.0
   }
 },
 {
@@ -155,7 +155,7 @@
     "course_ID": "110",
     "description": "\u5f88\u7b80\u5355",
     "course_type": "\u5fc5\u4fee",
-    "credit": 3
+    "credit": 3.0
   }
 },
 {
@@ -167,7 +167,7 @@
     "course_ID": "000000",
     "description": "",
     "course_type": "",
-    "credit": 1
+    "credit": 1.0
   }
 },
 {
@@ -208,58 +208,41 @@
   "model": "rateMyCourse.comment",
   "pk": 1,
   "fields": {
-    "content": "\u771f\u68d2",
-    "create_time": "2019-04-02T00:00:00Z",
-    "edit_time": "2019-04-04T18:00:00Z",
-    "parent_comment": -1
+    "content": "\u6211\u6210\u529f\u8fdb\u53bb\u5566\uff01",
+    "create_time": "2019-04-15T04:10:00Z",
+    "edit_time": "2019-04-15T04:10:00Z",
+    "parent_comment": -1,
+    "teacher": 2
   }
 },
 {
   "model": "rateMyCourse.comment",
   "pk": 2,
   "fields": {
-    "content": "\u6211\u4e5f\u8fd9\u4e48\u89c9\u5f97",
-    "create_time": "2019-04-03T15:17:49Z",
-    "edit_time": "2019-04-03T15:17:49Z",
-    "parent_comment": 1
+    "content": "\u90a3\u4f60\u5f88\u68d2\u68d2\u54e6",
+    "create_time": "2019-04-15T08:33:00Z",
+    "edit_time": "2019-04-15T08:33:00Z",
+    "parent_comment": 1,
+    "teacher": 2
   }
 },
 {
   "model": "rateMyCourse.comment",
   "pk": 3,
   "fields": {
-    "content": "\u6211\u6210\u529f\u8fdb\u53bb\u5566\uff01",
-    "create_time": "2019-04-05T15:20:58Z",
-    "edit_time": "2019-04-05T15:20:58Z",
-    "parent_comment": -1
-  }
-},
-{
-  "model": "rateMyCourse.comment",
-  "pk": 4,
-  "fields": {
-    "content": "\u90a3\u4f60\u5f88\u68d2\u68d2\u54e6",
-    "create_time": "2019-04-05T15:21:17Z",
-    "edit_time": "2019-04-05T15:21:17Z",
-    "parent_comment": 3
-  }
-},
-{
-  "model": "rateMyCourse.comment",
-  "pk": 5,
-  "fields": {
     "content": "rbq",
-    "create_time": "2019-04-06T13:58:06Z",
-    "edit_time": "2019-04-06T13:58:06Z",
-    "parent_comment": -1
+    "create_time": "2019-04-15T08:34:00Z",
+    "edit_time": "2019-04-15T08:34:00Z",
+    "parent_comment": -1,
+    "teacher": 1
   }
 },
 {
   "model": "rateMyCourse.makecomment",
   "pk": 1,
   "fields": {
-    "user": 1,
-    "course": 1,
+    "user": 4,
+    "course": 3,
     "comment": 1
   }
 },
@@ -267,8 +250,8 @@
   "model": "rateMyCourse.makecomment",
   "pk": 2,
   "fields": {
-    "user": 2,
-    "course": 1,
+    "user": 5,
+    "course": 3,
     "comment": 2
   }
 },
@@ -276,27 +259,9 @@
   "model": "rateMyCourse.makecomment",
   "pk": 3,
   "fields": {
-    "user": 4,
-    "course": 3,
-    "comment": 3
-  }
-},
-{
-  "model": "rateMyCourse.makecomment",
-  "pk": 4,
-  "fields": {
-    "user": 5,
-    "course": 3,
-    "comment": 4
-  }
-},
-{
-  "model": "rateMyCourse.makecomment",
-  "pk": 5,
-  "fields": {
     "user": 6,
     "course": 4,
-    "comment": 5
+    "comment": 3
   }
 },
 {
@@ -318,11 +283,29 @@
   }
 },
 {
-  "model": "sessions.session",
-  "pk": "hn7uj9sg41jyheuzrcj1w1dmfixklm7i",
+  "model": "auth.user",
+  "pk": 2,
   "fields": {
-    "session_data": "YjJlNjM0MjJkOGNlMWZlNDdhMDUwOWEyYWVkNTMyZDQ4ODliMDAwNTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlYjViYmVjOGMzYzJmN2JlZjFlYTRmMjBkMDM4MTRiMjllNzU0MTcwIn0=",
-    "expire_date": "2019-04-19T06:27:33.115Z"
+    "password": "pbkdf2_sha256$120000$f3GQxdZQUzdU$OgNHHvNa8VxIGlU7MKtb1nnnQ1WCUgIpcOSNGJbtLnk=",
+    "last_login": "2019-04-16T03:06:16.294Z",
+    "is_superuser": true,
+    "username": "root",
+    "first_name": "",
+    "last_name": "",
+    "email": "fd@fd.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2019-04-15T08:30:02.224Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "602tmhf13mn0obxmo7wv1cpalky4i6ds",
+  "fields": {
+    "session_data": "MTU2YzQ1ZWI0NjEzZTRmYzgxOTllYTJiMjllZjMyM2I5NDlmNDU0ODp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1NmZjMWJmYjk5M2M5MjhlYjNhYWMwYTY4YmQ5MzY1MjExMDc2ZmIwIn0=",
+    "expire_date": "2019-04-30T03:06:16.417Z"
   }
 }
 ]
