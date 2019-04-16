@@ -105,16 +105,14 @@
             var email;
             if ($("#name").val().indexOf("@") == -1) {       //true:是name登录
                 name = document.getElementById("name").value;
-                //var email = "";
+                
             } else {
-                //var name = null;
+                
                 email = document.getElementById("name").value;
             }
-            console.log($("#name").val());
-            console.log(name.val());
-            console.log(email.val());
+            
 
-            //document.getElementById("login").disabled = true;
+            //document.getElementByIssd("login").disabled = true;
 
             $.ajax({
                 type: "POST",
