@@ -100,15 +100,15 @@
         var name;
         var email;
         if($("#name").val().indexOf("@") == -1 ){       //true:是name登录
-            var name = document.getElementById("name").value;
+            name = document.getElementById("name").value;
             //var email = "";
         }else {
             //var name = null;
-            var email = document.getElementById("name").value;
+            email = document.getElementById("name").value;
         }
-        console.log("#name:"+$("#name").val());
-       console.log("name:"+name.val());
-       console.log("email:"+email.value);
+        console.log($("#name").val());
+        console.log(name.val());
+        console.log(email.val());
         
         function login() {
             
