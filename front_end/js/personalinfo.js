@@ -39,7 +39,7 @@ function getUserData(){
     $.ajax({
         type:"get",
         url: "https://api.ratemycourse.tk/searchUser/",
-        data:{username:name.val()},
+        data:{username:name},
         dataType:"json",
         success:function(data){
             if (data.status == "1"){
