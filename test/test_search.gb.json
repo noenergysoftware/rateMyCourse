@@ -71,15 +71,13 @@
         "search_course_by_department",
         "/searchCourseByDepartment/",
         {
-            "department": "Office"
+            "department": "Office",
+            "course_name": "论持久战"
         },
-        2,
+        1,
         [
             {
-                "course_name": "论持久战"
-            },
-            {
-                "course_name": "第三次世界大战"
+                "name": "论持久战"
             }
         ]
     ]
