@@ -205,17 +205,6 @@
   }
 },
 {
-  "model": "rateMyCourse.teachcourse",
-  "pk": 4,
-  "fields": {
-    "course": 4,
-    "department": 3,
-    "teachers": [
-      3
-    ]
-  }
-},
-{
   "model": "rateMyCourse.comment",
   "pk": 1,
   "fields": {
@@ -298,7 +287,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$120000$f3GQxdZQUzdU$OgNHHvNa8VxIGlU7MKtb1nnnQ1WCUgIpcOSNGJbtLnk=",
-    "last_login": "2019-04-16T00:17:44.805Z",
+    "last_login": "2019-04-16T03:06:16.294Z",
     "is_superuser": true,
     "username": "root",
     "first_name": "",
@@ -313,10 +302,10 @@
 },
 {
   "model": "sessions.session",
-  "pk": "iabu4hwpysp410mplq5g2w14b8t9o77m",
+  "pk": "602tmhf13mn0obxmo7wv1cpalky4i6ds",
   "fields": {
     "session_data": "MTU2YzQ1ZWI0NjEzZTRmYzgxOTllYTJiMjllZjMyM2I5NDlmNDU0ODp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1NmZjMWJmYjk5M2M5MjhlYjNhYWMwYTY4YmQ5MzY1MjExMDc2ZmIwIn0=",
-    "expire_date": "2019-04-30T00:17:44.957Z"
+    "expire_date": "2019-04-30T03:06:16.417Z"
   }
 }
 ]
