@@ -107,7 +107,8 @@
             var email = $("#name").val();
         }
 
-       
+       console.log("name:"+name);
+       console.log("email:"+email);
         
         function login() {
             
@@ -118,8 +119,8 @@
                 url: "https://api.ratemycourse.tk/signIn/",
                 dataType: "json",
                 data: {
-                    username: name.val(),
-                    mail: email.val(),
+                    username: name,
+                    mail: email,
                     password: $("#password").val()
                 },
                 xhrFields: {
