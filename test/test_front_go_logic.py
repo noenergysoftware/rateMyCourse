@@ -28,13 +28,9 @@ class FrontHomeGoLogicTC(FrontBasicTC):
 
     def test_person(self):
         page = self.createInitPage()
-        try:
-            page = logAction(page, "rbq", "rbq")
-            page.alertAccept()
+        with LogStatus(page, "rbq", "rbq") as page:
             page = page.goPersonPage()
             page.checkIsSelf()
-        finally:
-            page.clearCookies()
 
 
 @tag("front")
@@ -67,13 +63,9 @@ class FrontSearchGoLogicTC(FrontBasicTC):
 
     def test_person(self):
         page = self.createInitPage()
-        try:
-            page = logAction(page, "rbq", "rbq")
-            page.alertAccept()
+        with LogStatus(page, "rbq", "rbq") as page:
             page = page.goPersonPage()
             page.checkIsSelf()
-        finally:
-            page.clearCookies()
 
 
 @tag("front")
@@ -106,13 +98,9 @@ class FrontDetailGoLogicTC(FrontBasicTC):
 
     def test_person(self):
         page = self.createInitPage()
-        try:
-            page = logAction(page, "rbq", "rbq")
-            page.alertAccept()
+        with LogStatus(page, "rbq", "rbq") as page:
             page = page.goPersonPage()
             page.checkIsSelf()
-        finally:
-            page.clearCookies()
 
     def test_comment(self):
         page = self.createInitPage()
@@ -149,25 +137,19 @@ class FrontCommentGoLogicTC(FrontBasicTC):
 
     def test_person(self):
         page = self.createInitPage()
-        try:
-            page = logAction(page, "rbq", "rbq")
+        with LogStatus(page, "rbq", "rbq") as page:
             page = page.goPersonPage()
             page.checkIsSelf()
-        finally:
-            page.clearCookies()
 
     def test_detail(self):
         # TODO This not pass, may somewhat wrong.
         page = HomePage(self.driver, self.domain)
-        try:
-            page = logAction(page, "rbq", "rbq")
+        with LogStatus(page, "rbq", "rbq") as page:
             page = self.goInitPage(page)
             page.selectTeacher(0)
             page.editComment("kkkkkkkkkk")
             page = page.submitComment()
             page.checkIsSelf()
-        finally:
-            page.clearCookies()
 
 
 @tag("front")

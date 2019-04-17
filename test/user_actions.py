@@ -1,6 +1,10 @@
 from page_objects import *
+from contextlib import contextmanager
 
-def logAction(page, name, password):
+@contextmanager
+def LogStatus(page, name, password):
+    driver = page.driver
     if not page is LoginPage:
         page = page.goLoginPage()
-    return page.logIn(name, password)
+    yield page.logIn(name, password)
+    driver.delete_all_cookies()
