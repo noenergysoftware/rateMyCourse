@@ -87,6 +87,10 @@ def get_rank_by_course(request):
 
         num_rank = 0
         rank_dict = {}
+        rank_dict['difficulty_score'] =0
+        rank_dict['funny_score'] =0
+        rank_dict['gain_score'] =0
+        rank_dict['recommend_score'] =0
         for c in rawList:
             num_rank = num_rank + 1
             rank_dict['difficulty_score'] += c.rank.difficulty_score
@@ -94,10 +98,10 @@ def get_rank_by_course(request):
             rank_dict['gain_score'] += c.rank.gain_score
             rank_dict['recommend_score'] += c.rank.recommend_score
 
-        rank_dict['difficulty_score'] /= num_rank
-        rank_dict['funny_score'] /= num_rank
-        rank_dict['gain_score'] /= num_rank
-        rank_dict['recommend_score'] /= num_rank
+        rank_dict['difficulty_score'] /= (1 if num_rank==0 else num_rank)
+        rank_dict['funny_score'] /= (1 if num_rank==0 else num_rank)
+        rank_dict['gain_score'] /= (1 if num_rank==0 else num_rank)
+        rank_dict['recommend_score'] /= (1 if num_rank==0 else num_rank)
     except:
         return HttpResponse(json.dumps({
             'status': -1,
@@ -106,7 +110,7 @@ def get_rank_by_course(request):
     else:
         return HttpResponse(json.dumps({
             'status': 1,
-            'length': len(num_rank),
+            'length': num_rank,
             'body': rank_dict
         }), content_type="application/json")
     finally:
