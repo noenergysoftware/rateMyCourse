@@ -22,16 +22,19 @@ function adddiv(number){
                 "  </div>\n"+
                 "</div>\n"+
                 "<div class=\"row\" style=\"background:#eeeeee\">\n"+
+                "  <div id=\"rank_number\" class=\"col-md-6 text-md-left text-center align-self-center my-4\" style=\"font-size:24px\"></div>\n"+
+                "</div>\n"+
+                "<div class=\"row\" style=\"background:#eeeeee\">\n"+
                 "  <div class=\"col-md-3 text-md-left text-center align-self-center my-4\" style=\"font-size:24px\">难度</div>\n"+
-                "  <div id=\"difficulty_score\" class=\"col-md-3 text-md-left text-center align-self-center my-4\"></div>\n"+
+                "  <div id=\"difficulty_score_"+number+"\" class=\"col-md-3 text-md-left text-center align-self-center my-4\"></div>\n"+
                 "  <div class=\"col-md-3 text-md-left text-center align-self-center my-4\" style=\"font-size:24px\">有趣程度</div>\n"+
-                "  <div id=\"funny_score\" class=\"col-md-3 text-md-left text-center align-self-center my-4\"></div>\n"+
+                "  <div id=\"funny_score_"+number+"\" class=\"col-md-3 text-md-left text-center align-self-center my-4\"></div>\n"+
                 "</div>\n"+
                 "<div class=\"row\" style=\"background:#eeeeee\">\n"+
                 "  <div class=\"col-md-3 text-md-left text-center align-self-center my-4\" style=\"font-size:24px\">课程收获</div>\n"+
-                "  <div id=\"gain_score\" class=\"col-md-3 text-md-left text-center align-self-center my-4\"></div>\n"+
+                "  <div id=\"gain_score_"+number+"\" class=\"col-md-3 text-md-left text-center align-self-center my-4\"></div>\n"+
                 "  <div class=\"col-md-3 text-md-left text-center align-self-center my-4\" style=\"font-size:24px\">推荐程度</div>\n"+
-                "  <div id=\"recommend_score\" class=\"col-md-3 text-md-left text-center align-self-center my-4\"></div>\n"+
+                "  <div id=\"recommend_score_"+number+"\" class=\"col-md-3 text-md-left text-center align-self-center my-4\"></div>\n"+
                 "</div>\n"+
                 "<br>\n";
     var a=document.getElementById("c_pagination");
@@ -47,10 +50,11 @@ function adddiv(number){
         success:function(data){
             console.log(data);
             if(data.status=="1"){
-              raty(data.body.difficulty_score,"#difficulty_score");
-              raty(data.body.funny_score,"#funny_score");
-              raty(data.body.gain_score,"#gain_score");
-              raty(data.body.recommend_score,"#recommend_score");
+              raty(data.body.difficulty_score,"#difficulty_score_"+number);
+              raty(data.body.funny_score,"#funny_score_"+number);
+              raty(data.body.gain_score,"#gain_score_"+number);
+              raty(data.body.recommend_score,"#recommend_score_"+number);
+              $("#rank_number").text("评分人数"+data.length);
             }
             else{
               //alert(data.errMsg);
