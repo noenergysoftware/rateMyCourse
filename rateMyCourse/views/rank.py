@@ -59,7 +59,7 @@ def make_rank(request):
             r.funny_score = funny_score
             r.gain_score = gain_score
             r.recommend_score = recommend_score
-            r.edit_time=datetime.datetime.now()
+            #r.edit_time=datetime.datetime.now()
             r.save()
             return HttpResponse(json.dumps({
                 'status': 1,

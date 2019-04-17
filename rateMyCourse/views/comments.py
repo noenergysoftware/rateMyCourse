@@ -104,7 +104,7 @@ def edit_comment(request):
         c.comment.content = request.POST['content']
 
         c.comment.teacher = request.POST['teacher']
-        c.comment.edit_time = datetime.datetime.now()
+        #c.comment.edit_time = datetime.datetime.now()
         c.comment.save()
     except:
         return HttpResponse(json.dumps({

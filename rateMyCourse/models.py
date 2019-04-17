@@ -241,8 +241,8 @@ class Comment(models.Model):
     def ret(self):
         return {
             'content': self.content,
-            'create_time': str(self.create_time),
-            'edit_time': str(self.edit_time),
+            'create_time': str(self.create_time.strftime("%Y-%m-%d %H:%M:%S")),
+            'edit_time': str(self.edit_time.strftime("%Y-%m-%d %H:%M:%S")),
             'parent_comment': self.parent_comment,
             'teacher': str(self.teacher.name)
         }
