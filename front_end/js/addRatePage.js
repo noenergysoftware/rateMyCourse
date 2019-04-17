@@ -26,8 +26,8 @@ $(document).ready(function() {
   //1 加载课程名称 学院
   var coursenum=parseInt(window.sessionStorage.getItem("coursetoload"));
   $("#course_name").html(window.sessionStorage.getItem("course"+coursenum+"name"));
-  //var teacher_list=window.sessionStorage.getItem("course"+coursenum+"teacher_list").split(',');
-  var teacher_list=["教师1"];
+  var teacher_list=window.sessionStorage.getItem("course"+coursenum+"teacher_list").split(',');
+  //var teacher_list=["教师1"];
   var data="";
   for(var i=0; i<teacher_list.length;i++){
     data+="<li>\n"+
@@ -45,7 +45,7 @@ $(document).ready(function() {
   raty(5,"#gain_score");
   raty(5,"#recommend_score");
 
-  console.log($("#difficulty_score").raty("getScore"));
+  //console.log($("#difficulty_score").raty("getScore"));
 
 })
 
