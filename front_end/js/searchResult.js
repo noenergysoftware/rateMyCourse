@@ -22,7 +22,7 @@ function adddiv(number){
                 "  </div>\n"+
                 "</div>\n"+
                 "<div class=\"row\" style=\"background:#eeeeee\">\n"+
-                "  <div id=\"rank_number\" class=\"col-md-6 text-md-left text-center align-self-center my-4\" style=\"font-size:24px\"></div>\n"+
+                "  <div id=\"rank_number_"+number+"\" class=\"col-md-6 text-md-left text-center align-self-center my-4\" style=\"font-size:24px\"></div>\n"+
                 "</div>\n"+
                 "<div class=\"row\" style=\"background:#eeeeee\">\n"+
                 "  <div class=\"col-md-3 text-md-left text-center align-self-center my-4\" style=\"font-size:24px\">难度</div>\n"+
@@ -54,7 +54,7 @@ function adddiv(number){
               raty(data.body.funny_score,"#funny_score_"+number);
               raty(data.body.gain_score,"#gain_score_"+number);
               raty(data.body.recommend_score,"#recommend_score_"+number);
-              $("#rank_number").text("评分人数"+data.length);
+              $("#rank_number_"+number).text("评分人数"+data.length);
             }
             else{
               //alert(data.errMsg);
