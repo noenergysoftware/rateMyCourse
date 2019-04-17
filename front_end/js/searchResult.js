@@ -2,30 +2,79 @@ function adddiv(number){
     var x = document.createElement("div");
     x.setAttribute("class","container");
     x.setAttribute("id","course"+number);
+    var course_id=window.sessionStorage.getItem("course"+number+"course_ID");
 
     x.innerHTML="<div class=\"row\" style=\"background:#eeeeee\">\n"+
-        "<a href=\"#\" onclick=\"toCourse("+number+")\" style=\"text-decoration:none;font-size:30px;color:#000000; width:62%;\">"+window.sessionStorage.getItem("course"+number+"name")+"</a>\n"+
-        "</div>\n"+
-        "<div class=\"row\" style=\"background:#eeeeee\">\n"+
-        "<div class=\"col-md-3 text-md-left text-center align-self-center my-4\"> 学校\n"+
-        "<p>"+"北京航空航天大学"+"</p>\n"+
-        "</div>\n"+
-        "<div class=\"col-md-3 text-md-left text-center align-self-center my-4\"> 学院\n"+
-        "<p>"+window.sessionStorage.getItem("course"+number+"department")+"</p>\n"+
-        "</div>\n"+
-        "<div class=\"col-md-3 text-md-left text-center align-self-center my-4\"> 类型\n"+
-        "<p>"+window.sessionStorage.getItem("course"+number+"course_type")+"</p>\n"+
-        "</div>\n"+
-        "<div class=\"col-md-3 text-md-left text-center align-self-center my-4\"> 学分\n"+
-        "<p>"+window.sessionStorage.getItem("course"+number+"credit")+"</p>\n"+
-        "</div>\n"+
-        "</div>\n"+
-        "<br>\n";
+                "  <a href=\"#\" onclick=\"toCourse("+number+")\" style=\"text-decoration:none;font-size:30px;color:#000000; width:62%;\">"+window.sessionStorage.getItem("course"+number+"name")+"</a>\n"+
+                "</div>\n"+
+                "<div class=\"row\" style=\"background:#eeeeee\">\n"+
+                "  <div class=\"col-md-3 text-md-left text-center align-self-center my-4\"> 学校\n"+
+                "    <p>"+"北京航空航天大学"+"</p>\n"+
+                "  </div>\n"+
+                "  <div class=\"col-md-3 text-md-left text-center align-self-center my-4\"> 学院\n"+
+                "    <p>"+window.sessionStorage.getItem("course"+number+"department")+"</p>\n"+
+                "  </div>\n"+
+                "  <div class=\"col-md-3 text-md-left text-center align-self-center my-4\"> 类型\n"+
+                "    <p>"+window.sessionStorage.getItem("course"+number+"course_type")+"</p>\n"+
+                "  </div>\n"+
+                "  <div class=\"col-md-3 text-md-left text-center align-self-center my-4\"> 学分\n"+
+                "    <p>"+window.sessionStorage.getItem("course"+number+"credit")+"</p>\n"+
+                "  </div>\n"+
+                "</div>\n"+
+                "<div class=\"row\" style=\"background:#eeeeee\">\n"+
+                "  <div class=\"col-md-3 text-md-left text-center align-self-center my-4\" style=\"font-size:24px\">难度</div>\n"+
+                "  <div id=\"diffculty_score\" class=\"col-md-3 text-md-left text-center align-self-center my-4\"></div>\n"+
+                "  <div class=\"col-md-3 text-md-left text-center align-self-center my-4\" style=\"font-size:24px\">有趣程度</div>\n"+
+                "  <div id=\"funny_score\" class=\"col-md-3 text-md-left text-center align-self-center my-4\"></div>\n"+
+                "</div>\n"+
+                "<div class=\"row\" style=\"background:#eeeeee\">\n"+
+                "  <div class=\"col-md-3 text-md-left text-center align-self-center my-4\" style=\"font-size:24px\">课程收获</div>\n"+
+                "  <div id=\"gain_score\" class=\"col-md-3 text-md-left text-center align-self-center my-4\"></div>\n"+
+                "  <div class=\"col-md-3 text-md-left text-center align-self-center my-4\" style=\"font-size:24px\">推荐程度</div>\n"+
+                "  <div id=\"recommend_score\" class=\"col-md-3 text-md-left text-center align-self-center my-4\"></div>\n"+
+                "</div>\n"+
+                "<br>\n";
     var a=document.getElementById("c_pagination");
     a.parentNode.insertBefore(x , a);
     //console.log("success");
-
+    $.ajax({
+        type:"GET",
+        url: "https://api.ratemycourse.tk/getRankByCourse/",
+        dataType:"json",
+        data:{
+          course_ID:course_id
+        },
+        success:function(data){
+            if(data.status=="1"){
+              raty(data.body.rank_dict.diffculty_score,"#diffculty_score");
+              raty(data.body.rank_dict.funny_score,"#funny_score");
+              raty(data.body.rank_dict.gain_score,"#gain_score");
+              raty(data.body.rank_dict.recommend_score,"#recommend_score");
+            }
+            else{
+              alert(data.errMsg);
+            }
+            
+        },
+        error:function(data){
+          alert(JSON.stringify(data));
+        }
+    });
+    
 }
+
+function raty(number,id){
+  $(id).raty({
+    score:number,
+    starOn:"./resource/star-on.png",
+    starOff:"./resource/star-off.png",
+    starHalf:"./resource/star-half.png",
+    readOnly:true,
+    halfShow:true,
+    size:34,
+ })
+}
+
 
 function toPage(pagenum){
     var coursetoshow=(pagenum-1)*5;
