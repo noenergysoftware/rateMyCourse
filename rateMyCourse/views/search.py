@@ -137,7 +137,7 @@ def get_user_detail(request):
                 'errMsg': 'user name Error',
             }), content_type="application/json")
 
-        user = User.objects.filter(username=username)
+        user = User.objects.get(username=username)
         retlist={}
         retlist['username']=user.username
         retlist['mail']=user.mail
