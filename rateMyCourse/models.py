@@ -171,7 +171,7 @@ class Rank(models.Model):
     funny_score = models.FloatField(default=0)
     gain_score = models.FloatField(default=0)
     recommend_score = models.FloatField(default=0)
-    edit_time = models.DateTimeField(default=datetime.datetime.now)
+    edit_time = models.DateTimeField(auto_now=True)
 
     def ret(self):
         return {
@@ -230,7 +230,7 @@ class Comment(models.Model):
     """
     content = models.CharField(max_length=2048)
     create_time = models.DateTimeField(default=datetime.datetime.now)
-    edit_time = models.DateTimeField(default=datetime.datetime.now)
+    edit_time = models.DateTimeField(auto_now=True)
     parent_comment = models.IntegerField(default=-1)
 
     teacher = models.ForeignKey(
