@@ -122,7 +122,7 @@ def get_user_detail(request):
     用户姓名，空为任意用户
     姓名包含关键字的所有用户
     """
-    retlist = []
+
     try:
         '''if not auth.auth(request):
             return HttpResponse(json.dumps({
@@ -147,7 +147,7 @@ def get_user_detail(request):
     except Exception:
         return HttpResponse(json.dumps({
             'status': -1,
-            'errMsg': 'user name Error',
+            'errMsg': 'Get Error',
         }), content_type="application/json")
     return HttpResponse(json.dumps({
         'status': 1,
