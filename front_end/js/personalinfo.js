@@ -38,15 +38,15 @@ function getUserData(){
     var name = $.cookie("username");
     $.ajax({
         type:"get",
-        url: "https://api.ratemycourse.tk/searchUser/",
-        data:{username:name},
+        url: "https://api.ratemycourse.tk/getUserDetail/",
+        data:{"username":$.cookie("username")},
         dataType:"json",
         success:function(data){
             if (data.status == "1"){
-                document.getElementById("name").value = data.body.self.name;
-                document.getElementById("role").value = data.body.self.role;
-                document.getElementById("gender").value = data.body.self.gender;
-                document.getElementById("personalIntroduce").value = data.body.self.self_introductino;
+                document.getElementById("name").value = data.body.username;
+                document.getElementById("role").value = data.body.role;
+                document.getElementById("gender").value = data.body.gender;
+                document.getElementById("personalIntroduce").value = data.body.self_introduction;
             }else {
                 alert(data.errMsg);
             }
@@ -57,6 +57,41 @@ function getUserData(){
     });
 }
 
+function modifier() {
+        $.ajax({
+            type: "POST",
+            url: "https://api.ratemycourse.tk/updateUser/",
+            dataType: "json",
+            data: {
+                username: $("#name").val(),
+                role: $("#role").val(),
+                gender: $("#gender").val(),
+                self_introduction: $("#personalIntroduce").val()
+            },
+            xhrFields: {
+                    withCredentials: true
+            },
+            success: function (data) {
+                console.log(JSON.stringify(data));
+                console.log(data.status);
+                if (data.status == "1") {
+                    alert(data.body.message);
+                } else {
+                    alert(data.errMsg);
+                }
+            },
+            error: function (data) {
+                alert(JSON.stringify(data));
+            }
+        });
+    }
+
+
+    //$("#submit").click(function () {
+    //    if (infoCheck == true) {
+     //       modifier();
+      //  }
+  //  });
 $(document).ready(function () {
     
     getUserData();
@@ -87,38 +122,8 @@ $(document).ready(function () {
           gender = "A";
       }
       
-      console.log("role: "+role.val());
-      console.log("gender: "+gender.val());
-
-
-    function modifier() {
-        $.ajax({
-            type: "POST",
-            url: "https://api.ratemycourse.tk/updateUser/",
-            dataType: "json",
-            data: {
-                username: $("#username").val(),
-                role: role.val(),
-                gender: gender.val(),
-                self_introductino: $("#personalIntroduce").val()
-            },
-            xhrFields: {
-                    withCredentials: true
-            },
-            success: function (data) {
-                console.log(JSON.stringify(data));
-                console.log(data.status);
-                if (data.status == "1") {
-                    alert(data.body.message);
-                } else {
-                    alert(data.errMsg);
-                }
-            },
-            error: function (data) {
-                alert(JSON.stringify(data));
-            }
-        });
-    }
+  //    console.log("role: "+role.val());
+//      console.log("gender: "+gender.val());
 
 
     $("#submit").click(function () {
