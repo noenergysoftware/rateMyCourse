@@ -213,6 +213,12 @@ class rankCache(models.Model):
     funny_score = models.FloatField(default=0)
     gain_score = models.FloatField(default=0)
     recommend_score = models.FloatField(default=0)
+    difficulty_position = models.FloatField(default=-1)
+    funny_position = models.FloatField(default=-1)
+    gain_position = models.FloatField(default=-1)
+    recommend_position = models.FloatField(default=-1)
+    total_position = models.FloatField(default=-1)
+
 
 class Comment(models.Model):
     """
