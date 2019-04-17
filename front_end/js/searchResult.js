@@ -52,7 +52,8 @@ function adddiv(number){
               raty(data.body.rank_dict.recommend_score,"#recommend_score");
             }
             else{
-              alert(data.errMsg);
+              //alert(data.errMsg);
+              console.log(course_id+" fail to get rank");
             }
             
         },
