@@ -40,8 +40,9 @@ function getUserData(){
         type:"get",
         url: "https://api.ratemycourse.tk/getUserDetail/",
         data:{"username":$.cookie("username")},
-        dataType:"json",
+        dataType:"text",
         success:function(data){
+            data=JSON.parse(data);
             if (data.status == "1"){
                 document.getElementById("name").value = data.body.username;
                 document.getElementById("role").value = data.body.role;
@@ -61,7 +62,7 @@ function modifier() {
         $.ajax({
             type: "POST",
             url: "https://api.ratemycourse.tk/updateUser/",
-            dataType: "json",
+            dataType: "text",
             data: {
                 username: $("#name").val(),
                 role: $("#role").val(),
@@ -72,6 +73,7 @@ function modifier() {
                     withCredentials: true
             },
             success: function (data) {
+                data=JSON.parse(data);
                 console.log(JSON.stringify(data));
                 console.log(data.status);
                 if (data.status == "1") {

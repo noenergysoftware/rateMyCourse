@@ -130,7 +130,7 @@
 						$.ajax({
 								type:"POST",
 								url: "https://api.ratemycourse.tk/signUp/",
-								dataType:"json",
+								dataType:"text",
 								data:{              
 										username: $("#name").val(),
 										mail: $("#email").val(),
@@ -140,6 +140,7 @@
 										withCredentials: true
 								},
 								success:function(data){
+										data=JSON.parse(data);
 									//	alert("ajax success");
 										console.log(data);
 										console.log(data.status)

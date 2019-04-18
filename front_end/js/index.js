@@ -50,8 +50,9 @@ $(document).ready(function(){
   $.ajax({
       type:"GET",
       url: "https://api.ratemycourse.tk/getDepartment/",
-      dataType:"json",
+      dataType:"text",
       success:function(data){
+        data=JSON.parse(data);
         //	alert("ajax success");
           //console.log(data);
           //console.log(data.status)
@@ -89,11 +90,12 @@ $(document).ready(function(){
           $.ajax({
               type:"GET",
               url: "https://api.ratemycourse.tk/searchCourse/",
-              dataType:"json",
+              dataType:"text",
               data:{              
                   course_name: $("#searchboxCourse").val(),
               },
               success:function(data){
+                data=JSON.parse(data);
                 //	alert("ajax success");
                  // console.log(data);
                   //console.log(data.status)
@@ -118,12 +120,13 @@ $(document).ready(function(){
           $.ajax({
               type:"GET",
               url: "https://api.ratemycourse.tk/searchCourseByDepartment/",
-              dataType:"json",
+              dataType:"text",
               data:{              
                   course_name: $("#searchboxCourse").val(),
                   department: $("#buttonSelectDepartment").text()
               },
               success:function(data){
+                data=JSON.parse(data);
                 //	alert("ajax success");
                  // console.log(data);
                   //console.log(data.status)

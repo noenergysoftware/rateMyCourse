@@ -17,7 +17,7 @@ function jumpLogOut(){
   $.ajax({
     type:"POST",
     url: "https://api.ratemycourse.tk/logout/",
-    dataType:"json",
+    dataType:"text",
     data:{
       username: $.cookie("username")
     },
@@ -25,6 +25,7 @@ function jumpLogOut(){
       withCredentials: true
     },
     success:function(data){
+      data=JSON.parse(data);
       //console.log("status "+data.status);
       if (data.status > 0 ){
           $.cookie("username",undefined);
