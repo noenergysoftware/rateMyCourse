@@ -129,15 +129,15 @@ def sign_in(request):
         }), content_type="application/json")
     else:
         # set cookies and sessions
-        request.session['auth_sess']=username
+        request.session['auth_sess']=u.username
         response=HttpResponse(json.dumps({
             'status': 1,
             'length': 1,
             'body': {
-                'username': username
+                'username': u.username
             }
         }), content_type="application/json")
-        response.set_cookie('username',username,max_age=3600*24) # 1day
+        response.set_cookie('username',u.username,max_age=3600*24) # 1day
         response.set_cookie('password',password,max_age=3600*24) # 1day
         return response
 
