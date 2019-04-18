@@ -106,6 +106,7 @@ def sign_in(request):
     except Exception:
         try:
             mail = request.POST['mail']
+            password = request.POST['password']
         except Exception:
             return HttpResponse(json.dumps({
                 'status': -1,
