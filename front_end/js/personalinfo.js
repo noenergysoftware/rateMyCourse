@@ -41,9 +41,9 @@ function getUserData(){
         type:"get",
         url: "https://api.ratemycourse.tk/getUserDetail/",
         data:{"username":$.cookie("username")},
-        dataType:"text",
+        dataType:"json",
         success:function(data){
-            data=JSON.parse(data);
+            //data=JSON.parse(data);
             if (data.status == "1"){
                 document.getElementById("name").value = data.body.username;
                 document.getElementById("role").value = data.body.role;

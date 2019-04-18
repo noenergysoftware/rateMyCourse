@@ -44,13 +44,13 @@ function adddiv(number){
         async: true,
         type:"GET",
         url: "https://api.ratemycourse.tk/getRankByCourse/",
-        dataType:"text",
+        dataType:"json",
         data:{
           course_ID:course_id
         },
         success:function(data){
             console.log(data);
-            data=JSON.parse(data);
+            //data=JSON.parse(data);
             if(data.status=="1"){
               raty(data.body.difficulty_score,"#difficulty_score_"+number);
               raty(data.body.funny_score,"#funny_score_"+number);

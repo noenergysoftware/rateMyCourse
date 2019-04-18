@@ -179,12 +179,12 @@ $(document).ready(function () {
         async: false,
         type:"GET",
         url: "https://api.ratemycourse.tk/getCommentsByCourse/",
-        dataType:"text",
+        dataType:"json",
         data:{              
             course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID"),
         },
         success:function(data){
-            data=JSON.parse(data);
+            //data=JSON.parse(data);
             //	alert("ajax success");
            // console.log(data);
             //console.log(data.status)

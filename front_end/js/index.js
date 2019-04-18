@@ -51,9 +51,9 @@ $(document).ready(function(){
       async: false,
       type:"GET",
       url: "https://api.ratemycourse.tk/getDepartment/",
-      dataType:"text",
+      dataType:"json",
       success:function(data){
-        data=JSON.parse(data);
+        //data=JSON.parse(data);
         //	alert("ajax success");
           //console.log(data);
           //console.log(data.status)
@@ -92,12 +92,12 @@ $(document).ready(function(){
               async: false,
               type:"GET",
               url: "https://api.ratemycourse.tk/searchCourse/",
-              dataType:"text",
+              dataType:"json",
               data:{              
                   course_name: $("#searchboxCourse").val(),
               },
               success:function(data){
-                data=JSON.parse(data);
+                //data=JSON.parse(data);
                 //	alert("ajax success");
                  // console.log(data);
                   //console.log(data.status)
@@ -123,13 +123,13 @@ $(document).ready(function(){
               async: false,
               type:"GET",
               url: "https://api.ratemycourse.tk/searchCourseByDepartment/",
-              dataType:"text",
+              dataType:"json",
               data:{              
                   course_name: $("#searchboxCourse").val(),
                   department: $("#buttonSelectDepartment").text()
               },
               success:function(data){
-                data=JSON.parse(data);
+                //data=JSON.parse(data);
                 //	alert("ajax success");
                  // console.log(data);
                   //console.log(data.status)

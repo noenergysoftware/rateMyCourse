@@ -77,7 +77,7 @@ function Func_submit() {
   $.ajax({
       async: false,
       type: "POST",
-      dataType: "text",
+      dataType: "json",
       url: "https://api.ratemycourse.tk/makeComment/",
       data: {
         'username': $.cookie("username"),
@@ -89,7 +89,7 @@ function Func_submit() {
         withCredentials: true
       },
       success:function(data){
-        data=JSON.parse(data);
+        //data=JSON.parse(data);
         //	alert("ajax success");
         //console.log(data);
         //console.log(data.status)
@@ -111,7 +111,7 @@ function Func_submit() {
     $.ajax({
       async: false,
       type: "POST",
-      dataType: "text",
+      dataType: "json",
       url: "https://api.ratemycourse.tk/makeRank/",
       data: {
         'username': $.cookie("username"),
@@ -125,7 +125,7 @@ function Func_submit() {
         withCredentials: true
       },
       success:function(data){
-        data=JSON.parse(data);
+        //data=JSON.parse(data);
         //	alert("ajax success");
         //console.log(data);
         //console.log(data.status)

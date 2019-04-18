@@ -121,7 +121,7 @@
                 async: false,
                 type: "POST",
                 url: "https://api.ratemycourse.tk/signIn/",
-                dataType: "text",
+                dataType: "json",
                 data: {
                     username: name,
                     mail: email,
@@ -131,7 +131,7 @@
                     withCredentials: true
                 },
                 success: function (data) {
-                    data=JSON.parse(data);
+                    //data=JSON.parse(data);
                     console.log(JSON.stringify(data));
                     console.log(data.status);
                     if (data.status == "1") {
@@ -143,12 +143,14 @@
                         window.setTimeout("location.href='./index.html'", 1200);
                     }
                     else {
+                        console.log(JSON.stringify(data));
                         alert(data.errMsg);
                     }
                     //window.setTimeout("location.href='/user'", 1200);
 
                 },
                 error: function (data) {
+                    console.log(JSON.stringify(data));
                     alert(JSON.stringify(data));
                 }
             });
