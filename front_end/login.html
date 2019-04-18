@@ -118,6 +118,7 @@
             //document.getElementByIssd("login").disabled = true;
 
             $.ajax({
+                async: false,
                 type: "POST",
                 url: "https://api.ratemycourse.tk/signIn/",
                 dataType: "text",

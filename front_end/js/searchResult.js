@@ -41,6 +41,7 @@ function adddiv(number){
     a.parentNode.insertBefore(x , a);
     //console.log("success");
     $.ajax({
+        async: false,
         type:"GET",
         url: "https://api.ratemycourse.tk/getRankByCourse/",
         dataType:"text",

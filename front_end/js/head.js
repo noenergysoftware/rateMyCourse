@@ -15,6 +15,7 @@ function jumpPersonalInfo(){
 function jumpLogOut(){
   
   $.ajax({
+    async: false,
     type:"POST",
     url: "https://api.ratemycourse.tk/logout/",
     dataType:"text",

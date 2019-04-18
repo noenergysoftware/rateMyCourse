@@ -176,6 +176,7 @@ $(document).ready(function () {
     $("#coursedescription").html(window.sessionStorage.getItem("course"+coursenum+"description"))
     //2 获取评论信息
     $.ajax({
+        async: false,
         type:"GET",
         url: "https://api.ratemycourse.tk/getCommentsByCourse/",
         dataType:"text",

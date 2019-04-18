@@ -48,6 +48,7 @@ $(document).ready(function(){
   } 
   
   $.ajax({
+      async: false,
       type:"GET",
       url: "https://api.ratemycourse.tk/getDepartment/",
       dataType:"text",
@@ -88,6 +89,7 @@ $(document).ready(function(){
       if (department=="选择学院"){
         //没有选择学院
           $.ajax({
+              async: false,
               type:"GET",
               url: "https://api.ratemycourse.tk/searchCourse/",
               dataType:"text",
@@ -118,6 +120,7 @@ $(document).ready(function(){
       else{
         //选择了学院
           $.ajax({
+              async: false,
               type:"GET",
               url: "https://api.ratemycourse.tk/searchCourseByDepartment/",
               dataType:"text",

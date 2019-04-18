@@ -37,6 +37,7 @@ function infoCheck() {
 function getUserData(){
     var name = $.cookie("username");
     $.ajax({
+        async: false,
         type:"get",
         url: "https://api.ratemycourse.tk/getUserDetail/",
         data:{"username":$.cookie("username")},
@@ -60,6 +61,7 @@ function getUserData(){
 
 function modifier() {
         $.ajax({
+            async: false,
             type: "POST",
             url: "https://api.ratemycourse.tk/updateUser/",
             dataType: "text",

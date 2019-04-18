@@ -75,6 +75,7 @@ function Func_submit() {
   var teacher=$("#buttonSelectTeacher").text();
   console.log(teacher);
   $.ajax({
+      async: false,
       type: "POST",
       dataType: "text",
       url: "https://api.ratemycourse.tk/makeComment/",
@@ -108,6 +109,7 @@ function Func_submit() {
     });
 
     $.ajax({
+      async: false,
       type: "POST",
       dataType: "text",
       url: "https://api.ratemycourse.tk/makeRank/",
