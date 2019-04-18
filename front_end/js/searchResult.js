@@ -41,7 +41,7 @@ function adddiv(number){
     a.parentNode.insertBefore(x , a);
     //console.log("success");
     $.ajax({
-        async: false,
+        async: true,
         type:"GET",
         url: "https://api.ratemycourse.tk/getRankByCourse/",
         dataType:"text",
@@ -176,6 +176,8 @@ $(document).ready(function(){
     
     $("#serachedCourseNum").html(coursenum);
     
+    $("#noresult").hide();
+    $("#jumpbutton").hide();
     //console.log("coursenum!!!"+coursenum);
     if(coursenum==0 || coursenum==null){
       $("#noresult").show();
