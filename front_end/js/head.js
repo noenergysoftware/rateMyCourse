@@ -33,7 +33,11 @@ function jumpLogOut(){
           window.setTimeout("location.href='./index.html'", 500);
       }
       else{
-        alert("注销失败");
+        $.cookie("username",undefined);
+        $.removeCookie("username",{ path: '/'});
+        alert("注销成功");
+        window.setTimeout("location.href='./index.html'", 500);
+        //alert("注销失败");
       }
     },
     error:function(data){
