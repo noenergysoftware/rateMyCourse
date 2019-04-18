@@ -41,7 +41,7 @@
 						<div class="rowtocol">
 							<div class="auth-row">
 								<div class="form-group-label auth-row">
-									<label class="floating-label" for="name">昵称</label>
+									<label class="floating-label" for="name">用户名，字母、数字或下划线，3-16位</label>
 									<input class="form-control maxwidth-auth" id="name" name="inputUsername" type="text" maxlength="16" >
 									
 								</div>
@@ -64,7 +64,7 @@
 						<div class="rowtocol">
 							<div class="auth-row">
 								<div class="form-group-label auth-row">
-									<label class="floating-label" for="passwd">密码</label>
+									<label class="floating-label" for="passwd">密码，必须含字母、数字和特称字符，8-30位</label>
 									<input class="form-control maxwidth-auth" id="passwd" name="inputPassword" type="password">
 								</div>
 							</div>
@@ -127,7 +127,7 @@
     $(document).ready(function(){
 				function register(){
 						
-						$.ajax({
+						/*$.ajax({
 								async: false,
 								type:"POST",
 								url: "https://api.ratemycourse.tk/signUp/",
@@ -156,7 +156,7 @@
 								error:function(data){
 									alert(JSON.stringify(data));
 								}
-						});
+						});*/
 				}
 				$("#tos").click(function(){
 						if(check()==true){
@@ -177,36 +177,45 @@
 <script>
 	function check(){
 		var errmsg="";
+
 		var name=$("#name").val();
 		console.log(name);
-		var C=true;
-		if(name.length<3){
-				errmsg=errmsg+"用户名长度至少为3！\n";
-				C=false;
+		var uPattern = /^[a-zA-Z0-9_]{3,16}$/;
+		var check_name=uPattern.test(name);
+		console.log(check_name);
+
+		if(check_name==false){
+				errmsg=errmsg+"用户名格式错误\n";
 		}
 
 		var email=$("#email").val();
 		console.log(email);
-		var at1=email.indexOf("@");
-		var at2=email.indexOf(".");
-		console.log(at1);
-		if(at1<=0 || at1>=at2 || at2<=0  ){
-				errmsg=errmsg+"邮箱格式不正确！\n";
-				C=false;
+		var ePattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+		var check_email=ePattern.test(email)
+		console.log(check_email);
+
+		if(check_email==false){
+				errmsg=errmsg+"邮箱格式错误\n";
 		}
 		
-		var pd=$("#passwd").val();
-		var repd=$("#repasswd").val();
-		if(pd.length<7){
-				errmsg=errmsg+"密码长度过短！\n";
-				C=false;
+		var password=$("#passwd").val();
+		var repassword=$("#repasswd").val();
+		console.log(password);
+		console.log(repassword);
+		var pdPattern = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,30}$/;
+		var check_password=pdPattern.test(password);
+		console.log(check_password);
+
+		if(check_password==false){
+			errmsg=errmsg+"密码格式错误\n";
 		}
-			if(pd!=repd){
-				errmsg=errmsg+"密码不一致！\n";
-				C=false;
+		
+		if(password!=repassword){
+			errmsg=errmsg+"两次密码不一致\n";
+			check_password=false;
 		}
 
-		if(C==false){
+		if( check_name==false || check_email==false || check_password==false){
 			alert(errmsg);
 			return false;
 		}
