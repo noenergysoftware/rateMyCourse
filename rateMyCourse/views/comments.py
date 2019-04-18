@@ -103,7 +103,7 @@ def edit_comment(request):
 
         c.comment.content = request.POST['content']
 
-        c.comment.teacher = request.POST['teacher']
+        c.comment.teacher = Teacher.objects.get(name=request.POST['teacher_name'])
         #c.comment.edit_time = datetime.datetime.now()
         c.comment.save()
     except:
