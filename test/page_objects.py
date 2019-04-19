@@ -1,12 +1,24 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import WebDriverException
+from cover_saver import *
+
 
 class BasicPage:
+    cover_count = 0
+
     def __init__(self, driver, url=None):
         self.driver = driver
         if url:
-            driver.get(url)
+            if FS_COVER:
+                try:
+                    cover_saver.trySaveCoverageReport(driver)
+                except WebDriverException as e:
+                    # TODO The driver's first get must have such an exception presently,
+                    #   Try to remove this
+                    pass
+            driver.get("http://" + url)
         self.login_page_btn_id = "signIn"
         self.regist_page_btn_id = "signUp"
         self.home_page_btn_xpath = "//a[@href='index.html']"
@@ -109,7 +121,7 @@ class SearchResultPage(BasicPage):
     def __init__(self, driver, url=None):
         super().__init__(driver, url)
         self.course_num_id = "serachedCourseNum"
-        self.course_detail_xpath = "//div[@id='course{0}']//a[@href='#'"
+        self.course_detail_xpath = "//div[@id='course{0}']//a[@href='#']"
 
     def checkIsSelf(self):
         self.waitAppear_ID(self.course_num_id)
@@ -135,6 +147,7 @@ class RegistPage(BasicPage):
 class PersonPage(BasicPage):
     def __init__(self, driver, url=None):
         super().__init__(driver, url)
+        self.name_text_id = "name"
         self.role_text_id = "role"
         self.gender_text_id = "gender"
         self.intro_text_id = "personalIntroduce"
@@ -152,9 +165,18 @@ class PersonPage(BasicPage):
 class DetailPage(BasicPage):
     def __init__(self, driver, url=None):
         super().__init__(driver, url)
+        self.name_text_id = "course_name"
         self.credit_text_id = "course_credit"
         self.school_text_id = "course_school"
         self.type_text_id = "course_type"
+        self.description_text_id = "coursedescription"
+
+        self.comment_div_xpath = "//div[@id='{0}']"
+        self.comment_username_xpath = self.comment_div_xpath + "/div[1]/p"
+        self.comment_teachername_xpath = self.comment_div_xpath + "/table[1]/tbody/tr/td[2]/p"
+        self.comment_content_xpath = self.comment_div_xpath + "/div[2]/p"
+        self.comment_time_xpath = self.comment_div_xpath + "/div[3]/a[last()]/p"
+
         self.comment_page_btn_id = "toComment"
 
     def checkIsSelf(self):
