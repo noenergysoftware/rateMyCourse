@@ -121,7 +121,7 @@ def get_all_rank(request):
     all_course_ID=Course.objects.all()
     retDist={}
     for course_ID in all_course_ID:
-        rawList = MakeRank.objects.filter(course_id=Course.objects.get(course_ID=course_ID).id)
+        rawList = MakeRank.objects.filter(course_id=course_ID)
 
         num_rank = 0
         rank_dict = {}
@@ -141,7 +141,7 @@ def get_all_rank(request):
         rank_dict['gain_score'] /= (1 if num_rank == 0 else num_rank)
         rank_dict['recommend_score'] /= (1 if num_rank == 0 else num_rank)
         rank_dict['rank_number'] =  num_rank
-        retDist[course_ID]=rank_dict
+        retDist[course_ID.name]=rank_dict
     return HttpResponse(json.dumps({
         'status': 1,
         'length': len(retDist),

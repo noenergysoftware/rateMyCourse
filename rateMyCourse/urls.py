@@ -29,7 +29,7 @@ urlpatterns = [
 
     url(r'^makeRank/$', rank.make_rank, name="makeRank"),
     url(r'^getRankByCourse/$', rank.get_rank_by_course, name="getRankByCourse"),
-    url(r'^getALLRank/$', rank.get_all_rank, name="getALLRank"),
+    url(r'^getAllRank/$', rank.get_all_rank, name="getALLRank"),
 
 
 ]
