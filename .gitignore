@@ -19,5 +19,8 @@ rateMyCourse/templates/rateMyCourse/temp.html
 # document
 *.pdf
 
+# back
+log.txt
+
 # test
 test
