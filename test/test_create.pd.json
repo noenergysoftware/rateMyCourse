@@ -17,7 +17,12 @@
             "name": "test_teacher_no_website",
             "title": "Only For Test"
         },
-        "test_teacher_no_website"
+        {
+            "auth":{
+                "username": "rbq",
+                "password": "rbq"
+            }
+        }
     ],
     [
         "add_teacher_has_website",
@@ -28,7 +33,12 @@
             "title": "Only For Test",
             "website": "www.test.com"
         },
-        "test_teacher_has_website"
+        {
+            "auth":{
+                "username": "rbq",
+                "password": "rbq"
+            }
+        }
     ],
     [
         "add_course",
@@ -42,6 +52,11 @@
             "course_type": "TESTER",
             "credit": 5
         },
-        "test_course"
+        {
+            "auth":{
+                "username": "rbq",
+                "password": "rbq"
+            }
+        }
     ]
 ]
