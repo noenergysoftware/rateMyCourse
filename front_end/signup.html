@@ -167,7 +167,9 @@
 				$("html").keydown(function (event) {
             //13 = enter
             if (event.keyCode == 13) {
-								register();
+								if(check()==true){
+										register();
+								}
             }
         });
 
