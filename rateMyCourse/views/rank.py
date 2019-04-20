@@ -141,7 +141,7 @@ def get_all_rank(request):
         rank_dict['gain_score'] /= (1 if num_rank == 0 else num_rank)
         rank_dict['recommend_score'] /= (1 if num_rank == 0 else num_rank)
         rank_dict['rank_number'] =  num_rank
-        retDist[course_ID.name]=rank_dict
+        retDist[course_ID.course_ID]=rank_dict
     return HttpResponse(json.dumps({
         'status': 1,
         'length': len(retDist),
