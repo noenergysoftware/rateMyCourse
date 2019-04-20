@@ -1,7 +1,7 @@
 import os
 
 # Use JSCover
-FS_COVER = True
+FS_COVER = False
 
 class CoverSaver:
     def __init__(self):
