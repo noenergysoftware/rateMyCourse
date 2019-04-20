@@ -40,7 +40,7 @@ function adddiv(number){
     var a=document.getElementById("c_pagination");
     a.parentNode.insertBefore(x , a);
     //console.log("success");
-    $.ajax({
+    /*$.ajax({
         async: true,
         type:"GET",
         url: "https://api.ratemycourse.tk/getRankByCourse/",
@@ -67,7 +67,7 @@ function adddiv(number){
         error:function(data){
           alert(JSON.stringify(data));
         }
-    });
+    });*/
     
 }
 
@@ -234,4 +234,36 @@ $(document).ready(function(){
         a.parentNode.insertBefore(x , a);
        // console.log("add page");
     }
+
+    //load score
+    $.ajax({
+        async: true,
+        type:"GET",
+        url: "https://api.ratemycourse.tk/getAllRank/",
+        dataType:"json",
+        success:function(data){
+            //console.log(data);
+            //data=JSON.parse(data);
+            if(data.status=="1"){
+                //score=data;
+                var i,id;
+                for(i=0;i<coursenum;i++){
+                    id=window.sessionStorage.getItem("course"+i+"course_ID");
+                    raty(data.body[id].difficulty_score,"#difficulty_score_"+i);
+                    raty(data.body[id].funny_score,"#funny_score_"+i);
+                    raty(data.body[id].gain_score,"#gain_score_"+i);
+                    raty(data.body[id].recommend_score,"#recommend_score_"+i);
+                    $("#rank_number_"+i).text("评分人数"+data.body[id].rank_number);
+                }
+            }
+            else{
+              //alert(data.errMsg);
+              console.log(" fail to get rank");
+            }
+            
+        },
+        error:function(data){
+          alert(JSON.stringify(data));
+        }
+    });
 })

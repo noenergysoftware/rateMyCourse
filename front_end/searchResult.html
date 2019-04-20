@@ -69,7 +69,7 @@
   <div class="container">
 
     <p id="count">搜索到<nobr id="serachedCourseNum"></nobr>门课程</p>
-    <h3 id="noresult" >没有搜索到相关课程，建议更换关键字</h3>
+    <h3 id="noresult" style="display: none">没有搜索到相关课程，建议更换关键字</h3>
     <!-- use adddiv to load course data -->
 
     <ul id="c_pagination" class="pagination">
@@ -84,7 +84,7 @@
         <a class="page-link" onclick="nextPage()" href="#">下一页</a>
       </li>
 
-      <div id="jumpbutton" class="jump ">
+      <div id="jumpbutton" class="jump " style="display: none">
         <span class="jump_text">第<nobr id="pagenum"></nobr>页，共<nobr id="totalpage"></nobr>页
 
           <nobr id="jump">,跳到<input type="text" name="jumpPage" id="jumpPage" style="width:12%"
