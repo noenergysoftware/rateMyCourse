@@ -320,6 +320,10 @@ a.boardtop-left:hover {
 		height: 40px;
 		margin-top: 13px;
 	}
+	#TencentCaptcha {
+		height: 40px;
+		margin-top: 13px;
+	}
 	.btn-reg {
 		margin-top: 0;
 	}
