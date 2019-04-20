@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^searchTeacher/$', search.search_teacher, name='searchTeacher'),
     url(r'^searchCourse/$', search.search_course, name='searchCourse'),
     url(r'^searchUser/$', search.search_user, name='searchUser'),
+    url(r'^getUserDetail/$', search.get_user_detail, name='getUserDetail'),
     url(r'^searchCourseByDepartment/$', search.search_course_by_department,name='searchCourseByDepartment'),
     url(r'^getDepartment/$', search.get_department, name='getDepartment'),
 

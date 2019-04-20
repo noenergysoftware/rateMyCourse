@@ -9,6 +9,7 @@ from django.http import HttpResponse
 
 from rateMyCourse.models import *
 import rateMyCourse.views.authentication as auth
+import rateMyCourse.views.logs as logs
 
 def sign_up(request):
     """
@@ -106,6 +107,7 @@ def sign_in(request):
     except Exception:
         try:
             mail = request.POST['mail']
+            password = request.POST['password']
         except Exception:
             return HttpResponse(json.dumps({
                 'status': -1,
@@ -122,22 +124,25 @@ def sign_in(request):
                 'errMsg': '用户名或邮箱不存在',
             }), content_type="application/json")
     if (password != u.password):
+        logs.writeLog("{0}#${1}#$login fail".format(datetime.date.today(), u.username))
         return HttpResponse(json.dumps({
             'status': -3,
             'errMsg': '密码错误',
         }), content_type="application/json")
     else:
         # set cookies and sessions
-        request.session['auth_sess']=username
+        logs.writeLog("{0}#${1}#$login success".format(datetime.date.today(),u.username))
+        request.session['auth_sess']=u.username
+        request.session.set_expiry(3600*2)
         response=HttpResponse(json.dumps({
             'status': 1,
             'length': 1,
             'body': {
-                'username': username
+                'username': u.username
             }
         }), content_type="application/json")
-        response.set_cookie('username',username,max_age=3600*24) # 1day
-        response.set_cookie('password',password,max_age=3600*24) # 1day
+        response.set_cookie('username',u.username,max_age=3600*2) # 2 hour
+        response.set_cookie('password',password,max_age=3600*2) # 2 hour
         return response
 
 def logout(request):

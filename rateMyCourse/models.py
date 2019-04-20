@@ -171,7 +171,7 @@ class Rank(models.Model):
     funny_score = models.FloatField(default=0)
     gain_score = models.FloatField(default=0)
     recommend_score = models.FloatField(default=0)
-    edit_time = models.DateTimeField(default=datetime.datetime.now)
+    edit_time = models.DateTimeField(auto_now=True)
 
     def ret(self):
         return {
@@ -213,6 +213,12 @@ class rankCache(models.Model):
     funny_score = models.FloatField(default=0)
     gain_score = models.FloatField(default=0)
     recommend_score = models.FloatField(default=0)
+    difficulty_position = models.FloatField(default=-1)
+    funny_position = models.FloatField(default=-1)
+    gain_position = models.FloatField(default=-1)
+    recommend_position = models.FloatField(default=-1)
+    total_position = models.FloatField(default=-1)
+
 
 class Comment(models.Model):
     """
@@ -224,7 +230,7 @@ class Comment(models.Model):
     """
     content = models.CharField(max_length=2048)
     create_time = models.DateTimeField(default=datetime.datetime.now)
-    edit_time = models.DateTimeField(default=datetime.datetime.now)
+    edit_time = models.DateTimeField(auto_now=True)
     parent_comment = models.IntegerField(default=-1)
 
     teacher = models.ForeignKey(
@@ -235,8 +241,8 @@ class Comment(models.Model):
     def ret(self):
         return {
             'content': self.content,
-            'create_time': str(self.create_time),
-            'edit_time': str(self.edit_time),
+            'create_time': str((self.create_time+datetime.timedelta(seconds=8*60*60)).strftime("%Y-%m-%d %H:%M")),
+            'edit_time': str((self.edit_time+datetime.timedelta(seconds=8*60*60)).strftime("%Y-%m-%d %H:%M")),
             'parent_comment': self.parent_comment,
             'teacher': str(self.teacher.name)
         }

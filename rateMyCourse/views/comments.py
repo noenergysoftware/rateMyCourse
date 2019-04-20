@@ -67,8 +67,8 @@ def get_comment_by_course(request):
             rdict = {}
             rdict['username'] = i.user.username
             rdict['content'] = i.comment.content
-            rdict['editTime'] = str(i.comment.edit_time)
-            rdict['createTime'] = str(i.comment.create_time)
+            rdict['editTime'] = str((i.comment.create_time+datetime.timedelta(seconds=8*60*60)).strftime("%Y-%m-%d %H:%M"))
+            rdict['createTime'] = str((i.comment.edit_time+datetime.timedelta(seconds=8*60*60)).strftime("%Y-%m-%d %H:%M"))
             rdict['commentID'] = i.id
             rdict['teacher'] = i.comment.teacher.name
             retList.append(rdict)
@@ -103,8 +103,8 @@ def edit_comment(request):
 
         c.comment.content = request.POST['content']
 
-        c.comment.teacher = request.POST['teacher']
-        c.comment.edit_time = datetime.datetime.now()
+        c.comment.teacher = Teacher.objects.get(name=request.POST['teacher_name'])
+        #c.comment.edit_time = datetime.datetime.now()
         c.comment.save()
     except:
         return HttpResponse(json.dumps({

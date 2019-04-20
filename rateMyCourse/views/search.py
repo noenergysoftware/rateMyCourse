@@ -116,6 +116,45 @@ def search_user(request):
         'body': retlist,
     }), content_type="application/json")
 
+def get_user_detail(request):
+    """
+    搜索用户.
+    用户姓名，空为任意用户
+    姓名包含关键字的所有用户
+    """
+
+    try:
+        '''if not auth.auth(request):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")'''
+        username = request.GET['username']
+
+        if username=='':
+            return HttpResponse(json.dumps({
+                'status': -1,
+                'errMsg': 'user name Error',
+            }), content_type="application/json")
+
+        user = User.objects.get(username=username)
+        retlist={}
+        retlist['username']=user.username
+        retlist['mail']=user.mail
+        retlist['role']=user.role
+        retlist['gender']=user.gender
+        retlist['self_introduction']=user.self_introduction
+    except Exception:
+        return HttpResponse(json.dumps({
+            'status': -1,
+            'errMsg': 'Get Error',
+        }), content_type="application/json")
+    return HttpResponse(json.dumps({
+        'status': 1,
+        'length': 1,
+        'body': retlist,
+    }), content_type="application/json")
+
 
 def search_course_by_department(request):
     '''

@@ -102,7 +102,7 @@ def add_teach_course(request):
         c = TeachCourse(department=department, course=course)
         c.save()
 
-        teacher_list = request.POST.getlist('teacher_list')
+        #teacher_list = request.POST.getlist('teacher_list')
 
         for teacher_name in teacher_list:
             c.teachers.add(Teacher.objects.get(name=teacher_name))
