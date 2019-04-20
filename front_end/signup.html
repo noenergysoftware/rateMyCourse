@@ -147,11 +147,12 @@
 										console.log(data.status)
 										if(data.status=="1"){
 												alert(data.body.message);
+												window.setTimeout("location.href='./login.html'", 1000);
 										}
 										else{
 											alert(data.errMsg);
 										}
-										window.setTimeout("location.href='./login.html'", 1000);
+										
 								},
 								error:function(data){
 									alert(JSON.stringify(data));
