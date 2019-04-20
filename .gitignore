@@ -18,6 +18,3 @@ rateMyCourse/templates/rateMyCourse/temp.html
 
 # document
 *.pdf
-
-# test log
-test/test.log
