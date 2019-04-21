@@ -117,3 +117,35 @@ def get_rank_by_course(request):
         pass
 
 
+
+def get_all_rank(request):
+    all_course_ID=Course.objects.all()
+    retDist={}
+    for course_ID in all_course_ID:
+        rawList = MakeRank.objects.filter(course_id=course_ID)
+
+        num_rank = 0
+        rank_dict = {}
+        rank_dict['difficulty_score'] = 0
+        rank_dict['funny_score'] = 0
+        rank_dict['gain_score'] = 0
+        rank_dict['recommend_score'] = 0
+        for c in rawList:
+            num_rank = num_rank + 1
+            rank_dict['difficulty_score'] += c.rank.difficulty_score
+            rank_dict['funny_score'] += c.rank.funny_score
+            rank_dict['gain_score'] += c.rank.gain_score
+            rank_dict['recommend_score'] += c.rank.recommend_score
+
+        rank_dict['difficulty_score'] /= (1 if num_rank == 0 else num_rank)
+        rank_dict['funny_score'] /= (1 if num_rank == 0 else num_rank)
+        rank_dict['gain_score'] /= (1 if num_rank == 0 else num_rank)
+        rank_dict['recommend_score'] /= (1 if num_rank == 0 else num_rank)
+        rank_dict['rank_number'] =  num_rank
+        retDist[course_ID.course_ID]=rank_dict
+    return HttpResponse(json.dumps({
+        'status': 1,
+        'length': len(retDist),
+        'body': retDist
+    }), content_type="application/json")
+

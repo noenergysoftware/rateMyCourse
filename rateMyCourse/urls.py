@@ -29,6 +29,8 @@ urlpatterns = [
 
     url(r'^makeRank/$', rank.make_rank, name="makeRank"),
     url(r'^getRankByCourse/$', rank.get_rank_by_course, name="getRankByCourse"),
+    url(r'^getAllRank/$', rank.get_all_rank, name="getALLRank"),
+
 
 
 ]

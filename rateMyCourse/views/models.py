@@ -98,7 +98,9 @@ def add_teach_course(request):
             }), content_type="application/json")
         department = Department.objects.get(name=request.POST['department'])
         course = Course.objects.get(name=request.POST['course'])
+
         teacher_list = request.POST.getlist('teacher_list', [])
+
         c = TeachCourse(department=department, course=course)
         c.save()
 
