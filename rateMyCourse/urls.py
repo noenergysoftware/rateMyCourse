@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^getAllRank/$', rank.get_all_rank, name="getALLRank"),
 
 
+
 ]
 '''
 urlpatterns = [
