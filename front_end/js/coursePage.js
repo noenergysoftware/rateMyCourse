@@ -84,7 +84,7 @@ function AddComment(){
 function toPage(pagenum){
     
     var coursetoshow=(pagenum-1)*5;
-    var coursenum=window.sessionStorage.getItem("coursenum")
+    var comment_num=window.sessionStorage.getItem("comment_num")
     var totalpagenumber=$("#totalpage").html();
     console.log(totalpagenumber+" "+pagenum);
     if(pagenum>totalpagenumber || pagenum<=0){
@@ -92,10 +92,10 @@ function toPage(pagenum){
       return;
     }
 
-    for(var i=0;i<coursenum;i++){
+    for(var i=0;i<comment_num;i++){
         $("#"+i).hide();
     }
-    for(var i=coursetoshow;i<coursenum && i<coursetoshow+5;i++){
+    for(var i=coursetoshow;i<comment_num && i<coursetoshow+5;i++){
         $("#"+i).show();
     }
 
@@ -198,6 +198,7 @@ $(document).ready(function () {
                 else{
                     $("#noresult").hide();
                     $("#jumpbutton").show();
+                    window.sessionStorage.setItem("comment_num",data.length);
                     for(var i=0;i<data.length;i++){
                         var x=generateGrid(i,"#",data.body[i].username,"#",data.body[i].teacher,0,data.body[i].content,data.body[i].editTime,data.body[i].commentID,0,0);
                         var a=document.getElementById("locationid");
