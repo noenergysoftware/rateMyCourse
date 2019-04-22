@@ -129,7 +129,7 @@ function toPage(pagenum){
     }
 
     if(pagenum<totalpagenumber){
-      $("#nexwtpage").show();
+      $("#nextpage").show();
     }
     else{
       
