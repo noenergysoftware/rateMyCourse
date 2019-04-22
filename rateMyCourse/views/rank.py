@@ -117,6 +117,7 @@ def get_rank_by_course(request):
         pass
 
 
+
 def get_all_rank(request):
     all_course_ID=Course.objects.all()
     retDist={}
@@ -147,3 +148,4 @@ def get_all_rank(request):
         'length': len(retDist),
         'body': retDist
     }), content_type="application/json")
+
