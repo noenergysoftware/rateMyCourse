@@ -128,12 +128,13 @@
 	<script color="255,0,255" opacity="0.7" count="88" src="./js/canvas-nest.js"></script>
 	<script src="./js/md5.min.js"></script>
 	<script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+	<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
 	<canvas id="c_n5" width="1500" height="600" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas>
 
 <script>
     $(document).ready(function(){
 				var Captcha=false;
-
+				var Res;
 				window.callback = function(res){
 						//console.log(res)
 						// res（用户主动关闭验证码）= {ret: 2, ticket: null}
@@ -143,13 +144,16 @@
 								Captcha=true;
 								$("#TencentCaptcha").text("人机验证通过");
 								$("#TencentCaptcha").attr("disabled","disabled"); 
+								Res=res;
 						}
 				}
-
-
+				var IP=returnCitySN["cip"];
+				console.log(IP);
+				
 
 				function register(){
-						
+						console.log(Res.ticket);
+						console.log(Res.randstr);
 						$.ajax({
 								async: false,
 								type:"POST",
@@ -158,7 +162,10 @@
 								data:{              
 										username: $("#name").val(),
 										mail: $("#email").val(),
-										password: md5($("#passwd").val())
+										password: md5($("#passwd").val()),
+										IP:IP,
+										Ticket: Res.ticket,
+										Randstr: Res.randstr
 								},
 								xhrFields: {
 										withCredentials: true
