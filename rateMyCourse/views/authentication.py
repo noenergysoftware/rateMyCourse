@@ -66,7 +66,7 @@ def txrequest(params={}):
     print(res)
     if res:
         error_code = res["response"]
-        if error_code == 1:
+        if error_code == '1':
             return 1,'success'
         else:
             return -1,res
