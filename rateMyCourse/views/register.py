@@ -25,7 +25,7 @@ def sign_up(request):
         password = request.POST['password']
         Ticket = request.POST['Ticket']
         Randstr = request.POST['Randstr']
-        UserIP = request.POST['UserIP']
+        UserIP = request.POST['IP']
 
     except Exception:
         return HttpResponse(json.dumps({
