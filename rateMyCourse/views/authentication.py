@@ -62,7 +62,7 @@ def txrequest(params={}):
     f = urllib.request.urlopen("%s?%s" % (url, params))
 
     content = f.read()
-    res = json.loads(content)
+    res = json.loads(content.decode())
     print(res)
     if res:
         error_code = res["response"]
