@@ -83,7 +83,7 @@ function AddComment(){
 
 function toPage(pagenum){
     
-    var coursetoshow=(pagenum-1)*5;
+    var comment_to_show=(pagenum-1)*5;
     var comment_num=window.sessionStorage.getItem("comment_num")
     var totalpagenumber=$("#totalpage").html();
     console.log(totalpagenumber+" "+pagenum);
@@ -95,7 +95,7 @@ function toPage(pagenum){
     for(var i=0;i<comment_num;i++){
         $("#"+i).hide();
     }
-    for(var i=coursetoshow;i<comment_num && i<coursetoshow+5;i++){
+    for(var i=comment_to_show;i<comment_num && i<comment_to_show+5;i++){
         $("#"+i).show();
     }
 
@@ -129,7 +129,7 @@ function toPage(pagenum){
     }
 
     if(pagenum<totalpagenumber){
-      $("#nextpage").show();
+      $("#nexwtpage").show();
     }
     else{
       
