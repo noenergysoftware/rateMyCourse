@@ -1,4 +1,6 @@
 import json
+import urllib
+import urllib.request
 import smtplib
 from email.header import Header
 from email.mime.text import MIMEText
@@ -55,3 +57,18 @@ def auth_with_user(request,usernamein):
     finally:
         pass
 
+def txrequest(params={}):
+    url = "https://ssl.captcha.qq.com/ticket/verify"
+    f = urllib.request.urlopen("%s?%s" % (url, params))
+
+    content = f.read()
+    res = json.loads(content)
+    print(res)
+    if res:
+        error_code = res["response"]
+        if error_code == 1:
+            return 1,'success'
+        else:
+            return -1,res
+    else:
+        return -1,res

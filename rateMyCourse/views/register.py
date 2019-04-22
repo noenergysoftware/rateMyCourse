@@ -1,4 +1,6 @@
 import json
+import urllib
+from urllib.parse import urlencode
 import smtplib
 from email.header import Header
 from email.mime.text import MIMEText
@@ -21,10 +23,30 @@ def sign_up(request):
         username = request.POST['username']
         mail = request.POST['mail']
         password = request.POST['password']
+        Ticket = request.POST['Ticket']
+        Randstr = request.POST['Randstr']
+        UserIP = request.POST['UserIP']
+
     except Exception:
         return HttpResponse(json.dumps({
             'status': -1,
             'errMsg': '未能获取到用户名，邮箱或密码',
+        }), content_type="application/json")
+    try:
+        ret=auth.txrequest(urlencode({'aid':'XXX',
+                                    "AppSecretKey":'YYY',
+                                    'Ticket':Ticket,
+                                    'Randstr':Randstr,
+                                    'UserIP':UserIP}))
+        if ret[0]==-1:
+            return HttpResponse(json.dumps({
+                'status': -15,
+                'errMsg': ret[1],
+            }), content_type="application/json")
+    except:
+        return HttpResponse(json.dumps({
+            'status': -10,
+            'errMsg': "Auth failed",
         }), content_type="application/json")
     try:
         User(username=username, mail=mail, password=password).save()
