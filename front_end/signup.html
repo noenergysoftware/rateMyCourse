@@ -79,6 +79,12 @@
 							</div>
 						</div>
 								
+
+						<div class="rowtocol">
+							<div class="btn-auth auth-row">
+								<button id="TencentCaptcha" data-appid="2091355657" data-cbfn="callback" class="btn-reg btn btn-block btn-brand waves-attach waves-light waves-effect">人机验证</button>
+							</div>
+						</div>
 						
 						<div class="rowtocol">
 							<div class="btn-auth auth-row">
@@ -121,10 +127,27 @@
 	<script src="./js/jquery.validate.js"></script>
 	<script color="255,0,255" opacity="0.7" count="88" src="./js/canvas-nest.js"></script>
 	<script src="./js/md5.min.js"></script>
+	<script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
 	<canvas id="c_n5" width="1500" height="600" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas>
 
 <script>
     $(document).ready(function(){
+				var Captcha=false;
+
+				window.callback = function(res){
+						//console.log(res)
+						// res（用户主动关闭验证码）= {ret: 2, ticket: null}
+						// res（验证成功） = {ret: 0, ticket: "String", randstr: "String"}
+						if(res.ret === 0){
+								//alert(res.ticket)   // 票据
+								Captcha=true;
+								$("#TencentCaptcha").text("人机验证通过");
+								$("#TencentCaptcha").attr("disabled","disabled"); 
+						}
+				}
+
+
+
 				function register(){
 						
 						$.ajax({
@@ -160,15 +183,15 @@
 						});
 				}
 				$("#tos").click(function(){
-						if(check()==true){
-						register();
+						if(check(Captcha)==true){
+							register();
 						}
         });
 				
 				$("html").keydown(function (event) {
             //13 = enter
             if (event.keyCode == 13) {
-								if(check()==true){
+								if(check(Captcha)==true){
 										register();
 								}
             }
@@ -178,7 +201,7 @@
 	
 </script>
 <script>
-	function check(){
+	function check(check_Captcha){
 		var errmsg="";
 
 		var name=$("#name").val();
@@ -218,7 +241,11 @@
 			check_password=false;
 		}
 
-		if( check_name==false || check_email==false || check_password==false){
+		if(check_Captcha==false){
+			errmsg=errmsg+"人机验证未通过\n";
+		}
+
+		if( check_name==false || check_email==false || check_password==false || check_Captcha==false){
 			alert(errmsg);
 			return false;
 		}
