@@ -39,15 +39,18 @@ def sign_up(request):
                                     'Randstr':Randstr,
                                     'UserIP':UserIP}))
         if ret[0]==-1:
+            logs.writeLog("IP {0}#$signup failed".format(UserIP))
             return HttpResponse(json.dumps({
                 'status': -15,
                 'errMsg': ret[1],
             }), content_type="application/json")
     except:
+        logs.writeLog("IP {0}#$signup failed".format(UserIP))
         return HttpResponse(json.dumps({
             'status': -10,
             'errMsg': "Auth failed",
         }), content_type="application/json")
+    logs.writeLog("IP {0}#$signup success".format(UserIP))
     try:
         User(username=username, mail=mail, password=password).save()
     except Exception as err:
