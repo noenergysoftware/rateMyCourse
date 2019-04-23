@@ -59,7 +59,9 @@ $(document).ready(function(){
           //console.log(data.status)
           if(data.status=="1"){
               //alert(data.body.message);
-              var data2="";
+              var data2="<li>\n"+
+                        "  <a class=\"dropdown-item\" herf=\"#\" onclick=\"selectDepartment($(this).text())\">"+"选择学院"+"</a>\n"+
+                        "</li>\n";
               for(var i=0; i<data.body.length;i++){
                 data2+="<li>\n"+
                         "  <a class=\"dropdown-item\" herf=\"#\" onclick=\"selectDepartment($(this).text())\">"+data.body[i].name+"</a>\n"+
