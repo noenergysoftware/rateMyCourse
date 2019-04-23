@@ -18,6 +18,9 @@
 * 测试样例显得非常简洁。
 * 便于以后可能的自动生成测试样例。
 
+# 目前的缺陷
+* 不支持模型的外键。我还没搞明白怎么直接生成查外键的sql语句。
+
 # JSON规格
 对于BackPostCheckDBTC和BackGetCheckBodyTC使用的JSON文件的规格将在这里介绍，这两个类分别使用被我称为pd(post and check database), gb(get and check body)格式的json文件。
 
