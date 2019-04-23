@@ -243,6 +243,7 @@ $(document).ready(function () {
                         a.parentNode.insertBefore(x , a);
                        // console.log("add page");
                     }
+                    toPage(1);
                 }
             }
             else{
