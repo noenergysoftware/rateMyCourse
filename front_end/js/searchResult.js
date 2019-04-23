@@ -234,7 +234,7 @@ $(document).ready(function(){
         a.parentNode.insertBefore(x , a);
        // console.log("add page");
     }
-
+    toPage(1);
     //load score
     $.ajax({
         async: true,
