@@ -120,156 +120,17 @@
 </footer>
 
 <!-- js -->
-	<script src="./js/jquery.js"></script>
-  <script src="./js/gt.js"></script>
-  <script src="./js/base.min.js"></script>
-	<script src="./js/project.min.js"></script>
-	<script src="./js/jquery.validate.js"></script>
-	<script color="255,0,255" opacity="0.7" count="88" src="./js/canvas-nest.js"></script>
-	<script src="./js/md5.min.js"></script>
+	<script src="./lib/jquery-3.2.1.min.js"></script>
+  <script src="./lib/gt.js"></script>
+  <script src="./lib/base.min.js"></script>
+	<script src="./lib/project.min.js"></script>
+	<script src="./lib/jquery.validate.js"></script>
+	<script color="255,0,255" opacity="0.7" count="88" src="./lib/canvas-nest.js"></script>
+	<script src="./lib/md5.min.js"></script>
 	<script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
 	<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
 	<canvas id="c_n5" width="1500" height="600" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas>
-
-<script>
-    $(document).ready(function(){
-				var Captcha=false;
-				var Res;
-				window.callback = function(res){
-						//console.log(res)
-						// res（用户主动关闭验证码）= {ret: 2, ticket: null}
-						// res（验证成功） = {ret: 0, ticket: "String", randstr: "String"}
-						if(res.ret === 0){
-								//alert(res.ticket)   // 票据
-								Captcha=true;
-								$("#TencentCaptcha").text("人机验证通过");
-								$("#TencentCaptcha").attr("disabled","disabled"); 
-								Res=res;
-						}
-				}
-				var IP=returnCitySN["cip"];
-				console.log(IP);
-				
-
-				function register(){
-						console.log(Res.ticket);
-						console.log(Res.randstr);
-						$.ajax({
-								async: false,
-								type:"POST",
-								url: "https://api.ratemycourse.tk/signUp/",
-								dataType:"json",
-								data:{              
-										username: $("#name").val(),
-										mail: $("#email").val(),
-										password: md5($("#passwd").val()),
-										IP:IP,
-										Ticket: Res.ticket,
-										Randstr: Res.randstr
-								},
-								xhrFields: {
-										withCredentials: true
-								},
-								success:function(data){
-										//data=JSON.parse(data);
-									//	alert("ajax success");
-										console.log(data);
-										console.log(data.status)
-										if(data.status=="1"){
-												alert(data.body.message);
-												window.setTimeout("location.href='./login.html'", 1000);
-										}
-										else{
-											alert(data.errMsg);
-										}
-										
-								},
-								error:function(data){
-									alert(JSON.stringify(data));
-								}
-						});
-				}
-				$("#tos").click(function(){
-						if(check(Captcha)==true){
-							register();
-						}
-        });
-				
-				$("html").keydown(function (event) {
-            //13 = enter
-            if (event.keyCode == 13) {
-								if(check(Captcha)==true){
-										register();
-								}
-            }
-        });
-
-    });
-	
-</script>
-<script>
-	function check(check_Captcha){
-		var errmsg="";
-
-		var name=$("#name").val();
-		console.log(name);
-		var uPattern = /^[a-zA-Z0-9_]{3,16}$/;
-		var check_name=uPattern.test(name);
-		console.log(check_name);
-
-		if(check_name==false){
-				errmsg=errmsg+"用户名格式错误\n";
-		}
-
-		var email=$("#email").val();
-		console.log(email);
-		var ePattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-		var check_email=ePattern.test(email)
-		console.log(check_email);
-
-		if(check_email==false){
-				errmsg=errmsg+"邮箱格式错误\n";
-		}
-		
-		var password=$("#passwd").val();
-		var repassword=$("#repasswd").val();
-		console.log(password);
-		console.log(repassword);
-		var pdPattern = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,30}$/;
-		var check_password=pdPattern.test(password);
-		console.log(check_password);
-
-		if(check_password==false){
-			errmsg=errmsg+"密码格式错误\n";
-		}
-		
-		if(password!=repassword){
-			errmsg=errmsg+"两次密码不一致\n";
-			check_password=false;
-		}
-
-		if(check_Captcha==false){
-			errmsg=errmsg+"人机验证未通过\n";
-		}
-
-		if( check_name==false || check_email==false || check_password==false || check_Captcha==false){
-			alert(errmsg);
-			return false;
-		}
-		return true;
-	}
-</script>
-
-
-
-
-		
-
-    
-
-<canvas id="NooBox-VideoBeyond-preCanvas" style="display: none"></canvas>
-<div id="NooBox-Video-Indicator"></div>
-
+	<script src="./js/signup.js"></script>
 
 </body>
 </html>

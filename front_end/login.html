@@ -41,7 +41,7 @@
                         </a>
                         <!--添加中间图片-->
                         <div class="auth-logo">
-                            <img src="/resource/authlogo.jpg" alt="">
+                            <img src="./resource/authlogo.jpg" alt="">
                         </div>
                         <!--点击跳转至注册链接-->
                         <a href="https://ratemycourse.tk/signup.html" class="boardtop-right">
@@ -80,87 +80,29 @@
 
 
     <!-- js -->
-    <script src="./js/jquery.js"></script>
-    <script src="./js/jquery.cookie.js"></script>
-    <script src="./js/base.min.js"></script>
-    <script src="./js/project.min.js"></script>
-    <script src="./js/md5.min.js"></script>
-    <script color="255,0,255" opacity="0.7" count="88" src="./js/canvas-nest.js"></script>
+    <script src="./lib/jquery-3.2.1.min.js"></script>
+    <script src="./lib/jquery.cookie.js"></script>
+    <script src="./lib/base.min.js"></script>
+    <script src="./lib/project.min.js"></script>
+    <script src="./lib/md5.min.js"></script>
+    <script color="255,0,255" opacity="0.7" count="88" src="./lib/canvas-nest.js"></script>
+
+    <script src="./js/login.js"></script>
 </body>
 
 </html>
-</div>
 
-<script>
+
+<!--<script>
     let calltgbtn = document.querySelector('#calltgauth');
     let tgboard = document.querySelector('.card.auth-tg.cust-model');
     if (calltgbtn && tgboard)
         custModal(calltgbtn, tgboard);
-</script>
+</script>-->
 
-<script>
-    $(document).ready(function () {
-        function login() {
-            var name;
-            var email;
-            if ($("#name").val().indexOf("@") == -1) {       //true:是name登录
-                name = document.getElementById("name").value;
-                
-            } else {
-                
-                email = document.getElementById("name").value;
-            }
-            
-            //document.getElementByIssd("login").disabled = true;
-            $.ajax({
-                async: false,
-                type: "POST",
-                url: "https://api.ratemycourse.tk/signIn/",
-                dataType: "json",
-                data: {
-                    username: name,
-                    mail: email,
-                    password: md5($("#password").val())
-                },
-                xhrFields: {
-                    withCredentials: true
-                },
-                success: function (data) {
-                    //data=JSON.parse(data);
-                    console.log(JSON.stringify(data));
-                    console.log(data.status);
-                    if (data.status == "1") {
-                        $.cookie("username", data.body.username, { path: '/' });
-                        //window.sessionStorage.setItem("status",data.status);           //登录成功"status"="0",用于切换导航栏
-                        //window.sessionStorage.setItem("username",data.body.username);
-                        //console.log("status"+window.sessionStorage.getItem("status"));
-                        alert(data.body.username + "登录成功！");
-                        window.setTimeout("location.href='./index.html'", 1200);
-                    }
-                    else {
-                        console.log(JSON.stringify(data));
-                        alert(data.errMsg);
-                    }
-                    //window.setTimeout("location.href='/user'", 1200);
-                },
-                error: function (data) {
-                    console.log(JSON.stringify(data));
-                    alert(JSON.stringify(data));
-                }
-            });
-        }
-        $("html").keydown(function (event) {
-            //13 = enter
-            if (event.keyCode == 13) {
-                login();
-            }
-        });
-        $("#login").click(function () {
-            login();
-        });
-    })
+
+
 </script>
 
 <!--Username 非空验证-->
 
-</script>
