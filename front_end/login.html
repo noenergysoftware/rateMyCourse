@@ -100,10 +100,7 @@
 
 <script>
     $(document).ready(function () {
-
-
         function login() {
-
             var name;
             var email;
             if ($("#name").val().indexOf("@") == -1) {       //true:是name登录
@@ -114,9 +111,7 @@
                 email = document.getElementById("name").value;
             }
             
-
             //document.getElementByIssd("login").disabled = true;
-
             $.ajax({
                 async: false,
                 type: "POST",
@@ -147,7 +142,6 @@
                         alert(data.errMsg);
                     }
                     //window.setTimeout("location.href='/user'", 1200);
-
                 },
                 error: function (data) {
                     console.log(JSON.stringify(data));
@@ -155,7 +149,6 @@
                 }
             });
         }
-
         $("html").keydown(function (event) {
             //13 = enter
             if (event.keyCode == 13) {
@@ -165,7 +158,6 @@
         $("#login").click(function () {
             login();
         });
-
     })
 </script>
 

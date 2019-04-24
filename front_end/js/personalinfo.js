@@ -68,7 +68,7 @@ function modifier() {
             data: {
                 username: $("#name").val(),
                 role: $("#role").val(),
-                gender: $("#gender").val(),
+                gender: $("input[type=radio][name=gender]:checked").val(),
                 self_introduction: $("#personalIntroduce").val()
             },
             xhrFields: {
@@ -80,6 +80,7 @@ function modifier() {
                 console.log(data.status);
                 if (data.status == "1") {
                     alert(data.body.message);
+                    window.setTimeout("location.href='./index.html'", 1200);
                 } else {
                     alert(data.errMsg);
                 }
