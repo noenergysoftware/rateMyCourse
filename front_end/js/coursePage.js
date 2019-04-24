@@ -80,6 +80,17 @@ function AddComment(){
     window.setTimeout("location.href='./commentPage.html'", 0);
 }
 
+function raty(number,id){
+    $(id).raty({
+      score:number,
+      starOn:"./resource/star-on.png",
+      starOff:"./resource/star-off.png",
+      starHalf:"./resource/star-half.png",
+      readOnly:true,
+      halfShow:true,
+      size:34,
+   })
+  }
 
 function toPage(pagenum){
     
@@ -174,6 +185,39 @@ $(document).ready(function () {
     $("#course_type").html(window.sessionStorage.getItem("course"+coursenum+"course_type"));
     $("#course_school").html(window.sessionStorage.getItem("course"+coursenum+"department"));
     $("#coursedescription").html(window.sessionStorage.getItem("course"+coursenum+"description"))
+    
+    //显示评分
+    var course_id=window.sessionStorage.getItem("course"+coursenum+"course_ID");
+    $.ajax({
+        async: true,
+        type:"GET",
+        url: "http://127.0.0.1:8000/getRankByCourse/",
+        dataType:"json",
+        data:{
+          course_ID:course_id
+        },
+        success:function(data){
+            console.log(data);
+            //data=JSON.parse(data);
+            if(data.status=="1"){
+              raty(data.body.difficulty_score,"#difficulty_score");
+              raty(data.body.funny_score,"#funny_score");
+              raty(data.body.gain_score,"#gain_score");
+              raty(data.body.recommend_score,"#recommend_score");
+              $("#rank_number").text("评分人数   "+data.length);
+            }
+            else{
+              //alert(data.errMsg);
+              console.log(course_id+" fail to get rank");
+            }
+            
+        },
+        error:function(data){
+          alert(JSON.stringify(data));
+        }
+    });
+
+
     //2 获取评论信息
     $.ajax({
         async: false,

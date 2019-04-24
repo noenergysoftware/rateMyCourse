@@ -13,6 +13,7 @@
 
 
   <script src="./js/jquery-3.2.1.min.js"></script>
+  <script src="./js/jquery.raty.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="./js/jquery.cookie.js"></script>
   <script src="./js/bootstrap.bundle.js"></script>
@@ -110,6 +111,46 @@
           </tbody>
         </table>
       </div>
+
+      <div class="text-dark text-center" style="width:25%; margin-top:10px" id="rank_number">
+      
+      </div>
+
+      <div style="width:100%; margin-top:30px">
+          <table style="width:100%; margin:auto">
+            <tbody>
+              <tr>
+                <td style="width:25%">
+                  <p class="text-dark text-center">推荐程度</p>
+                </td>
+                <td style="width:25%">
+                  <p class="text-dark text-center">难度</p>
+                </td>
+                <td style="width:25%">
+                  <p class="text-dark text-center">有趣程度</p>
+                </td>
+                <td style="width:25%">
+                    <p class="text-dark text-center">课程收获</p>
+                  </td>
+              </tr>
+              <tr>
+                <td>
+                  <p  class="text-center" id="difficulty_score" style="margin-top:8px"></p>
+                </td>
+                <td>
+                  <p class="text-center" id="funny_score" style="margin-top:8px"></p>
+                </td>
+                <td>
+                  <p  class="text-center" id="gain_score" style="margin-top:8px"></p>
+                </td>
+                <td>
+                  <p class="text-center"  id="recommend_score" style="margin-top:8px"></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
     </div>
   </div>
 
