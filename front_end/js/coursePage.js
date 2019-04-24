@@ -191,7 +191,7 @@ $(document).ready(function () {
     $.ajax({
         async: true,
         type:"GET",
-        url: "http://127.0.0.1:8000/getRankByCourse/",
+        url: "https://api.ratemycourse.tk/getRankByCourse/",
         dataType:"json",
         data:{
           course_ID:course_id
