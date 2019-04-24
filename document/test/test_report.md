@@ -60,9 +60,14 @@
 不过要注意一点，因为本机环境下无法使用https（django不支持），所以需要手动将前端代码中的所有https都替换成http。
 
 ## 代码覆盖率计算方法
-目前没有。
+使用jscover，启用local-storage来支持跨页面的插桩记录存取。
 
-尝试过jscover，但jscover的原理是对js代码插桩，并使用一个js全局变量来存放覆盖率结果。然而js全局变量无法跨页面存在，所以一旦一个测试样例中出现了页面跳转，那么覆盖率就会丢失一部分。而我们的网站目前是一定要求从首页进入的线性访问模式，故而页面跳转是必须的。所以目前无法使用jscover来获取代码覆盖率。合适的替代品目前仍未找到。
+基本流程如下：
+1. 使用jscover对前端js文件插桩。
+2. 修改测试代码，使得每个WebDriver销毁前会保存插桩记录。
+3. 合并插桩记录，得到覆盖率报告。
+
+不过需要注意的是，仅仅只对**js文件**插桩，裸写在html文件中的js代码不会被纳入覆盖率的统计中。
 
 ## 测试思路
 细的来说：
@@ -211,21 +216,35 @@
     * 待废弃。
 
 
+# bug管理
+我们使用issue来进行bug管理。流程如下：
+1. 测试人员发现bug，发布issue，将其assign给相关人士。
+2. 相关人士处理bug，发布commit，回复测试人员。
+3. 测试人员检查是否确实处理，并进行回归测试。
+    1. 若一切正常，关闭issue。
+    2. 若出现问题，继续讨论解决。
 
 # Alpha阶段测试结果
+具体哪些bug这里就不列出了。都可以在[github的issue](https://github.com/noenergysoftware/rateMyCourse/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed+)中找到。测试人员发现的bug都有打上相应的标签。
 ## 前测试点
+commit: 666cc6afa8556d0618d630e9118f1df88518e994
+
 共47个测试样例，全部通过。
 
 * bug数：4
 * invalid数：2
 
-目前没有找到合适的工具来和selenium配合获取代码覆盖率。
+JS代码覆盖率：
+因为较晚才弄明白到底该怎么配合使用JSCover和Selenium，所以覆盖率还没有刷高。
+![](alpha_front_coverage.png)
 
 ## 后测试点
+commit: 55890581df5543ce2e34768306f72bf01e62c867
+
 共31个测试样例，全部通过。
 
 * bug数：4
 * invalid数：8
 
-代码覆盖率：
+Python代码覆盖率：
 ![](alpha_back_coverage.png)
