@@ -11,3 +11,7 @@
     var jscoverage_isReport = true;
 7. 使用edge打开jscoverage.html
     * 不能使用chrome，因为chrome禁止本地的文件访问。当然好像存在选项改，但还是直接Edge方便。
+
+
+# 不使用Proxy的原因
+因为Proxy模式需要修改浏览器代理。而我们目前的本地测试环境使用了Fiddler作为浏览器代理，这两个代理也就冲突了。
