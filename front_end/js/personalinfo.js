@@ -37,7 +37,9 @@ function getUserData(){
         async: true,
         type:"get",
         url: "http://testapi.ratemycourse.tk/getUserDetail/",
-        data:{"username":$.cookie("username")},
+        data:{
+            username:$.cookie("username")
+        },
         dataType:"json",
         success:function(data){
             //data=JSON.parse(data);
