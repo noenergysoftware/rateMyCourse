@@ -94,7 +94,7 @@ function modifier() {
         gender = "A";
     }
 
-    console.log($("#name").val()+"**");
+    console.log($("#name").val()+"**"+role+"**"+gender+"**"+$("#personalIntroduce").val());
     $.ajax({
         async: true,
         type: "POST",
