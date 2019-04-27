@@ -89,9 +89,11 @@
                     <span>用户名:</span>
                     <input type="text" id="name" value="" placeholder="*用户名，字母、数字或下划线，3-16位">
                 </label>
-                <label>
+                <label class="Main-role">
                     <span>你的角色:</span>
-                    <input type="text" id="role" value="" placeholder="*只可填写(教师; 学生; 其他)">
+                    <input type="radio" class="teacher" name="role" id="role_teacher" value="T">老师
+                    <input type="radio" class="student" name="role" id="role_student" value="S">学生
+                    <input type="radio" class="others"  name="role" id="role_others"  value="O">其他
                 </label>
                 <!--
                 <label>
@@ -105,9 +107,9 @@
                 -->
                 <label class="Main-sex">
                     <span>你的性别:</span>
-                    <input type="radio" class="male" name="gender" id="gender" value="M">男
-                    <input type="radio" class="fmale" name="gender" id="gender" value="F">女
-                    <input type="radio" class="anonymous" name="gender" id="gender" value="A">匿名
+                    <input type="radio" class="male" name="gender" id="gender_male" value="M">男
+                    <input type="radio" class="fmale" name="gender" id="gender_female" value="F">女
+                    <input type="radio" class="anonymous" name="gender" id="gender_secret" value="A">匿名
                 </label>
 
                 <label>

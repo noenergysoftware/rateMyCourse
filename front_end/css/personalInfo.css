@@ -27,7 +27,6 @@
     width: 99px;
     margin: 20px 20px 20px 20px ;
     border: none;
-    background: url("img/Example.jpg");
     overflow: hidden; 
     position: relative; 
 }
@@ -55,6 +54,16 @@
     line-height: 4px; 
 }
 .Main-sex input[type=checkbox]{
+    margin-top:6px;
+    vertical-align:middle; 
+}
+.Main-role{
+    padding-right: 13px;
+    padding-bottom: 13px;
+    font-weight: bold;
+    line-height: 4px; 
+}
+.Main-role input[type=checkbox]{
     margin-top:6px;
     vertical-align:middle; 
 }
