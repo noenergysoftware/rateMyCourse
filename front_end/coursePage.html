@@ -12,7 +12,8 @@
   <link rel="stylesheet" href="./css/coursePage.css" type="text/css">
 
 
-  <script src="./lib/jquery-3.2.1.min.js"></script>
+  <script src="./js/jquery-3.2.1.min.js"></script>
+  <script src="./js/jquery.raty.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="./lib/jquery.cookie.js"></script>
   <script src="./lib/bootstrap.bundle.js"></script>
@@ -47,7 +48,7 @@
         <div class="container" id="navbarContainer">
           <a class="navbar-brand" href="https://ratemycourse.tk/index.html">公客</a>
           <!--公告-->
-          <a class="navbar-brand" href="">公告</a>
+          <a class="navbar-brand" href="./announcement.html" style="display: none">公告</a>
           
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
@@ -110,6 +111,46 @@
           </tbody>
         </table>
       </div>
+
+      <div class="text-dark text-center" style="width:25%; margin-top:10px" id="rank_number">
+      
+      </div>
+
+      <div style="width:100%; margin-top:30px">
+          <table style="width:100%; margin:auto">
+            <tbody>
+              <tr>
+                <td style="width:25%">
+                  <p class="text-dark text-center">推荐程度</p>
+                </td>
+                <td style="width:25%">
+                  <p class="text-dark text-center">难度</p>
+                </td>
+                <td style="width:25%">
+                  <p class="text-dark text-center">有趣程度</p>
+                </td>
+                <td style="width:25%">
+                    <p class="text-dark text-center">课程收获</p>
+                  </td>
+              </tr>
+              <tr>
+                <td>
+                  <p  class="text-center" id="difficulty_score" style="margin-top:8px"></p>
+                </td>
+                <td>
+                  <p class="text-center" id="funny_score" style="margin-top:8px"></p>
+                </td>
+                <td>
+                  <p  class="text-center" id="gain_score" style="margin-top:8px"></p>
+                </td>
+                <td>
+                  <p class="text-center"  id="recommend_score" style="margin-top:8px"></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
     </div>
   </div>
 
