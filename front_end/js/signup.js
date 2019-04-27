@@ -49,6 +49,9 @@ $(document).ready(function(){
 										}
 										else{
 											alert(data.errMsg);
+											Captcha=false;
+											$("#TencentCaptcha").text("人机验证");
+											$("#TencentCaptcha").attr("disabled",""); 
 										}
 										
 								},
