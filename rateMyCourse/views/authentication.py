@@ -11,51 +11,54 @@ from django.http import HttpResponse
 
 from rateMyCourse.models import *
 
+
 def auth(request):
     try:
-        username=request.COOKIES.get('username')
-        password=request.COOKIES.get('password')
+        username = request.COOKIES.get('username')
+        password = request.COOKIES.get('password')
         u = User.objects.get(username=username)
-        if u.password!=password:
+        if u.password != password:
             # auth failed
             return False
-    except:
+    except BaseException:
         return False
     try:
-        sess=request.session.get('auth_sess',None)
-        if sess!=username:
+        sess = request.session.get('auth_sess', None)
+        if sess != username:
             return False
-    except:
+    except BaseException:
         return False
     else:
         return True
     finally:
         pass
 
-def auth_with_user(request,usernamein):
+
+def auth_with_user(request, usernamein):
     try:
-        username=request.COOKIES.get('username')
-        password=request.COOKIES.get('password')
+        username = request.COOKIES.get('username')
+        password = request.COOKIES.get('password')
         u = User.objects.get(username=username)
-        if u.password!=password:
+        if u.password != password:
             # auth failed
             return False
-    except:
+    except BaseException:
         return False
     try:
-        sess=request.session.get('auth_sess',None)
-        if sess!=username:
+        sess = request.session.get('auth_sess', None)
+        if sess != username:
             return False
         if usernamein != request.COOKIES.get('username'):
             return False
         if usernamein != request.session.get('auth_sess', None):
             return False
-    except:
+    except BaseException:
         return False
     else:
         return True
     finally:
         pass
+
 
 def txrequest(params={}):
     url = "https://ssl.captcha.qq.com/ticket/verify"
@@ -67,8 +70,8 @@ def txrequest(params={}):
     if res:
         error_code = res["response"]
         if error_code == '1':
-            return 1,'success'
+            return 1, 'success'
         else:
-            return -1,res
+            return -1, res
     else:
-        return -1,res
+        return -1, res

@@ -25,7 +25,7 @@ def add_teacher(request):
         title = request.POST['title']
         try:
             website = request.POST['website']
-        except:
+        except BaseException:
             website = "null"
         Teacher(name=name, title=title, website=website).save()
     except Exception as err:
@@ -67,8 +67,13 @@ def add_course(request):
         description = request.POST['description']
         course_type = request.POST['course_type']
         credit = request.POST['credit']
-        Course(name=name, website=website, course_type=course_type,
-               course_ID=course_ID, description=description, credit=credit).save()
+        Course(
+            name=name,
+            website=website,
+            course_type=course_type,
+            course_ID=course_ID,
+            description=description,
+            credit=credit).save()
     except Exception:
         return HttpResponse(json.dumps({
             'status': -1,
@@ -124,4 +129,3 @@ def add_teach_course(request):
         }), content_type="application/json")
     finally:
         pass
-
