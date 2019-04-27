@@ -61,14 +61,15 @@ $(document).ready(function(){
               //alert(data.body.message);
               var data2="<li>\n"+
                         "  <a class=\"dropdown-item\" herf=\"#\" onclick=\"selectDepartment($(this).text())\">"+"选择学院"+"</a>\n"+
-                        "</li>\n";
+                        "</li>\n"+
+                        "<div class=\"dropdown-divider\"></div>";
               for(var i=0; i<data.body.length;i++){
                 data2+="<li>\n"+
                         "  <a class=\"dropdown-item\" herf=\"#\" onclick=\"selectDepartment($(this).text())\">"+data.body[i].name+"</a>\n"+
                         "</li>\n";
                 //console.log(data.body[i]);
                 if(i<(data.body.length-1)){
-                  data2+= "<div class=\"dropdown-divider\"></div>"
+                  data2+= "<div class=\"dropdown-divider\"></div>";
                 }
                 $("#departments").html(data2);
               }
