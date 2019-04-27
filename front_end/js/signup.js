@@ -1,18 +1,20 @@
-﻿$(document).ready(function(){
-				var Captcha=false;
-				var Res;
-				window.callback = function(res){
-						//console.log(res)
-						// res（用户主动关闭验证码）= {ret: 2, ticket: null}
-						// res（验证成功） = {ret: 0, ticket: "String", randstr: "String"}
-						if(res.ret === 0){
-								//alert(res.ticket)   // 票据
-								Captcha=true;
-								$("#TencentCaptcha").text("人机验证通过");
-								$("#TencentCaptcha").attr("disabled","disabled"); 
-								Res=res;
-						}
-				}
+﻿var Captcha=false;
+var Res;
+window.callback = function(res){
+		//console.log(res)
+		// res（用户主动关闭验证码）= {ret: 2, ticket: null}
+		// res（验证成功） = {ret: 0, ticket: "String", randstr: "String"}
+		if(res.ret === 0){
+				//alert(res.ticket)   // 票据
+				Captcha=true;
+				$("#TencentCaptcha").text("人机验证通过");
+				$("#TencentCaptcha").attr("disabled","disabled"); 
+				Res=res;
+		}
+}
+
+$(document).ready(function(){
+				
 				var IP=returnCitySN["cip"];
 				console.log(IP);
 				
