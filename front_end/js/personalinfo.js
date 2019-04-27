@@ -36,7 +36,7 @@ function getUserData(){
     $.ajax({
         async: true,
         type:"get",
-        url: "https://api.ratemycourse.tk/getUserDetail/",
+        url: "http://testapi.ratemycourse.tk/getUserDetail/",
         data:{"username":$.cookie("username")},
         dataType:"json",
         success:function(data){
@@ -94,7 +94,7 @@ function modifier() {
     $.ajax({
         async: true,
         type: "POST",
-        url: "https://api.ratemycourse.tk/updateUser/",
+        url: "http://testapi.ratemycourse.tk/updateUser/",
         dataType: "text",
         data: {
             username: $("#name").val(),

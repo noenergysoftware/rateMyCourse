@@ -78,7 +78,7 @@ function Func_submit() {
       async: false,
       type: "POST",
       dataType: "json",
-      url: "https://api.ratemycourse.tk/makeComment/",
+      url: "http://testapi.ratemycourse.tk/makeComment/",
       data: {
         'username': $.cookie("username"),
         'course_ID': window.sessionStorage.getItem("course"+coursenum+"course_ID"),
@@ -112,7 +112,7 @@ function Func_submit() {
       async: false,
       type: "POST",
       dataType: "json",
-      url: "https://api.ratemycourse.tk/makeRank/",
+      url: "http://testapi.ratemycourse.tk/makeRank/",
       data: {
         'username': $.cookie("username"),
         'course_ID': window.sessionStorage.getItem("course"+coursenum+"course_ID"),

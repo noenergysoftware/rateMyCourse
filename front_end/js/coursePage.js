@@ -191,7 +191,7 @@ $(document).ready(function () {
     $.ajax({
         async: true,
         type:"GET",
-        url: "https://api.ratemycourse.tk/getRankByCourse/",
+        url: "http://testapi.ratemycourse.tk/getRankByCourse/",
         dataType:"json",
         data:{
           course_ID:course_id
@@ -222,7 +222,7 @@ $(document).ready(function () {
     $.ajax({
         async: false,
         type:"GET",
-        url: "https://api.ratemycourse.tk/getCommentsByCourse/",
+        url: "http://testapi.ratemycourse.tk/getCommentsByCourse/",
         dataType:"json",
         data:{              
             course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID"),

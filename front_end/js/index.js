@@ -50,7 +50,7 @@ $(document).ready(function(){
   $.ajax({
       async: false,
       type:"GET",
-      url: "https://api.ratemycourse.tk/getDepartment/",
+      url: "http://testapi.ratemycourse.tk/getDepartment/",
       dataType:"json",
       success:function(data){
         //data=JSON.parse(data);
@@ -94,7 +94,7 @@ $(document).ready(function(){
           $.ajax({
               async: false,
               type:"GET",
-              url: "https://api.ratemycourse.tk/searchCourse/",
+              url: "http://testapi.ratemycourse.tk/searchCourse/",
               dataType:"json",
               data:{              
                   course_name: $("#searchboxCourse").val(),
@@ -125,7 +125,7 @@ $(document).ready(function(){
           $.ajax({
               async: false,
               type:"GET",
-              url: "https://api.ratemycourse.tk/searchCourseByDepartment/",
+              url: "http://testapi.ratemycourse.tk/searchCourseByDepartment/",
               dataType:"json",
               data:{              
                   course_name: $("#searchboxCourse").val(),

@@ -14,7 +14,7 @@
             $.ajax({
                 async: false,
                 type: "POST",
-                url: "https://api.ratemycourse.tk/signIn/",
+                url: "http://testapi.ratemycourse.tk/signIn/",
                 dataType: "json",
                 data: {
                     username: name,

@@ -1,15 +1,15 @@
 function jumpLogin(){
   //var tmp = window.sessionStorage.getItem("status");
-  window.location.href = "https://ratemycourse.tk/login.html";
+  window.location.href = "./login.html";
   
 }
 
 function jumpSignUp(){
-  window.location.href = "https://ratemycourse.tk/signup.html";
+  window.location.href = "./signup.html";
 }
 
 function jumpPersonalInfo(){
-  window.location.href = "https://ratemycourse.tk/personalinfo.html";
+  window.location.href = "./personalinfo.html";
 }
 
 function jumpLogOut(){
@@ -17,7 +17,7 @@ function jumpLogOut(){
   $.ajax({
     async: false,
     type:"POST",
-    url: "https://api.ratemycourse.tk/logout/",
+    url: "http://testapi.ratemycourse.tk/logout/",
     dataType:"json",
     data:{
       username: $.cookie("username")
