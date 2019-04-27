@@ -138,6 +138,7 @@ class Course(models.Model):
             'credit': self.credit
         }
 
+
 class TeachCourse(models.Model):
     """
     matches courses and their teachers together.\n
@@ -157,6 +158,25 @@ class TeachCourse(models.Model):
         on_delete=models.CASCADE,
     )
 
+
+class SelectCourse(models.Model):
+    """
+    matches courses and their teachers together.\n
+    User: ManyToManyField to table USER, defines who select the course \n
+    course: foreign key to table COURSE, defines the course \n
+    department: foreign key to table DEPARTMENT, defines which department that this course belongs to \n
+    """
+    user = models.ManyToManyField(
+        User,
+    )
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+    )
+    department = models.ForeignKey(
+        Department,
+        on_delete=models.CASCADE,
+    )
 
 class Rank(models.Model):
     """

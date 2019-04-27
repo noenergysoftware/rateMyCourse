@@ -22,6 +22,8 @@ urlpatterns = [
     url(r'^addTeacher/$', models.add_teacher, name="addTeacher"),
     url(r'^addCourse/$', models.add_course, name="addCourse"),
     url(r'^addTeachCourse/$', models.add_teach_course, name="addTeachCourse"),
+    url(r'^addSelectCourse/$', models.add_select_course, name="addSelectCourse"),
+    url(r'^delSelectCourse/$', models.del_select_course, name="delSelectCourse"),
 
     url(r'^makeComment/$', comments.make_comment, name="makeComment"),
     url(r'^getCommentsByCourse/$', comments.get_comment_by_course, name="getCommentsByCourse"),

@@ -25,7 +25,7 @@ def add_teacher(request):
         title = request.POST['title']
         try:
             website = request.POST['website']
-        except:
+        except BaseException:
             website = "null"
         Teacher(name=name, title=title, website=website).save()
     except Exception as err:
@@ -67,8 +67,13 @@ def add_course(request):
         description = request.POST['description']
         course_type = request.POST['course_type']
         credit = request.POST['credit']
-        Course(name=name, website=website, course_type=course_type,
-               course_ID=course_ID, description=description, credit=credit).save()
+        Course(
+            name=name,
+            website=website,
+            course_type=course_type,
+            course_ID=course_ID,
+            description=description,
+            credit=credit).save()
     except Exception:
         return HttpResponse(json.dumps({
             'status': -1,
@@ -104,8 +109,6 @@ def add_teach_course(request):
         c = TeachCourse(department=department, course=course)
         c.save()
 
-        #teacher_list = request.POST.getlist('teacher_list')
-
         for teacher_name in teacher_list:
             c.teachers.add(Teacher.objects.get(name=teacher_name))
         c.save()
@@ -125,3 +128,79 @@ def add_teach_course(request):
     finally:
         pass
 
+
+def add_select_course(request):
+    """
+    增加选课信息，需求学生id，课程列表，部门列表
+    """
+    try:
+        if not auth.auth(request):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")
+        user = User.objects.get(id=request.POST['user_id'])
+
+        course_list = request.POST.getlist('course_list', [])
+        department_list = request.POST.getlist('department_list', [])
+
+        for [course_name, department_name] in [course_list, department_list]:
+            c = SelectCourse(
+                user=user,
+                course=Course.objects.get(name=course_name),
+                department=Department.objects.get(name=department_name)
+            )
+            c.save()
+    except Exception as err:
+        return HttpResponse(json.dumps({
+            'status': -1,
+            'errMsg': str(err),
+        }), content_type="application/json")
+    else:
+        return HttpResponse(json.dumps({
+            'status': 1,
+            'length': 1,
+            'body': {
+                'message': "添加课程关注成功".format(user)
+            }
+        }), content_type="application/json")
+    finally:
+        pass
+
+
+def del_select_course(request):
+    """
+    去除选课信息，需求学生id，课程列表，部门列表
+    """
+    try:
+        if not auth.auth(request):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")
+        user = User.objects.get(id=request.POST['user_id'])
+
+        course_list = request.POST.getlist('course_list', [])
+        department_list = request.POST.getlist('department_list', [])
+
+        for [course_name, department_name] in [course_list, department_list]:
+            SelectCourse.objects.filter(
+                user=user,
+                course=Course.objects.get(name=course_name),
+                department=Department.objects.get(name=department_name)
+            ).delete()
+    except Exception as err:
+        return HttpResponse(json.dumps({
+            'status': -1,
+            'errMsg': str(err),
+        }), content_type="application/json")
+    else:
+        return HttpResponse(json.dumps({
+            'status': 1,
+            'length': 1,
+            'body': {
+                'message': "移除关注成功".format(user)
+            }
+        }), content_type="application/json")
+    finally:
+        pass
