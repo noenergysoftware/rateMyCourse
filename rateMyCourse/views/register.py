@@ -33,11 +33,7 @@ def sign_up(request):
             'errMsg': '未能获取到用户名，邮箱或密码',
         }), content_type="application/json")
     try:
-        ret=auth.txrequest(urlencode({'aid':'XXX',
-                                    "AppSecretKey":'YYY',
-                                    'Ticket':Ticket,
-                                    'Randstr':Randstr,
-                                    'UserIP':UserIP}))
+        ret=auth.txrequest(Ticket,Randstr,UserIP)
         if ret[0]==-1:
             logs.writeLog("IP {0}#$signup failed".format(UserIP))
             return HttpResponse(json.dumps({
