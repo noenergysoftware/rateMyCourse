@@ -93,6 +93,8 @@ function modifier() {
     }else {
         gender = "A";
     }
+
+    console.log($("#name").val()+"**");
     $.ajax({
         async: true,
         type: "POST",
