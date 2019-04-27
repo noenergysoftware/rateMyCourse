@@ -48,10 +48,10 @@
 
     [!]
 
-# 前端服务器返回响应
+# 服务器返回响应
 这部分主要考虑的是能否将响应发送给用户，因为目前都是用的云计算服务，基本是由服务提供商保证这点，没有我们可以做的。
 
-# 客户端收到前端服务器的响应
+# 客户端收到服务器的响应
 * XSS攻击。[参考](https://www.freebuf.com/articles/web/185654.html)
 
     这类攻击可能不会直接影响到服务器安全，但会影响到客户使用。前段时间爆出来的[jquery原型污染](https://www.360zhijia.com/anquan/461210.html)就属于这类攻击。现在大多数浏览器都支持了XSS Filter，可以通过HTTP请求的头中包含X-XSS-PROTECTION来设置。django中，当启用了SecurityMiddleware后，可以通过设置[SECURE_BROWSER_XSS_FILTER](https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-SECURE_BROWSER_XSS_FILTER)来启用XSS Filter。而根据[这篇博客](https://www.freebuf.com/articles/web/138769.html)，XSS-Protection: 1; mode=block是我们应该选择的最优项，也是django默认的项。
@@ -97,7 +97,6 @@
 ## 自身的分析
 这里我们将从后端服务器提供的接口、存在的资源等角度分析漏洞。
 考虑到排版问题，拆分到[](safe_self_analyze.md)中叙述。
-
 
 
 # 依赖安全
