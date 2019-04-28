@@ -57,7 +57,7 @@
 ## 测试环境的搭建
 ![](front_test_env.png)
 使用Fiddler对域名和端口进行重映射，将对远端服务器的请求转换为对本地服务器的请求。
-不过要注意一点，因为本机环境下无法使用https（django不支持），所以需要手动将前端代码中的所有https都替换成http。
+通过使用openssl自己签个证书以及使用werkzeug_debugger_runserver实现本机支持https。详见[自签证书说明](self_ca.md)。
 
 ## 代码覆盖率计算方法
 使用jscover，启用local-storage来支持跨页面的插桩记录存取。
