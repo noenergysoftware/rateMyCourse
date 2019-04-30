@@ -1,4 +1,42 @@
-﻿$(document).ready(function () {
+﻿var csrftoken;
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+// 给ajax请求设置请求头x-csrftoken
+$.ajaxSetup({
+    beforeSend: function (xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+
+
+$(document).ready(function () {
+    $.ajax({
+        async: true,
+        type: "GET",
+        url: "http://testapi.ratemycourse.tk/getToken/",
+        dataType: "json",
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+           $.cookie("csrftoken",data);
+           csrftoken=$.cookie("csrftoken");
+        },
+        error: function (data) {
+            console.log(JSON.stringify(data));
+            alert(JSON.stringify(data));
+        }
+    });
+
+
+
         function login() {
             var name;
             var email;
@@ -30,7 +68,7 @@
                     console.log(data.status);
                     if (data.status == "1") {
                         $.cookie("username", data.body.username, { path: '/' });
-                        $.cookie("password", md5($("#password").val()), { path: '/' });
+                        
                         //window.sessionStorage.setItem("status",data.status);           //登录成功"status"="0",用于切换导航栏
                         //window.sessionStorage.setItem("username",data.body.username);
                         //console.log("status"+window.sessionStorage.getItem("status"));

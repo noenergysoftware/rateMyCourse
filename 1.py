@@ -1,6 +1,7 @@
 import os
 
-
+str1='https://api.ratemycourse.tk/'
+str2='http://ratemycourse.canuse.tk/'
 
 def Xreplace(path):
     os.chdir(path) # 跳到D盘
