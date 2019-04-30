@@ -33,8 +33,8 @@ urlpatterns = [
     url(r'^getRankByCourse/$', rank.get_rank_by_course, name="getRankByCourse"),
     url(r'^getAllRank/$', rank.get_all_rank, name="getALLRank"),
 
-    url(r'^getToken/$',register.get_token,name="getCSRFToken")
-
+    url(r'^getToken/$',register.get_token,name="getCSRFToken"),
+    url(r'^rateComment/$',comments.rate_comment,name="rateComment"),
 
 ]
 '''

@@ -1,5 +1,6 @@
 import json
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 
 import rateMyCourse.views.authentication as auth
@@ -117,3 +118,100 @@ def edit_comment(request):
             'length': 1,
             'body': {'message': "更新评论成功"}
         }), content_type="application/json")
+
+def rate_comment(request):
+    try:
+        if not auth.auth_with_user(request, request.POST['username']):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")
+        username = request.POST['username']
+        comment_ID=request.POST['comment_ID']
+        type=request.POST['type']
+    except:
+        return HttpResponse(json.dumps({
+            'status': -1,
+            'errMsg': '缺失信息',
+        }), content_type="application/json")
+    else:
+        try:
+            rate=RateComment.objects.get(user=User.objects.get(username=username),comment=Comment.objects.get(id=comment_ID))
+        except ObjectDoesNotExist:
+            rate=RateComment(user=User.objects.get(username=username),comment=Comment.objects.get(id=comment_ID))
+            rate.save()
+            c=Comment.objects.get(id=comment_ID)
+            if type=='agree':
+                c.rate+=1
+                rate.rate=1
+            else:
+                c.rate-=1
+                rate.rate=-1
+            c.save()
+            rate.save()
+            return HttpResponse(json.dumps({
+                'status': 1,
+                'length': 1,
+                'body': {'message': "评价评论成功"}
+            }), content_type="application/json")
+        except:
+            return HttpResponse(json.dumps({
+                'status': -1,
+                'errMsg': '评价评论失败',
+            }), content_type="application/json")
+        else:
+            c = Comment.objects.get(id=comment_ID)
+            if type=='agree':
+                if rate.rate==0:
+                    rate.rate=1
+                    c.rate+=1
+                    c.save()
+                    rate.save()
+                    return HttpResponse(json.dumps({
+                        'status': 1,
+                        'length': 1,
+                        'body': {'message': "赞同评论成功"}
+                    }), content_type="application/json")
+                elif rate.rate==-1:
+                    rate.rate=0
+                    c.rate+=1
+                    c.save()
+                    rate.save()
+                    return HttpResponse(json.dumps({
+                        'status': 1,
+                        'length': 1,
+                        'body': {'message': "已取消反对评论"}
+                    }), content_type="application/json")
+                else:
+                    return HttpResponse(json.dumps({
+                        'status': -1,
+                        'errMsg': "不能重复赞同评论",
+                    }), content_type="application/json")
+            else:
+                if rate.rate==0:
+                    rate.rate=-1
+                    c.rate-=1
+                    c.save()
+                    rate.save()
+                    return HttpResponse(json.dumps({
+                        'status': 1,
+                        'length': 1,
+                        'body': {'message': "反对评论成功"}
+                    }), content_type="application/json")
+                elif rate.rate==1:
+                    rate.rate=0
+                    c.rate-=1
+                    c.save()
+                    rate.save()
+                    return HttpResponse(json.dumps({
+                        'status': 1,
+                        'length': 1,
+                        'body': {'message': "已取消赞同评论"}
+                    }), content_type="application/json")
+                else:
+                    return HttpResponse(json.dumps({
+                        'status': -1,
+                        'errMsg': "不能重复反对评论",
+                    }), content_type="application/json")
+
+

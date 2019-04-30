@@ -252,7 +252,7 @@ class Comment(models.Model):
     create_time = models.DateTimeField(default=datetime.datetime.now)
     edit_time = models.DateTimeField(auto_now=True)
     parent_comment = models.IntegerField(default=-1)
-
+    rate = models.IntegerField(default=0)
     teacher = models.ForeignKey(
         Teacher,
         on_delete=models.CASCADE,
@@ -299,3 +299,14 @@ class HitCount(models.Model):
             'name': self.name,
             'count': self.count
         }
+
+class RateComment(models.Model):
+    user=models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+    comment=models.ForeignKey(
+        Comment,
+        on_delete=models.CASCADE,
+    )
+    rate=models.IntegerField(default=0)
