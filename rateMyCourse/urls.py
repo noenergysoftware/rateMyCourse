@@ -36,6 +36,7 @@ urlpatterns = [
     url(r'^getToken/$',register.get_token,name="getCSRFToken"),
     url(r'^rateComment/$',comments.rate_comment,name="rateComment"),
     url(r'^getRateComment/$',comments.get_rate_comment,name="getRateComment"),
+    url(r'^getHotComment/$',comments.get_high_rate_comment,name="getHotComment"),
 
 ]
 '''

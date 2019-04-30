@@ -230,3 +230,25 @@ def get_rate_comment(request):
             'length': 1,
             'body': {'rate': comment.rate}
         }), content_type="application/json")
+
+def get_high_rate_comment(request):
+    try:
+        course_ID=request.GET['course_ID']
+        course=Course.objects.get(course_ID=course_ID)
+    except:
+        return HttpResponse(json.dumps({
+            'status': -1,
+            'errMsg': "缺少courseID",
+        }), content_type="application/json")
+    else:
+        tlist=[]
+        b=MakeComment.objects.filter(course=course)
+        for i in b:
+            if i.comment.rate>0:
+                tlist.append([i.comment_id,i.comment.rate])
+        tlist.sort(key=lambda x:x[-1],reverse=True)
+        return HttpResponse(json.dumps({
+            'status': 1,
+            'length': len(tlist),
+            'body': tlist,
+        }), content_type="application/json")
