@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from rateMyCourse.models import *
 from django.core.exceptions import ObjectDoesNotExist
 import rateMyCourse.views.authentication as auth
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 def make_rank(request):
     """
     发表评分，需要用户名，课程ID，以及分数
@@ -117,7 +118,7 @@ def get_rank_by_course(request):
         pass
 
 
-
+@csrf_protect
 def get_all_rank(request):
     all_course_ID=Course.objects.all()
     retDist={}

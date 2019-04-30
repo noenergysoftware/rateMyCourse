@@ -4,7 +4,7 @@ from urllib import request, parse
 
 from django.http import HttpResponse
 from django.shortcuts import render, get_list_or_404, get_object_or_404
-
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from rateMyCourse.models import *
 import rateMyCourse.views.authentication as auth
 detail_names = ['有趣程度', '充实程度', '课程难度', '课程收获']
