@@ -16,6 +16,22 @@ function raty(number,id){
 }
 
 $(document).ready(function() {
+  $.ajax({
+    async: true,
+    type: "GET",
+    url: "https://api.ratemycourse.tk/getToken/",
+    dataType: "json",
+    xhrFields: {
+        withCredentials: true
+    },
+    success: function (data) {
+       $.cookie("csrftoken",data.token);
+    },
+    error: function (data) {
+        console.log(JSON.stringify(data));
+        alert(JSON.stringify(data));
+    }
+  });
 
   if($.cookie("username") != undefined){
     document.getElementById("signIn").style.display = "none";
@@ -80,10 +96,11 @@ function Func_submit() {
       dataType: "json",
       url: "https://api.ratemycourse.tk/makeComment/",
       data: {
-        'username': $.cookie("username"),
-        'course_ID': window.sessionStorage.getItem("course"+coursenum+"course_ID"),
-        'content' : $("#comment").val(),
-        'teacher_name' : $("#buttonSelectTeacher").text()
+        username: $.cookie("username"),
+        course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID"),
+        content : $("#comment").val(),
+        teacher_name : $("#buttonSelectTeacher").text(),
+        csrfmiddlewaretoken:  $.cookie("csrftoken")
       },
       xhrFields: {
         withCredentials: true
@@ -114,12 +131,13 @@ function Func_submit() {
       dataType: "json",
       url: "https://api.ratemycourse.tk/makeRank/",
       data: {
-        'username': $.cookie("username"),
-        'course_ID': window.sessionStorage.getItem("course"+coursenum+"course_ID"),
-        'difficulty_score': $("#difficulty_score").raty("getScore"),
-        'funny_score': $("#funny_score").raty("getScore"),
-        'gain_score': $("#gain_score").raty("getScore"),
-        'recommend_score': $("#recommend_score").raty("getScore")
+        username: $.cookie("username"),
+        course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID"),
+        difficulty_score: $("#difficulty_score").raty("getScore"),
+        funny_score: $("#funny_score").raty("getScore"),
+        gain_score: $("#gain_score").raty("getScore"),
+        recommend_score: $("#recommend_score").raty("getScore"),
+        csrfmiddlewaretoken:  $.cookie("csrftoken")
       },
       xhrFields: {
         withCredentials: true

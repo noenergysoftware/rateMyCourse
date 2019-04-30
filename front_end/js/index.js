@@ -39,12 +39,14 @@ function storedata(data){
 
 
 $(document).ready(function(){
+  
+
 
   if ($.cookie("username") != undefined){
     document.getElementById("signIn").style.display = "none";
     document.getElementById("signUp").style.display = "none";
     document.getElementById("personalInfo").style.display = "block";
-    document.getElementById("logOut").style.display = "block"
+    document.getElementById("logOut").style.display = "block";
   } 
   
   $.ajax({
@@ -97,7 +99,7 @@ $(document).ready(function(){
               url: "https://api.ratemycourse.tk/searchCourse/",
               dataType:"json",
               data:{              
-                  course_name: $("#searchboxCourse").val(),
+                  course_name: $("#searchboxCourse").val()
               },
               success:function(data){
                 //data=JSON.parse(data);

@@ -168,6 +168,8 @@ function lastPage(){
 
 
 $(document).ready(function () {
+
+    
     //generateGrid("#", "aya", "2016", "ruan", 20, "good", "2018", "1", "1", "2");
     if ($.cookie("username") != undefined){
         document.getElementById("signIn").style.display = "none";
@@ -225,7 +227,7 @@ $(document).ready(function () {
         url: "https://api.ratemycourse.tk/getCommentsByCourse/",
         dataType:"json",
         data:{              
-            course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID"),
+            course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID")
         },
         success:function(data){
             //data=JSON.parse(data);
