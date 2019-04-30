@@ -1,5 +1,7 @@
 import json
 from django.http import HttpResponse
+from django.views.decorators.cache import cache_page
+
 from rateMyCourse.models import *
 from django.core.exceptions import ObjectDoesNotExist
 import rateMyCourse.views.authentication as auth
@@ -71,7 +73,7 @@ def make_rank(request):
             }), content_type="application/json")
 
 
-
+@cache_page(60*60)
 def get_rank_by_course(request):
     """
     获取某节课的评分，需求课程号
@@ -118,7 +120,7 @@ def get_rank_by_course(request):
         pass
 
 
-@csrf_protect
+@cache_page(60*60)
 def get_all_rank(request):
     all_course_ID=Course.objects.all()
     retDist={}

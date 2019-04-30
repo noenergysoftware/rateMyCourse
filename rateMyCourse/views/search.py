@@ -7,9 +7,10 @@ from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from rateMyCourse.models import *
 import rateMyCourse.views.authentication as auth
+from django.views.decorators.cache import cache_page
 detail_names = ['有趣程度', '充实程度', '课程难度', '课程收获']
 
-
+@cache_page(60*60)
 def search_teacher(request):
     """
     搜索教师.
@@ -40,7 +41,7 @@ def search_teacher(request):
         'body': retlist,
     }), content_type="application/json")
 
-
+@cache_page(60*60)
 def search_course(request):
     """
     搜索课程.
@@ -81,6 +82,7 @@ def search_course(request):
         'body': retlist,
     }), content_type="application/json")
 
+@cache_page(60*60)
 def search_user(request):
     """
     搜索用户.
@@ -115,6 +117,7 @@ def search_user(request):
         'length': len(user_list),
         'body': retlist,
     }), content_type="application/json")
+
 
 def get_user_detail(request):
     """
@@ -155,7 +158,7 @@ def get_user_detail(request):
         'body': retlist,
     }), content_type="application/json")
 
-
+@cache_page(60*60)
 def search_course_by_department(request):
     '''
     按所属部门搜索课程
@@ -200,6 +203,7 @@ def search_course_by_department(request):
         'body': retlist,
     }), content_type="application/json")
 
+@cache_page(60*60)
 def get_department(request):
     '''
     得到部门列表

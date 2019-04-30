@@ -2,6 +2,7 @@ import json
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
+from django.views.decorators.cache import cache_page
 
 import rateMyCourse.views.authentication as auth
 from rateMyCourse.models import *
@@ -48,7 +49,7 @@ def make_comment(request):
                 }
             }), content_type="application/json")
 
-
+@cache_page(60*60)
 def get_comment_by_course(request):
     """
     获取某节课的评论，需求课程号
@@ -214,7 +215,7 @@ def rate_comment(request):
                         'errMsg': "不能重复反对评论",
                     }), content_type="application/json")
 
-
+@cache_page(3*60)
 def get_rate_comment(request):
     try:
         comment_ID=request.GET['comment_ID']
@@ -231,6 +232,7 @@ def get_rate_comment(request):
             'body': {'rate': comment.rate}
         }), content_type="application/json")
 
+@cache_page(60*60*2)
 def get_high_rate_comment(request):
     try:
         course_ID=request.GET['course_ID']
