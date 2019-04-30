@@ -26,7 +26,7 @@ $(document).ready(function () {
             withCredentials: true
         },
         success: function (data) {
-           $.cookie("csrftoken",data);
+           $.cookie("csrftoken",data.token);
            csrftoken=$.cookie("csrftoken");
         },
         error: function (data) {
