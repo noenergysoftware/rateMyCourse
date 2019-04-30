@@ -54,11 +54,12 @@ $(document).ready(function () {
                 type: "POST",
                 url: "http://testapi.ratemycourse.tk/signIn/",
                 dataType: "json",
-                CsrfViewMiddleware: csrftoken,
+                
                 data: {
                     username: name,
                     mail: email,
-                    password: md5($("#password").val())
+                    password: md5($("#password").val()),
+                    csrfmiddlewaretoken: csrftoken
                 },
                 xhrFields: {
                     withCredentials: true
