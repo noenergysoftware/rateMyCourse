@@ -73,7 +73,9 @@
 
     <p id="count">搜索到<nobr id="serachedCourseNum"></nobr>门课程</p>
     <h3 id="noresult" style="display: none">没有搜索到相关课程，建议更换关键字</h3>
+    
     <!-- use adddiv to load course data -->
+    <div id="course_data"></div>
 
     <ul id="c_pagination" class="pagination">
 
@@ -88,7 +90,7 @@
       </li>
 
       <div id="jumpbutton" class="jump " style="display: none">
-        <span class="jump_text">第<nobr id="pagenum"></nobr>页，共<nobr id="totalpage"></nobr>页
+        <span class="jump_text">第&nbsp;<nobr id="pagenum"></nobr>&nbsp;页，共&nbsp;<nobr id="totalpage"></nobr>&nbsp;页
 
           <nobr id="jump">,跳到<input type="text" name="jumpPage" id="jumpPage" style="width:12%"
               onkeyup="this.value=this.value.replace(/[^0-9-]+/,'');">页

@@ -1,3 +1,10 @@
+var course_num_per_page=5;
+var score_data;
+var total_page_number;
+var course_num=window.sessionStorage.getItem("coursenum");
+var ajax_success;
+
+
 function adddiv(number){
     var x = document.createElement("div");
     x.setAttribute("class","container");
@@ -37,8 +44,9 @@ function adddiv(number){
                 "  <div id=\"recommend_score_"+number+"\" class=\"col-md-3 text-md-left text-center align-self-center my-4\"></div>\n"+
                 "</div>\n"+
                 "<br>\n";
-    var a=document.getElementById("c_pagination");
-    a.parentNode.insertBefore(x , a);
+    /*var a=document.getElementById("c_pagination");
+    a.parentNode.insertBefore(x , a);*/
+    
     //console.log("success");
     /*$.ajax({
         async: true,
@@ -85,33 +93,48 @@ function raty(number,id){
 
 
 function toPage(pagenum){
-    var coursetoshow=(pagenum-1)*5;
-    var coursenum=window.sessionStorage.getItem("coursenum")
-    var totalpagenumber=Math.ceil(coursenum/5);;
- // console.log(totalpagenumber+" "+pagenum);
-    if(pagenum>totalpagenumber || pagenum<=0){
-      alert("页码错误"+"***"+pagenum+"***");
-      return;
+    //1 超出范围的页码报错
+    if(pagenum > total_page_number || pagenum <= 0){
+        alert("页码错误"+"***"+pagenum+"***");
+        return;
     }
 
-    for(var i=0;i<coursenum;i++){
-        $("#course"+i).hide();
-    }
-    for(var i=coursetoshow;i<coursenum && i<coursetoshow+5;i++){
-        $("#course"+i).show();
+    //2 获得到所要开始加载的课程序号
+    var course_to_show=(pagenum-1)*course_num_per_page;
+    
+    //3 加载页码内容,使用adddiv
+    //将course_data清空
+    $("#course_data").html("");
+    for(var i = course_to_show;i < course_num && i < (course_to_show + course_num_per_page); i++){
+        adddiv(i);
+        //想course_data内插入
+        $("#course"+i).appendTo($("#course_data"));
     }
 
-    for(var i=1;i<=totalpagenumber;i++){
+    //4 等待ajax获取评分完毕后加载评分
+    $.when(ajax_success).done(function () {
+        for(var i = course_to_show;i < course_num && i < (course_to_show + course_num_per_page); i++){
+            var id=window.sessionStorage.getItem("course"+i+"course_ID");
+            raty(data.body[id].difficulty_score,"#difficulty_score_"+i);
+            raty(data.body[id].funny_score,"#funny_score_"+i);
+            raty(data.body[id].gain_score,"#gain_score_"+i);
+            raty(data.body[id].recommend_score,"#recommend_score_"+i);
+            $("#rank_number_"+i).text("评分人数"+data.body[id].rank_number);
+        }
+    });
+
+    //5 隐藏其余的页码以及上下页
+    for(var i=1;i<=total_page_number;i++){
         $("#page"+i).hide();
     }
     
     if(pagenum<=3){
-        for(var i=1;i<=5 && i<=totalpagenumber ;i++){
+        for(var i=1;i<=5 && i<=total_page_number ;i++){
             $("#page"+i).show();
         }
     }
-    else if((totalpagenumber-pagenum)<=2){
-        for(var i=totalpagenumber;i>totalpagenumber-5 && i>=1 ;i--){
+    else if((total_page_number-pagenum)<=2){
+        for(var i=total_page_number;i>total_page_number-5 && i>=1 ;i--){
             $("#page"+i).show();
         }
     }
@@ -120,24 +143,22 @@ function toPage(pagenum){
             $("#page"+i).show();
         }
     }
-   // console.log("pagenum before last"+pagenum);
+
     if(pagenum>1){
-   
       $("#lastpage").show();
-     
     }
     else{
       $("#lastpage").hide();
     }
 
-    if(pagenum<totalpagenumber){
+    if(pagenum<total_page_number){
       $("#nextpage").show();
     }
     else{
-      
       $("#nextpage").hide();
     }
     
+    //5 最后修改页码
     $("#pagenum").html(pagenum);
 
 }
@@ -164,12 +185,46 @@ function toCourse(number){
 
 $(document).ready(function(){
 
+    //立即请求课程的评分
+    ajax_success=$.ajax({
+        async: true,
+        type:"GET",
+        url: "http://testapi.ratemycourse.tk/getAllRank/",
+        dataType:"json",
+        success:function(data){
+            //console.log(data);
+            //data=JSON.parse(data);
+            if(data.status=="1"){
+                score_data=data;
+                /*var i,id;
+                for(i=0;i<coursenum;i++){
+                    id=window.sessionStorage.getItem("course"+i+"course_ID");
+                    raty(data.body[id].difficulty_score,"#difficulty_score_"+i);
+                    raty(data.body[id].funny_score,"#funny_score_"+i);
+                    raty(data.body[id].gain_score,"#gain_score_"+i);
+                    raty(data.body[id].recommend_score,"#recommend_score_"+i);
+                    $("#rank_number_"+i).text("评分人数"+data.body[id].rank_number);
+                }*/
+            }
+            else{
+              //alert(data.errMsg);
+              console.log(" fail to get rank");
+            }
+            
+        },
+        error:function(data){
+          alert(JSON.stringify(data));
+        }
+    });
+
+
+
     if ($.cookie("username") != undefined){
         document.getElementById("signIn").style.display = "none";
         document.getElementById("signUp").style.display = "none";
         document.getElementById("personalInfo").style.display = "block";
         document.getElementById("logOut").style.display = "block"
-      }
+    }
     // alert("!!!")
     // Form validation for Sign in / Sign up forms
     var coursenum=window.sessionStorage.getItem("coursenum");
@@ -191,25 +246,25 @@ $(document).ready(function(){
     //console.log(233333);
 
 
-    for(var number=0;number<coursenum;number++){
+    /*for(var number=0;number<coursenum;number++){
         adddiv(number);
         if(number>5){
           document.getElementById("course"+number).style.display="none";
         }
-    }
+    }*/
     
-    var totalpagenumber=Math.ceil(coursenum/5);
-  //  console.log(totalpagenumber+"?????");
+    total_page_number=Math.ceil(coursenum/5);
+  //  console.log(total_page_number+"?????");
     $("#pagenum").html(1);
-    $("#totalpage").html(totalpagenumber);
-    if(totalpagenumber>1){
+    $("#totalpage").html(total_page_number);
+    if(total_page_number>1){
         $("#jump").show();
         $("#nextpage").show();
       // document.getElementById("jump").style.display="";
       // document.getElementById("nextpage").style.display="";
 
         //add page button
-        for(var i=1;i<=totalpagenumber;i++){
+        for(var i=1;i<=total_page_number;i++){
             var x = document.createElement("li");
             x.setAttribute("class","page-item");
             x.setAttribute("id","page"+i);
@@ -235,35 +290,4 @@ $(document).ready(function(){
        // console.log("add page");
     }
     toPage(1);
-    //load score
-    $.ajax({
-        async: true,
-        type:"GET",
-        url: "http://testapi.ratemycourse.tk/getAllRank/",
-        dataType:"json",
-        success:function(data){
-            //console.log(data);
-            //data=JSON.parse(data);
-            if(data.status=="1"){
-                //score=data;
-                var i,id;
-                for(i=0;i<coursenum;i++){
-                    id=window.sessionStorage.getItem("course"+i+"course_ID");
-                    raty(data.body[id].difficulty_score,"#difficulty_score_"+i);
-                    raty(data.body[id].funny_score,"#funny_score_"+i);
-                    raty(data.body[id].gain_score,"#gain_score_"+i);
-                    raty(data.body[id].recommend_score,"#recommend_score_"+i);
-                    $("#rank_number_"+i).text("评分人数"+data.body[id].rank_number);
-                }
-            }
-            else{
-              //alert(data.errMsg);
-              console.log(" fail to get rank");
-            }
-            
-        },
-        error:function(data){
-          alert(JSON.stringify(data));
-        }
-    });
 })
