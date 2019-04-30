@@ -7,8 +7,8 @@ from email.mime.text import MIMEText
 from random import Random  # 用于生成随机码
 
 from django.conf import settings
-from django.http import HttpResponse
-
+from django.http import HttpResponse, JsonResponse
+import django
 from rateMyCourse.models import *
 import rateMyCourse.views.authentication as auth
 import rateMyCourse.views.logs as logs
@@ -194,3 +194,7 @@ def logout(request):
         }), content_type="application/json")
     else:
         return response
+
+def get_token(request):
+    token = django.middleware.csrf.get_token(request)
+    return JsonResponse({'token': token})
