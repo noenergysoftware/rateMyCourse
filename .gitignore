@@ -24,3 +24,6 @@ log.txt
 
 # test
 test
+
+settings.py
+authentication.py
