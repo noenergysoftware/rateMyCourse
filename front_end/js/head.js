@@ -13,14 +13,30 @@ function jumpPersonalInfo(){
 }
 
 function jumpLogOut(){
-  
+  $.ajax({
+    async: true,
+    type: "GET",
+    url: "http://testapi.ratemycourse.tk/getToken/",
+    dataType: "json",
+    xhrFields: {
+        withCredentials: true
+    },
+    success: function (data) {
+       $.cookie("csrftoken",data.token);
+    },
+    error: function (data) {
+        console.log(JSON.stringify(data));
+        alert(JSON.stringify(data));
+    }
+  });
   $.ajax({
     async: false,
     type:"POST",
     url: "http://testapi.ratemycourse.tk/logout/",
     dataType:"json",
     data:{
-      username: $.cookie("username")
+      username: $.cookie("username"),
+      csrfmiddlewaretoken:  $.cookie("csrftoken")
     },
     xhrFields: {
       withCredentials: true

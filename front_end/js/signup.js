@@ -14,7 +14,24 @@ window.callback = function(res){
 }
 
 $(document).ready(function(){
-				
+		$.ajax({
+				async: true,
+				type: "GET",
+				url: "http://testapi.ratemycourse.tk/getToken/",
+				dataType: "json",
+				xhrFields: {
+						withCredentials: true
+				},
+				success: function (data) {
+					$.cookie("csrftoken",data.token);
+				},
+				error: function (data) {
+						console.log(JSON.stringify(data));
+						alert(JSON.stringify(data));
+				}
+		});			
+
+
 				var IP=returnCitySN["cip"];
 				console.log(IP);
 				
@@ -33,7 +50,8 @@ $(document).ready(function(){
 										password: md5($("#passwd").val()),
 										IP:IP,
 										Ticket: Res.ticket,
-										Randstr: Res.randstr
+										Randstr: Res.randstr,
+                    csrfmiddlewaretoken:  $.cookie("csrftoken")
 								},
 								xhrFields: {
 										withCredentials: true

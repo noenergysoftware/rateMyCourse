@@ -1,7 +1,4 @@
-﻿var csrftoken;
-
-
-
+﻿
 
 
 $(document).ready(function () {
@@ -15,7 +12,6 @@ $(document).ready(function () {
         },
         success: function (data) {
            $.cookie("csrftoken",data.token);
-           csrftoken=$.cookie("csrftoken");
         },
         error: function (data) {
             console.log(JSON.stringify(data));
@@ -42,12 +38,11 @@ $(document).ready(function () {
                 type: "POST",
                 url: "http://testapi.ratemycourse.tk/signIn/",
                 dataType: "json",
-                
                 data: {
                     username: name,
                     mail: email,
                     password: md5($("#password").val()),
-                    csrfmiddlewaretoken: csrftoken
+                    csrfmiddlewaretoken:  $.cookie("csrftoken")
                 },
                 xhrFields: {
                     withCredentials: true

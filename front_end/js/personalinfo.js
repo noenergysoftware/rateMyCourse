@@ -104,7 +104,8 @@ function modifier() {
             username: $("#name").val(),
             role: role,
             gender: gender,
-            self_introduction: $("#personalIntroduce").val()
+            self_introduction: $("#personalIntroduce").val(),
+            csrfmiddlewaretoken:  $.cookie("csrftoken")
         },
         xhrFields: {
                 withCredentials: true
@@ -133,7 +134,22 @@ function modifier() {
       //  }
   //  });
 $(document).ready(function () {
-    
+    $.ajax({
+        async: true,
+        type: "GET",
+        url: "http://testapi.ratemycourse.tk/getToken/",
+        dataType: "json",
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+           $.cookie("csrftoken",data.token);
+        },
+        error: function (data) {
+            console.log(JSON.stringify(data));
+            alert(JSON.stringify(data));
+        }
+    });
     getUserData();
 
     if ($.cookie("username") != undefined){
