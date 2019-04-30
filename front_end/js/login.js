@@ -54,7 +54,7 @@ $(document).ready(function () {
                 type: "POST",
                 url: "http://testapi.ratemycourse.tk/signIn/",
                 dataType: "json",
-                csrfmiddlewaretoken: csrftoken,
+                CsrfViewMiddleware: csrftoken,
                 data: {
                     username: name,
                     mail: email,
