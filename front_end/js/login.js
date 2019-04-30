@@ -26,7 +26,7 @@ $(document).ready(function () {
             withCredentials: true
         },
         success: function (data) {
-           $.cookie("csrftoken",data.token);
+           $.cookie("csrftoken",data);
            csrftoken=$.cookie("csrftoken");
         },
         error: function (data) {
@@ -54,6 +54,7 @@ $(document).ready(function () {
                 type: "POST",
                 url: "http://testapi.ratemycourse.tk/signIn/",
                 dataType: "json",
+                csrfmiddlewaretoken: csrftoken,
                 data: {
                     username: name,
                     mail: email,
