@@ -76,7 +76,7 @@ function adddiv(number){
           alert(JSON.stringify(data));
         }
     });*/
-    
+    return x;
 }
 
 function raty(number,id){
@@ -106,20 +106,19 @@ function toPage(pagenum){
     //将course_data清空
     $("#course_data").html("");
     for(var i = course_to_show;i < course_num && i < (course_to_show + course_num_per_page); i++){
-        adddiv(i);
-        //想course_data内插入
-        $("#course"+i).appendTo($("#course_data"));
+        //向course_data内插入
+        $("#course_data").append(adddiv(i));
     }
 
     //4 等待ajax获取评分完毕后加载评分
     $.when(ajax_success).done(function () {
         for(var i = course_to_show;i < course_num && i < (course_to_show + course_num_per_page); i++){
             var id=window.sessionStorage.getItem("course"+i+"course_ID");
-            raty(data.body[id].difficulty_score,"#difficulty_score_"+i);
-            raty(data.body[id].funny_score,"#funny_score_"+i);
-            raty(data.body[id].gain_score,"#gain_score_"+i);
-            raty(data.body[id].recommend_score,"#recommend_score_"+i);
-            $("#rank_number_"+i).text("评分人数"+data.body[id].rank_number);
+            raty(score_data.body[id].difficulty_score,"#difficulty_score_"+i);
+            raty(score_data.body[id].funny_score,"#funny_score_"+i);
+            raty(score_data.body[id].gain_score,"#gain_score_"+i);
+            raty(score_data.body[id].recommend_score,"#recommend_score_"+i);
+            $("#rank_number_"+i).text("评分人数"+score_data.body[id].rank_number);
         }
     });
 

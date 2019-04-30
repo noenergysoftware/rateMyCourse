@@ -1,8 +1,8 @@
 import os
 
 str1='https://api.ratemycourse.tk/'
-str2='http://ratemycourse.canuse.tk/'
-
+str2='http://testapi.ratemycourse.tk/'
+str3='http://127.0.0.1:8000/'
 def Xreplace(path):
     os.chdir(path) # 跳到D盘
     files = os.listdir(os.getcwd())
@@ -15,7 +15,7 @@ def Xreplace(path):
         for s in lines:
             #print(s)
             #print() 
-            fp.write(s.replace('https://api.ratemycourse.tk/','http://ratemycourse.canuse.tk/').replace('https://ratemycourse.tk/','./'))
+            fp.write(s.replace(str3,str2))
         fp.close() # 关闭文件
         os.remove(file)
         print(file+'.bak'+'  '+file)
