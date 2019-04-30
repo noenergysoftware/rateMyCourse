@@ -215,3 +215,18 @@ def rate_comment(request):
                     }), content_type="application/json")
 
 
+def get_rate_comment(request):
+    try:
+        comment_ID=request.GET['comment_ID']
+        comment=Comment.objects.get(id=comment_ID)
+    except:
+        return HttpResponse(json.dumps({
+            'status': -1,
+            'errMsg': "缺少commentID",
+        }), content_type="application/json")
+    else:
+        return HttpResponse(json.dumps({
+            'status': 1,
+            'length': 1,
+            'body': {'rate': comment.rate}
+        }), content_type="application/json")
