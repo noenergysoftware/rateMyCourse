@@ -185,7 +185,7 @@ function thumbUp(attitude, comment_ID, node){
                 }
                 else if(data.body.message=="已取消赞同评论"){
                     console.log(data.body.message);
-                    var i_tags =  node.parent().getElementsByTagName("i");
+                    var i_tags =  node.parentNode.getElementsByTagName("i");
                     $(i_tags[0]).removeClass("fa-thumbs-up");
                     $(i_tags[0]).addClass("fa-thumbs-o-up");
                     var thumb_up_num=parseInt($(node).parent().children("nobr").text());
@@ -194,7 +194,7 @@ function thumbUp(attitude, comment_ID, node){
                 }
                 else if(data.body.message=="已取消反对评论"){
                     console.log(data.body.message);
-                    var i_tags =  node.parent().getElementsByTagName("i");
+                    var i_tags =  node.parentNode.getElementsByTagName("i");
                     $(i_tags[1]).removeClass("fa-thumbs-down");
                     $(i_tags[1]).addClass("fa-thumbs-o-down");
                     var thumb_up_num=parseInt($(node).parent().children("nobr").text());
