@@ -12,7 +12,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
     $.ajax({
         async: true,
         type:"GET",
-        url: "http://testapi.ratemycourse.tk/getRateComment/",
+        url: "https://api.ratemycourse.tk/getRateComment/",
         dataType:"json",
         data:{              
             comment_ID: comment_ID
@@ -136,7 +136,7 @@ function thumbUp(attitude, comment_ID, node){
     $.ajax({
         async: true,
         type:"POST",
-        url: "http://testapi.ratemycourse.tk/rateComment/",
+        url: "https://api.ratemycourse.tk/rateComment/",
         dataType:"json",
         data:{
             username: $.cookie("username"),            
@@ -310,7 +310,7 @@ $(document).ready(function () {
     $.ajax({
         async: true,
         type: "GET",
-        url: "http://testapi.ratemycourse.tk/getToken/",
+        url: "https://api.ratemycourse.tk/getToken/",
         dataType: "json",
         xhrFields: {
             withCredentials: true
