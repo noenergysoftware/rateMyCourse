@@ -185,16 +185,18 @@ function thumbUp(attitude, comment_ID, node){
                 }
                 else if(data.body.message=="已取消赞同评论"){
                     console.log(data.body.message);
-                    $(node).removeClass("fa-thumbs-up");
-                    $(node).addClass("fa-thumbs-o-up");
+                    var i_tags =  node.parent().getElementsByTagName("i");
+                    $(i_tags[0]).removeClass("fa-thumbs-up");
+                    $(i_tags[0]).addClass("fa-thumbs-o-up");
                     var thumb_up_num=parseInt($(node).parent().children("nobr").text());
                     //console.log(thumb_up_num);
                     $(node).parent().children("nobr").text(thumb_up_num-1);
                 }
                 else if(data.body.message=="已取消反对评论"){
                     console.log(data.body.message);
-                    $(node).removeClass("fa-thumbs-down");
-                    $(node).addClass("fa-thumbs-o-down");
+                    var i_tags =  node.parent().getElementsByTagName("i");
+                    $(i_tags[1]).removeClass("fa-thumbs-down");
+                    $(i_tags[1]).addClass("fa-thumbs-o-down");
                     var thumb_up_num=parseInt($(node).parent().children("nobr").text());
                     //console.log(thumb_up_num);
                     $(node).parent().children("nobr").text(thumb_up_num+1);
