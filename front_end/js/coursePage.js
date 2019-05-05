@@ -127,7 +127,6 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
        
 }
 
-
 function thumbUp(attitude, comment_ID, node){
     if ($.cookie("username") == undefined){
         alert("请登录后再进行点赞或踩");
@@ -150,35 +149,52 @@ function thumbUp(attitude, comment_ID, node){
         },
         success:function(data){
             console.log(data);
+            //message类型 评价评论成功,已取消赞同评论,反对评论成功,已取消反对评论,赞同评论成功
             //data=JSON.parse(data);
             if(data.status=="1"){
                 //成功点赞或者点踩
-                if(attitude=="agree"){
-                    //点赞
-                    $(node).animate({
-                        fontSize:'+=8px'
-                    },"fast");
-                    $(node).animate({
-                        fontSize:'-=8px'
-                    },"fast");
-                    $(node).removeClass("fa-thumbs-o-up");
-                    $(node).addClass("fa-thumbs-up");
-                    var thumb_up_num=parseInt($(node).parent().children("nobr").text());
-                    //console.log(thumb_up_num);
-                    $(node).parent().children("nobr").text(thumb_up_num+1);
+                if(data.body.message == "评价评论成功" || data.body.message == "赞同评论成功" || data.body.message == "反对评论成功" ){
+                    if(attitude=="agree"){
+                        //点赞
+                        $(node).animate({
+                            fontSize:'+=8px'
+                        },"fast");
+                        $(node).animate({
+                            fontSize:'-=8px'
+                        },"fast");
+                        $(node).removeClass("fa-thumbs-o-up");
+                        $(node).addClass("fa-thumbs-up");
+                        var thumb_up_num=parseInt($(node).parent().children("nobr").text());
+                        //console.log(thumb_up_num);
+                        $(node).parent().children("nobr").text(thumb_up_num+1);
+                    }
+                    else{
+                        $(node).animate({
+                            fontSize:'+=8px'
+                        },"fast");
+                        $(node).animate({
+                            fontSize:'-=8px'
+                        },"fast");
+                        $(node).removeClass("fa-thumbs-o-down");
+                        $(node).addClass("fa-thumbs-down");
+                        var thumb_up_num=parseInt($(node).parent().children("nobr").text());
+                        //console.log(thumb_up_num);
+                        $(node).parent().children("nobr").text(thumb_up_num-1);
+                    }
                 }
-                else{
-                    $(node).animate({
-                        fontSize:'+=8px'
-                    },"fast");
-                    $(node).animate({
-                         fontSize:'-=8px'
-                    },"fast");
-                    $(node).removeClass("fa-thumbs-o-down");
-                    $(node).addClass("fa-thumbs-down");
+                else if(data.body.message=="已取消赞同评论"){
+                    $(node).removeClass("fa-thumbs-up");
+                    $(node).addClass("fa-thumbs-o-up");
                     var thumb_up_num=parseInt($(node).parent().children("nobr").text());
                     //console.log(thumb_up_num);
                     $(node).parent().children("nobr").text(thumb_up_num-1);
+                }
+                else if(data.body.message=="已取消反对评论"){
+                    $(node).removeClass("fa-thumbs-down");
+                    $(node).addClass("fa-thumbs-o-down");
+                    var thumb_up_num=parseInt($(node).parent().children("nobr").text());
+                    //console.log(thumb_up_num);
+                    $(node).parent().children("nobr").text(thumb_up_num+1);
                 }
             }
             else{
