@@ -129,7 +129,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
 
 
 function thumbUp(attitude, comment_ID, node){
-    if ($.cookie("username") != undefined){
+    if ($.cookie("username") == undefined){
         alert("请登录后再进行点赞或踩");
         return;
     }
