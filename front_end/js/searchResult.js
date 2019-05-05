@@ -157,7 +157,7 @@ function toPage(pagenum){
       $("#nextpage").hide();
     }
     
-    //5 最后修改页码
+    //6 最后修改页码
     $("#pagenum").html(pagenum);
 
 }
@@ -252,7 +252,7 @@ $(document).ready(function(){
         }
     }*/
     
-    total_page_number=Math.ceil(coursenum/5);
+    total_page_number=Math.ceil(coursenum/course_num_per_page);
   //  console.log(total_page_number+"?????");
     $("#pagenum").html(1);
     $("#totalpage").html(total_page_number);
