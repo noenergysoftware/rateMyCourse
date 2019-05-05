@@ -142,7 +142,8 @@ function thumbUp(attitude, comment_ID, node){
         data:{
             username: $.cookie("username"),            
             comment_ID: comment_ID,
-            type: attitude
+            type: attitude,
+            csrfmiddlewaretoken:  $.cookie("csrftoken")
         },
         xhrFields: {
             withCredentials: true
@@ -285,7 +286,22 @@ function lastPage(){
 
 
 $(document).ready(function () {
-
+    $.ajax({
+        async: true,
+        type: "GET",
+        url: "http://testapi.ratemycourse.tk/getToken/",
+        dataType: "json",
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+           $.cookie("csrftoken",data.token);
+        },
+        error: function (data) {
+            console.log(JSON.stringify(data));
+            alert(JSON.stringify(data));
+        }
+      });
     
     //generateGrid("#", "aya", "2016", "ruan", 20, "good", "2018", "1", "1", "2");
     if ($.cookie("username") != undefined){
