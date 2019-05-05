@@ -14,7 +14,7 @@ function storedata(data){
   window.sessionStorage.setItem("coursenum",data.length);
   for (var i=0;i<data.length;i++){
       
-      console.log("test DOM storage");
+      //console.log("test DOM storage");
       if (window.sessionStorage) { 
           window.sessionStorage.setItem("course"+i+"name",data.body[i].name);
           window.sessionStorage.setItem("course"+i+"website",data.body[i].website);
