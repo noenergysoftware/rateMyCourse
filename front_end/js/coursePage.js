@@ -154,6 +154,7 @@ function thumbUp(attitude, comment_ID, node){
             if(data.status=="1"){
                 //成功点赞或者点踩
                 if(data.body.message == "评价评论成功" || data.body.message == "赞同评论成功" || data.body.message == "反对评论成功" ){
+                    console.log(data.body.message);
                     if(attitude=="agree"){
                         //点赞
                         $(node).animate({
@@ -183,6 +184,7 @@ function thumbUp(attitude, comment_ID, node){
                     }
                 }
                 else if(data.body.message=="已取消赞同评论"){
+                    console.log(data.body.message);
                     $(node).removeClass("fa-thumbs-up");
                     $(node).addClass("fa-thumbs-o-up");
                     var thumb_up_num=parseInt($(node).parent().children("nobr").text());
@@ -190,6 +192,7 @@ function thumbUp(attitude, comment_ID, node){
                     $(node).parent().children("nobr").text(thumb_up_num-1);
                 }
                 else if(data.body.message=="已取消反对评论"){
+                    console.log(data.body.message);
                     $(node).removeClass("fa-thumbs-down");
                     $(node).addClass("fa-thumbs-o-down");
                     var thumb_up_num=parseInt($(node).parent().children("nobr").text());
