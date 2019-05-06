@@ -215,7 +215,7 @@ def rate_comment(request):
                         'errMsg': "不能重复反对评论",
                     }), content_type="application/json")
 
-@cache_page(3*60)
+#@cache_page(5)
 def get_rate_comment(request):
     try:
         comment_ID=request.GET['comment_ID']
