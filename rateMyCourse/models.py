@@ -178,6 +178,7 @@ class SelectCourse(models.Model):
         on_delete=models.CASCADE,
     )
 
+
 class Rank(models.Model):
     """
     rank records. \n
@@ -223,6 +224,7 @@ class MakeRank(models.Model):
         on_delete=models.CASCADE,
     )
 
+
 class RankCache(models.Model):
     course = models.ForeignKey(
         Course,
@@ -255,14 +257,25 @@ class Comment(models.Model):
         on_delete=models.CASCADE,
         default=None,
     )
+
     def ret(self):
         return {
             'content': self.content,
-            'create_time': str((self.create_time+datetime.timedelta(seconds=8*60*60)).strftime("%Y-%m-%d %H:%M")),
-            'edit_time': str((self.edit_time+datetime.timedelta(seconds=8*60*60)).strftime("%Y-%m-%d %H:%M")),
+            'create_time': str(
+                (self.create_time +
+                 datetime.timedelta(
+                     seconds=8 *
+                     60 *
+                     60)).strftime("%Y-%m-%d %H:%M")),
+            'edit_time': str(
+                (self.edit_time +
+                 datetime.timedelta(
+                     seconds=8 *
+                     60 *
+                     60)).strftime("%Y-%m-%d %H:%M")),
             'parent_comment': self.parent_comment,
-            'teacher': str(self.teacher.name)
-        }
+            'teacher': str(
+                self.teacher.name)}
 
 
 class MakeComment(models.Model):
@@ -286,7 +299,6 @@ class MakeComment(models.Model):
     )
 
 
-
 class HitCount(models.Model):
     name = models.CharField(max_length=50)
     count = models.BigIntegerField()
@@ -297,13 +309,14 @@ class HitCount(models.Model):
             'count': self.count
         }
 
+
 class RateComment(models.Model):
-    user=models.ForeignKey(
+    user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
     )
-    comment=models.ForeignKey(
+    comment = models.ForeignKey(
         Comment,
         on_delete=models.CASCADE,
     )
-    rate=models.IntegerField(default=0)
+    rate = models.IntegerField(default=0)
