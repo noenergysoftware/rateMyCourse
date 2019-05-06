@@ -22,6 +22,10 @@ def make_comment(request):
         course_ID = request.POST['course_ID']
         content = request.POST['content']
         teacher_name = request.POST['teacher_name']
+        try:
+            parent_comment=request.POST['parent_comment']
+        except:
+            parent_comment=-1
     except BaseException:
         return HttpResponse(json.dumps({
             'status': -1,
@@ -30,7 +34,7 @@ def make_comment(request):
     else:
         try:
             c = Comment(
-                content=content,
+                content=content,parent_comment=parent_comment,
                 teacher=Teacher.objects.get(
                     name=teacher_name))
             c.save()
@@ -52,7 +56,7 @@ def make_comment(request):
                 }
             }), content_type="application/json")
 
-@cache_page(60*60)
+
 def get_comment_by_course(request):
     """
     获取某节课的评论，需求课程号
@@ -88,6 +92,7 @@ def get_comment_by_course(request):
                      60)).strftime("%Y-%m-%d %H:%M"))
             rdict['commentID'] = i.id
             rdict['teacher'] = i.comment.teacher.name
+            rdict['parent_comment']=i.comment.parent_comment
             retList.append(rdict)
 
     except BaseException:
@@ -234,19 +239,24 @@ def rate_comment(request):
                         'body': {'message': "赞同评论成功"}
                     }), content_type="application/json")
                 elif rate.rate == -1:
-                    rate.rate = 0
-                    c.rate += 1
+                    rate.rate = 1
+                    c.rate += 2
                     c.save()
                     rate.save()
                     return HttpResponse(json.dumps({
                         'status': 1,
                         'length': 1,
-                        'body': {'message': "已取消反对评论"}
+                        'body': {'message': "已赞同评论"}
                     }), content_type="application/json")
                 else:
+                    rate.rate = 0
+                    c.rate -= 1
+                    c.save()
+                    rate.save()
                     return HttpResponse(json.dumps({
-                        'status': -1,
-                        'errMsg': "不能重复赞同评论",
+                        'status': 1,
+                        'length': 1,
+                        'body': {'message': "已取消赞同评论"}
                     }), content_type="application/json")
             else:
                 if rate.rate == 0:
@@ -260,19 +270,24 @@ def rate_comment(request):
                         'body': {'message': "反对评论成功"}
                     }), content_type="application/json")
                 elif rate.rate == 1:
-                    rate.rate = 0
-                    c.rate -= 1
+                    rate.rate = -1
+                    c.rate -= 2
                     c.save()
                     rate.save()
                     return HttpResponse(json.dumps({
                         'status': 1,
                         'length': 1,
-                        'body': {'message': "已取消赞同评论"}
+                        'body': {'message': "已反对评论"}
                     }), content_type="application/json")
                 else:
+                    rate.rate = 0
+                    c.rate += 1
+                    c.save()
+                    rate.save()
                     return HttpResponse(json.dumps({
-                        'status': -1,
-                        'errMsg': "不能重复反对评论",
+                        'status': 1,
+                        'length': 1,
+                        'body': {'message': "已取消反对评论"}
                     }), content_type="application/json")
 
 #@cache_page(5)

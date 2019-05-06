@@ -22,6 +22,12 @@ def make_rank(request):
         funny_score = request.POST['funny_score']
         gain_score = request.POST['gain_score']
         recommend_score = request.POST['recommend_score']
+        if difficulty_score>5 or difficulty_score<0 or funny_score>5 or funny_score<0 or gain_score>5 or gain_score<0 or recommend_score>5 or recommend_score<0:
+            return HttpResponse(json.dumps({
+                'status': -1,
+                'errMsg': '非法分数',
+            }), content_type="application/json")
+
     except:
         return HttpResponse(json.dumps({
             'status': -1,
