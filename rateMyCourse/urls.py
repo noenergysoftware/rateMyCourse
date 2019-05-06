@@ -27,6 +27,7 @@ urlpatterns = [
 
     url(r'^makeComment/$', comments.make_comment, name="makeComment"),
     url(r'^getCommentsByCourse/$', comments.get_comment_by_course, name="getCommentsByCourse"),
+    url(r'^getCommentsByTeacher/$', comments.get_comment_by_teacher, name="getCommentsByTeacher"),
     url(r'^editComment/$', comments.edit_comment, name="editComments"),
 
     url(r'^makeRank/$', rank.make_rank, name="makeRank"),
