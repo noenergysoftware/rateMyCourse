@@ -5,6 +5,7 @@ from django.views.decorators.cache import cache_page
 from rateMyCourse.models import *
 from django.core.exceptions import ObjectDoesNotExist
 import rateMyCourse.views.authentication as auth
+import rateMyCourse.views.calcRank as calcRank
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 
@@ -193,3 +194,6 @@ def get_course_sorted_by_rank(request):
         'length': len(sorted_course_list),
         'body': sorted_course_list,
     }), content_type="application/json")
+
+def flush(request):
+    calcRank.calc_rank()
