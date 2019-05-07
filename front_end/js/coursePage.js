@@ -1,6 +1,6 @@
 var comment_num_per_page=5;
 var total_page_number;
-var comment_data;
+
 
 //加载评论
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, hot) {
@@ -255,7 +255,7 @@ function thumbUp(attitude, comment_ID, node){
 }
 
 //热评
-function hotComment(course_id){
+function hotComment(course_id, comment_data){
     //1 获得热评
     $.ajax({
         async: true,
@@ -476,7 +476,6 @@ $(document).ready(function () {
             //	alert("ajax success");
            // console.log(data);
             //console.log(data.status)
-            comment_data=data;
             if(data.status=="1"){
                 //alert(data.body.message);
                 //console.log("Successfully get comment of id "+coursenum);
@@ -534,7 +533,7 @@ $(document).ready(function () {
                     }
 
                     //生成热评
-                    hotComment(course_id);
+                    hotComment(course_id,data);
 
                     toPage(1);
                 }
