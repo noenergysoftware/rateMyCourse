@@ -180,9 +180,13 @@ def get_course_sorted_by_rank(request):
 
     sorted_course_list = []
     for rank in all_rank:
-        # if rank.position == len(sorted_course_list) + 1:
-        if rank.position == len(sorted_course_list):
-            sorted_course_list.append(rank.course)
+        if rank.position!=-1:
+            sorted_course_list.append([rank.course,rank.recommend_score,rank.position])
+    sorted_course_list.sort(key=lambda x:x[-1],reverse=True)
+    #for rank in all_rank:
+    #   # if rank.position == len(sorted_course_list) + 1:
+    #    if rank.position == len(sorted_course_list):
+    #        sorted_course_list.append(rank.course)
 
     return HttpResponse(json.dumps({
         'status': 1,

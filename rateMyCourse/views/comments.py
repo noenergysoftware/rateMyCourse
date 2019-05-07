@@ -69,7 +69,7 @@ def get_comment_by_course(request):
                 'errMsg': 'cookies 错误',
             }), content_type="application/json")'''
         course_ID = request.GET['course_ID']
-        rawList = MakeComment.objects.filter(course_id=Course.objects.get(course_ID=course_ID).id)
+        rawList = MakeComment.objects.filter(course=Course.objects.get(course_ID=course_ID).id,)
 
         retList = []
         for i in rawList:
