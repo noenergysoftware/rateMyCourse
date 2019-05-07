@@ -197,3 +197,8 @@ def get_course_sorted_by_rank(request):
 
 def flush(request):
     calcRank.calc_rank()
+    return HttpResponse(json.dumps({
+        'status': 1,
+        'length': 1,
+        'body': "更新成功",
+    }), content_type="application/json")
