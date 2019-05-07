@@ -321,7 +321,7 @@ def get_high_rate_comment(request):
         b = MakeComment.objects.filter(course=course)
         for i in b:
             if i.comment.rate > 0:
-                tlist.append([i.comment_id, i.comment.rate])
+                tlist.append([i.comment_id, i.comment.rate, i.comment.content])
         tlist.sort(key=lambda x: x[-1], reverse=True)
         return HttpResponse(json.dumps({
             'status': 1,
