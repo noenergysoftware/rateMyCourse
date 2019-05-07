@@ -6,7 +6,7 @@ var total_page_number;
 
 
 //加载评论
-function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, snum) {
+function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, hot) {
     //获取评论的评价-->点赞数目
     var thumb_up_num=0;
     $.ajax({
@@ -63,7 +63,12 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
         var commentGrid = document.createElement("div");
         commentGrid.setAttribute("class", "card col-md-12");
         commentGrid.setAttribute("style","margin-top:8px");
-        commentGrid.id = "comment_"+number;
+        if(hot==1){
+            commentGrid.id = "hot_comment_"+number;
+        }
+        else{
+            commentGrid.id = "comment_"+number;
+        }
         commentGrid.innerHTML = ScreenGridHtml;
         //insert user image and name
         //暂时没有用户头像
@@ -127,6 +132,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
        
 }
 
+//点赞
 function thumbUp(attitude, comment_ID, node){
     if ($.cookie("username") == undefined){
         alert("请登录后再进行点赞或踩");
@@ -249,6 +255,42 @@ function thumbUp(attitude, comment_ID, node){
     });
 }
 
+//热评
+function hotComment(course_id){
+    //1 获得热评
+    $.ajax({
+        async: true,
+        type:"GET",
+        url: "https://api.ratemycourse.tk/getHotComment/",
+        dataType:"json",
+        data:{              
+            course_ID: course_id
+        },
+        success:function(data){
+            console.log(data);
+            if(data.status=="1"){
+                if(data.length==0){
+                    var no_hot_comment = document.createTextNode("暂无热评");
+                    $("#hot_comment").append(no_hot_comment);
+                }
+                else{
+                    for(var i = 0; i < data.length; i++){
+                        //console.log(data.body[i]);
+                        $("#hot_comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, 1));
+                    }
+                }
+            }
+            else{
+              alert(data.errMsg);
+            }
+            
+        },
+        error:function(data){
+          alert(JSON.stringify(data));
+        }
+    });
+
+}
 
 function AddComment(){
     window.setTimeout("location.href='./commentPage.html'", 0);
@@ -368,6 +410,8 @@ $(document).ready(function () {
         document.getElementById("logOut").style.display = "block"
       }
 
+    
+
     //1 从sessonStorage获取课程信息
     var coursenum=parseInt(window.sessionStorage.getItem("coursetoload"));
     //console.log("now in "+coursenum);
@@ -380,6 +424,10 @@ $(document).ready(function () {
     
     //显示评分
     var course_id=window.sessionStorage.getItem("course"+coursenum+"course_ID");
+
+    //生成热评
+    hotComment(course_id);
+
     $.ajax({
         async: true,
         type:"GET",
