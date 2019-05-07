@@ -261,7 +261,7 @@ function hotComment(course_id){
     $.ajax({
         async: true,
         type:"GET",
-        url: "https://testapi.ratemycourse.tk/getHotComment/",
+        url: "http://testapi.ratemycourse.tk/getHotComment/",
         dataType:"json",
         data:{              
             course_ID: course_id
