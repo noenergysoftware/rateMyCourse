@@ -325,7 +325,7 @@ def get_high_rate_comment(request):
         tlist.sort(key=lambda x: x[-1], reverse=True)
         retList = []
         for j in tlist:
-            i=Comment.objects.get(comment=j[0])
+            i=MakeComment.objects.get(comment_id=j[0])
             rdict = {}
             rdict['username'] = i.user.username
             rdict['content'] = i.comment.content
