@@ -16,7 +16,7 @@ function jumpLogOut(){
   $.ajax({
     async: true,
     type: "GET",
-    url: "https://api.ratemycourse.tk/getToken/",
+    url: "http://testapi.ratemycourse.tk/getToken/",
     dataType: "json",
     xhrFields: {
         withCredentials: true
@@ -32,7 +32,7 @@ function jumpLogOut(){
   $.ajax({
     async: false,
     type:"POST",
-    url: "https://api.ratemycourse.tk/logout/",
+    url: "http://testapi.ratemycourse.tk/logout/",
     dataType:"json",
     data:{
       username: $.cookie("username"),
