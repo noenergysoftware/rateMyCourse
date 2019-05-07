@@ -7,7 +7,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
     //获取评论的评价-->点赞数目
     var thumb_up_num;
     var ajax_success=$.ajax({
-        async: true,
+        async: false,
         type:"GET",
         url: "http://testapi.ratemycourse.tk/getRateComment/",
         dataType:"json",
@@ -276,7 +276,9 @@ function hotComment(course_id){
                     for(var j = 0; j < data.length; j++){
                         //console.log(data.body[i]);
                         for(i = 0; i < comment_data.length; i++){
+                            console.log("comment_id"+data.body[j][0]);
                             if(comment_data.body[i].comment_ID == data.body[j][0]){
+                                console.log("生成")
                                 $("#hot_comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, 1));
                             }
                         }
