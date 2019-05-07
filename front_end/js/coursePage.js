@@ -278,7 +278,7 @@ function hotComment(course_id, comment_data){
                     for(var j = 0; j < data.length; j++){
                         //console.log(data.body[i]);
                         for(i = 0; i < comment_data.length; i++){
-                            console.log("comment_id data.body[j][0]"+data.body[j][0]+"comment_data.body[i].comment_ID "+comment_data.body[i].comment_ID);
+                            console.log("comment_id data.body[j][0]"+data.body[j][0]+"comment_data.body[i].comment_ID "+comment_data.body[i].commentID);
                             if(comment_data.body[i].comment_ID == data.body[j][0]){
                                 console.log("生成")
                                 $("#hot_comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, 1));
