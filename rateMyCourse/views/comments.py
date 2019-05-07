@@ -91,6 +91,7 @@ def get_comment_by_course(request):
             rdict['commentID'] = i.id
             rdict['teacher'] = i.comment.teacher.name
             rdict['parent_comment']=i.comment.parent_comment
+            rdict['rate'] = i.comment.rate
             retList.append(rdict)
 
     except BaseException:
@@ -344,6 +345,7 @@ def get_high_rate_comment(request):
             rdict['commentID'] = i.id
             rdict['teacher'] = i.comment.teacher.name
             rdict['parent_comment'] = i.comment.parent_comment
+            rdict['rate']=i.comment.rate
             retList.append(rdict)
         return HttpResponse(json.dumps({
             'status': 1,
