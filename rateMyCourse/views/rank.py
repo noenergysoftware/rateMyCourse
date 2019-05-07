@@ -142,7 +142,7 @@ def get_all_rank(request):
     retDist = {}
     for course_ID in all_course_ID:
         # rawList = MakeRank.objects.filter(course_id=course_ID)
-        course = RankCache.objects.get(course_id=Course.objects.get(course_ID=course_ID).id)
+        course = RankCache.objects.get(course_id=course_ID)
 
         num_rank = 0
         rank_dict = {}
@@ -173,4 +173,19 @@ def get_all_rank(request):
         'status': 1,
         'length': len(retDist),
         'body': retDist
+    }), content_type="application/json")
+
+def get_course_sorted_by_rank(request):
+    all_rank = RankCache.objects.all()
+
+    sorted_course_list = []
+    for rank in all_rank:
+        # if rank.position == len(sorted_course_list) + 1:
+        if rank.position == len(sorted_course_list):
+            sorted_course_list.append(rank.course)
+
+    return HttpResponse(json.dumps({
+        'status': 1,
+        'length': len(sorted_course_list),
+        'body': sorted_course_list,
     }), content_type="application/json")
