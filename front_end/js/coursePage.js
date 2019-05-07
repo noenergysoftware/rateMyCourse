@@ -15,7 +15,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
             comment_ID: comment_ID
         },
         success:function(data){
-            //console.log(data);
+            console.log(data);
             //data=JSON.parse(data);
             if(data.status=="1"){
                 thumb_up_num=data.rate;
