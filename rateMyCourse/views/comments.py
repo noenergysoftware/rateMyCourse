@@ -321,10 +321,32 @@ def get_high_rate_comment(request):
         b = MakeComment.objects.filter(course=course)
         for i in b:
             if i.comment.rate > 0:
-                tlist.append([i.comment_id, i.comment.rate, i.comment.content])
+                tlist.append([i.comment_id, i.comment.rate])
         tlist.sort(key=lambda x: x[-1], reverse=True)
+        retList = []
+        for j in tlist:
+            i=Comment.objects.get(comment=j[0])
+            rdict = {}
+            rdict['username'] = i.user.username
+            rdict['content'] = i.comment.content
+            rdict['editTime'] = str(
+                (i.comment.create_time +
+                 datetime.timedelta(
+                     seconds=8 *
+                             60 *
+                             60)).strftime("%Y-%m-%d %H:%M"))
+            rdict['createTime'] = str(
+                (i.comment.edit_time +
+                 datetime.timedelta(
+                     seconds=8 *
+                             60 *
+                             60)).strftime("%Y-%m-%d %H:%M"))
+            rdict['commentID'] = i.id
+            rdict['teacher'] = i.comment.teacher.name
+            rdict['parent_comment'] = i.comment.parent_comment
+            retList.append(rdict)
         return HttpResponse(json.dumps({
             'status': 1,
-            'length': len(tlist),
-            'body': tlist,
+            'length': len(retList),
+            'body': retList,
         }), content_type="application/json")
