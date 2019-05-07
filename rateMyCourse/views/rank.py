@@ -163,10 +163,10 @@ def get_all_rank(request):
         # rank_dict['gain_score'] /= (1 if num_rank == 0 else num_rank)
         # rank_dict['recommend_score'] /= (1 if num_rank == 0 else num_rank)
         # rank_dict['rank_number'] = num_rank
-        rank_dict['difficulty_score'] /= course.difficulty_score / course.people
-        rank_dict['funny_score'] /= course.funny_score / course.people
-        rank_dict['gain_score'] /= course.gain_score / course.people
-        rank_dict['recommend_score'] /= course.recommend_score / course.people
+        rank_dict['difficulty_score'] = course.difficulty_score / (1 if course.people == 0 else course.people)
+        rank_dict['funny_score'] = course.funny_score / (1 if course.people == 0 else course.people)
+        rank_dict['gain_score'] = course.gain_score / (1 if course.people == 0 else course.people)
+        rank_dict['recommend_score'] = course.recommend_score / (1 if course.people == 0 else course.people)
         rank_dict['rank_number'] = course.people
         retDist[course_ID.course_ID] = rank_dict
 
