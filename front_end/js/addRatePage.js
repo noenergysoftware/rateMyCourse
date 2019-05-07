@@ -19,7 +19,7 @@ $(document).ready(function() {
   $.ajax({
     async: true,
     type: "GET",
-    url: "http://testapi.ratemycourse.tk/getToken/",
+    url: "https://api.ratemycourse.tk/getToken/",
     dataType: "json",
     xhrFields: {
         withCredentials: true
@@ -94,7 +94,7 @@ function Func_submit() {
       async: false,
       type: "POST",
       dataType: "json",
-      url: "http://testapi.ratemycourse.tk/makeComment/",
+      url: "https://api.ratemycourse.tk/makeComment/",
       data: {
         username: $.cookie("username"),
         course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID"),
@@ -129,7 +129,7 @@ function Func_submit() {
       async: false,
       type: "POST",
       dataType: "json",
-      url: "http://testapi.ratemycourse.tk/makeRank/",
+      url: "https://api.ratemycourse.tk/makeRank/",
       data: {
         username: $.cookie("username"),
         course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID"),

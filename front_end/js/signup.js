@@ -17,7 +17,7 @@ $(document).ready(function(){
 		$.ajax({
 				async: true,
 				type: "GET",
-				url: "http://testapi.ratemycourse.tk/getToken/",
+				url: "https://api.ratemycourse.tk/getToken/",
 				dataType: "json",
 				xhrFields: {
 						withCredentials: true
@@ -42,7 +42,7 @@ $(document).ready(function(){
 						$.ajax({
 								async: false,
 								type:"POST",
-								url: "http://testapi.ratemycourse.tk/signUp/",
+								url: "https://api.ratemycourse.tk/signUp/",
 								dataType:"json",
 								data:{              
 										username: $("#name").val(),

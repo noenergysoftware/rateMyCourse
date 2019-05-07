@@ -12,7 +12,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
     $.ajax({
         async: true,
         type:"GET",
-        url: "http://testapi.ratemycourse.tk/getRateComment/",
+        url: "https://api.ratemycourse.tk/getRateComment/",
         dataType:"json",
         data:{              
             comment_ID: comment_ID
@@ -136,7 +136,7 @@ function thumbUp(attitude, comment_ID, node){
     $.ajax({
         async: true,
         type:"POST",
-        url: "http://testapi.ratemycourse.tk/rateComment/",
+        url: "https://api.ratemycourse.tk/rateComment/",
         dataType:"json",
         data:{
             username: $.cookie("username"),            
@@ -185,21 +185,57 @@ function thumbUp(attitude, comment_ID, node){
                 }
                 else if(data.body.message=="已取消赞同评论"){
                     console.log(data.body.message);
-                    var i_tags =  node.parentNode.getElementsByTagName("i");
-                    $(i_tags[0]).removeClass("fa-thumbs-up");
-                    $(i_tags[0]).addClass("fa-thumbs-o-up");
+                    $(node).removeClass("fa-thumbs-up");
+                    $(node).addClass("fa-thumbs-o-up");
                     var thumb_up_num=parseInt($(node).parent().children("nobr").text());
                     //console.log(thumb_up_num);
                     $(node).parent().children("nobr").text(thumb_up_num-1);
                 }
                 else if(data.body.message=="已取消反对评论"){
                     console.log(data.body.message);
-                    var i_tags =  node.parentNode.getElementsByTagName("i");
-                    $(i_tags[1]).removeClass("fa-thumbs-down");
-                    $(i_tags[1]).addClass("fa-thumbs-o-down");
+                    $(node).removeClass("fa-thumbs-down");
+                    $(node).addClass("fa-thumbs-o-down");
                     var thumb_up_num=parseInt($(node).parent().children("nobr").text());
                     //console.log(thumb_up_num);
                     $(node).parent().children("nobr").text(thumb_up_num+1);
+                }
+                else if(data.body.message=="已赞同评论"){
+                    //直接将反对变成赞同
+                    console.log(data.body.message);
+                    var i_tags =  node.parentNode.getElementsByTagName("i");
+                    $(i_tags[1]).removeClass("fa-thumbs-down");
+                    $(i_tags[1]).addClass("fa-thumbs-o-down");
+                    $(i_tags[0]).animate({
+                        fontSize:'+=8px'
+                    },"fast");
+                    $(i_tags[0]).animate({
+                        fontSize:'-=8px'
+                    },"fast");
+                    $(i_tags[0]).removeClass("fa-thumbs-o-up");
+                    $(i_tags[0]).addClass("fa-thumbs-up");
+                    $(node).removeClass("fa-thumbs-up");
+                    $(node).addClass("fa-thumbs-o-up");
+                    var thumb_up_num=parseInt($(node).parent().children("nobr").text());
+                    //console.log(thumb_up_num);
+                    $(node).parent().children("nobr").text(thumb_up_num+2);
+                }
+                else if(data.body.message=="已反对评论"){
+                    //直接将赞同变为反对
+                    console.log(data.body.message);
+                    var i_tags =  node.parentNode.getElementsByTagName("i");
+                    $(i_tags[0]).removeClass("fa-thumbs-up");
+                    $(i_tags[0]).addClass("fa-thumbs-o-up");
+                    $(i_tags[1]).animate({
+                        fontSize:'+=8px'
+                    },"fast");
+                    $(i_tags[1]).animate({
+                        fontSize:'-=8px'
+                    },"fast");
+                    $(i_tags[1]).removeClass("fa-thumbs-o-down");
+                    $(i_tags[1]).addClass("fa-thumbs-down");
+                    var thumb_up_num=parseInt($(node).parent().children("nobr").text());
+                    //console.log(thumb_up_num);
+                    $(node).parent().children("nobr").text(thumb_up_num-2);
                 }
             }
             else{
@@ -310,7 +346,7 @@ $(document).ready(function () {
     $.ajax({
         async: true,
         type: "GET",
-        url: "http://testapi.ratemycourse.tk/getToken/",
+        url: "https://api.ratemycourse.tk/getToken/",
         dataType: "json",
         xhrFields: {
             withCredentials: true
@@ -347,7 +383,7 @@ $(document).ready(function () {
     $.ajax({
         async: true,
         type:"GET",
-        url: "http://testapi.ratemycourse.tk/getRankByCourse/",
+        url: "https://api.ratemycourse.tk/getRankByCourse/",
         dataType:"json",
         data:{
           course_ID:course_id
@@ -378,7 +414,7 @@ $(document).ready(function () {
     $.ajax({
         async: true,
         type:"GET",
-        url: "http://testapi.ratemycourse.tk/getCommentsByCourse/",
+        url: "https://api.ratemycourse.tk/getCommentsByCourse/",
         dataType:"json",
         data:{              
             course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID")
