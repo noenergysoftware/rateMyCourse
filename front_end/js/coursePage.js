@@ -532,6 +532,10 @@ $(document).ready(function () {
                         a.parentNode.insertBefore(x , a);
                        // console.log("add page");
                     }
+
+                    //生成热评
+                    hotComment(course_id);
+                    
                     toPage(1);
                 }
             }
@@ -546,8 +550,7 @@ $(document).ready(function () {
     });
 
 
-    //生成热评
-    hotComment(course_id);
+    
 
 
 })
