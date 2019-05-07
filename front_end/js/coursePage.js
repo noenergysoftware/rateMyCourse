@@ -257,6 +257,8 @@ function thumbUp(attitude, comment_ID, node){
 //热评
 function hotComment(course_id, comment_data){
     //1 获得热评
+    console.log("comment_data");
+    console.log(comment_data);
     $.ajax({
         async: true,
         type:"GET",
