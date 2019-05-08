@@ -13,7 +13,7 @@ function adddiv(number){
 
     x.innerHTML="<div class=\"row col-md-12\" style=\"background:#eeeeee\">\n"+
                 "  <div class=\"col-md-2\"></div>\n"+
-                "  <a class=\"col-md-4" href=\"#\" onclick=\"toCourse("+number+")\" style=\"text-decoration:none;font-size:40px;color:#000000; width:62%;\">"+window.sessionStorage.getItem("course"+number+"name")+"</a>\n"+
+                "  <a class=\"col-md-4\" href=\"#\" onclick=\"toCourse("+number+")\" style=\"text-decoration:none;font-size:40px;color:#000000; width:62%;\">"+window.sessionStorage.getItem("course"+number+"name")+"</a>\n"+
                 "  <div class=\"col-md-1\"></div>\n"+
                 "  <div id=\"rank_number_"+number+"\" class=\"col-md-2 text-md-left text-center align-self-center my-4\" style=\"font-size:24px\"></div>\n"+
                 "  <div class=\"col-md-3\"></div>\n"+
