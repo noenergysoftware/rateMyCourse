@@ -11,8 +11,12 @@ function adddiv(number){
     x.setAttribute("id","course"+number);
     var course_id=window.sessionStorage.getItem("course"+number+"course_ID");
 
-    x.innerHTML="<div class=\"row\" style=\"background:#eeeeee\">\n"+
-                "  <a href=\"#\" onclick=\"toCourse("+number+")\" style=\"text-decoration:none;font-size:30px;color:#000000; width:62%;\">"+window.sessionStorage.getItem("course"+number+"name")+"</a>\n"+
+    x.innerHTML="<div class=\"row col-md-12\" style=\"background:#eeeeee\">\n"+
+                "  <div class=\"col-md-2\"></div>\n"+
+                "  <a class=\"col-md-4" href=\"#\" onclick=\"toCourse("+number+")\" style=\"text-decoration:none;font-size:40px;color:#000000; width:62%;\">"+window.sessionStorage.getItem("course"+number+"name")+"</a>\n"+
+                "  <div class=\"col-md-1\"></div>\n"+
+                "  <div id=\"rank_number_"+number+"\" class=\"col-md-2 text-md-left text-center align-self-center my-4\" style=\"font-size:24px\"></div>\n"+
+                "  <div class=\"col-md-3\"></div>\n"+
                 "</div>\n"+
                 "<div class=\"row\" style=\"background:#eeeeee\">\n"+
                 "  <div class=\"col-md-3 text-md-left text-center align-self-center my-4\"> 学校\n"+
@@ -118,7 +122,7 @@ function toPage(pagenum){
             raty(score_data.body[id].funny_score,"#funny_score_"+i);
             raty(score_data.body[id].gain_score,"#gain_score_"+i);
             raty(score_data.body[id].recommend_score,"#recommend_score_"+i);
-            $("#rank_number_"+i).text("评分人数"+score_data.body[id].rank_number);
+            $("#rank_number_"+i).text("评分人数   "+score_data.body[id].rank_number);
         }
     });
 
