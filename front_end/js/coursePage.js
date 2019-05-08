@@ -275,7 +275,10 @@ function hotComment(course_id, comment_data){
                     $("#no_hot_comment").show();
                 }
                 else{
-                    $("#hot_comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, 1));
+                    var i;
+                    for(i=0;i<data.length;i++){
+                        $("#hot_comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, 1));
+                    }
                 }
             }
             else{
