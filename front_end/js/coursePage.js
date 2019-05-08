@@ -6,7 +6,7 @@ var total_page_number;
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, hot) {
     //获取评论的评价-->点赞数目
     var thumb_up_num;
-    $.ajax({
+    var ajax_success=$.ajax({
         async: false,
         type:"GET",
         url: "http://testapi.ratemycourse.tk/getRateComment/",
@@ -18,7 +18,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
             console.log(data);
             //data=JSON.parse(data);
             if(data.status=="1"){
-                thumb_up_num=data.rate;
+                thumb_up_num=data.body.rate;
                 console.log(comment_ID+"thumv_up_num"+thumb_up_num);
             }
             else{
@@ -104,9 +104,9 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
         
         aTags[0].appendChild(document.createTextNode(" "));
         var num_node = document.createElement("nobr");
-        
-        $(num_node).text(thumb_up_num);
-        
+        $.when(ajax_success).done(function () {
+            $(num_node).text(thumb_up_num);
+        });
         aTags[0].appendChild(num_node);
         aTags[0].appendChild(document.createTextNode(" "));
 
@@ -272,20 +272,10 @@ function hotComment(course_id, comment_data){
             console.log(data);
             if(data.status=="1"){
                 if(data.length==0){
-                    var no_hot_comment = document.createTextNode("暂无热评");
-                    $("#hot_comment").append(no_hot_comment);
+                    $("#no_hot_comment").show();
                 }
                 else{
-                    for(var j = 0; j < data.length; j++){
-                        //console.log(data.body[i]);
-                        for(i = 0; i < comment_data.length; i++){
-                            console.log("comment_id data.body[j][0]"+data.body[j][0]+"comment_data.body[i].comment_ID "+comment_data.body[i].commentID);
-                            if(comment_data.body[i].comment_ID == data.body[j][0]){
-                                console.log("生成")
-                                $("#hot_comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, 1));
-                            }
-                        }
-                    }
+                    $("#hot_comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, 1));
                 }
             }
             else{
