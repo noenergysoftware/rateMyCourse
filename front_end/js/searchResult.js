@@ -12,11 +12,11 @@ function adddiv(number){
     var course_id=window.sessionStorage.getItem("course"+number+"course_ID");
 
     x.innerHTML="<div class=\"row\" style=\"background:#eeeeee\">\n"+
-                "  <div class=\"col-md-2\"></div>\n"+
-                "  <a class=\"col-md-4 col-sm-12 align-self-center text-sm-center text-md-left\" href=\"#\" onclick=\"toCourse("+number+")\" style=\"text-decoration:none;font-size:40px;color:#000000; width:62%;\">"+window.sessionStorage.getItem("course"+number+"name")+"</a>\n"+
-                "  <div class=\"col-md-1\"></div>\n"+
-                "  <div id=\"rank_number_"+number+"\" class=\"col-md-2 text-md-left text-center align-self-center my-4\" style=\"font-size:24px\"></div>\n"+
-                "  <div class=\"col-md-3\"></div>\n"+
+                "  <div class=\"col-md-2  col-sm-0\"></div>\n"+
+                "  <a class=\"col-md-4 col-sm-12 text-sm-center text-md-left\" href=\"#\" onclick=\"toCourse("+number+")\" style=\"text-decoration:none;font-size:40px;color:#000000; width:62%;\">"+window.sessionStorage.getItem("course"+number+"name")+"</a>\n"+
+                "  <div class=\"col-md-1 col-sm-0\"></div>\n"+
+                "  <div id=\"rank_number_"+number+"\" class=\"col-md-2 col-sm-12 text-md-left text-center align-self-center my-4\" style=\"font-size:24px\"></div>\n"+
+                "  <div class=\"col-md-3 col-sm-0\"></div>\n"+
                 "</div>\n"+
                 "<div class=\"row\" style=\"background:#eeeeee\">\n"+
                 "  <div class=\"col-md-3 text-md-left text-center align-self-center my-4\"> 学校\n"+
