@@ -238,6 +238,19 @@ class RankCache(models.Model):
     position = models.FloatField(default=-1)
     people = models.IntegerField(default=0)
 
+class TeacherRankCache(models.Model):
+    teacher = models.ForeignKey(
+        Teacher,
+        on_delete=models.CASCADE,
+    )
+    count = models.IntegerField(default=0)
+    difficulty_score = models.FloatField(default=0)
+    funny_score = models.FloatField(default=0)
+    gain_score = models.FloatField(default=0)
+    recommend_score = models.FloatField(default=0)
+    position = models.FloatField(default=-1)
+    people = models.IntegerField(default=0)
+
 
 class Comment(models.Model):
     """
