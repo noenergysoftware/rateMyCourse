@@ -32,6 +32,9 @@ urlpatterns = [
 
     url(r'^makeRank/$', rank.make_rank, name="makeRank"),
     url(r'^getRankByCourse/$', rank.get_rank_by_course, name="getRankByCourse"),
+    url(r'^getRankBySortedCourse/$', rank.get_rank_by_sorted_course, name="getRankBySortedCourse"),
+    url(r'^getRankBySortedTeacher/$', rank.get_rank_by_sorted_teacher, name="getRankBySortedTeacher"),
+
     url(r'^getAllRank/$', rank.get_all_rank, name="getALLRank"),
     url(r'^flushRank/$', rank.flush, name="flush"),
 

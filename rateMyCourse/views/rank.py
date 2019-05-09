@@ -106,17 +106,6 @@ def get_rank_by_course(request):
         rank_dict['funny_score'] = 0
         rank_dict['gain_score'] = 0
         rank_dict['recommend_score'] = 0
-        # for c in rawList:
-        #     num_rank = num_rank + 1
-        #     rank_dict['difficulty_score'] += c.rank.difficulty_score
-        #     rank_dict['funny_score'] += c.rank.funny_score
-        #     rank_dict['gain_score'] += c.rank.gain_score
-        #     rank_dict['recommend_score'] += c.rank.recommend_score
-
-        # rank_dict['difficulty_score'] /= (1 if num_rank == 0 else num_rank)
-        # rank_dict['funny_score'] /= (1 if num_rank == 0 else num_rank)
-        # rank_dict['gain_score'] /= (1 if num_rank == 0 else num_rank)
-        # rank_dict['recommend_score'] /= (1 if num_rank == 0 else num_rank)
 
         rank_dict['difficulty_score'] = course.difficulty_score / (1 if course.people == 0 else course.people)
         rank_dict['funny_score'] = course.funny_score / (1 if course.people == 0 else course.people)
@@ -151,18 +140,6 @@ def get_all_rank(request):
         rank_dict['funny_score'] = 0
         rank_dict['gain_score'] = 0
         rank_dict['recommend_score'] = 0
-        # for c in rawList:
-        #     num_rank = num_rank + 1
-        #     rank_dict['difficulty_score'] += c.rank.difficulty_score
-        #     rank_dict['funny_score'] += c.rank.funny_score
-        #     rank_dict['gain_score'] += c.rank.gain_score
-        #     rank_dict['recommend_score'] += c.rank.recommend_score
-
-        # rank_dict['difficulty_score'] /= (1 if num_rank == 0 else num_rank)
-        # rank_dict['funny_score'] /= (1 if num_rank == 0 else num_rank)
-        # rank_dict['gain_score'] /= (1 if num_rank == 0 else num_rank)
-        # rank_dict['recommend_score'] /= (1 if num_rank == 0 else num_rank)
-        # rank_dict['rank_number'] = num_rank
         rank_dict['difficulty_score'] = course.difficulty_score / (1 if course.people == 0 else course.people)
         rank_dict['funny_score'] = course.funny_score / (1 if course.people == 0 else course.people)
         rank_dict['gain_score'] = course.gain_score / (1 if course.people == 0 else course.people)
@@ -176,24 +153,48 @@ def get_all_rank(request):
         'body': retDist
     }), content_type="application/json")
 
-def get_course_sorted_by_rank(request):
+
+def get_rank_by_sorted_course(request):
     all_rank = RankCache.objects.all()
 
     sorted_course_list = []
     for rank in all_rank:
-        if rank.position!=-1:
-            sorted_course_list.append([rank.course,rank.recommend_score,rank.position])
-    sorted_course_list.sort(key=lambda x:x[-1],reverse=True)
-    #for rank in all_rank:
-    #   # if rank.position == len(sorted_course_list) + 1:
-    #    if rank.position == len(sorted_course_list):
-    #        sorted_course_list.append(rank.course)
+        if rank.position != -1:
+            rank_dict = {}
+            rank_dict['difficulty_score'] = rank.difficulty_score
+            rank_dict['funny_score'] = rank.funny_score
+            rank_dict['gain_score'] = rank.gain_score
+            rank_dict['recommend_score'] = rank.recommend_score
+            sorted_course_list.append([rank.course.ret(), rank_dict, rank.position])
+    sorted_course_list.sort(key=lambda x: x[-1], reverse=True)
 
     return HttpResponse(json.dumps({
         'status': 1,
         'length': len(sorted_course_list),
         'body': sorted_course_list,
     }), content_type="application/json")
+
+
+def get_rank_by_sorted_teacher(request):
+    all_rank = TeacherRankCache.objects.all()
+
+    sorted_teacher_list = []
+    for rank in all_rank:
+        if rank.position != -1:
+            rank_dict = {}
+            rank_dict['difficulty_score'] = rank.difficulty_score
+            rank_dict['funny_score'] = rank.funny_score
+            rank_dict['gain_score'] = rank.gain_score
+            rank_dict['recommend_score'] = rank.recommend_score
+            sorted_teacher_list.append([rank.teacher.ret(), rank_dict, rank.position])
+    sorted_teacher_list.sort(key=lambda x: x[-1], reverse=True)
+
+    return HttpResponse(json.dumps({
+        'status': 1,
+        'length': len(sorted_teacher_list),
+        'body': sorted_teacher_list,
+    }), content_type="application/json")
+
 
 def flush(request):
     calcRank.calc_rank()
