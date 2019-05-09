@@ -10,15 +10,15 @@ function adddiv(number){
     x.setAttribute("id","course"+number);
     var course_id=window.sessionStorage.getItem("course"+number+"course_ID");
 
-    x.innerHTML="<div class=\"row\" style=\"background:#eeeeee\">\n"+
+    x.innerHTML="<div class=\"row\" >\n"+
                 "  <div class=\"col-md-2  col-0\"></div>\n"+
-                "  <a class=\"col-md-4 col-12 align-self-center text-center text-md-left\" href=\"#\" onclick=\"toCourse("+number+")\" style=\"text-decoration:none;font-size:40px;color:#000000;\">"+window.sessionStorage.getItem("course"+number+"name")+"</a>\n"+
+                "  <a class=\"col-md-4 col-12 align-self-center text-center text-md-left\" href=\"#\" onclick=\"toCourse("+number+")\" style=\"text-decoration:none\">"+window.sessionStorage.getItem("course"+number+"name")+"</a>\n"+
                 "  <div class=\"col-md-1 col-0\"></div>\n"+
-                "  <div id=\"rank_number_"+number+"\" class=\"col-md-3 col-12 text-md-left text-center align-self-center \" style=\"font-size:26px\"></div>\n"+
+                "  <div id=\"rank_number_"+number+"\" class=\"col-md-3 col-12 text-md-left text-center align-self-center \" ></div>\n"+
                 "  <div class=\"col-md-2 col-0\"></div>\n"+
                 "</div>\n"+
                 "<div class=\"row\" >\n"+
-                "  <div class=\"col-md-6 \" style=\"background:#eeeeee;font-size:28px\">\n"+
+                "  <div class=\"col-md-6\" >\n"+
                 "    <div class=\"row\" >\n"+
                 "      <div class=\"col-md-4 col-4 text-md-center text-center align-self-center\"> 学校</div>\n"+
                 "      <div class=\"col-md-8 col-8 text-md-center text-center align-self-center\">"+"北京航空航天大学"+"</div>\n"+
@@ -36,9 +36,9 @@ function adddiv(number){
                 "      <div class=\"col-md-8 col-8 text-md-center text-center align-self-center\">"+window.sessionStorage.getItem("course"+number+"credit")+"</div>\n"+
                 "    </div>\n"+
                 "  </div>\n"+
-                "  <div class=\"col-md-6  \" style=\"background:#eeeeee;font-size:28px\">\n"+
+                "  <div class=\"col-md-6\" >\n"+
                 "    <div class=\"row\" >\n"+
-                "      <div class=\"col-md-4 col-4 text-md-center text-center align-self-center\" style=\"font-size:30px\"> 推荐程度</div>\n"+
+                "      <div class=\"col-md-4 col-4 text-md-center text-center align-self-center\" > 推荐程度</div>\n"+
                 "      <div class=\"col-md-8 col-8 text-md-center text-center align-self-center\" id=\"recommend_score_"+number+"\" ></div>\n"+
                 "    </div>\n"+
                 "    <div class=\"row\" >\n"+
