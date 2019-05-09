@@ -77,30 +77,19 @@
     <!-- use adddiv to load course data -->
     <div id="course_data"></div>
 
-    <ul id="c_pagination" class="pagination">
+    
+    
+      <ul id="c_pagination" class="pagination" style="display:flex;justify-content:center;">
+        <li class="page-item" id="lastpage" style="display: none">
+          <a class="page-link" onclick="lastPage()" href="#">&lt;</a>
+        </li>
 
-      <li style="display: none" id="lastpage" class="page-item col-md-1.5">
-        <a class="page-link" onclick="lastPage()" href="#">上一页</a>
-      </li>
+        <!-- use add page to load page data -->
 
-      <!-- use add page to load page data -->
-
-      <li style="display: none" id="nextpage" class="page-item col-md-1.5">
-        <a class="page-link" onclick="nextPage()" href="#">下一页</a>
-      </li>
-
-      <div id="jumpbutton" class="jump " style="display: none">
-        <span class="jump_text">第&nbsp;<nobr id="pagenum"></nobr>&nbsp;页，共&nbsp;<nobr id="totalpage"></nobr>&nbsp;页
-
-          <nobr id="jump">,跳到<input type="text" name="jumpPage" id="jumpPage" style="width:12%"
-              onkeyup="this.value=this.value.replace(/[^0-9-]+/,'');">页
-            <button type="button" class="btn btn-primary btn-xs" onclick="jumpPage()">GO</button>
-          </nobr>
-        </span>
-      </div>
-
-    </ul>
-
+        <li class="page-item" id="nextpage" style="display: none">
+          <a class="page-link" onclick="nextPage()" href="#">&gt;</a>
+        </li>
+      </ul>
 
   </div>
   <div class="row">

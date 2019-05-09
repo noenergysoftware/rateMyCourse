@@ -3,6 +3,17 @@ var score_data;
 var total_page_number;
 var course_num=window.sessionStorage.getItem("coursenum");;
 var ajax_success;
+var page_dot = document.createElement("li");
+page_dot.setAttribute("class","page-item");
+page_dot.setAttribute("id","page_dot");
+page_dot.setAttribute("style","display:none");
+page_dot.innerHTML="<a class=\"page-link\" href=\"#c_pagination\">...</a>";
+
+var page_dot2 = document.createElement("li");
+page_dot2.setAttribute("class","page-item");
+page_dot2.setAttribute("id","page_dot2");
+page_dot2.setAttribute("style","display:none");
+page_dot2.innerHTML="<a class=\"page-link\" href=\"#c_pagination\">...</a>";
 
 function adddiv(number){
     var x = document.createElement("div");
@@ -137,20 +148,45 @@ function toPage(pagenum){
         $("#page"+i).hide();
     }
     
-    if(pagenum<=3){
-        for(var i=1;i<=5 && i<=total_page_number ;i++){
-            $("#page"+i).show();
+    $("#page_dot").hide();
+    $("#page_dot2").hide();
+    if(pagenum <= 4){
+        if(total_page_number<=6){
+            for(var i=1; i<=total_page_number ;i++){
+              $("#page"+i).show();
+            }
+        }
+        else{
+            for(var i=1; i<=5 ;i++){
+                $("#page"+i).show();
+            }
+            $("#page_dot2").show();
+            $("#page"+total_page_number).show();
         }
     }
-    else if((total_page_number-pagenum)<=2){
-        for(var i=total_page_number;i>total_page_number-5 && i>=1 ;i--){
-            $("#page"+i).show();
+    else if(pagenum >= (total_page_number-3)){
+        if(total_page_number<=6){
+            for(var i=1; i<=total_page_number ;i++){
+              $("#page"+i).show();
+            }
+        }
+        else{
+            for(var i=total_page_number; i>total_page_number-5; i--){
+                $("#page"+i).show();
+            }
+            $("#page_dot").show();
+            $("#page1").show();
         }
     }
     else{
+        //此时 n>=9
         for(var i=pagenum-2;i<=pagenum+2 ;i++){
             $("#page"+i).show();
         }
+        $("#page_dot").show();
+        $("#page1").show();
+        $("#page_dot2").show();
+        $("#page"+total_page_number).show();
     }
 
     if(pagenum>1){
@@ -232,16 +268,16 @@ $(document).ready(function(){
     $("#serachedCourseNum").html(coursenum);
     
     $("#noresult").hide();
-    $("#jumpbutton").hide();
+    //$("#jumpbutton").hide();
     //console.log("coursenum!!!"+coursenum);
     if(coursenum==0 || coursenum==null){
       $("#noresult").show();
-      $("#jumpbutton").hide();
+      //$("#jumpbutton").hide();
       $("#serachedCourseNum").html(0);
       return ;
     }
     $("#noresult").hide();
-    $("#jumpbutton").show();
+    //$("#jumpbutton").show();
     //test to gen div
     //console.log(233333);
 
@@ -277,6 +313,12 @@ $(document).ready(function(){
               console.log("hide");
               $("#page"+i).hide();
             }
+        }
+        if(total_page_number>=7){
+          var a=document.getElementById("page2");
+          a.parentNode.insertBefore(page_dot , a);
+          var b=document.getElementById("page"+total_page_number);
+          b.parentNode.insertBefore(page_dot2 , b);
         }
     }
     else{
