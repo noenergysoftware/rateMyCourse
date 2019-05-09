@@ -197,6 +197,7 @@ def get_course_sorted_by_rank(request):
 
 def flush(request):
     calcRank.calc_rank()
+    calcRank.calc_rank_teacher()
     return HttpResponse(json.dumps({
         'status': 1,
         'length': 1,
