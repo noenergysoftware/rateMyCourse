@@ -2,14 +2,11 @@ var comment_num_per_page=5;
 var total_page_number;
 
 
-
-
-
 //加载评论
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, hot) {
     //获取评论的评价-->点赞数目
-    var thumb_up_num=0;
-    $.ajax({
+    var thumb_up_num;
+    var ajax_success=$.ajax({
         async: true,
         type:"GET",
         url: "https://api.ratemycourse.tk/getRateComment/",
@@ -18,10 +15,10 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
             comment_ID: comment_ID
         },
         success:function(data){
-            //console.log(data);
+            console.log(data);
             //data=JSON.parse(data);
             if(data.status=="1"){
-                thumb_up_num=data.rate;
+                thumb_up_num=data.body.rate;
             }
             else{
               //alert(data.errMsg);
@@ -106,7 +103,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
         
         aTags[0].appendChild(document.createTextNode(" "));
         var num_node = document.createElement("nobr");
-        $(num_node).text(thumb_up_num);
+        //$(num_node).text(thumb_up_num);
         aTags[0].appendChild(num_node);
         aTags[0].appendChild(document.createTextNode(" "));
 
@@ -127,6 +124,10 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
      
      //   console.log("successfully establish comment");
 
+        //等待ajax请求收到后再填充
+        $.when(ajax_success).done(function () {
+            $(num_node).text(thumb_up_num);
+        });
         return commentGrid;
 
        
@@ -270,12 +271,10 @@ function hotComment(course_id){
             console.log(data);
             if(data.status=="1"){
                 if(data.length==0){
-                    var no_hot_comment = document.createTextNode("暂无热评");
-                    $("#hot_comment").append(no_hot_comment);
+                    $("#no_hot_comment").show();
                 }
                 else{
-                    for(var i = 0; i < data.length; i++){
-                        //console.log(data.body[i]);
+                    for(var i=0;i<data.length;i++){
                         $("#hot_comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, 1));
                     }
                 }
@@ -425,9 +424,6 @@ $(document).ready(function () {
     //显示评分
     var course_id=window.sessionStorage.getItem("course"+coursenum+"course_ID");
 
-    //生成热评
-    hotComment(course_id);
-
     $.ajax({
         async: true,
         type:"GET",
@@ -540,5 +536,7 @@ $(document).ready(function () {
         }
     });
 
+    //生成热评
+    hotComment(course_id);
 
 })
