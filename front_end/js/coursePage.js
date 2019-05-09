@@ -258,10 +258,8 @@ function thumbUp(attitude, comment_ID, node){
 }
 
 //热评
-function hotComment(course_id, comment_data){
+function hotComment(course_id){
     //1 获得热评
-    console.log("comment_data");
-    console.log(comment_data);
     $.ajax({
         async: true,
         type:"GET",
@@ -277,8 +275,7 @@ function hotComment(course_id, comment_data){
                     $("#no_hot_comment").show();
                 }
                 else{
-                    var i;
-                    for(i=0;i<data.length;i++){
+                    for(var i=0;i<data.length;i++){
                         $("#hot_comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, 1));
                     }
                 }
@@ -530,8 +527,7 @@ $(document).ready(function () {
                        // console.log("add page");
                     }
 
-                    //生成热评
-                    hotComment(course_id,data);
+                    
 
                     toPage(1);
                 }
@@ -546,7 +542,8 @@ $(document).ready(function () {
         }
     });
 
-
+    //生成热评
+    hotComment(course_id);
     
 
 
