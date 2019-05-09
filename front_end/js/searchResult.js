@@ -70,7 +70,7 @@ function adddiv(number){
     a.parentNode.insertBefore(x , a);*/
     
     //console.log("success");
-    $.ajax({
+    /*$.ajax({
         async: true,
         type:"GET",
         url: "http://testapi.ratemycourse.tk/getRankByCourse/",
@@ -97,7 +97,7 @@ function adddiv(number){
         error:function(data){
           alert(JSON.stringify(data));
         }
-    });
+    });*/
     return x;
 }
 
@@ -132,7 +132,7 @@ function toPage(pagenum){
         $("#course_data").append(adddiv(i));
     }
     //4 等待ajax获取评分完毕后加载评分
-    $.when(ajax_success).done(function () {
+    /*$.when(ajax_success).done(function () {
         for(var i = course_to_show;i < course_num && i < (course_to_show + course_num_per_page); i++){
             var id=window.sessionStorage.getItem("course"+i+"course_ID");
             raty(score_data.body[id].difficulty_score,"#difficulty_score_"+i);
@@ -141,7 +141,7 @@ function toPage(pagenum){
             raty(score_data.body[id].recommend_score,"#recommend_score_"+i);
             $("#rank_number_"+i).text("评分人数   "+score_data.body[id].rank_number);
         }
-    });
+    });*/
     $("#rank_number_0").text("评分人数   "+100);
     //5 隐藏其余的页码以及上下页
     for(var i=1;i<=total_page_number;i++){
@@ -229,9 +229,9 @@ function toCourse(number){
 }
 
 $(document).ready(function(){
-
+ 
     //立即请求课程的评分
-    ajax_success=$.ajax({
+    /*ajax_success=$.ajax({
         async: true,
         type:"GET",
         url: "http://testapi.ratemycourse.tk/getAllRank/",
@@ -251,9 +251,11 @@ $(document).ready(function(){
         error:function(data){
           alert(JSON.stringify(data));
         }
-    });
+    });*/
 
-
+    if(window.screen.width<768){
+      $("#c_pagination").addClass("pagination-sm");  
+    }
 
     if ($.cookie("username") != undefined){
         document.getElementById("signIn").style.display = "none";
