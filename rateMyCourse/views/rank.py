@@ -166,7 +166,7 @@ def get_rank_by_sorted_course(request):
             rank_dict['gain_score'] = rank.gain_score
             rank_dict['recommend_score'] = rank.recommend_score
             sorted_course_list.append([rank.course.ret(), rank_dict, rank.position])
-    sorted_course_list.sort(key=lambda x: x[-1], reverse=True)
+    sorted_course_list.sort(key=lambda x: x[-1], reverse=False)
 
     return HttpResponse(json.dumps({
         'status': 1,
@@ -187,7 +187,7 @@ def get_rank_by_sorted_teacher(request):
             rank_dict['gain_score'] = rank.gain_score
             rank_dict['recommend_score'] = rank.recommend_score
             sorted_teacher_list.append([rank.teacher.ret(), rank_dict, rank.position])
-    sorted_teacher_list.sort(key=lambda x: x[-1], reverse=True)
+    sorted_teacher_list.sort(key=lambda x: x[-1], reverse=False)
 
     return HttpResponse(json.dumps({
         'status': 1,
