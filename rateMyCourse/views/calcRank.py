@@ -85,7 +85,7 @@ class Rankers:
                 self.outTable[i[0]] = i[-1]
             return self.outTable
 
-        return []
+        return {}
 
     def save_to_database(self):
         qs=[i[0] for i in self.allranks]
@@ -199,7 +199,7 @@ class RankersTeacher:
                 self.outTable[i[0]] = i[-1]
             return self.outTable
 
-        return []
+        return {}
 
     def save_to_database(self):
         qs=[i[0] for i in self.allranks]
