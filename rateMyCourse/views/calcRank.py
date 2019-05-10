@@ -50,17 +50,42 @@ class Rankers:
         self.rawTable2=pd.DataFrame(tmpTable2)
 
     def run_rank(self):
-        data = Table(self.rawTable, col=[0,1,2,3])
-        data2 = Table(self.rawTable2, col=[0,1,2,3])
-        maseey=MasseyRanker()
-        keener=KeenerRanker()
-        maseeyRank=maseey.rank(data2)
-        keenerRank=keener.rank(data)
-        mergedRank = borda_count_merge([maseeyRank, keenerRank])
-        self.outTable={}
-        for index,i in mergedRank.iterrows():
-            self.outTable[i[0]]=i[-1]
-        return self.outTable
+        if len(self.rawTable) == 0:
+            data = None
+        else:
+            data = Table(self.rawTable, col=[0, 1, 2, 3])
+        if len(self.rawTable) == 0:
+            data2 = None
+        else:
+            data2 = Table(self.rawTable2, col=[0, 1, 2, 3])
+
+        maseey = MasseyRanker()
+        keener = KeenerRanker()
+        if data2 != None and data != None:
+            maseeyRank = maseey.rank(data2)
+            keenerRank = keener.rank(data)
+            mergedRank = borda_count_merge([maseeyRank, keenerRank])
+            self.outTable = {}
+            for index, i in mergedRank.iterrows():
+                self.outTable[i[0]] = i[-1]
+            return self.outTable
+        if data2 != None:
+            maseeyRank = maseey.rank(data2)
+            mergedRank = maseeyRank
+            self.outTable = {}
+            for index, i in mergedRank.iterrows():
+                self.outTable[i[0]] = i[-1]
+            return self.outTable
+
+        if data != None:
+            keenerRank = keener.rank(data)
+            mergedRank = keenerRank
+            self.outTable = {}
+            for index, i in mergedRank.iterrows():
+                self.outTable[i[0]] = i[-1]
+            return self.outTable
+
+        return []
 
     def save_to_database(self):
         qs=[i[0] for i in self.allranks]
@@ -139,17 +164,42 @@ class RankersTeacher:
         self.rawTable2=pd.DataFrame(tmpTable2)
 
     def run_rank(self):
-        data = Table(self.rawTable, col=[0,1,2,3])
-        data2 = Table(self.rawTable2, col=[0,1,2,3])
+        if len(self.rawTable)==0:
+            data=None
+        else:
+            data = Table(self.rawTable, col=[0,1,2,3])
+        if len(self.rawTable)==0:
+            data2=None
+        else:
+            data2 = Table(self.rawTable2, col=[0,1,2,3])
+
         maseey=MasseyRanker()
         keener=KeenerRanker()
-        maseeyRank=maseey.rank(data2)
-        keenerRank=keener.rank(data)
-        mergedRank = borda_count_merge([maseeyRank, keenerRank])
-        self.outTable={}
-        for index,i in mergedRank.iterrows():
-            self.outTable[i[0]]=i[-1]
-        return self.outTable
+        if data2!=None and data!=None:
+            maseeyRank=maseey.rank(data2)
+            keenerRank=keener.rank(data)
+            mergedRank = borda_count_merge([maseeyRank, keenerRank])
+            self.outTable={}
+            for index,i in mergedRank.iterrows():
+                self.outTable[i[0]]=i[-1]
+            return self.outTable
+        if data2!=None:
+            maseeyRank = maseey.rank(data2)
+            mergedRank = maseeyRank
+            self.outTable = {}
+            for index, i in mergedRank.iterrows():
+                self.outTable[i[0]] = i[-1]
+            return self.outTable
+
+        if data!=None:
+            keenerRank=keener.rank(data)
+            mergedRank = keenerRank
+            self.outTable = {}
+            for index, i in mergedRank.iterrows():
+                self.outTable[i[0]] = i[-1]
+            return self.outTable
+
+        return []
 
     def save_to_database(self):
         qs=[i[0] for i in self.allranks]
