@@ -408,12 +408,13 @@ function filterTeacher(){
         if(teacher==teacher_list[i]){
             enable_filter=i;
             console.log(filter["teacher"+i].length+" "+enable_filter);
-            if(filter["teacher"+i].length==0){
+            if(filter["teacher"+i].length=="0"){
                 return;
                 $("#noresult").show();
                 $("#jumpbutton").hide();
             }
             else{
+                console.log("开始重新生成页码")
                 //$("#noresult").hide();
                 $("#jumpbutton").show();
                 
@@ -604,30 +605,21 @@ $(document).ready(function () {
                         $("#jump").show();
                         $("#nextpage").show();
                         //生成页码跳转按钮W
-                        for(var i=1;i<=total_page_nmber;i++){
-                            var x = document.createElement("li");
-                            x.setAttribute("class","page-item");
-                            x.setAttribute("id","page"+i);
-                            x.innerHTML="<a class=\"page-link\" onclick=\"toPage("+i+")\" href=\"#\">"+i+"</a>";
-                            
-                            var a=document.getElementById("nextpage");
-                            a.parentNode.insertBefore(x , a);
-                            // console.log("add page");
-                            if(i>5){
-                            //console.log("hide");
-                            $("#page"+i).hide();
-                            }
-                        }
+                        
                     }
-                    else{
-                    //$("#nextpage").show();
+                    for(var i=1;i<=total_page_nmber;i++){
                         var x = document.createElement("li");
                         x.setAttribute("class","page-item");
                         x.setAttribute("id","page"+i);
-                        x.innerHTML="<a class=\"page-link\" onclick=\"toPage(1)\" href=\"#\">1</a>";
+                        x.innerHTML="<a class=\"page-link\" onclick=\"toPage("+i+")\" href=\"#\">"+i+"</a>";
+                        
                         var a=document.getElementById("nextpage");
                         a.parentNode.insertBefore(x , a);
-                       // console.log("add page");
+                        // console.log("add page");
+                        if(i>5){
+                        //console.log("hide");
+                            $("#page"+i).hide();
+                        }
                     }
                     toPage(1);
                 }
