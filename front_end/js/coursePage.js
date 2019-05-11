@@ -401,8 +401,64 @@ function selectTeacher(name){
     $("#buttonSelectTeacher").html(name); 
 }
 
+function genPage(data){
+    if(data.length==0){
+        $("#noresult").show();
+        $("#jumpbutton").hide();
+    }
+    else{
+        $("#noresult").hide();
+        $("#jumpbutton").show();
+        
+        /*for(var i=0;i<data.length;i++){
+            var x=generateGrid(i,"#",data.body[i].username,"#",data.body[i].teacher,0,data.body[i].content,data.body[i].editTime,data.body[i].commentID,0,0);
+            var a=document.getElementById("locationid");
+            a.parentNode.insertBefore(x , a);
+            if(i>=5){
+                $("#"+i).hide();
+            }
+        }*/
+
+        //删除旧的页码
+        for(var i=1;i<=total_page_number;i++){
+            $("#page"+i).remove();
+        }
+        
+        total_page_number=Math.ceil(data.length/comment_num_per_page);
+        console.log(data.length+" "+total_page_number+"?????");
+
+        $("#pagenum").html(1);
+        $("#totalpage").html(total_page_number);
+        if(total_page_number>1){
+            $("#jump").show();
+            $("#nextpage").show();
+            //生成页码跳转按钮W
+            
+        }
+        for(var i=1;i<=total_page_number;i++){
+            var x = document.createElement("li");
+            x.setAttribute("class","page-item");
+            x.setAttribute("id","page"+i);
+            x.innerHTML="<a class=\"page-link\" onclick=\"toPage("+i+")\" href=\"#\">"+i+"</a>";
+            
+            var a=document.getElementById("nextpage");
+            a.parentNode.insertBefore(x , a);
+            // console.log("add page");
+            if(i>5){
+            //console.log("hide");
+                $("#page"+i).hide();
+            }
+        }
+        toPage(1);
+    }
+}
+
 function filterTeacher(){
     var teacher=$("#buttonSelectTeacher").text();
+    if(teacher=="全部教师"){
+        genPage(JSON.parse(window.sessionStorage.getItem("comment_data")));
+        return;
+    }
     for(var j=0;j<teacher_list.length;j++){
         if(teacher==teacher_list[j]){
             enable_filter=j;
@@ -578,50 +634,10 @@ $(document).ready(function () {
                 //console.log("Successfully get comment of id "+coursenum);
                 window.sessionStorage.setItem("comment_num",data.length);
                 window.sessionStorage.setItem("comment_data",JSON.stringify(data));
-                if(data.length==0){
-                    $("#noresult").show();
-                    $("#jumpbutton").hide();
-                }
-                else{
-                    $("#noresult").hide();
-                    $("#jumpbutton").show();
-                    
-                    /*for(var i=0;i<data.length;i++){
-                        var x=generateGrid(i,"#",data.body[i].username,"#",data.body[i].teacher,0,data.body[i].content,data.body[i].editTime,data.body[i].commentID,0,0);
-                        var a=document.getElementById("locationid");
-                        a.parentNode.insertBefore(x , a);
-                        if(i>=5){
-                            $("#"+i).hide();
-                        }
-                    }*/
-                    
-                    total_page_number=Math.ceil(data.length/comment_num_per_page);
-                    console.log(data.length+" "+total_page_number+"?????");
-        
-                    $("#pagenum").html(1);
-                    $("#totalpage").html(total_page_number);
-                    if(total_page_number>1){
-                        $("#jump").show();
-                        $("#nextpage").show();
-                        //生成页码跳转按钮W
-                        
-                    }
-                    for(var i=1;i<=total_page_number;i++){
-                        var x = document.createElement("li");
-                        x.setAttribute("class","page-item");
-                        x.setAttribute("id","page"+i);
-                        x.innerHTML="<a class=\"page-link\" onclick=\"toPage("+i+")\" href=\"#\">"+i+"</a>";
-                        
-                        var a=document.getElementById("nextpage");
-                        a.parentNode.insertBefore(x , a);
-                        // console.log("add page");
-                        if(i>5){
-                        //console.log("hide");
-                            $("#page"+i).hide();
-                        }
-                    }
-                    toPage(1);
-                }
+                
+                genPage(data);
+
+                
             }
             else{
                 alert(data.errMsg);
