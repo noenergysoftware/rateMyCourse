@@ -16,11 +16,11 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
             comment_ID: comment_ID
         },
         success:function(data){
-            console.log(data);
+            //console.log(data);
             //data=JSON.parse(data);
             if(data.status=="1"){
                 thumb_up_num=data.body.rate;
-                console.log(comment_ID+"thumv_up_num"+thumb_up_num);
+                //console.log(comment_ID+"thumv_up_num"+thumb_up_num);
             }
             else{
               //alert(data.errMsg);
@@ -433,7 +433,7 @@ function filterTeacher(){
                 
                 //计算，生成新的页码
                 total_page_number=Math.ceil(filter["teacher"+i].length/comment_num_per_page);
-                //console.log(data.length+" "+total_page_number+"?????");
+                console.log(filter["teacher"+i].length+" "+total_page_number+"?????");
         
                 $("#pagenum").html(1);
                 $("#totalpage").html(total_page_number);
