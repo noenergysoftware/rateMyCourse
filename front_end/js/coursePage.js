@@ -404,6 +404,7 @@ function filterTeacher(){
     for(var i=0;i<teacher_list.length;i++){
         if(teacher==teacher_list[i]){
             enable_filter=i;
+            console.log(filter["teacher"+i].length);
             if(filter["teacher"+i].length){
                 return;
                 $("#noresult").show();
