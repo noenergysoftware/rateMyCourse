@@ -3,7 +3,7 @@ function selectTeacher(name){
   $("#buttonSelectTeacher").html(name); 
 }
 
-function raty(number,id){
+function rank(number,id){
   $(id).raty({
     score:number,
     starOn:"./resource/star-on.png",
@@ -56,10 +56,10 @@ $(document).ready(function() {
     $("#teacherlist").html(data);
   }
 
-  raty(5,"#difficulty_score");
-  raty(5,"#funny_score");
-  raty(5,"#gain_score");
-  raty(5,"#recommend_score");
+  rank(5,"#difficulty_score");
+  rank(5,"#funny_score");
+  rank(5,"#gain_score");
+  rank(5,"#recommend_score");
 
   //console.log($("#difficulty_score").raty("getScore"));
 
@@ -157,6 +157,7 @@ function Func_submit() {
             window.setTimeout("location.href='./coursePage.html'", 1000);
         }
         else{
+            console.log($("#difficulty_score").raty("getScore"));
             console.log("评分发送失败");
             alert(data.errMsg);
         }  
