@@ -444,7 +444,7 @@ function filterTeacher(){
                 for(var i=1;i<=total_page_number;i++){
                     var x = document.createElement("li");
                     x.setAttribute("class","page-item");
-                    x.setAttribute("id","new_page"+i);
+                    x.setAttribute("id","page"+i);
                     x.innerHTML="<a class=\"page-link\" onclick=\"toPage("+i+")\" href=\"#\">"+i+"</a>";
                     var a=document.getElementById("nextpage");
                     a.parentNode.insertBefore(x , a);
