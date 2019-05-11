@@ -429,7 +429,8 @@ function filterTeacher(){
                 
                 //删除旧的页码
                 for(var i=1;i<=total_page_number;i++){
-                    $("#page"+i).remove();
+                    var str="#page"+i;
+                    $(str).remove();
                 }
 
                 //计算，生成新的页码
