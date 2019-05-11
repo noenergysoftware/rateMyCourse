@@ -432,8 +432,8 @@ function filterTeacher(){
                 }
                 
                 //计算，生成新的页码
-                total_page_number=Math.ceil(filter["teacher"+i].length/comment_num_per_page);
-                console.log(filter["teacher"+i].length+" "+total_page_number+"?????");
+                total_page_number=Math.ceil(filter["teacher"+j].length/comment_num_per_page);
+                console.log(filter["teacher"+j].length+" "+total_page_number+"?????");
         
                 $("#pagenum").html(1);
                 $("#totalpage").html(total_page_number);
