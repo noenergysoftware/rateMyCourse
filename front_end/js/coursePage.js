@@ -566,7 +566,7 @@ $(document).ready(function () {
 
 
     //2 获取评论信息
-    $.ajax({
+    var success=$.ajax({
         async: true,
         type:"GET",
         url: "http://testapi.ratemycourse.tk/getCommentsByCourse/",
@@ -591,24 +591,26 @@ $(document).ready(function () {
     //生成热评
     hotComment(course_id);
     
-    //创建一个教师列表供筛选用
-    var total_data = JSON.parse(window.sessionStorage.getItem("comment_data"));
-    var teacher=new Array();
-    for(var i=0; i < total_data.length; i++){
-        teacher.push(total_data.body[i].teacher);
-    }
-    var filter= new Object();
-    for(var i=0; i<teacher_list.length; i++){
-        filter.i=new Array();
-    }
-    console.log("现在应该是空的，只是按照教师数目创建好了而已"+filter);
-    for(var i=0; i < teacher.length; i++){
-        for(var j=0; j < teacher_list.length; j++){
-            if(teacher[i]==teacher_list[j]){
-                filter.j.push(i);
+    $.when(success).done(function () {
+        //创建一个教师列表供筛选用
+        var total_data = JSON.parse(window.sessionStorage.getItem("comment_data"));
+        var teacher=new Array();
+        for(var i=0; i < total_data.length; i++){
+            teacher.push(total_data.body[i].teacher);
+        }
+        var filter= new Object();
+        for(var i=0; i<teacher_list.length; i++){
+            filter.i=new Array();
+        }
+        console.log("现在应该是空的，只是按照教师数目创建好了而已"+filter);
+        for(var i=0; i < teacher.length; i++){
+            for(var j=0; j < teacher_list.length; j++){
+                if(teacher[i]==teacher_list[j]){
+                    filter.j.push(i);
+                }
             }
         }
-    }
-    console.log("筛选完毕"+filter);
+        console.log("筛选完毕"+filter);
+    });
 
 })
