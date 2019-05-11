@@ -602,7 +602,8 @@ $(document).ready(function () {
         for(var i=0; i<teacher_list.length; i++){
             filter.i=new Array();
         }
-        console.log("现在应该是空的，只是按照教师数目创建好了而已"+filter);
+        console.log("现在应该是空的，只是按照教师数目创建好了而已");
+        console.log(filter);
         for(var i=0; i < teacher.length; i++){
             for(var j=0; j < teacher_list.length; j++){
                 if(teacher[i]==teacher_list[j]){
@@ -610,7 +611,8 @@ $(document).ready(function () {
                 }
             }
         }
-        console.log("筛选完毕"+filter);
+        console.log("筛选完毕");
+        console.log(filter);
     });
 
 })
