@@ -399,6 +399,7 @@ function selectTeacher(name){
 }
 
 function filterTeacher(){
+    console.log("?????????????");
     var teacher=$("#buttonSelectTeacher").text();
     for(var i=0;i<teacher_list.length;i++){
         if(teacher==teacher_list[i]){

@@ -25,6 +25,12 @@
   <script src="./lib/animations.js"></script>
   <script src="./js/coursePage.js"></script>
   <script src="./js/head.js"></script>
+  <script type="text/javascript">
+    $(function () {
+        // 解决bootstrap下拉菜单第一次点击无反应问题
+        $('.dropdown-toggle').dropdown();
+    });
+  </script>
   <!--<script src="./js/coursePage_old.js"></script>-->
 
   <title>课程信息</title>
