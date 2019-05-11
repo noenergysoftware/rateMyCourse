@@ -381,10 +381,102 @@ function lastPage(){
     toPage(parseInt($("#pagenum").text())-1);
 }
 
+function selectTeacher(name){
+    $("#buttonSelectTeacher").html(name); 
+}
 
+function filterTeacher(){
+    /*$.ajax({
+        async: true,
+        type:"GET",
+        url: "http://testapi.ratemycourse.tk/getCommentsByCourse/",
+        dataType:"json",
+        data:{              
+            course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID")
+        },
+        success:function(data){
+            //data=JSON.parse(data);
+            //	alert("ajax success");
+           // console.log(data);
+            //console.log(data.status)
+            
+            //生成页码标签并跳转到第一页
+            genPage(data);
+        },
+        error:function(data){
+            alert(JSON.stringify(data));
+        }
+    });*/
+    
+}
 
+function genPage(data){
+    if(data.status=="1"){
+        //alert(data.body.message);
+        //console.log("Successfully get comment of id "+coursenum);
+        window.sessionStorage.setItem("comment_num",data.length);
+        window.sessionStorage.setItem("comment_data",JSON.stringify(data));
+        if(data.length==0){
+            $("#noresult").show();
+            $("#jumpbutton").hide();
+        }
+        else{
+            $("#noresult").hide();
+            $("#jumpbutton").show();
+            
+            /*for(var i=0;i<data.length;i++){
+                var x=generateGrid(i,"#",data.body[i].username,"#",data.body[i].teacher,0,data.body[i].content,data.body[i].editTime,data.body[i].commentID,0,0);
+                var a=document.getElementById("locationid");
+                a.parentNode.insertBefore(x , a);
+                if(i>=5){
+                    $("#"+i).hide();
+                }
+            }*/
+            
+            total_page_nmber=Math.ceil(data.length/comment_num_per_page);
+            console.log(data.length+" "+total_page_nmber+"?????");
+
+            $("#pagenum").html(1);
+            $("#totalpage").html(total_page_nmber);
+            if(total_page_nmber>1){
+                $("#jump").show();
+                $("#nextpage").show();
+                //生成页码跳转按钮W
+                for(var i=1;i<=total_page_nmber;i++){
+                    var x = document.createElement("li");
+                    x.setAttribute("class","page-item");
+                    x.setAttribute("id","page"+i);
+                    x.innerHTML="<a class=\"page-link\" onclick=\"toPage("+i+")\" href=\"#\">"+i+"</a>";
+                    
+                    var a=document.getElementById("nextpage");
+                    a.parentNode.insertBefore(x , a);
+                    // console.log("add page");
+                    if(i>5){
+                    //console.log("hide");
+                    $("#page"+i).hide();
+                    }
+                }
+            }
+            else{
+            //$("#nextpage").show();
+                var x = document.createElement("li");
+                x.setAttribute("class","page-item");
+                x.setAttribute("id","page"+i);
+                x.innerHTML="<a class=\"page-link\" onclick=\"toPage(1)\" href=\"#\">1</a>";
+                var a=document.getElementById("nextpage");
+                a.parentNode.insertBefore(x , a);
+               // console.log("add page");
+            }
+            toPage(1);
+        }
+    }
+    else{
+        alert(data.errMsg);
+    }
+}
 
 $(document).ready(function () {
+    //获得 csrftoken
     $.ajax({
         async: true,
         type: "GET",
@@ -400,7 +492,8 @@ $(document).ready(function () {
             console.log(JSON.stringify(data));
             alert(JSON.stringify(data));
         }
-      });
+    });
+
     
     //generateGrid("#", "aya", "2016", "ruan", 20, "good", "2018", "1", "1", "2");
     if ($.cookie("username") != undefined){
@@ -408,7 +501,7 @@ $(document).ready(function () {
         document.getElementById("signUp").style.display = "none";
         document.getElementById("personalInfo").style.display = "block";
         document.getElementById("logOut").style.display = "block"
-      }
+    }
 
     
 
@@ -421,11 +514,26 @@ $(document).ready(function () {
     $("#course_type").html(window.sessionStorage.getItem("course"+coursenum+"course_type"));
     $("#course_school").html(window.sessionStorage.getItem("course"+coursenum+"department"));
     $("#coursedescription").html(window.sessionStorage.getItem("course"+coursenum+"description"))
-    
+
+    //教师筛选下拉菜单
+    var teacher_list=window.sessionStorage.getItem("course"+coursenum+"teacher_list").split(',');
+    var data="<li>\n"+
+            "  <a class=\"dropdown-item\" herf=\"#\" onclick=\"selectTeacher($(this).text())\">全部教师</a>\n"+
+            "</li>\n"+
+            "<div class=\"dropdown-divider\"></div>\n";
+    for(var i=0; i<teacher_list.length;i++){
+        data+="<li>\n"+
+                "  <a class=\"dropdown-item\" herf=\"#\" onclick=\"selectTeacher($(this).text())\">"+teacher_list[i]+"</a>\n"+
+                "</li>\n";
+        console.log(teacher_list[i]);
+        if(i<(teacher_list.length-1)){
+        data+= "<div class=\"dropdown-divider\"></div>"
+        }
+        $("#teacherlist").html(data);
+    }
+
     //显示评分
     var course_id=window.sessionStorage.getItem("course"+coursenum+"course_ID");
-
-    
 
     $.ajax({
         async: true,
@@ -471,71 +579,9 @@ $(document).ready(function () {
             //	alert("ajax success");
            // console.log(data);
             //console.log(data.status)
-            if(data.status=="1"){
-                //alert(data.body.message);
-                //console.log("Successfully get comment of id "+coursenum);
-                if(data.length==0){
-                    $("#noresult").show();
-                    $("#jumpbutton").hide();
-                }
-                else{
-                    $("#noresult").hide();
-                    $("#jumpbutton").show();
-                    window.sessionStorage.setItem("comment_num",data.length);
-                    window.sessionStorage.setItem("comment_data",JSON.stringify(data));
-                    /*for(var i=0;i<data.length;i++){
-                        var x=generateGrid(i,"#",data.body[i].username,"#",data.body[i].teacher,0,data.body[i].content,data.body[i].editTime,data.body[i].commentID,0,0);
-                        var a=document.getElementById("locationid");
-                        a.parentNode.insertBefore(x , a);
-                        if(i>=5){
-                            $("#"+i).hide();
-                        }
-                    }*/
-                    
-                    total_page_nmber=Math.ceil(data.length/comment_num_per_page);
-                    console.log(data.length+" "+total_page_nmber+"?????");
-
-                    $("#pagenum").html(1);
-                    $("#totalpage").html(total_page_nmber);
-                    if(total_page_nmber>1){
-                        $("#jump").show();
-                        $("#nextpage").show();
-                        //生成页码跳转按钮W
-                        for(var i=1;i<=total_page_nmber;i++){
-                            var x = document.createElement("li");
-                            x.setAttribute("class","page-item");
-                            x.setAttribute("id","page"+i);
-                            x.innerHTML="<a class=\"page-link\" onclick=\"toPage("+i+")\" href=\"#\">"+i+"</a>";
-                            
-                            var a=document.getElementById("nextpage");
-                            a.parentNode.insertBefore(x , a);
-                            // console.log("add page");
-                            if(i>5){
-                            //console.log("hide");
-                            $("#page"+i).hide();
-                            }
-                        }
-                    }
-                    else{
-                    //$("#nextpage").show();
-                        var x = document.createElement("li");
-                        x.setAttribute("class","page-item");
-                        x.setAttribute("id","page"+i);
-                        x.innerHTML="<a class=\"page-link\" onclick=\"toPage(1)\" href=\"#\">1</a>";
-                        var a=document.getElementById("nextpage");
-                        a.parentNode.insertBefore(x , a);
-                       // console.log("add page");
-                    }
-
-                    
-
-                    toPage(1);
-                }
-            }
-            else{
-                alert(data.errMsg);
-            }
             
+            //生成页码标签并跳转到第一页
+            genPage(data);
         },
         error:function(data){
             alert(JSON.stringify(data));
@@ -545,6 +591,24 @@ $(document).ready(function () {
     //生成热评
     hotComment(course_id);
     
-
+    //创建一个教师列表供筛选用
+    var total_data = JSON.parse(window.sessionStorage.getItem("comment_data"));
+    var teacher=new Array();
+    for(var i=0; i < total_data.length; i++){
+        teacher.push(total_data.body[i].teacher);
+    }
+    var filter= new Object();
+    for(var i=0; i<teacher_list.length; i++){
+        filter.i=new Array();
+    }
+    console.log("现在应该是空的，只是按照教师数目创建好了而已"+filter);
+    for(var i=0; i < teacher.length; i++){
+        for(var j=0; j < teacher_list.length; j++){
+            if(teacher[i]==teacher_list[j]){
+                filter.j.push(i);
+            }
+        }
+    }
+    console.log("筛选完毕"+filter);
 
 })
