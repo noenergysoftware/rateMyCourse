@@ -332,6 +332,8 @@ function toPage(pagenum){
         }
     }
     else{
+
+        console.log(enable_filter);
         var data = JSON.parse(window.sessionStorage.getItem("comment_data"));
         var comment_to_show=(pagenum-1)*comment_num_per_page;
         var comment_num=filter["teacher"+enable_filter].length;
