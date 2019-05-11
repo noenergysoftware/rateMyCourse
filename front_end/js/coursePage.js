@@ -428,12 +428,13 @@ function filterTeacher(){
                 }*/
                 
                 //删除旧的页码
+                console.log("删除"+total_page_number);
                 var pages=document.getElementById("c_pagination");
                 for(var i=1;i<=total_page_number;i++){
                     console.log(pages.childNodes[1]);
                     pages.removeChild(pages.childNodes[1]);
                 }
-
+                console.log("删除完毕");
                 //计算，生成新的页码
                 total_page_nmber=Math.ceil(filter["teacher"+i].length/comment_num_per_page);
                 //console.log(data.length+" "+total_page_nmber+"?????");
