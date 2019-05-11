@@ -129,7 +129,7 @@ def get_rank_by_course(request):
 @cache_page(60 * 60)
 def get_all_rank(request):
     all_course_ID = Course.objects.all()
-    retDist = {}
+    ret_dict = {}
     for course_ID in all_course_ID:
         # rawList = MakeRank.objects.filter(course_id=course_ID)
         course = RankCache.objects.get(course_id=course_ID)
@@ -145,19 +145,19 @@ def get_all_rank(request):
         rank_dict['gain_score'] = course.gain_score / (1 if course.people == 0 else course.people)
         rank_dict['recommend_score'] = course.recommend_score / (1 if course.people == 0 else course.people)
         rank_dict['rank_number'] = course.people
-        retDist[course_ID.course_ID] = rank_dict
+        ret_dict[course_ID.course_ID] = rank_dict
 
     return HttpResponse(json.dumps({
         'status': 1,
-        'length': len(retDist),
-        'body': retDist
+        'length': len(ret_dict),
+        'body': ret_dict
     }), content_type="application/json")
 
 
 def get_rank_by_sorted_course(request):
     all_rank = RankCache.objects.all()
 
-    sorted_course_list = []
+    sorted_course_dict = {}
     for rank in all_rank:
         if rank.position != -1:
             rank_dict = {}
@@ -165,20 +165,21 @@ def get_rank_by_sorted_course(request):
             rank_dict['funny_score'] = rank.funny_score
             rank_dict['gain_score'] = rank.gain_score
             rank_dict['recommend_score'] = rank.recommend_score
-            sorted_course_list.append([rank.course.ret(), rank_dict, rank.position])
-    sorted_course_list.sort(key=lambda x: x[-1], reverse=False)
+            rank_dict['course_info'] = rank.course.ret()
+            rank_dict['position'] = rank.position
+            sorted_course_dict[rank.position] = rank_dict
 
     return HttpResponse(json.dumps({
         'status': 1,
-        'length': len(sorted_course_list),
-        'body': sorted_course_list,
+        'length': len(sorted_course_dict),
+        'body': sorted_course_dict,
     }), content_type="application/json")
 
 
 def get_rank_by_sorted_teacher(request):
     all_rank = TeacherRankCache.objects.all()
 
-    sorted_teacher_list = []
+    sorted_teacher_dict = {}
     for rank in all_rank:
         if rank.position != -1:
             rank_dict = {}
@@ -186,13 +187,14 @@ def get_rank_by_sorted_teacher(request):
             rank_dict['funny_score'] = rank.funny_score
             rank_dict['gain_score'] = rank.gain_score
             rank_dict['recommend_score'] = rank.recommend_score
-            sorted_teacher_list.append([rank.teacher.ret(), rank_dict, rank.position])
-    sorted_teacher_list.sort(key=lambda x: x[-1], reverse=False)
+            rank_dict['teacher_info'] = rank.teacher.ret()
+            rank_dict['position'] = rank.position
+            sorted_teacher_dict[rank.position] = rank_dict
 
     return HttpResponse(json.dumps({
         'status': 1,
-        'length': len(sorted_teacher_list),
-        'body': sorted_teacher_list,
+        'length': len(sorted_teacher_dict),
+        'body': sorted_teacher_dict,
     }), content_type="application/json")
 
 
