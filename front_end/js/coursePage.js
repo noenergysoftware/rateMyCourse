@@ -318,6 +318,7 @@ function toPage(pagenum){
         return;
     }
 
+    console.log(enable_filter);
     if(enable_filter == -1){
         //2 获取保存的data数据以及需要加载的评论序号
         var data = JSON.parse(window.sessionStorage.getItem("comment_data"));
@@ -406,7 +407,7 @@ function filterTeacher(){
     for(var i=0;i<teacher_list.length;i++){
         if(teacher==teacher_list[i]){
             enable_filter=i;
-            console.log(filter["teacher"+i].length);
+            console.log(filter["teacher"+i].length+" "+enable_filter);
             if(filter["teacher"+i].length){
                 return;
                 $("#noresult").show();
