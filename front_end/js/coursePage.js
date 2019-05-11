@@ -430,7 +430,7 @@ function filterTeacher(){
                 //删除旧的页码
                 var pages=document.getElementById("c_pagination");
                 for(var i=1;i<=total_page_number;i++){
-                    pages.removeChild(pages.childNodes[i]);
+                    pages.removeChild(pages.childNodes[1]);
                 }
 
                 //计算，生成新的页码
