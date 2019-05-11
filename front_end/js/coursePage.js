@@ -403,11 +403,11 @@ function selectTeacher(name){
 
 function filterTeacher(){
     var teacher=$("#buttonSelectTeacher").text();
-    for(var i=0;i<teacher_list.length;i++){
-        if(teacher==teacher_list[i]){
-            enable_filter=i;
+    for(var j=0;j<teacher_list.length;j++){
+        if(teacher==teacher_list[j]){
+            enable_filter=j;
             //console.log(filter["teacher"+i].length+" "+enable_filter);
-            if(filter["teacher"+i].length=="0"){
+            if(filter["teacher"+j].length=="0"){
                 return;
                 $("#noresult").show();
                 $("#jumpbutton").hide();
