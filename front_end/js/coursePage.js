@@ -347,17 +347,17 @@ function toPage(pagenum){
     }
 
     //4 隐藏其余的页码以及上下页
-    for(var i=1;i<=total_page_nmber;i++){
+    for(var i=1;i<=total_page_number;i++){
         $("#page"+i).hide();
     }
     
     if(pagenum<=3){
-        for(var i=1;i<=5 && i<=total_page_nmber ;i++){
+        for(var i=1;i<=5 && i<=total_page_number ;i++){
             $("#page"+i).show();
         }
     }
-    else if((total_page_nmber-pagenum)<=2){
-        for(var i=total_page_nmber;i>total_page_nmber-5 && i>=1 ;i--){
+    else if((total_page_number-pagenum)<=2){
+        for(var i=total_page_number;i>total_page_number-5 && i>=1 ;i--){
             $("#page"+i).show();
         }
     }
@@ -374,7 +374,7 @@ function toPage(pagenum){
       $("#lastpage").hide();
     }
 
-    if(pagenum<total_page_nmber){
+    if(pagenum<total_page_number){
       $("#nextpage").show();
     }
     else{
@@ -402,19 +402,18 @@ function selectTeacher(name){
 }
 
 function filterTeacher(){
-    console.log("?????????????");
     var teacher=$("#buttonSelectTeacher").text();
     for(var i=0;i<teacher_list.length;i++){
         if(teacher==teacher_list[i]){
             enable_filter=i;
-            console.log(filter["teacher"+i].length+" "+enable_filter);
+            //console.log(filter["teacher"+i].length+" "+enable_filter);
             if(filter["teacher"+i].length=="0"){
                 return;
                 $("#noresult").show();
                 $("#jumpbutton").hide();
             }
             else{
-                console.log("开始重新生成页码")
+                
                 //$("#noresult").hide();
                 $("#jumpbutton").show();
                 
@@ -428,24 +427,21 @@ function filterTeacher(){
                 }*/
                 
                 //删除旧的页码
-                console.log("删除"+total_page_number);
-                var pages=document.getElementById("c_pagination");
                 for(var i=1;i<=total_page_number;i++){
-                    console.log(pages.childNodes[1]);
-                    pages.removeChild(pages.childNodes[1]);
+                    $("#page"+i).remove();
                 }
-                console.log("删除完毕");
+                
                 //计算，生成新的页码
-                total_page_nmber=Math.ceil(filter["teacher"+i].length/comment_num_per_page);
-                //console.log(data.length+" "+total_page_nmber+"?????");
+                total_page_number=Math.ceil(filter["teacher"+i].length/comment_num_per_page);
+                //console.log(data.length+" "+total_page_number+"?????");
         
                 $("#pagenum").html(1);
-                $("#totalpage").html(total_page_nmber);
-                if(total_page_nmber>1){
+                $("#totalpage").html(total_page_number);
+                if(total_page_number>1){
                     $("#jump").show();
                     $("#nextpage").show();
                 }
-                for(var i=1;i<=total_page_nmber;i++){
+                for(var i=1;i<=total_page_number;i++){
                     var x = document.createElement("li");
                     x.setAttribute("class","page-item");
                     x.setAttribute("id","new_page"+i);
@@ -458,7 +454,7 @@ function filterTeacher(){
                         $("#page"+i).hide();
                     }
                 }
-                console.log("重新分页！！！！！！！！！！！！！！！！！！！！");
+                
                 toPage(1);
             }
         }
@@ -599,18 +595,18 @@ $(document).ready(function () {
                         }
                     }*/
                     
-                    total_page_nmber=Math.ceil(data.length/comment_num_per_page);
-                    console.log(data.length+" "+total_page_nmber+"?????");
+                    total_page_number=Math.ceil(data.length/comment_num_per_page);
+                    console.log(data.length+" "+total_page_number+"?????");
         
                     $("#pagenum").html(1);
-                    $("#totalpage").html(total_page_nmber);
-                    if(total_page_nmber>1){
+                    $("#totalpage").html(total_page_number);
+                    if(total_page_number>1){
                         $("#jump").show();
                         $("#nextpage").show();
                         //生成页码跳转按钮W
                         
                     }
-                    for(var i=1;i<=total_page_nmber;i++){
+                    for(var i=1;i<=total_page_number;i++){
                         var x = document.createElement("li");
                         x.setAttribute("class","page-item");
                         x.setAttribute("id","page"+i);
