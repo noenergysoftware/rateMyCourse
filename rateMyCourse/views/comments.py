@@ -119,17 +119,35 @@ def get_comment_by_teacher(request):
                 'status': -100,
                 'errMsg': 'cookies 错误',
             }), content_type="application/json")'''
-        teacher_ID = request.GET['teacher_ID']
-        rawList = Comment.objects.filter(teacher=Teacher.objects.get(id=teacher_ID))
+        course_ID = request.GET['course_ID']
+        rawList0 = MakeComment.objects.filter(course=Course.objects.get(course_ID=course_ID).id, )
 
+        teacher_ID = request.GET['teacher_ID']
+        rawList=[]
+        for i in rawList0:
+            if i.comment.teacher_id==teacher_ID:
+                rawList.append(i)
         retList = []
         for i in rawList:
             rdict = {}
+            rdict['username'] = i.user.username
             rdict['content'] = i.comment.content
-            rdict['editTime'] = str((i.comment.create_time +datetime.timedelta(seconds=8 *60 *60)).strftime("%Y-%m-%d %H:%M"))
-            rdict['createTime'] = str((i.comment.edit_time +datetime.timedelta(seconds=8 *60 *60)).strftime("%Y-%m-%d %H:%M"))
+            rdict['editTime'] = str(
+                (i.comment.create_time +
+                 datetime.timedelta(
+                     seconds=8 *
+                             60 *
+                             60)).strftime("%Y-%m-%d %H:%M"))
+            rdict['createTime'] = str(
+                (i.comment.edit_time +
+                 datetime.timedelta(
+                     seconds=8 *
+                             60 *
+                             60)).strftime("%Y-%m-%d %H:%M"))
             rdict['commentID'] = i.id
             rdict['teacher'] = i.comment.teacher.name
+            rdict['parent_comment'] = i.comment.parent_comment
+            rdict['rate'] = i.comment.rate
             retList.append(rdict)
 
     except BaseException:
