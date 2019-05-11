@@ -430,6 +430,7 @@ function filterTeacher(){
                 //删除旧的页码
                 var pages=document.getElementById("c_pagination");
                 for(var i=1;i<=total_page_number;i++){
+                    console.log(pages.childNodes[1]);
                     pages.removeChild(pages.childNodes[1]);
                 }
 
@@ -446,7 +447,7 @@ function filterTeacher(){
                 for(var i=1;i<=total_page_nmber;i++){
                     var x = document.createElement("li");
                     x.setAttribute("class","page-item");
-                    x.setAttribute("id","page"+i);
+                    x.setAttribute("id","new_page"+i);
                     x.innerHTML="<a class=\"page-link\" onclick=\"toPage("+i+")\" href=\"#\">"+i+"</a>";
                     var a=document.getElementById("nextpage");
                     a.parentNode.insertBefore(x , a);
