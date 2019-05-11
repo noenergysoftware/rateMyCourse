@@ -600,14 +600,14 @@ $(document).ready(function () {
         }
         var filter= new Object();
         for(var i=0; i<teacher_list.length; i++){
-            filter[i]=new Array();
+            filter["teacher"+i]=new Array();
         }
         console.log("现在应该是空的，只是按照教师数目创建好了而已");
         console.log(filter);
         for(var i=0; i < teacher.length; i++){
             for(var j=0; j < teacher_list.length; j++){
                 if(teacher[i]==teacher_list[j]){
-                    filter.j.push(i);
+                    filter["teacher"+j].push(i);
                 }
             }
         }
