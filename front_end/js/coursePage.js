@@ -454,6 +454,7 @@ function filterTeacher(){
                         $("#page"+i).hide();
                     }
                 }
+                console.log("重新分页！！！！！！！！！！！！！！！！！！！！");
                 toPage(1);
             }
         }
