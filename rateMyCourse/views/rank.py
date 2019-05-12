@@ -21,10 +21,10 @@ def make_rank(request):
             }), content_type="application/json")
         username = request.POST['username']
         course_ID = request.POST['course_ID']
-        difficulty_score = request.POST['difficulty_score']
-        funny_score = request.POST['funny_score']
-        gain_score = request.POST['gain_score']
-        recommend_score = request.POST['recommend_score']
+        difficulty_score = int(request.POST['difficulty_score'])
+        funny_score = int(request.POST['funny_score'])
+        gain_score = int(request.POST['gain_score'])
+        recommend_score = int(request.POST['recommend_score'])
         if difficulty_score > 5 or difficulty_score < 0 or funny_score > 5 or funny_score < 0 or gain_score > 5 or gain_score < 0 or recommend_score > 5 or recommend_score < 0:
             return HttpResponse(json.dumps({
                 'status': -1,
