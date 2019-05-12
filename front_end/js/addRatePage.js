@@ -3,7 +3,7 @@ function selectTeacher(name){
   $("#buttonSelectTeacher").html(name); 
 }
 
-function raty(number,id){
+function rank(number,id){
   $(id).raty({
     score:number,
     starOn:"./resource/star-on.png",
@@ -56,10 +56,10 @@ $(document).ready(function() {
     $("#teacherlist").html(data);
   }
 
-  raty(5,"#difficulty_score");
-  raty(5,"#funny_score");
-  raty(5,"#gain_score");
-  raty(5,"#recommend_score");
+  rank(5,"#difficulty_score");
+  rank(5,"#funny_score");
+  rank(5,"#gain_score");
+  rank(5,"#recommend_score");
 
   //console.log($("#difficulty_score").raty("getScore"));
 
@@ -91,7 +91,7 @@ function Func_submit() {
   var teacher=$("#buttonSelectTeacher").text();
   console.log(teacher);
   $.ajax({
-      async: false,
+      async: true,
       type: "POST",
       dataType: "json",
       url: "http://testapi.ratemycourse.tk/makeComment/",
@@ -114,9 +114,11 @@ function Func_submit() {
             //alert(data.body.message);
             //console.log("Successfully makeComment "+coursenum);
             //alert("评论成功！");
+            console.log("评论发送成功");
             //window.setTimeout("location.href='./coursePage.html'", 1000);
         }
         else{
+            console.log("评论发送失败");
             alert(data.errMsg);
         }  
       },
@@ -126,7 +128,7 @@ function Func_submit() {
     });
 
     $.ajax({
-      async: false,
+      async: true,
       type: "POST",
       dataType: "json",
       url: "http://testapi.ratemycourse.tk/makeRank/",
@@ -151,9 +153,12 @@ function Func_submit() {
             //alert(data.body.message);
             //console.log("Successfully makeComment "+coursenum);
             alert("评论成功！");
+            console.log("评分发送成功");
             window.setTimeout("location.href='./coursePage.html'", 1000);
         }
         else{
+            console.log($("#difficulty_score").raty("getScore"));
+            console.log("评分发送失败");
             alert(data.errMsg);
         }  
       },

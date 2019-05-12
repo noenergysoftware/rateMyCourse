@@ -12,8 +12,8 @@
   <link rel="stylesheet" href="./css/coursePage.css" type="text/css">
 
 
-  <script src="./js/jquery-3.2.1.min.js"></script>
-  <script src="./js/jquery.raty.js"></script>
+  <script src="./lib/jquery-3.2.1.min.js"></script>
+  <script src="./lib/jquery.raty.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="./lib/jquery.cookie.js"></script>
   <script src="./lib/bootstrap.bundle.js"></script>
@@ -25,6 +25,12 @@
   <script src="./lib/animations.js"></script>
   <script src="./js/coursePage.js"></script>
   <script src="./js/head.js"></script>
+  <script type="text/javascript">
+    $(function () {
+        // 解决bootstrap下拉菜单第一次点击无反应问题
+        $('.dropdown-toggle').dropdown();
+    });
+  </script>
   <!--<script src="./js/coursePage_old.js"></script>-->
 
   <title>课程信息</title>
@@ -79,42 +85,53 @@
         </div>
       </nav>
     </div>
+    
     <div class="container py-5">
-      <div class="text-center text-dark">
-        <h1 id="course_name" class="lead display-4"></h1>
-      </div>
-      <div style="width:100%; margin-top:86px">
-        <table style="width:100%; margin:auto">
-          <tbody>
-            <tr>
-              <td style="width:33%">
-                <p class="text-dark text-center">学分</p>
-              </td>
-              <td style="width:33%">
-                <p class="text-dark text-center">开课学院</p>
-              </td>
-              <td style="width:33%">
-                <p class="text-dark text-center">课程类别</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p class="text-dark text-center" id="course_credit" style="margin-top:8px"></p>
-              </td>
-              <td>
-                <p class="text-dark text-center" id="course_school" style="margin-top:8px"></p>
-              </td>
-              <td>
-                <p class="text-dark text-center" id="course_type" style="margin-top:8px"></p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="text-dark text-center" style="width:25%; margin-top:10px" id="rank_number">
+      <div class="text-center text-dark" id="course_name"></div>
       
+      <div class="row">
+        <!--课程的信息-->
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-4">开课学院</div>
+            <div class="col-md-8" id="course_school"></div>
+          </div>
+    
+          <div class="row">
+            <div class="col-md-4">课程类别</div>
+            <div class="col-md-8" id="course_type"></div>
+          </div>
+    
+          <div class="row">
+            <div class="col-md-4">学分</div>
+            <div class="col-md-8" id="course_credit"></div>
+          </div>
+        </div>
+
+        <!-- 选择教师-->
+        
+        <div class="col-md-4">
+          <div class="row text-md-center">
+            <div class="col-md-6 offset-md-3">选择授课教师</div>
+          </div>
+          <div class="row">
+            <div class="btn-group col-md-4 offset-md-2 text-center">
+              <a class="btn dropdown-toggle" data-toggle="dropdown"
+                id="buttonSelectTeacher">全部教师</a>
+              <ul id="teacher_list" class="dropdown-menu col-md-4" role="menu" style="height:214px;overflow:scroll">
+              
+              </ul>
+            </div>
+            <div class="btn col-md-3 offset-md-2" onclick="filterTeacher()">确定</div>
+          </div>
+        </div>
+
+        <div class="col-md-4 text-md-center">
+          111
+        </div>
+
       </div>
+      <div class="text-dark text-center" style="width:25%; margin-top:10px" id="rank_number"></div>
 
       <div style="width:100%; margin-top:30px">
           <table style="width:100%; margin:auto">
@@ -192,7 +209,12 @@
       </div>
       -->
 
-      <div id="locationid"></div>
+      <div class="col-md-12" id="hot_comment">热门评论
+        <div class="col-md-12" id="no_hot_comment" style="display:none">暂无热评</div>
+      </div>
+
+      <div class="col-md-12">评论</div>
+      <div class="col-md-12" id="comment"></div>
 
       <ul id="c_pagination" class="pagination" style="margin-top:20px;margin-bottom:-10px">
 
@@ -207,7 +229,7 @@
         </li>
 
         <div id="jumpbutton" class="jump ">
-          <span class="jump_text">第<nobr id="pagenum"></nobr>页，共<nobr id="totalpage"></nobr>页
+          <span class="jump_text">第&nbsp;<nobr id="pagenum"></nobr>&nbsp;页，共&nbsp;<nobr id="totalpage"></nobr>&nbsp;页
 
             <nobr id="jump">,跳到<input type="text" name="jumpPage" id="jumpPage" style="width:12%"
                 onkeyup="this.value=this.value.replace(/[^0-9-]+/,'');">页
@@ -234,7 +256,6 @@
     </div>
   </div>
 </body>
-
 
 
 </html>
