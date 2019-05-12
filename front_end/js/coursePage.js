@@ -318,7 +318,7 @@ function toPage(pagenum){
         return;
     }
 
-    console.log(enable_filter);
+    
     if(enable_filter == -1){
         //2 获取保存的data数据以及需要加载的评论序号
         var data = JSON.parse(window.sessionStorage.getItem("comment_data"));
@@ -334,7 +334,7 @@ function toPage(pagenum){
     }
     else{
 
-        console.log(enable_filter);
+        
         var data = JSON.parse(window.sessionStorage.getItem("comment_data"));
         var comment_to_show=(pagenum-1)*comment_num_per_page;
         var comment_num=filter["teacher"+enable_filter].length;
@@ -402,6 +402,8 @@ function selectTeacher(name){
 }
 
 function genPage(data){
+    //console.log("in genPage");
+    //console.log(data);
     if(data.length==0){
         $("#noresult").show();
         $("#jumpbutton").hide();
@@ -456,6 +458,7 @@ function genPage(data){
 function filterTeacher(){
     var teacher=$("#buttonSelectTeacher").text();
     if(teacher=="全部教师"){
+        enable_filter=-1;
         genPage(JSON.parse(window.sessionStorage.getItem("comment_data")));
         return;
     }
