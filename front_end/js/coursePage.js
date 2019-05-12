@@ -1,7 +1,8 @@
 var comment_num_per_page=5;
 var total_page_number;
-
-
+var filter;
+var teacher_list;
+var enable_filter=-1;
 //加载评论
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, hot) {
     //获取评论的评价-->点赞数目
@@ -15,10 +16,11 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
             comment_ID: comment_ID
         },
         success:function(data){
-            console.log(data);
+            //console.log(data);
             //data=JSON.parse(data);
             if(data.status=="1"){
                 thumb_up_num=data.body.rate;
+                //console.log(comment_ID+"thumv_up_num"+thumb_up_num);
             }
             else{
               //alert(data.errMsg);
@@ -103,7 +105,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
         
         aTags[0].appendChild(document.createTextNode(" "));
         var num_node = document.createElement("nobr");
-        //$(num_node).text(thumb_up_num);
+        
         aTags[0].appendChild(num_node);
         aTags[0].appendChild(document.createTextNode(" "));
 
@@ -123,11 +125,11 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
         tableTag[0].setAttribute("style", "width:50%; margin-top:2px;border-bottom:1px #e4e4e4 solid");
      
      //   console.log("successfully establish comment");
-
-        //等待ajax请求收到后再填充
+        
         $.when(ajax_success).done(function () {
             $(num_node).text(thumb_up_num);
         });
+
         return commentGrid;
 
        
@@ -312,35 +314,50 @@ function toPage(pagenum){
 
     //1 超出范围的页码报错
     if(pagenum > total_page_number || pagenum <= 0){
-        alert("页码错误"+"***"+pagenum+"***");
+        alert("页码错误"+"***"+total_page_number+"***"+pagenum+"***");
         return;
     }
 
+    
+    if(enable_filter == -1){
+        //2 获取保存的data数据以及需要加载的评论序号
+        var data = JSON.parse(window.sessionStorage.getItem("comment_data"));
+        var comment_to_show=(pagenum-1)*comment_num_per_page;
+        var comment_num=window.sessionStorage.getItem("comment_num");
 
-    //2 获取保存的data数据以及需要加载的评论序号
-    var data = JSON.parse(window.sessionStorage.getItem("comment_data"));
-    var comment_to_show=(pagenum-1)*comment_num_per_page;
-    var comment_num=window.sessionStorage.getItem("comment_num");
+        //3 开始加载 generateGrid
+        $("#comment").html("");//请空
+        for(var i = comment_to_show; i < comment_num && i < (comment_to_show + comment_num_per_page); i++){
+            //console.log(data.body[i]);
+            $("#comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, 0));
+        }
+    }
+    else{
 
-    //3 开始加载 generateGrid
-    $("#comment").html("");//请空
-    for(var i = comment_to_show; i < comment_num && i < (comment_to_show + comment_num_per_page); i++){
-        //console.log(data.body[i]);
-        $("#comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, 0));
+        
+        var data = JSON.parse(window.sessionStorage.getItem("comment_data"));
+        var comment_to_show=(pagenum-1)*comment_num_per_page;
+        var comment_num=filter["teacher"+enable_filter].length;
+
+        $("#comment").html("");//请空
+        for(var j = 0; j < comment_num && j < comment_num_per_page; j++){
+            var i = filter["teacher"+enable_filter][j+comment_to_show];
+            $("#comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, 0));
+        }
     }
 
     //4 隐藏其余的页码以及上下页
-    for(var i=1;i<=total_page_nmber;i++){
+    for(var i=1;i<=total_page_number;i++){
         $("#page"+i).hide();
     }
     
     if(pagenum<=3){
-        for(var i=1;i<=5 && i<=total_page_nmber ;i++){
+        for(var i=1;i<=5 && i<=total_page_number ;i++){
             $("#page"+i).show();
         }
     }
-    else if((total_page_nmber-pagenum)<=2){
-        for(var i=total_page_nmber;i>total_page_nmber-5 && i>=1 ;i--){
+    else if((total_page_number-pagenum)<=2){
+        for(var i=total_page_number;i>total_page_number-5 && i>=1 ;i--){
             $("#page"+i).show();
         }
     }
@@ -357,7 +374,7 @@ function toPage(pagenum){
       $("#lastpage").hide();
     }
 
-    if(pagenum<total_page_nmber){
+    if(pagenum<total_page_number){
       $("#nextpage").show();
     }
     else{
@@ -380,10 +397,137 @@ function lastPage(){
     toPage(parseInt($("#pagenum").text())-1);
 }
 
+function selectTeacher(name){
+    $("#buttonSelectTeacher").html(name); 
+}
+
+function genPage(data){
+    //console.log("in genPage");
+    //console.log(data);
+    if(data.length==0){
+        $("#noresult").show();
+        $("#jumpbutton").hide();
+    }
+    else{
+        $("#noresult").hide();
+        $("#jumpbutton").show();
+        
+        /*for(var i=0;i<data.length;i++){
+            var x=generateGrid(i,"#",data.body[i].username,"#",data.body[i].teacher,0,data.body[i].content,data.body[i].editTime,data.body[i].commentID,0,0);
+            var a=document.getElementById("locationid");
+            a.parentNode.insertBefore(x , a);
+            if(i>=5){
+                $("#"+i).hide();
+            }
+        }*/
+
+        //删除旧的页码
+        for(var i=1;i<=total_page_number;i++){
+            $("#page"+i).remove();
+        }
+        
+        total_page_number=Math.ceil(data.length/comment_num_per_page);
+        console.log(data.length+" "+total_page_number+"?????");
+
+        $("#pagenum").html(1);
+        $("#totalpage").html(total_page_number);
+        if(total_page_number>1){
+            $("#jump").show();
+            $("#nextpage").show();
+            //生成页码跳转按钮W
+            
+        }
+        for(var i=1;i<=total_page_number;i++){
+            var x = document.createElement("li");
+            x.setAttribute("class","page-item");
+            x.setAttribute("id","page"+i);
+            x.innerHTML="<a class=\"page-link\" onclick=\"toPage("+i+")\" href=\"#\">"+i+"</a>";
+            
+            var a=document.getElementById("nextpage");
+            a.parentNode.insertBefore(x , a);
+            // console.log("add page");
+            if(i>5){
+            //console.log("hide");
+                $("#page"+i).hide();
+            }
+        }
+        toPage(1);
+    }
+}
+
+function filterTeacher(){
+    var teacher=$("#buttonSelectTeacher").text();
+    if(teacher=="全部教师"){
+        enable_filter=-1;
+        genPage(JSON.parse(window.sessionStorage.getItem("comment_data")));
+        return;
+    }
+    for(var j=0;j<teacher_list.length;j++){
+        if(teacher==teacher_list[j]){
+            enable_filter=j;
+            //console.log(filter["teacher"+i].length+" "+enable_filter);
+            if(filter["teacher"+j].length=="0"){
+                return;
+                $("#noresult").show();
+                $("#jumpbutton").hide();
+            }
+            else{
+                
+                //$("#noresult").hide();
+                $("#jumpbutton").show();
+                
+                /*for(var i=0;i<data.length;i++){
+                    var x=generateGrid(i,"#",data.body[i].username,"#",data.body[i].teacher,0,data.body[i].content,data.body[i].editTime,data.body[i].commentID,0,0);
+                    var a=document.getElementById("locationid");
+                    a.parentNode.insertBefore(x , a);
+                    if(i>=5){
+                        $("#"+i).hide();
+                    }
+                }*/
+                
+                //删除旧的页码
+                for(var i=1;i<=total_page_number;i++){
+                    $("#page"+i).remove();
+                }
+                
+                //计算，生成新的页码
+                total_page_number=Math.ceil(filter["teacher"+j].length/comment_num_per_page);
+                console.log(filter["teacher"+j].length+" "+total_page_number+"?????");
+        
+                $("#pagenum").html(1);
+                $("#totalpage").html(total_page_number);
+                if(total_page_number>1){
+                    $("#jump").show();
+                    $("#nextpage").show();
+                }
+                for(var i=1;i<=total_page_number;i++){
+                    var x = document.createElement("li");
+                    x.setAttribute("class","page-item");
+                    x.setAttribute("id","page"+i);
+                    x.innerHTML="<a class=\"page-link\" onclick=\"toPage("+i+")\" href=\"#\">"+i+"</a>";
+                    var a=document.getElementById("nextpage");
+                    a.parentNode.insertBefore(x , a);
+                    // console.log("add page");
+                    if(i>5){
+                    //console.log("hide");
+                        $("#page"+i).hide();
+                    }
+                }
+                
+                toPage(1);
+            }
+        }
+    }
+    //window.sessionStorage.setItem("comment_num",data.length);
+    //window.sessionStorage.setItem("comment_data",JSON.stringify(data));
+    
+    
+}
 
 
 
 $(document).ready(function () {
+    //获得 csrftoken
     $.ajax({
         async: true,
         type: "GET",
@@ -399,7 +543,8 @@ $(document).ready(function () {
             console.log(JSON.stringify(data));
             alert(JSON.stringify(data));
         }
-      });
+    });
+
     
     //generateGrid("#", "aya", "2016", "ruan", 20, "good", "2018", "1", "1", "2");
     if ($.cookie("username") != undefined){
@@ -407,7 +552,7 @@ $(document).ready(function () {
         document.getElementById("signUp").style.display = "none";
         document.getElementById("personalInfo").style.display = "block";
         document.getElementById("logOut").style.display = "block"
-      }
+    }
 
     
 
@@ -420,7 +565,24 @@ $(document).ready(function () {
     $("#course_type").html(window.sessionStorage.getItem("course"+coursenum+"course_type"));
     $("#course_school").html(window.sessionStorage.getItem("course"+coursenum+"department"));
     $("#coursedescription").html(window.sessionStorage.getItem("course"+coursenum+"description"))
-    
+
+    //教师筛选下拉菜单
+    teacher_list=window.sessionStorage.getItem("course"+coursenum+"teacher_list").split(',');
+    var data="<li>\n"+
+            "  <a class=\"dropdown-item\" herf=\"#\" onclick=\"selectTeacher($(this).text())\">全部教师</a>\n"+
+            "</li>\n"+
+            "<div class=\"dropdown-divider\"></div>\n";
+    for(var i=0; i<teacher_list.length;i++){
+        data+="<li>\n"+
+                "  <a class=\"dropdown-item\" herf=\"#\" onclick=\"selectTeacher($(this).text())\">"+teacher_list[i]+"</a>\n"+
+                "</li>\n";
+        console.log(teacher_list[i]);
+        if(i<(teacher_list.length-1)){
+        data+= "<div class=\"dropdown-divider\"></div>"
+        }
+        $("#teacher_list").html(data);
+    }
+
     //显示评分
     var course_id=window.sessionStorage.getItem("course"+coursenum+"course_ID");
 
@@ -455,7 +617,7 @@ $(document).ready(function () {
 
 
     //2 获取评论信息
-    $.ajax({
+    var success=$.ajax({
         async: true,
         type:"GET",
         url: "https://api.ratemycourse.tk/getCommentsByCourse/",
@@ -468,68 +630,21 @@ $(document).ready(function () {
             //	alert("ajax success");
            // console.log(data);
             //console.log(data.status)
+            
+            //生成页码标签并跳转到第一页
             if(data.status=="1"){
                 //alert(data.body.message);
                 //console.log("Successfully get comment of id "+coursenum);
-                if(data.length==0){
-                    $("#noresult").show();
-                    $("#jumpbutton").hide();
-                }
-                else{
-                    $("#noresult").hide();
-                    $("#jumpbutton").show();
-                    window.sessionStorage.setItem("comment_num",data.length);
-                    window.sessionStorage.setItem("comment_data",JSON.stringify(data));
-                    /*for(var i=0;i<data.length;i++){
-                        var x=generateGrid(i,"#",data.body[i].username,"#",data.body[i].teacher,0,data.body[i].content,data.body[i].editTime,data.body[i].commentID,0,0);
-                        var a=document.getElementById("locationid");
-                        a.parentNode.insertBefore(x , a);
-                        if(i>=5){
-                            $("#"+i).hide();
-                        }
-                    }*/
-                    
-                    total_page_nmber=Math.ceil(data.length/comment_num_per_page);
-                    console.log(data.length+" "+total_page_nmber+"?????");
+                window.sessionStorage.setItem("comment_num",data.length);
+                window.sessionStorage.setItem("comment_data",JSON.stringify(data));
+                
+                genPage(data);
 
-                    $("#pagenum").html(1);
-                    $("#totalpage").html(total_page_nmber);
-                    if(total_page_nmber>1){
-                        $("#jump").show();
-                        $("#nextpage").show();
-                        //生成页码跳转按钮W
-                        for(var i=1;i<=total_page_nmber;i++){
-                            var x = document.createElement("li");
-                            x.setAttribute("class","page-item");
-                            x.setAttribute("id","page"+i);
-                            x.innerHTML="<a class=\"page-link\" onclick=\"toPage("+i+")\" href=\"#\">"+i+"</a>";
-                            
-                            var a=document.getElementById("nextpage");
-                            a.parentNode.insertBefore(x , a);
-                            // console.log("add page");
-                            if(i>5){
-                            //console.log("hide");
-                            $("#page"+i).hide();
-                            }
-                        }
-                    }
-                    else{
-                    //$("#nextpage").show();
-                        var x = document.createElement("li");
-                        x.setAttribute("class","page-item");
-                        x.setAttribute("id","page"+i);
-                        x.innerHTML="<a class=\"page-link\" onclick=\"toPage(1)\" href=\"#\">1</a>";
-                        var a=document.getElementById("nextpage");
-                        a.parentNode.insertBefore(x , a);
-                       // console.log("add page");
-                    }
-                    toPage(1);
-                }
+                
             }
             else{
                 alert(data.errMsg);
             }
-            
         },
         error:function(data){
             alert(JSON.stringify(data));
@@ -538,5 +653,30 @@ $(document).ready(function () {
 
     //生成热评
     hotComment(course_id);
+    
+    $.when(success).done(function () {
+        //创建一个教师列表筛选器供筛选用
+        var total_data = JSON.parse(window.sessionStorage.getItem("comment_data"));
+        var teacher=new Array();
+        for(var i=0; i < total_data.length; i++){
+            teacher.push(total_data.body[i].teacher);
+        }
+        filter= new Object();
+        filter.length=teacher_list.length;
+        for(var i=0; i<teacher_list.length; i++){
+            filter["teacher"+i]=new Array();
+        }
+        console.log("现在应该是空的，只是按照教师数目创建好了而已");
+        console.log(filter);
+        for(var i=0; i < teacher.length; i++){
+            for(var j=0; j < teacher_list.length; j++){
+                if(teacher[i]==teacher_list[j]){
+                    filter["teacher"+j].push(i);
+                }
+            }
+        }
+        console.log("筛选完毕");
+        console.log(filter);
+    });
 
 })
