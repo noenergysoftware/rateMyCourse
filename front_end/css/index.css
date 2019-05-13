@@ -1,11 +1,87 @@
-.scrollable-menu {
-    height: auto;
-    max-height: 300px;
-    overflow-x: hidden;
+/*#navbarContainer{
+    background-color: rgba(214, 230, 242, 0.36);
+    border: 1px solid rgba(247, 251, 252, 1);
+}*/
+
+#title{
+    color: rgba(20, 83, 116, 1);
+    font-size: 88px;
+    text-align: center;
+    font-family: 方正圆体-标准;
 }
-.blur {
-    -webkit-filter: blur(10px);
-       -moz-filter: blur(10px);
-        -ms-filter: blur(10px);
-            filter: blur(10px);
+
+#aim{
+    color: rgba(20, 83, 116, 1);
+    font-size: 36px;
+    text-align: center;
+    font-family: 方正圆体-标准;
+}
+
+#buttonSelectDepartment{
+    color: rgba(20, 83, 116, 1);
+    font-size: 36px;
+    text-align: center;
+    font-family: 方正圆体-标准;
+}
+
+#searchCouseContainer{
+    line-height: 20px;
+    opacity: 0.8;
+    border-radius: 20px;
+    text-align: center;
+    border: 5px solid rgba(247, 251, 252, 1);
+}
+
+#buttonSearchCourse{
+    color: rgba(20, 83, 116, 1);
+    font-size: 36px;
+    text-align: center;
+    font-family: 方正圆体-标准;
+}
+
+#rights{
+    color: rgba(49, 147, 185, 0.61);
+    font-size: 20px;
+    text-align: center;
+    font-family: SourceHanSansSC-regular;
+}
+
+.navbar-brand{
+    line-height: 20px;
+    opacity: 0.31;
+    border-radius: 20px;
+    background-color: rgba(185, 215, 234, 1);
+    text-align: center;
+    border: 5px solid rgba(247, 251, 252, 1);
+}
+
+.btn-group{
+    line-height: 31px;
+    opacity: 0.8;
+    color: rgba(20, 83, 116, 1);
+    font-size: 22px;
+    font-family: Roboto;
+}
+
+.input-group{
+    height: 60px;
+    line-height: 20px;
+    border-radius: 2px 2px 2px 2px;
+    background-color: rgba(250, 250, 250, 1);
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0);
+}
+
+.Aboutus{
+    color: rgba(20, 83, 116, 1);
+    font-size: 36px;
+    text-align: center;
+    font-family: 方正圆体-标准;
+}
+
+.text-white{
+    color: rgba(214, 230, 242, 1);
+    font-size: 28px;
+    text-align: center;
+    font-family: 方正圆体-标准;
 }
