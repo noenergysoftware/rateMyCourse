@@ -1,4 +1,26 @@
-﻿$(document).ready(function () {
+﻿
+
+
+$(document).ready(function () {
+    $.ajax({
+        async: true,
+        type: "GET",
+        url: "https://api.ratemycourse.tk/getToken/",
+        dataType: "json",
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+           $.cookie("csrftoken",data.token);
+        },
+        error: function (data) {
+            console.log(JSON.stringify(data));
+            alert(JSON.stringify(data));
+        }
+    });
+
+
+
         function login() {
             var name;
             var email;
@@ -19,7 +41,8 @@
                 data: {
                     username: name,
                     mail: email,
-                    password: md5($("#password").val())
+                    password: md5($("#password").val()),
+                    csrfmiddlewaretoken:  $.cookie("csrftoken")
                 },
                 xhrFields: {
                     withCredentials: true
@@ -30,6 +53,7 @@
                     console.log(data.status);
                     if (data.status == "1") {
                         $.cookie("username", data.body.username, { path: '/' });
+                        
                         //window.sessionStorage.setItem("status",data.status);           //登录成功"status"="0",用于切换导航栏
                         //window.sessionStorage.setItem("username",data.body.username);
                         //console.log("status"+window.sessionStorage.getItem("status"));

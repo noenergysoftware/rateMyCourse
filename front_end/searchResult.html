@@ -35,7 +35,7 @@
   <div>
     <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
       <div class="container" id="navbarContainer">
-        <a class="navbar-brand" href="https://ratemycourse.tk/index.html">公客</a>
+        <a class="navbar-brand" href="./index.html">公客</a>
         <!--公告-->
         <a class="navbar-brand" href="./announcement.html" style="display: none">公告</a>
 
@@ -73,32 +73,21 @@
 
     <p id="count">搜索到<nobr id="serachedCourseNum"></nobr>门课程</p>
     <h3 id="noresult" style="display: none">没有搜索到相关课程，建议更换关键字</h3>
+    
     <!-- use adddiv to load course data -->
+    <div id="course_data"></div>
 
-    <ul id="c_pagination" class="pagination">
-
-      <li style="display: none" id="lastpage" class="page-item col-md-1.5">
-        <a class="page-link" onclick="lastPage()" href="#">上一页</a>
+    <ul id="c_pagination" class="pagination" style="display:flex;justify-content:center;">
+      <li class="page-item" id="lastpage" style="display: none">
+        <a class="page-link" onclick="lastPage()" href="#">&lt;</a>
       </li>
 
       <!-- use add page to load page data -->
 
-      <li style="display: none" id="nextpage" class="page-item col-md-1.5">
-        <a class="page-link" onclick="nextPage()" href="#">下一页</a>
+      <li class="page-item" id="nextpage" style="display: none">
+        <a class="page-link" onclick="nextPage()" href="#">&gt;</a>
       </li>
-
-      <div id="jumpbutton" class="jump " style="display: none">
-        <span class="jump_text">第<nobr id="pagenum"></nobr>页，共<nobr id="totalpage"></nobr>页
-
-          <nobr id="jump">,跳到<input type="text" name="jumpPage" id="jumpPage" style="width:12%"
-              onkeyup="this.value=this.value.replace(/[^0-9-]+/,'');">页
-            <button type="button" class="btn btn-primary btn-xs" onclick="jumpPage()">GO</button>
-          </nobr>
-        </span>
-      </div>
-
     </ul>
-
 
   </div>
   <div class="row">
@@ -106,9 +95,6 @@
       <p class="text-center text-dark my-5">© Copyright 2019 flamenco - All rights reserved. </p>
     </div>
   </div>
-
-
-
 
 </body>
 

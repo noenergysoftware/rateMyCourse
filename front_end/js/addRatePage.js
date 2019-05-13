@@ -1,9 +1,9 @@
-
+﻿
 function selectTeacher(name){
   $("#buttonSelectTeacher").html(name); 
 }
 
-function raty(number,id){
+function rank(number,id){
   $(id).raty({
     score:number,
     starOn:"./resource/star-on.png",
@@ -16,6 +16,22 @@ function raty(number,id){
 }
 
 $(document).ready(function() {
+  $.ajax({
+    async: true,
+    type: "GET",
+    url: "https://api.ratemycourse.tk/getToken/",
+    dataType: "json",
+    xhrFields: {
+        withCredentials: true
+    },
+    success: function (data) {
+       $.cookie("csrftoken",data.token);
+    },
+    error: function (data) {
+        console.log(JSON.stringify(data));
+        alert(JSON.stringify(data));
+    }
+  });
 
   if($.cookie("username") != undefined){
     document.getElementById("signIn").style.display = "none";
@@ -40,10 +56,10 @@ $(document).ready(function() {
     $("#teacherlist").html(data);
   }
 
-  raty(5,"#difficulty_score");
-  raty(5,"#funny_score");
-  raty(5,"#gain_score");
-  raty(5,"#recommend_score");
+  rank(5,"#difficulty_score");
+  rank(5,"#funny_score");
+  rank(5,"#gain_score");
+  rank(5,"#recommend_score");
 
   //console.log($("#difficulty_score").raty("getScore"));
 
@@ -75,15 +91,16 @@ function Func_submit() {
   var teacher=$("#buttonSelectTeacher").text();
   console.log(teacher);
   $.ajax({
-      async: false,
+      async: true,
       type: "POST",
       dataType: "json",
       url: "https://api.ratemycourse.tk/makeComment/",
       data: {
-        'username': $.cookie("username"),
-        'course_ID': window.sessionStorage.getItem("course"+coursenum+"course_ID"),
-        'content' : $("#comment").val(),
-        'teacher_name' : $("#buttonSelectTeacher").text()
+        username: $.cookie("username"),
+        course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID"),
+        content : $("#comment").val(),
+        teacher_name : $("#buttonSelectTeacher").text(),
+        csrfmiddlewaretoken:  $.cookie("csrftoken")
       },
       xhrFields: {
         withCredentials: true
@@ -97,9 +114,11 @@ function Func_submit() {
             //alert(data.body.message);
             //console.log("Successfully makeComment "+coursenum);
             //alert("评论成功！");
+            console.log("评论发送成功");
             //window.setTimeout("location.href='./coursePage.html'", 1000);
         }
         else{
+            console.log("评论发送失败");
             alert(data.errMsg);
         }  
       },
@@ -109,17 +128,18 @@ function Func_submit() {
     });
 
     $.ajax({
-      async: false,
+      async: true,
       type: "POST",
       dataType: "json",
       url: "https://api.ratemycourse.tk/makeRank/",
       data: {
-        'username': $.cookie("username"),
-        'course_ID': window.sessionStorage.getItem("course"+coursenum+"course_ID"),
-        'difficulty_score': $("#difficulty_score").raty("getScore"),
-        'funny_score': $("#funny_score").raty("getScore"),
-        'gain_score': $("#gain_score").raty("getScore"),
-        'recommend_score': $("#recommend_score").raty("getScore")
+        username: $.cookie("username"),
+        course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID"),
+        difficulty_score: $("#difficulty_score").raty("getScore"),
+        funny_score: $("#funny_score").raty("getScore"),
+        gain_score: $("#gain_score").raty("getScore"),
+        recommend_score: $("#recommend_score").raty("getScore"),
+        csrfmiddlewaretoken:  $.cookie("csrftoken")
       },
       xhrFields: {
         withCredentials: true
@@ -133,9 +153,12 @@ function Func_submit() {
             //alert(data.body.message);
             //console.log("Successfully makeComment "+coursenum);
             alert("评论成功！");
+            console.log("评分发送成功");
             window.setTimeout("location.href='./coursePage.html'", 1000);
         }
         else{
+            
+            console.log("评分发送失败");
             alert(data.errMsg);
         }  
       },
