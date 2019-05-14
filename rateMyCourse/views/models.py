@@ -14,8 +14,8 @@ import rateMyCourse.views.authentication as auth
 def update_user_profile_photo(request):
 
     try:
-        user_id = request.GET['user_id']
-        profile_photo = request.GET['profile_photo']
+        user_id = request.POST['user_id']
+        profile_photo = request.POST['profile_photo']
         user = User.objects.get(id=user_id)
         user.profile_photo = profile_photo
     except Exception:
