@@ -79,6 +79,7 @@ class User(models.Model):
     # attributes
     username = models.CharField(max_length=64, unique=True)  # 用户名不可重复
     mail = models.EmailField(max_length=64, unique=True)
+    profile_photo = models.URLField(blank=True, default="https://i.loli.net/2019/05/14/5cda6706c2f0861301.jpg")
     # TODO md5+salt
     password = models.CharField(max_length=32)
     role = models.CharField(max_length=1, choices=ROLE_CHOICE, default='O')

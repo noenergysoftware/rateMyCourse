@@ -11,6 +11,27 @@ from rateMyCourse.models import *
 import rateMyCourse.views.authentication as auth
 
 
+def update_user_profile_photo(request):
+
+    try:
+        user_id = request.GET['user_id']
+        profile_photo = request.GET['profile_photo']
+        user = User.objects.get(id=user_id)
+        user.profile_photo = profile_photo
+    except Exception:
+        return HttpResponse(json.dumps({
+            'status': -1,
+            'errMsg': 'Update Error',
+        }), content_type="application/json")
+    return HttpResponse(json.dumps({
+        'status': 1,
+        'length': 1,
+        'body': {
+            'message': "成功更新用户{0}的头像".format(user.username)
+        }
+    }), content_type="application/json")
+
+
 def add_teacher(request):
     """
     增加教师，需求教师的基本信息：姓名，职称
