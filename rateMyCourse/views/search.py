@@ -171,8 +171,8 @@ def get_user_profile_photo(request):
     """
 
     try:
-        user_id = request.GET['user_id']
-        user = User.objects.get(id=user_id)
+        user_name = request.POST['username']
+        user = User.objects.get(username=user_name)
         retlist = {}
         retlist['profile_photo'] = user.profile_photo
     except Exception:
