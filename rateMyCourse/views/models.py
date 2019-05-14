@@ -14,6 +14,11 @@ import rateMyCourse.views.authentication as auth
 def update_user_profile_photo(request):
 
     try:
+        if not auth.auth(request):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")
         user_id = request.POST['user_id']
         profile_photo = request.POST['profile_photo']
         user = User.objects.get(id=user_id)
