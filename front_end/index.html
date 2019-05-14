@@ -7,24 +7,40 @@
   <title>公客</title>
   <link rel="shortcut icon" href="./resource/favicon.ico" />
   <link rel="bookmark" href="./resource/favicon.ico" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
 
   <link rel="stylesheet" href="./css/index.css" type="text/css">
-  <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.min.css" type="text/css">
 
 
-  <script src="./lib/jquery-3.2.1.min.js"></script>
-  <script src="./lib/popper.min.js"></script>
-  <script src="./lib/bootstrap.min.js"></script>
-  <script src="./lib/jquery.cookie.js"></script>
-  <script src="./lib/bootstrap.bundle.js"></script>
-  <script src="./lib/jquery.validate.js"></script>
+  <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/popper.js/1.12.3/popper.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.staticfile.org/jquery-validate/1.17.0/jquery.validate.min.js"></script>
   <script src="./js/index.js"></script>
   <script src="./js/head.js"></script>
   <script type="text/javascript">
     $(function () {
         // 解决bootstrap下拉菜单第一次点击无反应问题
         $('.dropdown-toggle').dropdown();
+        // preload picture
+        function preloadImg(url) {
+            var img = new Image();
+            img.src = url;
+            if(img.complete) {
+                //接下来可以使用图片了
+                //do something here
+            }
+            else {
+                img.onload = function() {
+                    //接下来可以使用图片了
+                    //do something here
+                };
+            }
+        };
+        preloadImg("https://ae01.alicdn.com/kf/HTB1035PVzTpK1RjSZKP7613UpXal.png");
     });
   </script>
 </head>
