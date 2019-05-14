@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^searchCourse/$', search.search_course, name='searchCourse'),
     url(r'^searchUser/$', search.search_user, name='searchUser'),
     url(r'^getUserDetail/$', search.get_user_detail, name='getUserDetail'),
+    url(r'^getUserProfilePhoto/$', search.get_user_profile_photo, name='getUserProfilePhoto'),
     url(r'^searchCourseByDepartment/$', search.search_course_by_department,name='searchCourseByDepartment'),
     url(r'^getDepartment/$', search.get_department, name='getDepartment'),
 
@@ -22,6 +23,7 @@ urlpatterns = [
     #url(r'^addTeacher/$', models.add_teacher, name="addTeacher"),
     #url(r'^addCourse/$', models.add_course, name="addCourse"),
     #url(r'^addTeachCourse/$', models.add_teach_course, name="addTeachCourse"),
+    url(r'^updateUserProfilePhoto/$', models.update_user_profile_photo, name="updateUserProfilePhoto"),
     url(r'^addSelectCourse/$', models.add_select_course, name="addSelectCourse"),
     url(r'^delSelectCourse/$', models.del_select_course, name="delSelectCourse"),
 
