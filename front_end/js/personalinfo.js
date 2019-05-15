@@ -209,7 +209,7 @@ function uploadPhoto(){
                     //上传成功
                     $.ajax({
                         type:"POST",
-                        url:"http://testapi.ratemycourse.tk/updateUserProfilePhoto",
+                        url:"http://testapi.ratemycourse.tk/updateUserProfilePhoto/",
                         data:{
                             username: $.cookie("username"),
                             profile_photo: data.data.url,
