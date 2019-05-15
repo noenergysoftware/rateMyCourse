@@ -224,6 +224,7 @@ function uploadPhoto(){
                             console.log(data2);
                             if(data2.status=="1"){
                                 alert("上传头像成功！");
+                                $("#myModal").modal('hide');
                             }
                             else{
                                 console.log(data2.errMsg);
