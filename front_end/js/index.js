@@ -49,7 +49,7 @@ $(document).ready(function(){
     document.getElementById("logOut").style.display = "block";
   } 
   
-  /*$.ajax({
+  $.ajax({
       async: false,
       type:"GET",
       url: "https://api.ratemycourse.tk/getDepartment/",
@@ -84,7 +84,7 @@ $(document).ready(function(){
       error:function(data){
         alert(JSON.stringify(data));
       }
-  });*/
+  });
 
 
   function search(){
