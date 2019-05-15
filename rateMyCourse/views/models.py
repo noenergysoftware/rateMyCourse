@@ -23,6 +23,7 @@ def update_user_profile_photo(request):
         profile_photo = request.POST['profile_photo']
         user = User.objects.get(username=user_name)
         user.profile_photo = profile_photo
+        user.save()
     except Exception:
         return HttpResponse(json.dumps({
             'status': -1,
