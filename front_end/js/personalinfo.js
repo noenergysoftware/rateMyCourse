@@ -1,7 +1,7 @@
 
 var gender;
 var role;
-
+var formData;
 function infoCheck() {
     var errmsg = "";
     var result = true;
@@ -172,4 +172,95 @@ $(document).ready(function () {
         }
     });
 
+    $("#upload_photo").click(function () {
+        uploadPhoto();
+    });
+
 })
+
+function ProcessFile(e) {
+    
+    
+}
+function contentLoaded() {
+    document.getElementById('upload').addEventListener('change', ProcessFile, false);
+}
+function uploadPhoto(){
+    if ($.cookie("username") == undefined){
+        alert("你还未登录，无法上传头像");
+        return;
+    }
+    var file = document.getElementById("upload").files[0];
+    console.log(file);
+    if (file && checkPhoto(file)) {
+        console.log("rignt");
+        formData=new FormData();
+        formData.append('smfile',file);
+        $.ajax({
+            type:"POST",
+            url:"https://sm.ms/api/upload",
+            data:formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                if(data.code="success"){
+                    //上传成功
+                    $.ajax({
+                        type:"POST",
+                        url:"http://testapi.ratemycourse.tk/updateUserProfilePhoto",
+                        data:{
+                            username: $.cookie("username"),
+                            profile_photo: data.data.url,
+                            csrfmiddlewaretoken:  $.cookie("csrftoken")
+                        },
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        success: function (data2) {
+                            console.log(data2);
+                            if(data2.status=="1"){
+                                alert("上传头像成功！");
+                            }
+                            else{
+                                console.log(data2.errMsg);
+                                alert(data2.errMsg);
+                            }
+                        },
+                        error: function (data2) {
+                            console.log(data2);
+                            
+                        }
+                    });
+                }
+                else{
+                    console.log(data.msg);
+                }
+    
+            },
+            error: function (data) {
+                console.log(data);
+                
+            }
+        });
+    }
+}
+
+function checkPhoto(file){
+    var errmsg = "";
+    var result = true;
+    console.log(file.name+"\n"+file.size);
+    var reg = /.*?\.(gif|png|jpg)/gi;
+    if(!reg.test(file.name.substr(file.name.lastIndexOf(".")))){
+        errmsg+="请选择jpg或png格式图片！";
+        result=false;
+    }
+    var size=parseInt(file.size);
+    if(size>=5242880){
+        errmsg+="图片过大，请选择不超过5MB大小的图片";
+        result=false;
+    }
+    console.log(errmsg);
+    return result;
+}

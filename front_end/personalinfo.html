@@ -9,6 +9,7 @@
     <link rel="bookmark" href="./resource/favicon.ico" />
     <!-- css -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/bootstrap-fileinput/5.0.3/css/fileinput.min.css" type="text/css">
 
     <link href="./css/css.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/personalInfo.css" type="text/css">
@@ -21,12 +22,14 @@
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
 
     <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js"></script>
     <script src="./lib/popper.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-  <script src="https://cdn.staticfile.org/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery-validate/1.17.0/jquery.validate.min.js"></script>
     <script src="https://cdn.staticfile.org/blueimp-md5/2.10.0/js/md5.min.js"></script>
-
+    <script src="https://cdn.staticfile.org/bootstrap-fileinput/5.0.3/js/fileinput.min.js"></script>
+    <script src="https://cdn.staticfile.org/bootstrap-fileinput/5.0.3/js/locales/zh.min.js"></script>
+    <script src="https://cdn.staticfile.org/bootstrap-fileinput/5.0.3/js/plugins/piexif.min.js"></script>
     <script src="./lib/animations.js"></script>
     <script src="./js/personalinfo.js"></script>
     <script src="./js/head.js"></script>
@@ -81,10 +84,13 @@
             <h1>个人信息</h1>
             <span class="text1">请在文本框中完善您的个人信息</span>
             <p>
-                <div class="fileInputContainer">
-                    <input class="fileInput" id="" type="file" name="">
-
-                </div>
+                <!--<div id="profile_photo" class="container">
+                    <div class="row">
+                        <input type="file" name="upload" id="upload" class="file">
+                        <div class="button button-sm" onclick="uploadPhoto()" >上传头像</div>
+                    </div>
+                </div>-->
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">上传头像</button>  
                 <label>
                     <span>用户名:</span>
                     <input type="text" id="name" value="" placeholder="*用户名，字母、数字或下划线，3-16位">
@@ -114,14 +120,36 @@
 
                 <label>
                     <span>个人介绍:</span>
-                    <textarea id="personalIntroduce"
-                        onKeyUp="if(this.value.length > 256) this.value=this.value.substr(0,256)"></textarea>
+                    <textarea id="personalIntroduce" onkeyup="if(this.value.length > 256) this.value=this.value.substr(0,256)"></textarea>
                 </label>
                 <label>
                     <input type="button" value="确认修改" onclick="modifier()">
                 </label>
+            </p>
         </form>
     </div>
+
+
+    
+          
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
+        <div class="modal-dialog" role="document">  
+            <div class="modal-content">  
+                <div class="modal-header">  
+                    <h4 class="modal-title" id="myModalLabel">上传头像</h4>  
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                            <span aria-hidden="true">×</span>  
+                    </button>  
+                </div>  
+                <div class="modal-body">  
+                    <input type="file" name="upload" id="upload" class="file">  
+                </div>  
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="upload_photo">上传</button>  
+                </div>  
+            </div>  
+        </div>  
+    </div>  
 
 </body>
 
