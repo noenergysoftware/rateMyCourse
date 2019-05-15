@@ -225,6 +225,7 @@ function uploadPhoto(){
                             if(data2.status=="1"){
                                 alert("上传头像成功！");
                                 $('#close_modal').click();
+                                $("#user_profile_photo").prop("src",data.data.url); 
                             }
                             else{
                                 console.log(data2.errMsg);
