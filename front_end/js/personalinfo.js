@@ -66,7 +66,8 @@ function getUserData(){
                     $("#gender_secret").prop("checked",true);
                 }
                 document.getElementById("personalIntroduce").value = data.body.self_introduction;
-                $("user_profile_photo").prop("src", data.body.profile_photo); 
+                console.log(data.body.profile_photo);
+                $("#user_profile_photo").prop("src",data.body.profile_photo); 
             }else {
                 alert(data.errMsg);
             }
