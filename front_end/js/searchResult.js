@@ -15,6 +15,8 @@ page_dot2.setAttribute("id","page_dot2");
 page_dot2.setAttribute("style","display:none");
 page_dot2.innerHTML="<a class=\"page-link\" href=\"#c_pagination\">...</a>";
 
+var current_page=1;
+
 function adddiv(number){
     var x = document.createElement("div");
     x.setAttribute("class","container");
@@ -120,7 +122,8 @@ function toPage(pagenum){
         alert("页码错误"+"***"+pagenum+"***");
         return;
     }
-    
+    current_page=pagenum;
+
     //2 获得到所要开始加载的课程序号
     var course_to_show=(pagenum-1)*course_num_per_page;
     
@@ -214,10 +217,10 @@ function jumpPage(){
 }
 
 function nextPage(){
-    toPage(parseInt($("#pagenum").text())+1);
+    toPage(current_page+1);
 }
 function lastPage(){
-    toPage(parseInt($("#pagenum").text())-1);
+    toPage(current_page-1);
 }
 
 function toCourse(number){
