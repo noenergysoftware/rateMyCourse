@@ -75,6 +75,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
             commentGrid.id = "comment_"+number;
         }
         //commentGrid.innerHTML = ScreenGridHtml;
+        console.log(commentGrid.id);
         $("#"+commentGrid.id).html(comment);
         /*
         //insert user image and name
