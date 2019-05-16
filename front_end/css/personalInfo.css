@@ -1,9 +1,33 @@
-#modify{
-    float: none;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+
+.no_padding{
+    padding-left: 0px;
+    padding-right: 0px;
 }
-.select_role{
-    font-size: 10px
+.no_left_padding{
+    padding-left: 0px;
+}
+.no_right_padding{
+    padding-right: 0px;
+}
+
+body{
+    background-color: rgba(247, 251, 252, 1);
+}   
+
+#show_modal{
+    border-radius: 12px;
+    background-color: rgba(214, 230, 242, 1);
+    color: rgba(20, 83, 116, 1);
+    text-align: center;
+    font-family: Microsoft Yahei;
+    border: 1px solid rgba(150, 212, 236, 0.2);
+}
+#modify{
+   
+    border-radius: 12px;
+    background-color: rgba(214, 230, 242, 1);
+    color: rgba(20, 83, 116, 1);
+    text-align: center;
+    font-family: Microsoft Yahei;
+    border: 1px solid rgba(150, 212, 236, 0.2);
 }

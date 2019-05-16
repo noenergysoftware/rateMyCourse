@@ -81,38 +81,38 @@
 
     <div class="container">
             <div class="row">
-                 <h1 class="text-md-left col-md-2 offset-md-2">个人信息</h1>
+                 <h1 class="text-md-left col-md-10 offset-md-2">个人信息</h1>
             </div>
-            
+            <hr style="filter: progid:dximagetransform.microsoft.glow(color="#987cb9",strength=10)" width="80%" color="#987cb9" size=1>
             <div class="row col-md-4 offset-md-3">
                 
-                    <span>用户名:</span>
-                    <input type="text" readonly="readonly" id="name" value="" placeholder="">
+                    <span >用户名: </span>
+                    <div></div>
                 
             </div>
             <div class="row col-md-6 offset-md-3">
                 <div class="col-md-8">
-                    <label class="row my-3" style="white-space: nowrap">
-                            <span class="col-md-3" >你的角色</span>
-                            <div class="col-md-3">
+                    <label class="row my-4" >
+                            <span class="col-md-3 no_padding" >你的角色</span>
+                            <div class="col-md-3 no_padding">
                                 <input type="radio" class="teacher" name="role" id="role_teacher" value="T">老师
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 no_padding">
                                 <input type="radio" class="student " name="role" id="role_student" value="S">学生
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 no_padding">
                                 <input type="radio" class="others "  name="role" id="role_others"  value="O">其他
                             </div>
                     </label>
-                    <div class="row my-3" style="white-space: nowrap">
-                            <span class="col-md-3" >你的性别</span>
-                            <div class="col-md-3">
+                    <div class="row my-4" style="white-space: nowrap">
+                            <span class="col-md-3  no_padding" >你的性别</span>
+                            <div class="col-md-3  no_padding">
                                 <input type="radio" class="male" name="gender" id="gender_male" value="M">男
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3  no_padding">
                                 <input type="radio" class="fmale" name="gender" id="gender_female" value="F">女
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3  no_padding">
                                 <input type="radio" class="anonymous" name="gender" id="gender_secret" value="A">匿名
                             </div>
                     </div>
@@ -120,19 +120,18 @@
 
                 <div class="col-md-2 offset-md-2">
                     <div class="row">
-                        <img class="img-responsive" id="user_profile_photo" >
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">上传头像</button>  
+                        <img class="img-responsive col-md-12 no_padding" id="user_profile_photo" >
+                        <button type="button" class="btn btn-default no_padding" data-toggle="modal" data-target="#myModal" id="show_modal">上传头像</button>  
                     </div>
                 </div>
             </div>
             <div class="row col-md-6 offset-md-3">
-                <label>
-                    <span>个人介绍:</span>
-                    <textarea id="personalIntroduce" onkeyup="if(this.value.length > 256) this.value=this.value.substr(0,256)"></textarea>
-                </label>
-                
+                    <span class="col-md-2 no_left_padding">个人介绍:</span>
+                    <textarea id="personalIntroduce" class="col-md-10" onkeyup="if(this.value.length > 256) this.value=this.value.substr(0,256)"></textarea>
             </div>
-            <div id="modify" class="btn center-block" onclick="modifier()">确认修改</div>
+            <div style="text-align:center">
+                <div id="modify" class="btn text-center my-4" onclick="modifier()">确认修改</div>
+            </div>
     </div>
 
 

@@ -45,7 +45,7 @@ function getUserData(){
             //data=JSON.parse(data);
             console.log(data);
             if (data.status == "1"){
-                $("#name").prop("placeholder",data.body.username);
+                $("#name").text();
                 if(data.body.role=="T"){
                     $("#role_teacher").prop("checked",true);
                 }
@@ -96,14 +96,14 @@ function modifier() {
         gender = "A";
     }
 
-    console.log($("#name").prop("placeholder")+"**"+role+"**"+gender+"**"+$("#personalIntroduce").val());
+    console.log($("#name").text()+"**"+role+"**"+gender+"**"+$("#personalIntroduce").val());
     $.ajax({
         async: true,
         type: "POST",
         url: "http://testapi.ratemycourse.tk/updateUser/",
         dataType: "text",
         data: {
-            username: $("#name").prop("placeholder"),
+            username: $("#name").text(),
             role: role,
             gender: gender,
             self_introduction: $("#personalIntroduce").val(),
