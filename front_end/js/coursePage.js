@@ -22,12 +22,12 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
             console.log(data);
             //data=JSON.parse(data);
             if(data.status=="1"){
-                imgurl=data.body.retlist.profile_photo;
+                imgurl=data.body.profile_photo;
                 //console.log(comment_ID+"thumv_up_num"+thumb_up_num);
             }
             else{
               //alert(data.errMsg);
-              console.log(" fail to get thumb_up_num");
+              console.log(" fail to photodata");
             }
             
         },
