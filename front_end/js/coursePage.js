@@ -24,9 +24,9 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "</div>"+
                 "<div class=\"text-center\">"+     
                 "  <a>"+
-                "    <i class=\"fa fa-thumbs-o-up\" onclick=\"thumbUp(\"agree\","+comment_ID+",this)\"></i>"+
+                "    <i class=\"fa fa-thumbs-o-up\" onclick=\"thumbUp(\'agree\',"+comment_ID+",this)\"></i>"+
                 "    <nobr>"+thumb_up_num+"</nobr>"+
-                "    <i class=\"fa fa-thumbs-o-down\" onclick=\"thumbUp(\"disagree\","+comment_ID+",this)\"></i>"+
+                "    <i class=\"fa fa-thumbs-o-down\" onclick=\"thumbUp(\'disagree\',"+comment_ID+",this)\"></i>"+
                 "  </a>"+
                 "  <a>"+
                 "  </a>"+
