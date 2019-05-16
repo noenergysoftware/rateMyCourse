@@ -10,7 +10,8 @@
     <!-- css -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.staticfile.org/bootstrap-fileinput/5.0.3/css/fileinput.min.css" type="text/css">
-
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link href="https://cdn.bootcss.com/cropper/3.1.3/cropper.min.css" rel="stylesheet">
     <link href="./css/css.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/personalInfo.css" type="text/css">
     <!--
@@ -20,7 +21,7 @@
 
     <!-- js -->
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-
+    <script src="https://cdn.bootcss.com/cropper/3.1.3/cropper.min.js"></script>
     <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js"></script>
     <script src="./lib/popper.min.js"></script>
@@ -81,80 +82,102 @@
 
     <div class="container">
             <div class="row">
-                 <h1 class="text-md-left col-md-10 offset-md-2">个人信息</h1>
+                 <div class="text-md-left col-md-10 offset-md-2 personal_data">个人信息</div>
             </div>
-            <hr style="filter: progid:dximagetransform.microsoft.glow(color="#987cb9",strength=10)" width="80%" color="#987cb9" size=1>
+            <hr>
             <div class="row col-md-4 offset-md-3">
-                
-                    <span >用户名: </span>
-                    <div></div>
-                
+                <span >用户名: </span>
+                <div></div> 
             </div>
+    
             <div class="row col-md-6 offset-md-3">
-                <div class="col-md-8">
-                    <label class="row my-4" >
+                <div class="col-md-8 no_left_padding">
+                    <label class="row my-5 no_left_padding" >
                             <span class="col-md-3 no_padding" >你的角色</span>
-                            <div class="col-md-3 no_padding">
+                            <div class="col-md-3 no_padding text-md-left ">
                                 <input type="radio" class="teacher" name="role" id="role_teacher" value="T">老师
                             </div>
-                            <div class="col-md-3 no_padding">
+                            <div class="col-md-3 no_padding text-md-left ">
                                 <input type="radio" class="student " name="role" id="role_student" value="S">学生
                             </div>
-                            <div class="col-md-3 no_padding">
+                            <div class="col-md-3 no_padding text-md-left">
                                 <input type="radio" class="others "  name="role" id="role_others"  value="O">其他
                             </div>
                     </label>
-                    <div class="row my-4" style="white-space: nowrap">
+                    <div class="row my-5 no_left_padding" style="white-space: nowrap">
                             <span class="col-md-3  no_padding" >你的性别</span>
-                            <div class="col-md-3  no_padding">
+                            <div class="col-md-3  no_padding text-md-left ">
                                 <input type="radio" class="male" name="gender" id="gender_male" value="M">男
                             </div>
-                            <div class="col-md-3  no_padding">
+                            <div class="col-md-3  no_padding text-md-left ">
                                 <input type="radio" class="fmale" name="gender" id="gender_female" value="F">女
                             </div>
-                            <div class="col-md-3  no_padding">
+                            <div class="col-md-3  no_padding text-md-left ">
                                 <input type="radio" class="anonymous" name="gender" id="gender_secret" value="A">匿名
                             </div>
                     </div>
                 </div>
 
-                <div class="col-md-2 offset-md-2">
-                    <div class="row">
-                        <img class="img-responsive col-md-12 no_padding" id="user_profile_photo" >
-                        <button type="button" class="btn btn-default no_padding" data-toggle="modal" data-target="#myModal" id="show_modal">上传头像</button>  
+                <div class="col-md-4 my-3">
+                    <div class="row my-1">
+                        <img class="img-responsive ml-5" width="100" height="100" id="user_profile_photo" >
+                    </div>
+                    <div class="row my-2">
+                        <button type="button" class="btn btn-default mybtn float-none ml-5" data-toggle="modal" data-target="#changeModal" id="show_modal">上传头像</button>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="row col-md-6 offset-md-3">
+                <span >个人介绍:&nbsp;</span>
+                <textarea id="personalIntroduce" class="col-md-10" onkeyup="if(this.value.length > 256) this.value=this.value.substr(0,256)"></textarea>
+            </div>
+            
+            <div style="text-align:center">
+                <div id="modify" class="btn text-center my-4 mybtn" onclick="modifier()">确认修改</div>
+            </div>
+    
+    </div>
+    
+    <div class="modal fade" id="changeModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" >
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title float-none">
+                            <i class="fa fa-pencil"></i>更换头像
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="tip-info text-center">
+                            未选择图片
+                        </p>
+                        <div class="img-container" style="display: none">
+                            <img src="" alt="" id="photo">
+                        </div>
+                        <div class="img-preview-box" style="display: none">
+                            <hr>
+                            <span>预览:</span>
+                            <div id="testid" class="img-preview img-preview-md">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="container">
+                        <label class="btn mybtn col-md-3" for="photoInput">
+                            <input type="file" class="sr-only" id="photoInput" accept="image/*">
+                                <span>打开图片</span>
+                        </label>
+                        <button class="btn mybtn disabled col-md-2 offset-md-4 mb-2" disabled="true" onclick="sendPhoto();">提交</button>
+                        <button class="btn mybtn col-md-2 mb-2" aria-hidden="true" data-dismiss="modal">取消</button>
+                    </div>
                     </div>
                 </div>
             </div>
-            <div class="row col-md-6 offset-md-3">
-                    <span class="col-md-2 no_left_padding">个人介绍:</span>
-                    <textarea id="personalIntroduce" class="col-md-10" onkeyup="if(this.value.length > 256) this.value=this.value.substr(0,256)"></textarea>
             </div>
-            <div style="text-align:center">
-                <div id="modify" class="btn text-center my-4" onclick="modifier()">确认修改</div>
-            </div>
-    </div>
-
-
-    
-          
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
-        <div class="modal-dialog" role="document">  
-            <div class="modal-content">  
-                <div class="modal-header">  
-                    <h4 class="modal-title" id="myModalLabel">上传头像</h4>  
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close_modal">  
-                            <span aria-hidden="true">×</span>  
-                    </button>  
-                </div>  
-                <div class="modal-body">  
-                    <input type="file" name="upload" id="upload" class="file">  
-                </div>  
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="upload_photo">上传</button>  
-                </div>  
-            </div>  
-        </div>  
-    </div>  
+            
 
 </body>
 
