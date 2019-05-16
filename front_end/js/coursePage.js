@@ -43,7 +43,8 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
             username: userName
         },
         success:function(data){
-            //console.log(data);
+            console.log("photo data")
+            console.log(data);
             //data=JSON.parse(data);
             if(data.status=="1"){
                 imgurl=data.body.retlist.profile_photo;
