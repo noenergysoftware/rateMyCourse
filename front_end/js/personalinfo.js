@@ -6,7 +6,7 @@ function infoCheck() {
     var errmsg = "";
     var result = true;
 
-    var name = $("#username").val();
+    /*var name = $("#username").val();
     var uPattern = /^[a-zA-Z0-9_]{3,16}$/;
     var check_name=uPattern.test(name);
     console.log(check_name);
@@ -14,7 +14,7 @@ function infoCheck() {
     if(check_name==false){
             errmsg=errmsg+"用户名格式错误\n";
             result=false;
-    }
+    }*/
 
     var length = document.getElementById("personalIntroduce");
     if (length.value.length > 256) {
