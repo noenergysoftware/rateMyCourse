@@ -667,7 +667,8 @@ $(document).ready(function () {
         success:function(data){
             //data=JSON.parse(data);
             //	alert("ajax success");
-           // console.log(data);
+            console.log("totaldata")
+            console.log(data);
             //console.log(data.status)
             
             //生成页码标签并跳转到第一页
