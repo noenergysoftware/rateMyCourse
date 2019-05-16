@@ -7,6 +7,7 @@ var enable_filter=-1;
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, hot) {
     //获取评论的评价-->点赞数目
     var thumb_up_num;
+    var imgurl;
     var ajax_success=$.ajax({
         async: true,
         type:"GET",
@@ -33,10 +34,36 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
         }
     });
 
+    var img_success=$.ajax({
+        async: true,
+        type:"GET",
+        url: "http://testapi.ratemycourse.tk/getUserProfilePhoto/",
+        dataType:"json",
+        data:{              
+            username: userName
+        },
+        success:function(data){
+            //console.log(data);
+            //data=JSON.parse(data);
+            if(data.status=="1"){
+                imgurl=data.body.retlist.profile_photo;
+                //console.log(comment_ID+"thumv_up_num"+thumb_up_num);
+            }
+            else{
+              //alert(data.errMsg);
+              console.log(" fail to get thumb_up_num");
+            }
+            
+        },
+        error:function(data){
+          alert(JSON.stringify(data));
+        }
+    });
     
 
     var ScreenGridHtml = `
-        <div>   
+        <div>
+            <img>   
             <p>
         </div>
         <table>
@@ -70,6 +97,12 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
         }
         commentGrid.innerHTML = ScreenGridHtml;
         //insert user image and name
+        var imageTag = commentGrid.getElementsByTagName("img");
+        
+        imageTag[0].width = "86";
+        imageTag[0].height = "86";
+        imageTag[0].setAttribute("class", "col-md-2");
+        imageTag[0].setAttribute("style", "margin-left:8px");
         //暂时没有用户头像
 
         var pTags = commentGrid.getElementsByTagName("p");
@@ -129,6 +162,11 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
         $.when(ajax_success).done(function () {
             $(num_node).text(thumb_up_num);
         });
+
+        $.when(img_success).done(function () {
+            imageTag[0].src = imgurl;
+        });
+        
 
         return commentGrid;
 
