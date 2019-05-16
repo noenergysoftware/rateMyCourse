@@ -85,34 +85,34 @@
                  <div class="text-md-left col-md-10 offset-md-2 personal_data">个人信息</div>
             </div>
             <hr>
-            <div class="row col-md-4 offset-md-3">
+            <div class="row col-md-4 col-12 offset-md-3">
                 <span >用户名: </span>
                 <div></div> 
             </div>
     
-            <div class="row col-md-6 offset-md-3">
-                <div class="col-md-8 no_left_padding">
+            <div class="row col-md-6 col-12 offset-md-3">
+                <div class="col-md-8 col-12 no_left_padding">
                     <label class="row my-5 no_left_padding" >
-                            <span class="col-md-3 no_padding" >你的角色</span>
-                            <div class="col-md-3 no_padding text-md-left ">
+                            <span class="col-md-3 col-3 no_padding" >你的角色</span>
+                            <div class="col-md-3 col-3 no_padding text-md-left  text-left">
                                 <input type="radio" class="teacher" name="role" id="role_teacher" value="T">老师
                             </div>
-                            <div class="col-md-3 no_padding text-md-left ">
+                            <div class="col-md-3 col-3 no_padding text-md-left text-left">
                                 <input type="radio" class="student " name="role" id="role_student" value="S">学生
                             </div>
-                            <div class="col-md-3 no_padding text-md-left">
+                            <div class="col-md-3 col-3 no_padding text-md-left text-left">
                                 <input type="radio" class="others "  name="role" id="role_others"  value="O">其他
                             </div>
                     </label>
                     <div class="row my-5 no_left_padding" style="white-space: nowrap">
-                            <span class="col-md-3  no_padding" >你的性别</span>
-                            <div class="col-md-3  no_padding text-md-left ">
+                            <span class="col-md-3 col-3 no_padding" >你的性别</span>
+                            <div class="col-md-3 col-3 no_padding text-md-left text-left">
                                 <input type="radio" class="male" name="gender" id="gender_male" value="M">男
                             </div>
-                            <div class="col-md-3  no_padding text-md-left ">
+                            <div class="col-md-3 col-3 no_padding text-md-left text-left">
                                 <input type="radio" class="fmale" name="gender" id="gender_female" value="F">女
                             </div>
-                            <div class="col-md-3  no_padding text-md-left ">
+                            <div class="col-md-3 col-3 no_padding text-md-left text-left">
                                 <input type="radio" class="anonymous" name="gender" id="gender_secret" value="A">匿名
                             </div>
                     </div>
@@ -120,10 +120,10 @@
 
                 <div class="col-md-4 my-3">
                     <div class="row my-1">
-                        <img class="img-responsive ml-5" width="100" height="100" id="user_profile_photo" >
+                        <img class="img-responsive ml-0 ml-md-5" width="100" height="100" id="user_profile_photo" >
                     </div>
                     <div class="row my-2">
-                        <button type="button" class="btn btn-default mybtn float-none ml-5" data-toggle="modal" data-target="#changeModal" id="show_modal">上传头像</button>
+                        <button type="button" class="btn btn-default mybtn float-md-none ml-0 ml-md-5" data-toggle="modal" data-target="#changeModal" id="show_modal">上传头像</button>
                     </div>
                 </div>
                 
@@ -145,7 +145,7 @@
                 <div class="modal-content" >
                     <div class="modal-header">
                         
-                        <h4 class="modal-title float-none">
+                        <h4 class="modal-title float-md-none">
                             <i class="fa fa-pencil"></i>更换头像
                         </h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="close_modal">×</button>
