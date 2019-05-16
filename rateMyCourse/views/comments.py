@@ -92,6 +92,7 @@ def get_comment_by_course(request):
             rdict['teacher'] = i.comment.teacher.name
             rdict['parent_comment']=i.comment.parent_comment
             rdict['rate'] = i.comment.rate
+            rdict['profile_photo'] = i.user.profile_photo
             retList.append(rdict)
 
     except BaseException:
@@ -148,6 +149,7 @@ def get_comment_by_teacher(request):
             rdict['teacher'] = i.comment.teacher.name
             rdict['parent_comment'] = i.comment.parent_comment
             rdict['rate'] = i.comment.rate
+            rdict['profile_photo'] = i.user.profile_photo
             retList.append(rdict)
 
     except BaseException:
@@ -364,6 +366,7 @@ def get_high_rate_comment(request):
             rdict['teacher'] = i.comment.teacher.name
             rdict['parent_comment'] = i.comment.parent_comment
             rdict['rate']=i.comment.rate
+            rdict['profile_photo'] = i.user.profile_photo
             retList.append(rdict)
         return HttpResponse(json.dumps({
             'status': 1,
