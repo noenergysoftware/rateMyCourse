@@ -7,7 +7,40 @@ var enable_filter=-1;
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, thumb_up_num, hot) {
     //获取评论的评价-->点赞数目
     
-    var ScreenGridHtml = `
+    var comment="<div>\n"+
+                "  <img src=\""+imageUrls+"\" width=\"86\" height=\"86\" class=\"col-md-2\" style=\"margin-left:8px\">\n"+
+                "  <p class=\"userName col-md-4\">"+userName+"</p>\n"+
+                "</div>\n"+
+                "<table style=\"width:50%; margin-top:2px;border-bottom:1px #e4e4e4 solid\">\n"+
+                "  <tbody>\n"+
+                "    <tr>\n"+
+                "      <td><p>教师</p></td>\n"+
+                "      <td><p>"+iTeacher+"</p></td>\n"+
+                "    </tr>\n"
+                "  </tbody>"+
+                "</table>"+
+                "<div class=\"row text-center\">"+
+                "  <p style=\"margin-top:16px;margin-left:16px;text-align:left; width:70%\">"+text+"</p>\n"+
+                "</div>"+
+                "<div class=\"text-center\">"+     
+                "  <a>"+
+                "    <i class=\"fa fa-thumbs-o-up\" onclick=\"thumbUp(\"agree\","+comment_ID+",this)\"></i>"+
+                "    <nobr>"+thumb_up_num+"</nobr>"+
+                "    <i class=\"fa fa-thumbs-o-down\" onclick=\"thumbUp(\"disagree\","+comment_ID+",this)\"></i>"+
+                "  </a>"+
+                "  <a>"+
+                "  </a>"+
+                "  <a>"+
+                "  </a>"+
+                "  <a>"+
+                "  </a>"+
+                "  <a>"+
+                "    <p style=\"float:left;text-align:left;margin-top:16px\">"+time+"</p>"+
+                "  </a>"+
+                "</div>"+
+                "<table>"+
+                "</table>";
+    /*var ScreenGridHtml = `
         <div>
             <img>   
             <p>
@@ -29,7 +62,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
             <a>
             <p>
         </div>
-        `;
+        `;*/
 
         // create div
         var commentGrid = document.createElement("div");
@@ -42,6 +75,8 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
             commentGrid.id = "comment_"+number;
         }
         commentGrid.innerHTML = ScreenGridHtml;
+        $("#"+commentGrid.id).html(comment);
+        /*
         //insert user image and name
         var imageTag = commentGrid.getElementsByTagName("img");
         imageTag[0].src = imageUrls;
@@ -105,7 +140,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
         
         var tableTag = commentGrid.getElementsByTagName("table");
         tableTag[0].setAttribute("style", "width:50%; margin-top:2px;border-bottom:1px #e4e4e4 solid");
-     
+        */
      //   console.log("successfully establish comment");
         
         
