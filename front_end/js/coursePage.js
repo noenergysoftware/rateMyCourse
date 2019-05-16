@@ -6,37 +6,7 @@ var enable_filter=-1;
 //加载评论
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, thumb_up_num, hot) {
     //获取评论的评价-->点赞数目
-    var imgurl;
     
-
-    var img_success=$.ajax({
-        async: true,
-        type:"GET",
-        url: "http://testapi.ratemycourse.tk/getUserProfilePhoto/",
-        dataType:"json",
-        data:{              
-            username: userName
-        },
-        success:function(data){
-            console.log("photo data")
-            console.log(data);
-            //data=JSON.parse(data);
-            if(data.status=="1"){
-                imgurl=data.body.profile_photo;
-                //console.log(comment_ID+"thumv_up_num"+thumb_up_num);
-            }
-            else{
-              //alert(data.errMsg);
-              console.log(" fail to photodata");
-            }
-            
-        },
-        error:function(data){
-          alert(JSON.stringify(data));
-        }
-    });
-    
-
     var ScreenGridHtml = `
         <div>
             <img>   
@@ -74,7 +44,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
         commentGrid.innerHTML = ScreenGridHtml;
         //insert user image and name
         var imageTag = commentGrid.getElementsByTagName("img");
-        
+        imageTag[0].src = imageUrls;
         imageTag[0].width = "86";
         imageTag[0].height = "86";
         imageTag[0].setAttribute("class", "col-md-2");
@@ -136,10 +106,6 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
      //   console.log("successfully establish comment");
         
         
-
-        $.when(img_success).done(function () {
-            imageTag[0].src = imgurl;
-        });
         
 
         return commentGrid;
@@ -289,7 +255,7 @@ function hotComment(course_id){
                 }
                 else{
                     for(var i=0;i<data.length;i++){
-                        $("#hot_comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, data.body[i].rate, 1));
+                        $("#hot_comment").append(generateGrid(i, data.body[i].profile_photo, data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, data.body[i].rate, 1));
                     }
                 }
             }
@@ -341,7 +307,7 @@ function toPage(pagenum){
         $("#comment").html("");//请空
         for(var i = comment_to_show; i < comment_num && i < (comment_to_show + comment_num_per_page); i++){
             //console.log(data.body[i]);
-            $("#comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, data.body[i].rate, 0));
+            $("#comment").append(generateGrid(i, data.body[i].profile_photo, data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, data.body[i].rate, 0));
         }
     }
     else{
@@ -354,7 +320,7 @@ function toPage(pagenum){
         $("#comment").html("");//请空
         for(var j = 0; j < comment_num && j < comment_num_per_page; j++){
             var i = filter["teacher"+enable_filter][j+comment_to_show];
-            $("#comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, data.body[i].rate, 0));
+            $("#comment").append(generateGrid(i, data.body[i].profile_photo, data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, data.body[i].rate, 0));
         }
     }
 
