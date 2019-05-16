@@ -70,13 +70,13 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
         commentGrid.setAttribute("style","margin-top:8px");
         if(hot==1){
             commentGrid.id = "hot_comment_"+number;
+            
         }
         else{
             commentGrid.id = "comment_"+number;
         }
-        //commentGrid.innerHTML = ScreenGridHtml;
-        console.log(commentGrid.id);
-        $("#"+commentGrid.id).html(comment);
+        commentGrid.innerHTML = comment;
+      
         /*
         //insert user image and name
         var imageTag = commentGrid.getElementsByTagName("img");
