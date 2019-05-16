@@ -96,14 +96,14 @@ function modifier() {
         gender = "A";
     }
 
-    console.log($("#name").val()+"**"+role+"**"+gender+"**"+$("#personalIntroduce").val());
+    console.log($("#name").prop("placeholder")+"**"+role+"**"+gender+"**"+$("#personalIntroduce").val());
     $.ajax({
         async: true,
         type: "POST",
         url: "http://testapi.ratemycourse.tk/updateUser/",
         dataType: "text",
         data: {
-            username: $("#name").val(),
+            username: $("#name").prop("placeholder"),
             role: role,
             gender: gender,
             self_introduction: $("#personalIntroduce").val(),
