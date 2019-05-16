@@ -79,55 +79,60 @@
     </div>
 
 
-    <div class="Content-Main">
-        <form action="" method="POST" class="form-userInfo">
-            <h1>个人信息</h1>
-            <span class="text1">请在文本框中完善您的个人信息</span>
-            <p>
-                <!--<div id="profile_photo" class="container">
-                    <div class="row">
-                        <input type="file" name="upload" id="upload" class="file">
-                        <div class="button button-sm" onclick="uploadPhoto()" >上传头像</div>
-                    </div>
-                </div>-->
-                <img class="img-responsive" id="user_profile_photo" height="100" width="100">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">上传头像</button>  
-                <label>
+    <div class="container">
+            <div class="row">
+                 <h1 class="text-md-left col-md-2 offset-md-2">个人信息</h1>
+            </div>
+            
+            <div class="row col-md-4 offset-md-3">
+                
                     <span>用户名:</span>
                     <input type="text" readonly="readonly" id="name" value="" placeholder="">
-                </label>
-                <label class="Main-role">
-                    <span>你的角色:</span>
-                    <input type="radio" class="teacher" name="role" id="role_teacher" value="T">老师
-                    <input type="radio" class="student" name="role" id="role_student" value="S">学生
-                    <input type="radio" class="others"  name="role" id="role_others"  value="O">其他
-                </label>
-                <!--
-                <label>
-                    <span>你的性别:</span>
-                    <input type="radio" id="male" value="F" placeholder="*只可填写(男; 女; 匿名)" name="gender">
-                    <input type="radio" id="famale" value="M" name="gender">
-                    
-                    <input type="text" id="gender" value="" placeholder="*只可填写(男; 女; 匿名)">
-                    
-                </label>
-                -->
-                <label class="Main-sex">
-                    <span>你的性别:</span>
-                    <input type="radio" class="male" name="gender" id="gender_male" value="M">男
-                    <input type="radio" class="fmale" name="gender" id="gender_female" value="F">女
-                    <input type="radio" class="anonymous" name="gender" id="gender_secret" value="A">匿名
-                </label>
+                
+            </div>
+            <div class="row col-md-6 offset-md-3">
+                <div class="col-md-8">
+                    <label class="row my-3" style="white-space: nowrap">
+                            <span class="col-md-3" >你的角色</span>
+                            <div class="col-md-3">
+                                <input type="radio" class="teacher" name="role" id="role_teacher" value="T">老师
+                            </div>
+                            <div class="col-md-3">
+                                <input type="radio" class="student " name="role" id="role_student" value="S">学生
+                            </div>
+                            <div class="col-md-3">
+                                <input type="radio" class="others "  name="role" id="role_others"  value="O">其他
+                            </div>
+                    </label>
+                    <div class="row my-3" style="white-space: nowrap">
+                            <span class="col-md-3" >你的性别</span>
+                            <div class="col-md-3">
+                                <input type="radio" class="male" name="gender" id="gender_male" value="M">男
+                            </div>
+                            <div class="col-md-3">
+                                <input type="radio" class="fmale" name="gender" id="gender_female" value="F">女
+                            </div>
+                            <div class="col-md-3">
+                                <input type="radio" class="anonymous" name="gender" id="gender_secret" value="A">匿名
+                            </div>
+                    </div>
+                </div>
 
+                <div class="col-md-2 offset-md-2">
+                    <div class="row">
+                        <img class="img-responsive" id="user_profile_photo" >
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">上传头像</button>  
+                    </div>
+                </div>
+            </div>
+            <div class="row col-md-6 offset-md-3">
                 <label>
                     <span>个人介绍:</span>
                     <textarea id="personalIntroduce" onkeyup="if(this.value.length > 256) this.value=this.value.substr(0,256)"></textarea>
                 </label>
-                <label>
-                    <input type="button" value="确认修改" onclick="modifier()">
-                </label>
-            </p>
-        </form>
+                
+            </div>
+            <div id="modify" class="btn center-block" onclick="modifier()">确认修改</div>
     </div>
 
 

@@ -33,7 +33,7 @@ function infoCheck() {
 
 function getUserData(){
     var name = $.cookie("username");
-    $.ajax({
+    /*$.ajax({
         async: true,
         type:"get",
         url: "http://testapi.ratemycourse.tk/getUserDetail/",
@@ -75,7 +75,7 @@ function getUserData(){
         error:function(data){
             alert(JSON.stringify(data));
         }
-    });
+    });*/
 }
 
 function modifier() {
@@ -136,7 +136,7 @@ function modifier() {
       //  }
   //  });
 $(document).ready(function () {
-    $.ajax({
+    /*$.ajax({
         async: true,
         type: "GET",
         url: "http://testapi.ratemycourse.tk/getToken/",
@@ -151,7 +151,7 @@ $(document).ready(function () {
             console.log(JSON.stringify(data));
             alert(JSON.stringify(data));
         }
-    });
+    });*/
     getUserData();
 
     if ($.cookie("username") != undefined){
