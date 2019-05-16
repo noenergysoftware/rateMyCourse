@@ -54,11 +54,11 @@
   
   <!--导航栏-->
   <div>
-    <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top"  style="background-color:black;border: 1px solid rgba(247, 251, 252, 1);">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top"  style="background-color: #29B6F6;border: 1px solid rgba(247, 251, 252, 1);">
       <div class="container" id="navbarContainer">
-        <a class="navbar-brand" href="./index.html">公客</a>
+        <a class="navbar-brand" href="./index.html" style="color:#0D47A1;font-weight: 600;">首页</a>
         <!--公告-->
-        <a class="navbar-brand" href="./announcement.html" >公告</a>
+        <a class="navbar-brand" href="./announcement.html" style="color:#145374;font-weight: 500;">公告</a>
         
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
           data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
@@ -72,16 +72,16 @@
           <ul class="navbar-nav">
 
             <li class="nav-item">
-              <a href="javascript:void(0)" class="navbar-brand" onclick="javascript: jumpLogin()" id="signIn" style="display:block">登录</a>
+              <a href="javascript:void(0)" class="navbar-brand" onclick="javascript: jumpLogin()" id="signIn" style="display:block;color:#145374;font-weight: 500;">登录</a>
             </li>
             <li class="nav-item">
-              <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpSignUp()" id="signUp" style="display:block">注册</a>
+              <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpSignUp()" id="signUp" style="display:block;color:#145374;font-weight: 500;">注册</a>
             </li>
             <li class="item">
-              <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpPersonalInfo()" id="personalInfo" style="display:none">个人信息</a>
+              <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpPersonalInfo()" id="personalInfo" style="display:none;color:#145374;font-weight: 500;">个人信息</a>
             </li>
             <li class="item">
-                <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpLogOut()" id="logOut" style="display:none">注销</a>
+                <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpLogOut()" id="logOut" style="display:none;color:#145374;font-weight: 500;">注销</a>
             </li>
           </ul>
         </div>
@@ -89,7 +89,7 @@
     </nav>
   </div>
 
-  <div class="py-5 text-center opaque-overlay" style="background-image: url('https://ae01.alicdn.com/kf/HTB1035PVzTpK1RjSZKP7613UpXal.png');">
+  <div class="py-5 text-center opaque-overlay" style="background: #F7FBFC;">
     <div class="container py-5">
       <div class="row">
         <div class="col-md-12 text-white">
@@ -104,7 +104,7 @@
 
   <div class="py-10 text-center bg-light">
 
-    <div class="container">
+    <div class="container" style="background:#D6E6F2;">
       <div class="row">
         <div class="col-md-12 p-4">
           <!--img class="img-fluid d-block rounded-circle mx-auto" src="https://pingendo.github.io/templates/sections/assets/test_carlito.jpg"-->
@@ -112,16 +112,16 @@
             <div class="col-md-1"></div>
 
             <div class="col-md-3">
-              <div class="btn-group">
+              <div class="btn-group mt-3">
                 <a class="btn btn-light btn-lg dropdown-toggle my-1" data-toggle="dropdown"
                   id="buttonSelectDepartment">选择学院</a>
-                <ul id="departments"class="dropdown-menu" role="menu" style="height:214px;overflow:scroll">
+                <ul id="departments"class="dropdown-menu" role="menu" style="height:214px;overflow:scroll;min-width: 209px;">
                 
                 </ul>
               </div>
             </div>
 
-            <div class="col-md-4" style="bottom:-8px">
+            <div class="col-md-4 mb-3 mt-2" style="bottom:-8px">
               <div class="input-group">
                 <span class="input-group-addon">
                   <i class="fa fa-search"></i>
@@ -131,19 +131,20 @@
               </div>
             </div>
 
-            <div class="col-md-3" id="searchCouseContainer">
-              <a class="btn btn-light btn-lg my-1" href="#" id="buttonSearchCourse">搜索课程</a>
+
+            <div class="col-md-1.5 offset-md-1 mt-3" id="searchCouseContainer">
+              <a class="btn" href="#" id="buttonSearchCourse">搜索课程</a>
             </div>
             
-            <div class="col-md-1"></div>
+            <div class="col-md-1.5"></div>
           </div>
           
         </div>
       </div>
     </div>
 
-    <div class="text-white bg-secondary">
-      <div class="container">
+    <div class="text-white">
+      <div class="container" style="background: #B9D7EA;">
         <div class="row">
           <div class="p-4 col-md-4">
             <h2 class="Aboutus">flamenco
@@ -167,7 +168,7 @@
             </p>
           </div>
         </div>
-        <div class="row">
+        <div class="row" style="background: #769FCD;">
           <div class="col-md-12 mt-3">
             <p class="text-center text-white" id="rights">© Copyright 2019 flamenco - All rights reserved. </p>
           </div>
@@ -175,27 +176,6 @@
       </div>
     </div>
   </div>
-  <!-- modals-->
-  <div class="modal fade" id="contactModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"> 公客们 </h5>
-          <a class="close" href="javascript:void(0)" data-dismiss="modal" aria-label="Close" style="outline:none;">
-            <span aria-hidden="true">&times;</span>
-          </a>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="modal-body text-center">
-              <img src="#" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
 
 
 </body>

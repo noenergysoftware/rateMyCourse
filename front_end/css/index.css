@@ -18,23 +18,29 @@
 }
 
 #buttonSelectDepartment{
+    line-height: 31px;
+    opacity: 0.8;
     color: rgba(20, 83, 116, 1);
-    font-size: 36px;
-    text-align: center;
-    font-family: 方正圆体-标准;
+    font-size: 22px;
+    font-family: Roboto;
+    border: 1px solid rgba(187, 187, 187, 1);
 }
 
 #searchCouseContainer{
+    height: 49px;
     line-height: 20px;
     opacity: 0.8;
     border-radius: 20px;
+    background-color: rgba(255, 255, 255, 1);
     text-align: center;
     border: 5px solid rgba(247, 251, 252, 1);
 }
 
 #buttonSearchCourse{
+    position: relative;
+    top:-4px;
     color: rgba(20, 83, 116, 1);
-    font-size: 36px;
+    font-size: 22px;
     text-align: center;
     font-family: 方正圆体-标准;
 }
@@ -44,6 +50,13 @@
     font-size: 20px;
     text-align: center;
     font-family: SourceHanSansSC-regular;
+    background: #769FCD;
+}
+
+#searchboxCourse{
+    color: rgba(20, 83, 116, 1);
+    font-size: 22px;
+    font-family: 方正圆体-标准;
 }
 
 .navbar-brand{
@@ -55,6 +68,8 @@
     border: 5px solid rgba(247, 251, 252, 1);
 }
 
+
+
 .btn-group{
     line-height: 31px;
     opacity: 0.8;
@@ -64,7 +79,7 @@
 }
 
 .input-group{
-    height: 60px;
+    height: 50px;
     line-height: 20px;
     border-radius: 2px 2px 2px 2px;
     background-color: rgba(250, 250, 250, 1);
@@ -73,8 +88,7 @@
 }
 
 .Aboutus{
-    color: rgba(20, 83, 116, 1);
-    font-size: 36px;
+    font-size: 30px;
     text-align: center;
     font-family: 方正圆体-标准;
 }
