@@ -16,7 +16,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "    <tr>\n"+
                 "      <td><p>教师</p></td>\n"+
                 "      <td><p>"+iTeacher+"</p></td>\n"+
-                "    </tr>\n"
+                "    </tr>\n"+
                 "  </tbody>"+
                 "</table>"+
                 "<div class=\"row text-center\">"+
