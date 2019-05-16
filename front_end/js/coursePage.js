@@ -7,8 +7,8 @@ var enable_filter=-1;
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, thumb_up_num, hot) {
     //获取评论的评价-->点赞数目
     
-    var comment="<div>\n"+
-                "  <img src=\""+imageUrls+"\" width=\"86\" height=\"86\" class=\"col-md-2\" style=\"margin-left:8px\">\n"+
+    var comment="<div class=\"row\">\n"+
+                "  <img src=\""+imageUrls+"\" width=\"86\" height=\"86\" class=\"col-md-3 img-responsive\" style=\"margin-left:8px\">\n"+
                 "  <p class=\"userName col-md-4\">"+userName+"</p>\n"+
                 "</div>\n"+
                 "<table style=\"width:50%; margin-top:2px;border-bottom:1px #e4e4e4 solid\">\n"+
