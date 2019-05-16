@@ -47,15 +47,18 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
         imageTag[0].src = imageUrls;
         imageTag[0].width = "86";
         imageTag[0].height = "86";
-        imageTag[0].setAttribute("class", "col-md-2");
+        imageTag[0].setAttribute("class", "col-md-3");
         imageTag[0].setAttribute("style", "margin-left:8px");
         //暂时没有用户头像
+
 
         var pTags = commentGrid.getElementsByTagName("p");
         var userNameNode = document.createTextNode(userName);
         pTags[0].appendChild(userNameNode);
         pTags[0].setAttribute("class", "userName col-md-4");
 
+        var divTags = commentGrid.getElementsByTagName("div");
+        divTags[0].setAttribute("class", "row ");
         // insert information
         var term = document.createTextNode("学期");
         var teacher = document.createTextNode("教师");
