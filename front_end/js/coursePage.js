@@ -4,35 +4,10 @@ var filter;
 var teacher_list;
 var enable_filter=-1;
 //加载评论
-function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, hot) {
+function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, thumb_up_num, hot) {
     //获取评论的评价-->点赞数目
-    var thumb_up_num;
     var imgurl;
-    var ajax_success=$.ajax({
-        async: true,
-        type:"GET",
-        url: "http://testapi.ratemycourse.tk/getRateComment/",
-        dataType:"json",
-        data:{              
-            comment_ID: comment_ID
-        },
-        success:function(data){
-            //console.log(data);
-            //data=JSON.parse(data);
-            if(data.status=="1"){
-                thumb_up_num=data.body.rate;
-                //console.log(comment_ID+"thumv_up_num"+thumb_up_num);
-            }
-            else{
-              //alert(data.errMsg);
-              console.log(" fail to get thumb_up_num");
-            }
-            
-        },
-        error:function(data){
-          alert(JSON.stringify(data));
-        }
-    });
+    
 
     var img_success=$.ajax({
         async: true,
@@ -139,7 +114,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
         
         aTags[0].appendChild(document.createTextNode(" "));
         var num_node = document.createElement("nobr");
-        
+        $(num_node).text(thumb_up_num);
         aTags[0].appendChild(num_node);
         aTags[0].appendChild(document.createTextNode(" "));
 
@@ -160,9 +135,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
      
      //   console.log("successfully establish comment");
         
-        $.when(ajax_success).done(function () {
-            $(num_node).text(thumb_up_num);
-        });
+        
 
         $.when(img_success).done(function () {
             imageTag[0].src = imgurl;
@@ -316,7 +289,7 @@ function hotComment(course_id){
                 }
                 else{
                     for(var i=0;i<data.length;i++){
-                        $("#hot_comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, 1));
+                        $("#hot_comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, data.body[i].rate, 1));
                     }
                 }
             }
@@ -368,7 +341,7 @@ function toPage(pagenum){
         $("#comment").html("");//请空
         for(var i = comment_to_show; i < comment_num && i < (comment_to_show + comment_num_per_page); i++){
             //console.log(data.body[i]);
-            $("#comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, 0));
+            $("#comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, data.body[i].rate, 0));
         }
     }
     else{
@@ -381,7 +354,7 @@ function toPage(pagenum){
         $("#comment").html("");//请空
         for(var j = 0; j < comment_num && j < comment_num_per_page; j++){
             var i = filter["teacher"+enable_filter][j+comment_to_show];
-            $("#comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, 0));
+            $("#comment").append(generateGrid(i,"#", data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, data.body[i].rate, 0));
         }
     }
 
