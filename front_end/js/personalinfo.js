@@ -45,7 +45,7 @@ function getUserData(){
             //data=JSON.parse(data);
             console.log(data);
             if (data.status == "1"){
-                $("#name").text();
+                $("#name").text(data.body.username);
                 if(data.body.role=="T"){
                     $("#role_teacher").prop("checked",true);
                 }
