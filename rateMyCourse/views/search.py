@@ -171,7 +171,7 @@ def get_user_profile_photo(request):
     """
 
     try:
-        user_name = request.POST['username']
+        user_name = request.GET['username']
         user = User.objects.get(username=user_name)
         retlist = {}
         retlist['profile_photo'] = user.profile_photo
