@@ -74,7 +74,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
         else{
             commentGrid.id = "comment_"+number;
         }
-        commentGrid.innerHTML = ScreenGridHtml;
+        //commentGrid.innerHTML = ScreenGridHtml;
         $("#"+commentGrid.id).html(comment);
         /*
         //insert user image and name
