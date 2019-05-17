@@ -89,8 +89,8 @@
       <div class="row">
         <div class="col-md-8">
 
-          <div class="row align-items-center">
-            <div class="text-center float-md-none text-dark" id="course_name" style="font-size: 30px"></div>
+          <div class="row ">
+            <div class="col-md-4 offset-md-4 text-md-center text-dark" id="course_name" style="font-size: 30px"></div>
           </div>
           
           <div class="row">
@@ -133,6 +133,15 @@
           <!-- 选择教师-->
         <div class="col-md-4">
           <div class="row">
+            <div class="col-md-4">
+              <div class="text-dark text-md-center" id="rank_number"></div>
+            </div>
+            <div class="col-md-4 offset-md-2">
+              <a class="btn mybtn btn-default" id="toComment" href="#" onclick="AddComment()">撰写评价</a>
+            </div>
+          </div>
+
+          <div class="row">
             <p class="text-dark text-md-left col-md-4">推荐程度</p>
             <p class="text-center  col-md-8" id="recommend_score"></p>
           </div>
@@ -154,18 +163,6 @@
 
   <div class="container py-5">
     <div class="row" style="width:100%;">
-
-      <!--<div style="width:100%">-->
-
-      <div class="row show-grid" style="width:100%;margin-left:16px">
-        <!--<div class="col-md-8"><h3 class="text-dark"> 总分：{{course_scores}}</h3></div>-->
-        <div class="col-md-4"><a class="btn btn-outline-primary btn-lg btn-default" id="toComment" href="#"
-            onclick="AddComment()">撰写评价</a></div>
-      </div>
-
-
-
-      <br />
 
       <div style="margin-top: 20px;margin-bottom: 20px" class="card col-12">
         <div class="card-header">课程简介</div>
