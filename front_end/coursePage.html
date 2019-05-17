@@ -126,7 +126,22 @@
         </div>
 
         <div class="col-md-4 text-md-center">
-          111
+          <div class="row">
+              <p class="text-dark text-center col-md-4">推荐程度</p>
+              <p class="text-center  col-md-8" id="recommend_score"></p>
+          </div>
+          <div class="row">
+              <p class="text-dark text-center">难度</p>
+              <p class="text-center col-md-8" id="difficulty_score"></p>
+          </div>
+          <div class="row">
+              <p class="text-dark text-center">有趣程度</p>
+              <p class="text-center col-md-8" id="funny_score"></p>
+          </div>
+          <div class="row">
+              <p class="text-dark text-center">课程收获</p>
+              <p  class="text-center col-md-8" id="gain_score"></p>
+          </div>
         </div>
 
       </div>
@@ -151,16 +166,16 @@
               </tr>
               <tr>
                 <td>
-                  <p  class="text-center" id="difficulty_score" style="margin-top:8px"></p>
+                  
                 </td>
                 <td>
-                  <p class="text-center" id="funny_score" style="margin-top:8px"></p>
+                  
                 </td>
                 <td>
                   <p  class="text-center" id="gain_score" style="margin-top:8px"></p>
                 </td>
                 <td>
-                  <p class="text-center"  id="recommend_score" style="margin-top:8px"></p>
+                  
                 </td>
               </tr>
             </tbody>
@@ -213,6 +228,34 @@
       </div>
 
       <div class="col-md-12">评论</div>
+      <div class="card col-md-12" style="margin-top:8px" id="hot_comment_0">
+          <div class="row align-items-center">
+            <img src="https://i.loli.net/2019/05/16/5cdd6d7d5e4e946297.jpg" width="86" height="86" class="img-responsive mx-2 my-2">
+            <p class="my-4 col-md-4 ">test</p>
+            <p class="my-4 col-md-1">教师</p>
+            <p class="my-4 col-md-2">欧&nbsp; 攀</p>
+          </div>
+
+        
+
+          <div class="row text-center"> 
+            <p style="margin-top:16px;margin-left:16px;text-align:left; width:70%">热评测试</p>
+          </div>
+      
+          <div class="text-center"> 
+            <a>   
+              <i class="fa fa-thumbs-o-up" onclick="thumbUp('agree',35,this)"></i>
+                <nobr>31</nobr>
+              <i class="fa fa-thumbs-o-down" onclick="thumbUp('disagree',35,this)"></i>
+            </a>  <a>  </a>  <a>  </a>  <a>  </a>
+            <a>
+              <p style="float:left;text-align:left;margin-top:16px">2019-05-07 16:54</p>
+            </a>
+          </div>
+          <table>
+      
+          </table>
+        </div>
       <div class="col-md-12" id="comment"></div>
 
       <ul id="c_pagination" class="pagination" style="margin-top:20px;margin-bottom:-10px">
