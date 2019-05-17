@@ -8,17 +8,12 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
     //获取评论的评价-->点赞数目
     
     var comment="<div class=\"row\">\n"+
-                "  <img src=\""+imageUrls+"\" width=\"86\" height=\"86\" class=\"col-md-3 img-responsive\" style=\"margin-left:8px\">\n"+
+                "  <img src=\""+imageUrls+"\" width=\"86\" height=\"86\" class=\"img-responsive mx-2 my-2\">\n"+
                 "  <p class=\"userName col-md-4\">"+userName+"</p>\n"+
+                "  <p class=\"my-4 col-md-1\">教师</p>"+
+                "  <p class=\"my-4 col-md-2\">"+iTeacher+"</p>"+
                 "</div>\n"+
-                "<table style=\"width:50%; margin-top:2px;border-bottom:1px #e4e4e4 solid\">\n"+
-                "  <tbody>\n"+
-                "    <tr>\n"+
-                "      <td><p>教师</p></td>\n"+
-                "      <td><p>"+iTeacher+"</p></td>\n"+
-                "    </tr>\n"+
-                "  </tbody>"+
-                "</table>"+
+                "<hr class=\"my-1\" width=\"70%\">"+
                 "<div class=\"row text-center\">"+
                 "  <p style=\"margin-top:16px;margin-left:16px;text-align:left; width:70%\">"+text+"</p>\n"+
                 "</div>"+
