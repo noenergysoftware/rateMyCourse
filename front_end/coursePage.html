@@ -86,104 +86,77 @@
     </div>
     
     <div class="container py-5">
-      <div class="text-center text-dark" id="course_name"></div>
-      
       <div class="row">
-        <!--课程的信息-->
-        <div class="col-md-4 align-items-center">
-          <div class="row mt-4 mb-3">
-            <div class="col-md-4">开课学院</div>
-            <div class="col-md-8" id="course_school"></div>
-          </div>
-    
-          <div class="row my-3">
-            <div class="col-md-4">课程类别</div>
-            <div class="col-md-8" id="course_type"></div>
-          </div>
-    
-          <div class="row mt-3 mb-4">
-            <div class="col-md-4">学分</div>
-            <div class="col-md-8" id="course_credit"></div>
-          </div>
-        </div>
+        <div class="col-md-8">
 
-        <!-- 选择教师-->
+          <div class="row">
+            <div class="text-center text-dark" id="course_name"></div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6 align-items-center">
+              <div class="row mt-4 mb-3">
+                <div class="col-md-4">开课学院</div>
+                <div class="col-md-8" id="course_school"></div>
+              </div>
         
-        <div class="col-md-4">
-          <div class="row text-md-center">
-            <div class="col-md-6 offset-md-3 my-2">选择授课教师</div>
-          </div>
-          <div class="row my-4">
-            <div class="btn-group col-md-4 offset-md-2 text-center">
-              <a class="btn dropdown-toggle" data-toggle="dropdown"
-                id="buttonSelectTeacher">全部教师</a>
-              <ul id="teacher_list" class="dropdown-menu col-md-4" role="menu" style="height:214px;overflow:scroll">
-              
-              </ul>
+              <div class="row my-3">
+                <div class="col-md-4">课程类别</div>
+                <div class="col-md-8" id="course_type"></div>
+              </div>
+        
+              <div class="row mt-3 mb-4">
+                <div class="col-md-4">学分</div>
+                <div class="col-md-8" id="course_credit"></div>
+              </div>
             </div>
-            <div class="btn col-md-3 offset-md-2" onclick="filterTeacher()">确定</div>
+            
+            <div class="col-md-6">
+              <div class="row text-md-center">
+                <div class="col-md-6 offset-md-3 my-2">选择授课教师</div>
+              </div>
+              <div class="row my-4">
+                <div class="btn-group col-md-4 offset-md-2 text-center">
+                  <a class="btn dropdown-toggle" data-toggle="dropdown"
+                    id="buttonSelectTeacher">全部教师</a>
+                  <ul id="teacher_list" class="dropdown-menu col-md-4" role="menu" style="height:214px;overflow:scroll">
+                  
+                  </ul>
+                </div>
+                <div class="btn col-md-3 offset-md-2" onclick="filterTeacher()">确定</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="col-md-4">
-          <div class="row">
-              <p class="text-dark text-md-left col-md-4">推荐程度</p>
-              <p class="text-center  col-md-8" id="recommend_score"></p>
+        <div class="row">
+          <!--课程的信息-->
+    
+          <!-- 选择教师-->
+        
+          <div class="col-md-4">
+            <div class="row">
+                <p class="text-dark text-md-left col-md-4">推荐程度</p>
+                <p class="text-center  col-md-8" id="recommend_score"></p>
+            </div>
+            <div class="row">
+                <p class="text-dark text-md-left col-md-4">难易程度</p>
+                <p class="text-center col-md-8" id="difficulty_score"></p>
+            </div>
+            <div class="row">
+                <p class="text-dark text-md-left col-md-4">有趣程度</p>
+                <p class="text-center col-md-8" id="funny_score"></p>
+            </div>
+            <div class="row">
+                <p class="text-dark text-md-left col-md-4">课程收获</p>
+                <p  class="text-center col-md-8" id="gain_score"></p>
+            </div>
           </div>
-          <div class="row">
-              <p class="text-dark text-md-left col-md-4">难易程度</p>
-              <p class="text-center col-md-8" id="difficulty_score"></p>
-          </div>
-          <div class="row">
-              <p class="text-dark text-md-left col-md-4">有趣程度</p>
-              <p class="text-center col-md-8" id="funny_score"></p>
-          </div>
-          <div class="row">
-              <p class="text-dark text-md-left col-md-4">课程收获</p>
-              <p  class="text-center col-md-8" id="gain_score"></p>
-          </div>
+
         </div>
 
       </div>
-      <div class="text-dark text-center" style="width:25%; margin-top:10px" id="rank_number"></div>
-
-      <div style="width:100%; margin-top:30px">
-          <table style="width:100%; margin:auto">
-            <tbody>
-              <tr>
-                <td style="width:25%">
-                  <p class="text-dark text-center">推荐程度</p>
-                </td>
-                <td style="width:25%">
-                  <p class="text-dark text-center">难度</p>
-                </td>
-                <td style="width:25%">
-                  <p class="text-dark text-center">有趣程度</p>
-                </td>
-                <td style="width:25%">
-                    <p class="text-dark text-center">课程收获</p>
-                  </td>
-              </tr>
-              <tr>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                  <p  class="text-center" id="gain_score" style="margin-top:8px"></p>
-                </td>
-                <td>
-                  
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
     </div>
-  </div>
 
   <div class="container py-5">
     <div class="row" style="width:100%;">
@@ -270,7 +243,7 @@
     </div>
   </div>
 
-
+  </div>
   
 </body>
 
