@@ -1,109 +1,53 @@
-.Content-Main{
-    max-width: 500px;
-    margin: auto;
-    border: none;
-    border-radius: 5px; 
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-shadow: 1px 1px 1px #444;
-    color: #D3D3;
-    background: white;
+
+.no_padding{
+    padding-left: 0px;
+    padding-right: 0px;
 }
-.Content-Main h1{
-    padding: 8px 0px 40px 10px;
-    display: block;
-    border-bottom: 1px solid #444;
+.no_left_padding{
+    padding-left: 0px;
 }
-.text1{
-    margin-left: 3px;
+.no_right_padding{
+    padding-right: 0px;
 }
-.Content-Main label{
-    margin: 0px 0px 5px;
-    display: block;
+
+body{
+    background-color: rgba(247, 251, 252, 1);
+    text-align: center;
+    color: rgba(4, 73, 100, 0.86);
+    font-size: 16px;
+    font-family: SourceHanSansSC-regular;
+}   
+
+.personal_data{
+    color: rgba(4, 73, 100, 1);
+    font-size: 36px;
 }
-.fileInputContainer{
-    height: 99px;
-    width: 99px;
-    margin: 20px 20px 20px 20px ;
-    border: none;
-    overflow: hidden; 
-    position: relative; 
+
+.mybtn{
+    border-radius: 12px;
+    background-color: rgba(214, 230, 242, 1);
+    color: rgba(20, 83, 116, 1);
+    text-align: center;
+    font-family: Microsoft Yahei;
+    border: 1px solid rgba(150, 212, 236, 0.2);
 }
-.fileInput{
-    height: 106px;
-    border: none;
-    font-size: 300px;
-    opacity: 0;  
-    filter:alpha(opacity=0);
-    cursor: pointer;
-    position: absolute;
+
+
+#photo {
+    max-width:100%;
+    max-height:350px;
 }
-.Content-Main label>span{
-    width: 20%;
-    float: left;
-    text-align: right;
-    padding-right: 10px;
-    margin-top: 10px;
-    font-weight: bold;
+.img-preview-box {
+    text-align: center;
 }
-.Main-sex{
-    padding-right: 13px;
-    padding-bottom: 13px;
-    font-weight: bold;
-    line-height: 4px; 
+.img-preview-box > div {
+    display: inline-block;;
+    margin-right: 10px;
 }
-.Main-sex input[type=checkbox]{
-    margin-top:6px;
-    vertical-align:middle; 
+.img-preview {
+    overflow: hidden;
 }
-.Main-role{
-    padding-right: 13px;
-    padding-bottom: 13px;
-    font-weight: bold;
-    line-height: 4px; 
-}
-.Main-role input[type=checkbox]{
-    margin-top:6px;
-    vertical-align:middle; 
-}
-.Content-Main input[type="text"],.Content-Main input[type="email"],.Content-Main textarea{
-    height: 25px;
-    width: 70%;
-    line-height: 15px;
-    padding: 5px 0px 5px 5px; 
-    margin-bottom: 16px;
-    margin-right: 6px;
-    margin-top: 2px;
-    border: none;
-    border-radius:2px;
-    -webkit-border-radius:2px;
-    -moz-border-radius:2px;
-    outline: 0 none; 
-    background:  #DFDFDF;
-    color: #525252;
-}
-.Content-Main textarea{
+.img-preview-box .img-preview-md {
+    width: 100px;
     height: 100px;
-    width: 70%;
-    padding: 5px 0px 0px 5px;
-}
-.Content-Main .button{
-    padding: 8px 24px 8px 24px;
-    margin-bottom: 8px;
-    border: none;
-    border-radius: 4px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    font-weight: bold;
-    text-shadow: 1px 1px 1px #FFE477;
-    box-shadow: 1px 1px 1px  #3D3D3D;
-    -moz-box-shadow: 1px 1px 1px  #3D3D3D;
-    -webkit-box-shadow: 1px 1px 1px  #3D3D3D;
-    color: #585858;
-    background: #f6ff0a;
-}
-.Content-Main .button:hover{
-    color:  #333;
-    background-color:  #EBEBEB ;
 }

@@ -6,7 +6,7 @@ function infoCheck() {
     var errmsg = "";
     var result = true;
 
-    var name = $("#username").val();
+    /*var name = $("#username").val();
     var uPattern = /^[a-zA-Z0-9_]{3,16}$/;
     var check_name=uPattern.test(name);
     console.log(check_name);
@@ -14,7 +14,7 @@ function infoCheck() {
     if(check_name==false){
             errmsg=errmsg+"用户名格式错误\n";
             result=false;
-    }
+    }*/
 
     var length = document.getElementById("personalIntroduce");
     if (length.value.length > 256) {
@@ -45,7 +45,7 @@ function getUserData(){
             //data=JSON.parse(data);
             console.log(data);
             if (data.status == "1"){
-                $("#name").prop("placeholder",data.body.username);
+                $("#name").text(data.body.username);
                 if(data.body.role=="T"){
                     $("#role_teacher").prop("checked",true);
                 }
@@ -96,14 +96,14 @@ function modifier() {
         gender = "A";
     }
 
-    console.log($("#name").val()+"**"+role+"**"+gender+"**"+$("#personalIntroduce").val());
+    console.log($("#name").text()+"**"+role+"**"+gender+"**"+$("#personalIntroduce").val());
     $.ajax({
         async: true,
         type: "POST",
         url: "https://api.ratemycourse.tk/updateUser/",
         dataType: "text",
         data: {
-            username: $("#name").val(),
+            username: $("#name").text(),
             role: role,
             gender: gender,
             self_introduction: $("#personalIntroduce").val(),
@@ -174,97 +174,141 @@ $(document).ready(function () {
         }
     });
 
-    $("#upload_photo").click(function () {
-        uploadPhoto();
-    });
-
 })
 
-function ProcessFile(e) {
-    
-    
-}
-function contentLoaded() {
-    document.getElementById('upload').addEventListener('change', ProcessFile, false);
-}
-function uploadPhoto(){
-    if ($.cookie("username") == undefined){
-        alert("你还未登录，无法上传头像");
-        return;
-    }
-    var file = document.getElementById("upload").files[0];
-    console.log(file);
-    if (file && checkPhoto(file)) {
-        console.log("rignt");
-        formData=new FormData();
-        formData.append('smfile',file);
-        $.ajax({
-            type:"POST",
-            url:"https://sm.ms/api/upload",
-            data:formData,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (data) {
-                console.log(data);
-                if(data.code="success"){
-                    //上传成功
-                    $.ajax({
-                        type:"POST",
-                        url:"https://api.ratemycourse.tk/updateUserProfilePhoto/",
-                        data:{
-                            username: $.cookie("username"),
-                            profile_photo: data.data.url,
-                            csrfmiddlewaretoken:  $.cookie("csrftoken")
-                        },
-                        xhrFields: {
-                            withCredentials: true
-                        },
-                        success: function (data2) {
-                            console.log(data2);
-                            if(data2.status=="1"){
-                                alert("上传头像成功！");
-                                $('#close_modal').click();
-                                $("#user_profile_photo").prop("src",data.data.url); 
-                            }
-                            else{
-                                console.log(data2.errMsg);
-                                alert(data2.errMsg);
-                            }
-                        },
-                        error: function (data2) {
-                            console.log(data2);
-                            
+
+var initCropperInModal = function(img, input, modal){
+        var $image = img;
+        var $inputImage = input;
+        var $modal = modal;
+        var options = {
+            aspectRatio: 1, // 纵横比
+            viewMode: 2,
+            preview: '.img-preview' // 预览图的class名
+        };
+        // 模态框隐藏后需要保存的数据对象
+        var saveData = {};
+        var URL = window.URL || window.webkitURL;
+        var blobURL;
+        $modal.on('show.bs.modal',function () {
+            // 如果打开模态框时没有选择文件就点击“打开图片”按钮
+            /*if(!$inputImage.val()){
+                $inputImage.click();
+            }*/
+        }).on('shown.bs.modal', function () {
+            // 重新创建
+            $image.cropper( $.extend(options, {
+                ready: function () {
+                    // 当剪切界面就绪后，恢复数据
+                    if(saveData.canvasData){
+                        $image.cropper('setCanvasData', saveData.canvasData);
+                        $image.cropper('setCropBoxData', saveData.cropBoxData);
+                    }
+                }
+            }));
+        }).on('hidden.bs.modal', function () {
+            // 保存相关数据
+            saveData.cropBoxData = $image.cropper('getCropBoxData');
+            saveData.canvasData = $image.cropper('getCanvasData');
+            // 销毁并将图片保存在img标签
+            $image.cropper('destroy').attr('src',blobURL);
+        });
+        if (URL) {
+            $inputImage.change(function() {
+                var files = this.files;
+                var file;
+                if (!$image.data('cropper')) {
+                    return;
+                }
+                if (files && files.length) {
+                    file = files[0];
+                    if (/^image\/\w+$/.test(file.type)) {
+
+                        if(blobURL) {
+                            URL.revokeObjectURL(blobURL);
                         }
-                    });
+                        blobURL = URL.createObjectURL(file);
+
+                        // 重置cropper，将图像替换
+                        $image.cropper('reset').cropper('replace', blobURL);
+
+                        // 选择文件后，显示和隐藏相关内容
+                        $('.img-container').show();
+                        $('.img-preview-box').show();
+                        $('#changeModal .disabled').removeAttr('disabled').removeClass('disabled');
+                        $('#changeModal .tip-info').hide();
+
+                    } else {
+                        window.alert('请选择一个图像文件！');
+                    }
                 }
-                else{
-                    console.log(data.msg);
+            });
+        } else {
+            $inputImage.prop('disabled', true).addClass('disabled');
+        }
+    }
+
+
+    var sendPhoto = function(){
+        var photo = $('#photo').cropper('getCroppedCanvas', {
+            width: 100,
+            height: 100
+        }).toBlob(function (blob) {
+            formData=new FormData();
+            formData.append('smfile',blob);
+            $.ajax({
+                type:"POST",
+                url:"https://sm.ms/api/upload",
+                data:formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    console.log(data);
+                    if(data.code="success"){
+                        //上传成功
+                        $.ajax({
+                            type:"POST",
+                            url:"https://api.ratemycourse.tk/updateUserProfilePhoto/",
+                            data:{
+                                username: $.cookie("username"),
+                                profile_photo: data.data.url,
+                                csrfmiddlewaretoken:  $.cookie("csrftoken")
+                            },
+                            xhrFields: {
+                                withCredentials: true
+                            },
+                            success: function (data2) {
+                                console.log(data2);
+                                if(data2.status=="1"){
+                                    alert("上传头像成功！");
+                                    $('#close_modal').click();
+                                    $("#user_profile_photo").prop("src",data.data.url); 
+                                }
+                                else{
+                                    console.log(data2.errMsg);
+                                    alert(data2.errMsg);
+                                }
+                            },
+                            error: function (data2) {
+                                console.log(data2);
+                                
+                            }
+                        });
+                    }
+                    else{
+                        console.log(data.msg);
+                    }
+        
+                },
+                error: function (data) {
+                    console.log(data);
+                    
                 }
-    
-            },
-            error: function (data) {
-                console.log(data);
-                
-            }
+            });
         });
     }
-}
 
-function checkPhoto(file){
-    var errmsg = "";
-    var result = true;
-    console.log(file.name+"\n"+file.size);
-    var reg = /.*?\.(gif|png|jpg)/gi;
-    if(!reg.test(file.name.substr(file.name.lastIndexOf(".")))){
-        errmsg+="请选择jpg或png格式图片！";
-        result=false;
-    }
-    var size=parseInt(file.size);
-    if(size>=5242880){
-        errmsg+="图片过大，请选择不超过5MB大小的图片";
-        result=false;
-    }
-    console.log(errmsg);
-    return result;
-}
+    $(function(){
+        initCropperInModal($('#photo'),$('#photoInput'),$('#changeModal'));
+    });
