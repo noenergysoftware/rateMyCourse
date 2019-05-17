@@ -9,7 +9,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
     
     var comment="<div class=\"row align-items-center\">\n"+
                 "  <img src=\""+imageUrls+"\" width=\"86\" height=\"86\" class=\"img-responsive mx-2 my-2\">\n"+
-                "  <p class=\"userName col-md-4\">"+userName+"</p>\n"+
+                "  <p class=\"my-4 col-md-4\">"+userName+"</p>\n"+
                 "  <p class=\"my-4 col-md-1\">教师</p>"+
                 "  <p class=\"my-4 col-md-2\">"+iTeacher+"</p>"+
                 "</div>\n"+
