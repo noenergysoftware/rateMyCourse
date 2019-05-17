@@ -1,34 +1,46 @@
 
-.navbar-brand{
+.navbar-brand1{
     line-height: 20px;
     opacity: 0.31;
-    border-radius: 20px;
-    background-color: rgba(20, 83, 116, 1);
+    color: rgba(20, 83, 116, 1);
+    background-color: rgba(185, 215, 234, 1);
     text-align: center;
     border: 5px solid rgb(255, 255, 255);
-    
+    border-radius: 20px;
+    font-size: 30px;
+}
+
+.navbar-brand2{
+    line-height: 20px;
+    opacity: 0.31;
+    color: rgba(20, 83, 116, 1);
+    background-color: rgba(185, 215, 234, 1);
+    text-align: center;
+    border: 5px solid rgb(255, 255, 255);
+    border-radius: 20px;
+    font-size: 20px;
+    margin-left: 10px;
 }
 
 
 body{
+    text-align: center;
     background-color: rgb(247, 251, 252);
 }
 
 
-/*#navbarContainer{
-    background-color: rgb(154, 174, 197);
-}*/
 
 #announcement{
     position: fixed;
     bottom:270px;
     left: 302px;
     z-index: 23;
-    background-color: rgb(185, 215, 234);
+    background-color:rgba(185, 215, 235, 0.5);
     border-color: rgb(247, 251, 252);
     border-radius: 20px;
     height: 300px;
     width: 600px;
+    margin: 0 auto;
 }
 
 
@@ -44,3 +56,4 @@ body{
     font-size: 20px;
     font-family: 方正圆体-标准;
 }
+
