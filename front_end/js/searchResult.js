@@ -21,6 +21,15 @@ function adddiv(number){
     var x = document.createElement("div");
     x.setAttribute("class","container");
     x.setAttribute("id","course"+number);
+    /*添加一个类命为让css识别添加不同背景 */
+    if(number%2 == 1){
+      //x.setAttribute("class", "background1");
+      x.addClass("backround1");
+    }
+    else {
+      //x.setAttribute("class", "background2");
+      x.addClass("background2");
+    }
     var course_id=window.sessionStorage.getItem("course"+number+"course_ID");
 
     x.innerHTML="<div class=\"row\" >\n"+
