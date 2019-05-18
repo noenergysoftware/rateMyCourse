@@ -36,6 +36,10 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "</div>"+
                 "<div class=\"card\" id=\"child_box_"+comment_ID+"\">"+
                 "  <div class=\"card-body\">"+
+                "    <div id=\"comment_area_"+id+" \" style=\"display:none;\">"+
+                "      <textarea id=\"textarea_"+id+"\" class=\" \" \"></textarea>"+
+                "      <div id=\"make_child_comment_"+id+"\" class=\" \" \">发送</div>"+
+                "    </div>"+
                 "  </div>"+
                 "</div>";
 
@@ -152,20 +156,13 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
        
 }
 
-function add_child_comment(id){
-    if(document.getElementById("comment_area_"+id)){ 
-        if($("#comment_area_"+id).css("display") =="none"){
-            $("#comment_area_"+id).show();
-        }
-        else{
-            $("#comment_area_"+id).hide();
-        }
+function show_child_comment(id){
+    
+    if($("#comment_area_"+id).css("display") =="none"){
+        $("#comment_area_"+id).show();
     }
     else{
-        console.log("新建元素");
-        var comment_area=$("<div id=\"comment_area_"+id+" \">\n <textarea id=\"textarea_"+id+"\" class=\" \" \"></textarea></div>");
-        console.log($("#child_box_"+id).children());
-        $("#child_box_"+id).children().prepend(comment_area);
+        $("#comment_area_"+id).hide();
     }
     
 }
