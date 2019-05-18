@@ -648,6 +648,25 @@ $(document).ready(function () {
             if(data.status=="1"){
                 //alert(data.body.message);
                 //console.log("Successfully get comment of id "+coursenum);
+
+                //处理夹杂的子评论
+                for(var i=0; i<data.length; i++){
+                    var parent=data.body[i].parent_comment;
+                    if(parent != -1){
+                        var 
+                        //是子评论
+                        if(data["child_comment_of"+parent]=="undefined"){
+                            data["child_comment"+parent]=new Array();
+                            data["child_comment"+parent].push(data.body[i]);
+                        }
+                        else{
+                            data["child_comment"+parent].push(data.body[i]);
+                        }
+                        
+                    }
+                }
+                console.log(data);
+
                 window.sessionStorage.setItem("comment_num",data.length);
                 window.sessionStorage.setItem("comment_data",JSON.stringify(data));
                 
