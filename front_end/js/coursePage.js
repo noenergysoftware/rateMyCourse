@@ -651,6 +651,7 @@ $(document).ready(function () {
 
                 //处理夹杂的子评论
                 for(var i=0; i<data.length; i++){
+                    console.log("now is "+i);
                     var parent=data.body[i].parent_comment;
                     if(parent != "-1"){
                         //是子评论
