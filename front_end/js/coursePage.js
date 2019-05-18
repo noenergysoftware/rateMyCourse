@@ -663,7 +663,7 @@ $(document).ready(function () {
                         else{
                             data["child_comment_"+parent].push(data.body[i]);
                         }
-                        delete data.body[i];
+                        data.body.splice(i,1);
                     }
                 }
                 console.log(data);
