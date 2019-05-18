@@ -656,6 +656,7 @@ $(document).ready(function () {
                         //是子评论
                         console.log(data["child_comment_of"+parent]);
                         if(data["child_comment_of"+parent]==undefined){
+                            console.log(i+" is child");
                             data["child_comment"+parent]=new Array();
                             data["child_comment"+parent].push(data.body[i]);
                         }
