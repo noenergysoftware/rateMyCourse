@@ -42,12 +42,12 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
     var data = JSON.parse(window.sessionStorage.getItem("comment_data"));
     if(data["child_comment_"+comment_ID] != undefined){
         for(var i=0; i< data["child_comment_"+comment_ID].length; i++){
-
-            comment += "<div style=\"border:1px solid;\" class=\"my-2\">"+
-                       "<p class=\"my-2\">"+data["child_comment_"+comment_ID][i].username+"</p>\n"+
-                       "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][i].content+"</p>\n"+
-                       "<p class=\"my-2 text-md-right\">"+data["child_comment_"+comment_ID][i].editTime+"</p>\n"+
-                       "</div>";
+            var child_comment=$("<div style=\"border:1px solid;\" class=\"my-2\">"+
+            "<p class=\"my-2\">"+data["child_comment_"+comment_ID][i].username+"</p>\n"+
+            "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][i].content+"</p>\n"+
+            "<p class=\"my-2 text-md-right\">"+data["child_comment_"+comment_ID][i].editTime+"</p>\n"+
+            "</div>");
+            $("#child_box_"+id).children().append(child_comment);
         }
     }
     /*var ScreenGridHtml = `
