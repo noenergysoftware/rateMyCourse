@@ -36,7 +36,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "</div>"+
                 "<div class=\"card\" id=\"child_box_"+comment_ID+"\">"+
                 "  <div class=\"card-body\">"+
-                "    <div id=\"comment_area_"+comment_ID+" \" style=\"display:none;\">"+
+                "    <div id=\"comment_area_"+comment_ID+"\" style=\"display:none;\">"+
                 "      <textarea id=\"textarea_"+comment_ID+"\" class=\" \" \"></textarea>"+
                 "      <div id=\"make_child_comment_"+comment_ID+"\" class=\" \" \">发送</div>"+
                 "    </div>"+
@@ -157,7 +157,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
 }
 
 function showChildCommentTextarea(id){
-    console.log($("#comment_area_"+id).css);
+    console.log($("#comment_area_"+id).css());
     console.log($("#comment_area_"+id));
     if($("#comment_area_"+id).css("display") =="none"){
         $("#comment_area_"+id).show();
