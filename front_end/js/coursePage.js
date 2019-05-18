@@ -39,17 +39,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "  </div>"+
                 "</div>";
 
-    var data = JSON.parse(window.sessionStorage.getItem("comment_data"));
-    if(data["child_comment_"+comment_ID] != undefined){
-        for(var i=0; i< data["child_comment_"+comment_ID].length; i++){
-            var child_comment=$("<div style=\"border:1px solid;\" class=\"my-2\">"+
-            "<p class=\"my-2\">"+data["child_comment_"+comment_ID][i].username+"</p>\n"+
-            "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][i].content+"</p>\n"+
-            "<p class=\"my-2 text-md-right\">"+data["child_comment_"+comment_ID][i].editTime+"</p>\n"+
-            "</div>");
-            $("#child_box_"+comment_ID).children().append(child_comment);
-        }
-    }
+    
     /*var ScreenGridHtml = `
         <div>
             <img>   
@@ -376,6 +366,18 @@ function toPage(pagenum){
         for(var i = comment_to_show; i < comment_num && i < (comment_to_show + comment_num_per_page); i++){
             //console.log(data.body[i]);
             $("#comment").append(generateGrid(i, data.body[i].profile_photo, data.body[i].username, "#", data.body[i].teacher, 0, data.body[i].content, data.body[i].editTime, data.body[i].commentID, 0, data.body[i].rate, 0));
+            var comment_ID=data.body[i].commentID;
+            if(data["child_comment_"+comment_ID] != undefined){
+                for(var j=0; j< data["child_comment_"+comment_ID].length; j++){
+                    var child_comment=$("<div style=\"border:1px solid;\" class=\"my-2\">"+
+                    "<p class=\"my-2\">"+data["child_comment_"+comment_ID][j].username+"</p>\n"+
+                    "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][j].content+"</p>\n"+
+                    "<p class=\"my-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
+                    "</div>");
+                    $("#child_box_"+comment_ID).children().append(child_comment);
+                }
+            }
+        
         }
     }
     else{
