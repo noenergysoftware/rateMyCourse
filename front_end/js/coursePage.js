@@ -654,19 +654,19 @@ $(document).ready(function () {
                     var parent=data.body[i].parent_comment;
                     if(parent != "-1"){
                         //是子评论
-                        console.log(data["child_comment_"+parent]);
                         if(data["child_comment_"+parent]==undefined){
-                            console.log(i+" is child");
                             data["child_comment_"+parent]=new Array();
                             data["child_comment_"+parent].push(data.body[i]);
                         }
                         else{
                             data["child_comment_"+parent].push(data.body[i]);
                         }
+                        console.log(i+"is child");
                         data.body.splice(i,1);
+                        console.log(data);
                     }
                 }
-                console.log(data);
+                
 
                 window.sessionStorage.setItem("comment_num",data.length);
                 window.sessionStorage.setItem("comment_data",JSON.stringify(data));
