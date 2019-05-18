@@ -164,9 +164,15 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
 
 function add_child_comment(id){
     if($("#comment_area_"+id).length >0){
-        $("#comment_area_"+id).hide();
+        if($("#comment_area_"+id).css("display") =="none"){
+            $("#comment_area_"+id).show();
+        }
+        else{
+            $("#comment_area_"+id).hide();
+        }
     }
     else{
+        console.log("新建元素");
         var comment_area=$("<div id=\"comment_area_"+id+" \">\n <textarea id=\"textarea_"+id+"\" class=\" \" \"></textarea></div>");
         $("#child_box_"+id).children().prependTo(comment_area);
     }
