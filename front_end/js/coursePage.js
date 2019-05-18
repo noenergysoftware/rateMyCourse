@@ -153,9 +153,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
 }
 
 function add_child_comment(id){
-    console.log($("#comment_area_"+id));
-    console.log($("#comment_area_"+id).length);
-    if(document.getElementById("comment_area_"+id){ 
+    if(document.getElementById("comment_area_"+id)){ 
         if($("#comment_area_"+id).css("display") =="none"){
             $("#comment_area_"+id).show();
         }
