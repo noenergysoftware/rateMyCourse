@@ -174,7 +174,8 @@ function add_child_comment(id){
     else{
         console.log("新建元素");
         var comment_area=$("<div id=\"comment_area_"+id+" \">\n <textarea id=\"textarea_"+id+"\" class=\" \" \"></textarea></div>");
-        $("#child_box_"+id).children().prependTo(comment_area);
+        console.log($("#child_box_"+id).children());
+        $("#child_box_"+id).children().prepend(comment_area);
     }
     
 }
