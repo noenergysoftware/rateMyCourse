@@ -650,8 +650,8 @@ $(document).ready(function () {
                 //console.log("Successfully get comment of id "+coursenum);
 
                 //处理夹杂的子评论
-                for(var i=0; i<data.length; i++){
-                    console.log("now is "+i+"length is "+data.length);
+                for(var i=0; i<data.body.length; i++){
+                    console.log("now is "+i+"length is "+data.body.length);
                     var parent=data.body[i].parent_comment;
                     if(parent != "-1"){
                         //是子评论
@@ -664,6 +664,7 @@ $(document).ready(function () {
                         }
                         console.log(i+"is child");
                         data.body.splice(i,1);
+                        i--;
                         console.log(data);
                     }
                 }
