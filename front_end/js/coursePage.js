@@ -47,7 +47,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
             "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][i].content+"</p>\n"+
             "<p class=\"my-2 text-md-right\">"+data["child_comment_"+comment_ID][i].editTime+"</p>\n"+
             "</div>");
-            $("#child_box_"+id).children().append(child_comment);
+            $("#child_box_"+comment_ID).children().append(child_comment);
         }
     }
     /*var ScreenGridHtml = `
