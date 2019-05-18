@@ -157,7 +157,8 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
 }
 
 function showChildCommentTextarea(id){
-    
+    console.log($("#comment_area_"+id).attr("style"));
+
     if($("#comment_area_"+id).css("display") =="none"){
         $("#comment_area_"+id).show();
     }
