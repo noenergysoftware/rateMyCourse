@@ -23,6 +23,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "    <nobr>"+thumb_up_num+"</nobr>"+
                 "    <i class=\"fa fa-thumbs-o-down\" onclick=\"thumbUp(\'disagree\',"+comment_ID+",this)\"></i>"+
                 "  </a>"+
+                "    <p class=\"\" id=\"add_child_comment\" onclick=\"add_child_comment("+comment_ID+")\">评论</p>"+
                 "  <a>"+
                 "  </a>"+
                 "  <a>"+
@@ -32,20 +33,22 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "  <a>"+
                 "    <p style=\"float:left;text-align:left;margin-top:16px\">"+time+"</p>"+
                 "  </a>"+
+                "</div>"+
+                "<div class=\"card\" id=\"child_box_"+comment_ID+"\">"+
+                "  <div class=\"card-body\">"+
+                "  </div>"+
                 "</div>";
+
     var data = JSON.parse(window.sessionStorage.getItem("comment_data"));
     if(data["child_comment_"+comment_ID] != undefined){
-        comment += "<div class=\"card\">";
-        comment += "<div class=\"card-body\">";
         for(var i=0; i< data["child_comment_"+comment_ID].length; i++){
+
             comment += "<div style=\"border:1px solid;\" class=\"my-2\">"+
                        "<p class=\"my-2\">"+data["child_comment_"+comment_ID][i].username+"</p>\n"+
                        "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][i].content+"</p>\n"+
                        "<p class=\"my-2 text-md-right\">"+data["child_comment_"+comment_ID][i].editTime+"</p>\n"+
                        "</div>";
         }
-        comment += "</div>";
-        comment += "</div>";
     }
     /*var ScreenGridHtml = `
         <div>
@@ -158,6 +161,18 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
 
        
 }
+
+function add_child_comment(id){
+    if($("#comment_area_"+id).length >0){
+        $("#comment_area_"+id).hide();
+    }
+    else{
+        var comment_area=$("<div id=\"comment_area_"+id+" \">\n <textarea id=\"textarea_"+id+"\" class=\" \" \"></textarea></div>");
+        $("#child_box_"+id).children().prependTo(comment_area);
+    }
+    
+}
+
 
 //点赞
 function thumbUp(attitude, comment_ID, node){
