@@ -36,9 +36,9 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "</div>"+
                 "<div class=\"card\" id=\"child_box_"+comment_ID+"\">"+
                 "  <div class=\"card-body\">"+
-                "    <div id=\"comment_area_"+id+" \" style=\"display:none;\">"+
-                "      <textarea id=\"textarea_"+id+"\" class=\" \" \"></textarea>"+
-                "      <div id=\"make_child_comment_"+id+"\" class=\" \" \">发送</div>"+
+                "    <div id=\"comment_area_"+comment_ID+" \" style=\"display:none;\">"+
+                "      <textarea id=\"textarea_"+comment_ID+"\" class=\" \" \"></textarea>"+
+                "      <div id=\"make_child_comment_"+comment_ID+"\" class=\" \" \">发送</div>"+
                 "    </div>"+
                 "  </div>"+
                 "</div>";
