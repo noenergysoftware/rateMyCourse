@@ -36,7 +36,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
     var data = JSON.parse(window.sessionStorage.getItem("comment_data"));
     if(data["child_comment_"+comment_ID] != undefined){
         comment += "<div class=\"card\">";
-        comment += "<div class=\"card-body\">"'
+        comment += "<div class=\"card-body\">";
         for(var i=0; i< data["child_comment_"+comment_ID].length; i++){
             comment += "<div>"+
                        "<p class=\"my-2\">"+data["child_comment_"+comment_ID][i].username+"</p>\n"+
