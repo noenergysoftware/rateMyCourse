@@ -640,7 +640,7 @@ $(document).ready(function () {
         success:function(data){
             //data=JSON.parse(data);
             //	alert("ajax success");
-            console.log("totaldata")
+            //console.log("totaldata")
             console.log(data);
             //console.log(data.status)
             
@@ -651,7 +651,7 @@ $(document).ready(function () {
 
                 //处理夹杂的子评论
                 for(var i=0; i<data.body.length; i++){
-                    console.log("now is "+i+"length is "+data.body.length);
+                    //console.log("now is "+i+"length is "+data.body.length);
                     var parent=data.body[i].parent_comment;
                     if(parent != "-1"){
                         //是子评论
@@ -662,15 +662,17 @@ $(document).ready(function () {
                         else{
                             data["child_comment_"+parent].push(data.body[i]);
                         }
-                        console.log(i+"is child");
+                        //console.log(i+"is child");
+                        //删除这一条子评论
                         data.body.splice(i,1);
                         i--;
-                        console.log(data);
+                        //console.log(data);
                     }
                 }
+                //修改评论长度
                 data.length=data.body.length;
                 
-
+                console.log(data);
                 window.sessionStorage.setItem("comment_num",data.length);
                 window.sessionStorage.setItem("comment_data",JSON.stringify(data));
                 
@@ -702,8 +704,8 @@ $(document).ready(function () {
         for(var i=0; i<teacher_list.length; i++){
             filter["teacher"+i]=new Array();
         }
-        console.log("现在应该是空的，只是按照教师数目创建好了而已");
-        console.log(filter);
+        //console.log("现在应该是空的，只是按照教师数目创建好了而已");
+        //console.log(filter);
         for(var i=0; i < teacher.length; i++){
             for(var j=0; j < teacher_list.length; j++){
                 if(teacher[i]==teacher_list[j]){
