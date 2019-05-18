@@ -23,7 +23,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "    <nobr>"+thumb_up_num+"</nobr>"+
                 "    <i class=\"fa fa-thumbs-o-down\" onclick=\"thumbUp(\'disagree\',"+comment_ID+",this)\"></i>"+
                 "  </a>"+
-                "    <p class=\"\" id=\"add_child_comment\" onclick=\"add_child_comment("+comment_ID+")\">评论</p>"+
+                "    <p class=\"\" id=\"add_child_comment\" onclick=\" showChildCommentTextarea("+comment_ID+")\">评论</p>"+
                 "  <a>"+
                 "  </a>"+
                 "  <a>"+
@@ -156,7 +156,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
        
 }
 
-function show_child_comment(id){
+function showChildCommentTextarea(id){
     
     if($("#comment_area_"+id).css("display") =="none"){
         $("#comment_area_"+id).show();
