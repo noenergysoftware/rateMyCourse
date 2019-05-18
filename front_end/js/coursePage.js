@@ -38,10 +38,10 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
         comment += "<div class=\"card\">";
         comment += "<div class=\"card-body\">";
         for(var i=0; i< data["child_comment_"+comment_ID].length; i++){
-            comment += "<div>"+
+            comment += "<div style=\"border:1px solid;\" class=\"my-2\">"+
                        "<p class=\"my-2\">"+data["child_comment_"+comment_ID][i].username+"</p>\n"+
                        "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][i].content+"</p>\n"+
-                       "<p class=\"my-2\">"+data["child_comment_"+comment_ID][i].editTime+"</p>\n"+
+                       "<p class=\"my-2 text-md-right\">"+data["child_comment_"+comment_ID][i].editTime+"</p>\n"+
                        "</div>";
         }
         comment += "</div>";
