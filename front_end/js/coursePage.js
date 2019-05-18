@@ -668,6 +668,7 @@ $(document).ready(function () {
                         console.log(data);
                     }
                 }
+                data.length=data.body.length;
                 
 
                 window.sessionStorage.setItem("comment_num",data.length);
