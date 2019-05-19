@@ -32,7 +32,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "</div>"+
                 "<div class=\"card\" id=\"child_box_"+comment_ID+"\" style=\"width:70%;display:none;\">"+
                 "  <div class=\"card-body\">"+
-                "    <div id=\"comment_area_"+comment_ID+"\" style=\"display:none;\">"+
+                "    <div id=\"comment_area_"+comment_ID+"\">"+
                 "      <textarea id=\"textarea_"+comment_ID+"\" class=\" \" \"></textarea>"+
                 "      <div id=\"make_child_comment_"+comment_ID+"\" class=\" \" \">发送</div>"+
                 "    </div>"+
