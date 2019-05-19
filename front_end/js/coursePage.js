@@ -30,7 +30,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "    <i class=\"fa fa-thumbs-o-down\" onclick=\"thumbUp(\'disagree\',"+comment_ID+",this)\"></i>"+
                 "  </a>"+
                 "</div>"+
-                "<div class=\"card\" id=\"child_box_"+comment_ID+"\" style=\"width:70%\">"+
+                "<div class=\"card\" id=\"child_box_"+comment_ID+"\" style=\"width:70%;display:none;\">"+
                 "  <div class=\"card-body\">"+
                 "    <div id=\"comment_area_"+comment_ID+"\" style=\"display:none;\">"+
                 "      <textarea id=\"textarea_"+comment_ID+"\" class=\" \" \"></textarea>"+
