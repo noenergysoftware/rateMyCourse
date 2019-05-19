@@ -32,9 +32,11 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "</div>"+
                 "<div class=\"card\" id=\"child_box_"+comment_ID+"\" style=\"width:70%;display:none;\">"+
                 "  <div class=\"card-body\">"+
-                "    <div id=\"comment_area_"+comment_ID+"\">"+
-                "      <textarea id=\"textarea_"+comment_ID+"\" class=\" \" \"></textarea>"+
-                "      <div id=\"make_child_comment_"+comment_ID+"\" class=\" \" \">发送</div>"+
+                "  </div>"+
+                "  <div class=\"card-footer\">"+
+                "    <div id=\"comment_area_"+comment_ID+"\" class=\"row \">"+
+                "      <textarea id=\"textarea_"+comment_ID+"\" class=\"col-md-10\" \"></textarea>"+
+                "      <div id=\"make_child_comment_"+comment_ID+"\" class=\"btn col-md-2\" onclick=\"makeChildComment("+comment_ID+",\'"+iTeacher+"\')\">发送</div>"+
                 "    </div>"+
                 "  </div>"+
                 "</div>";
@@ -164,6 +166,58 @@ function showChildCommentTextarea(id){
     
 }
 
+
+function makeChildComment(id,teacher){
+    console.log($("#textarea_"+id).val());
+
+    if ($.cookie("username") == undefined){
+        alert("用户未登录！ 登录后即可发表评论");
+        return false;
+    }
+      
+    if($("#textarea_"+id).val().length > 2048){
+        alert("评价内容不能多于2048字");
+        return false
+    }
+    var coursenum=parseInt(window.sessionStorage.getItem("coursetoload"));
+    $.ajax({
+        async: true,
+        type: "POST",
+        dataType: "json",
+        url: "https://api.ratemycourse.tk/makeComment/",
+        data: {
+          username: $.cookie("username"),
+          course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID"),
+          content : $("#textarea_"+id).val(),
+          teacher_name : teacher,
+          parent_comment: id,
+          csrfmiddlewaretoken:  $.cookie("csrftoken")
+        },
+        xhrFields: {
+          withCredentials: true
+        },
+        success:function(data){
+          //data=JSON.parse(data);
+          //	alert("ajax success");
+          //console.log(data);
+          //console.log(data.status)
+          if(data.status=="1"){
+              //alert(data.body.message);
+              //console.log("Successfully makeComment "+coursenum);
+              //alert("评论成功！");
+              console.log("评论发送成功");
+              //window.setTimeout("location.href='./coursePage.html'", 1000);
+          }
+          else{
+              console.log("评论发送失败");
+              alert(data.errMsg);
+          }  
+        },
+        error:function(data){
+            alert(JSON.stringify(data));
+        }
+      });
+}
 
 //点赞
 function thumbUp(attitude, comment_ID, node){
@@ -339,7 +393,7 @@ function hotComment(course_id){
                                 "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][j].content+"</p>\n"+
                                 "<p class=\"my-2 mx-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
                                 "</div>");
-                                $("#child_box_"+comment_ID).children().append(child_comment);
+                                $("#child_box_"+comment_ID).children().first().append(child_comment);
                             }
                         }
                     }
@@ -402,7 +456,7 @@ function toPage(pagenum){
                     "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][j].content+"</p>\n"+
                     "<p class=\"my-2 mx-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
                     "</div>");
-                    $("#child_box_"+comment_ID).children().append(child_comment);
+                    $("#child_box_"+comment_ID).children().first().append(child_comment);
                 }
             }
         
@@ -427,7 +481,7 @@ function toPage(pagenum){
                     "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][j].content+"</p>\n"+
                     "<p class=\"my-2 mx-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
                     "</div>");
-                    $("#child_box_"+comment_ID).children().append(child_comment);
+                    $("#child_box_"+comment_ID).children().first().append(child_comment);
                 }
             }
         }
