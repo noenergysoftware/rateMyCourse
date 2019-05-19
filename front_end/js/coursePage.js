@@ -36,7 +36,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "  <div class=\"card-footer\">"+
                 "    <div id=\"comment_area_"+comment_ID+"\" class=\"row \">"+
                 "      <textarea id=\"textarea_"+comment_ID+"\" class=\"col-md-10\" \"></textarea>"+
-                "      <div id=\"make_child_comment_"+comment_ID+"\" class=\"btn col-md-2\" onclick=\"makeChildComment("+comment_ID+","+iTeacher+")\">发送</div>"+
+                "      <div id=\"make_child_comment_"+comment_ID+"\" class=\"btn col-md-2\" onclick=\"makeChildComment("+comment_ID+",\'"+iTeacher+"\')\">发送</div>"+
                 "    </div>"+
                 "  </div>"+
                 "</div>";
