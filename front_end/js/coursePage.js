@@ -393,7 +393,7 @@ function hotComment(course_id){
                                 "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][j].content+"</p>\n"+
                                 "<p class=\"my-2 mx-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
                                 "</div>");
-                                $("#child_box_"+comment_ID).children(":first").append(child_comment);
+                                $("#child_box_"+comment_ID).children().first().append(child_comment);
                             }
                         }
                     }
@@ -456,7 +456,7 @@ function toPage(pagenum){
                     "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][j].content+"</p>\n"+
                     "<p class=\"my-2 mx-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
                     "</div>");
-                    $("#child_box_"+comment_ID).children(":first").append(child_comment);
+                    $("#child_box_"+comment_ID).children().first().append(child_comment);
                 }
             }
         
@@ -481,7 +481,7 @@ function toPage(pagenum){
                     "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][j].content+"</p>\n"+
                     "<p class=\"my-2 mx-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
                     "</div>");
-                    $("#child_box_"+comment_ID).children().append(child_comment);
+                    $("#child_box_"+comment_ID).children().first().append(child_comment);
                 }
             }
         }
