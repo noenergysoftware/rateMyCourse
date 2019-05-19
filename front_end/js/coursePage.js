@@ -17,21 +17,17 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "<div class=\"row text-center\">"+
                 "  <p style=\"margin-top:16px;margin-left:16px;text-align:left; width:70%\">"+text+"</p>\n"+
                 "</div>"+
-                "<div class=\"text-center\">"+     
-                "  <a>"+
+                "<div class=\"row text-center\">"+
+                "  <a class=\"col-md-4\" >"+
+                "    <p style=\"float:left;text-align:left;\">"+time+"</p>"+
+                "  </a>"+
+                "  <a class=\"col-md-1 offset-md-3\">"+
+                "    <p  id=\"add_child_comment\" onclick=\" showChildCommentTextarea("+comment_ID+")\">评论</p>"+
+                "  </a>"+    
+                "  <a class=\"col-md-2 offset-md-2\">"+
                 "    <i class=\"fa fa-thumbs-o-up\" onclick=\"thumbUp(\'agree\',"+comment_ID+",this)\"></i>"+
                 "    <nobr>"+thumb_up_num+"</nobr>"+
                 "    <i class=\"fa fa-thumbs-o-down\" onclick=\"thumbUp(\'disagree\',"+comment_ID+",this)\"></i>"+
-                "  </a>"+
-                "    <p class=\"\" id=\"add_child_comment\" onclick=\" showChildCommentTextarea("+comment_ID+")\">评论</p>"+
-                "  <a>"+
-                "  </a>"+
-                "  <a>"+
-                "  </a>"+
-                "  <a>"+
-                "  </a>"+
-                "  <a>"+
-                "    <p style=\"float:left;text-align:left;margin-top:16px\">"+time+"</p>"+
                 "  </a>"+
                 "</div>"+
                 "<div class=\"card\" id=\"child_box_"+comment_ID+"\">"+
