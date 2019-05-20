@@ -38,7 +38,7 @@
 </head>
 
 <body id="body">
-  <div class="py-5" style="background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);">
+  
     <div style="padding-top:70px">
       <!-- Space used to modify navbar with fixed-top style-->
     </div>
@@ -86,119 +86,83 @@
     </div>
     
     <div class="container py-5">
-      <div class="text-center text-dark" id="course_name"></div>
-      
       <div class="row">
-        <!--课程的信息-->
-        <div class="col-md-4">
-          <div class="row">
-            <div class="col-md-4">开课学院</div>
-            <div class="col-md-8" id="course_school"></div>
-          </div>
-    
-          <div class="row">
-            <div class="col-md-4">课程类别</div>
-            <div class="col-md-8" id="course_type"></div>
-          </div>
-    
-          <div class="row">
-            <div class="col-md-4">学分</div>
-            <div class="col-md-8" id="course_credit"></div>
-          </div>
-        </div>
+        <div class="col-md-8">
 
-        <!-- 选择教师-->
+          <div class="row ">
+            <div class="col-md-4 offset-md-4 text-md-center text-dark" id="course_name" style="font-size: 30px"></div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6 align-items-center">
+              <div class="row mt-4 mb-3">
+                <div class="col-md-4">开课学院</div>
+                <div class="col-md-8" id="course_school"></div>
+              </div>
         
-        <div class="col-md-4">
-          <div class="row text-md-center">
-            <div class="col-md-6 offset-md-3">选择授课教师</div>
-          </div>
-          <div class="row">
-            <div class="btn-group col-md-4 offset-md-2 text-center">
-              <a class="btn dropdown-toggle" data-toggle="dropdown"
-                id="buttonSelectTeacher">全部教师</a>
-              <ul id="teacher_list" class="dropdown-menu col-md-4" role="menu" style="height:214px;overflow:scroll">
-              
-              </ul>
+              <div class="row my-3">
+                <div class="col-md-4">课程类别</div>
+                <div class="col-md-8" id="course_type"></div>
+              </div>
+        
+              <div class="row mt-3 mb-4">
+                <div class="col-md-4">学分</div>
+                <div class="col-md-8" id="course_credit"></div>
+              </div>
             </div>
-            <div class="btn col-md-3 offset-md-2" onclick="filterTeacher()">确定</div>
+            
+            <div class="col-md-6">
+              <div class="row text-md-center">
+                <div class="col-md-6 offset-md-3 my-2">选择授课教师</div>
+              </div>
+              <div class="row my-4">
+                <div class="btn-group col-md-4 offset-md-2 text-center">
+                  <a class="btn dropdown-toggle" data-toggle="dropdown"
+                    id="buttonSelectTeacher">全部教师</a>
+                  <ul id="teacher_list" class="dropdown-menu col-md-4" role="menu" style="height:214px;overflow:scroll">
+                  
+                  </ul>
+                </div>
+                <div class="btn col-md-3 offset-md-2" onclick="filterTeacher()">确定</div>
+              </div>
+            </div>
           </div>
         </div>
+<!--课程的信息-->
+    
+          <!-- 选择教师-->
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="text-dark text-md-center" id="rank_number"></div>
+            </div>
+            <div class="col-md-4 offset-md-2">
+              <a class="btn mybtn btn-default" id="toComment" href="#" onclick="AddComment()">撰写评价</a>
+            </div>
+          </div>
 
-        <div class="col-md-4 text-md-center">
           <div class="row">
-              <p class="text-dark text-center col-md-4">推荐程度</p>
-              <p class="text-center  col-md-8" id="recommend_score"></p>
+            <p class="text-dark text-md-left col-md-4">推荐程度</p>
+            <p class="text-center  col-md-8" id="recommend_score"></p>
           </div>
           <div class="row">
-              <p class="text-dark text-center">难度</p>
-              <p class="text-center col-md-8" id="difficulty_score"></p>
+            <p class="text-dark text-md-left col-md-4">难易程度</p>
+            <p class="text-center col-md-8" id="difficulty_score"></p>
           </div>
           <div class="row">
-              <p class="text-dark text-center">有趣程度</p>
-              <p class="text-center col-md-8" id="funny_score"></p>
+            <p class="text-dark text-md-left col-md-4">有趣程度</p>
+            <p class="text-center col-md-8" id="funny_score"></p>
           </div>
           <div class="row">
-              <p class="text-dark text-center">课程收获</p>
-              <p  class="text-center col-md-8" id="gain_score"></p>
+            <p class="text-dark text-md-left col-md-4">课程收获</p>
+            <p  class="text-center col-md-8" id="gain_score"></p>
           </div>
         </div>
-
       </div>
-      <div class="text-dark text-center" style="width:25%; margin-top:10px" id="rank_number"></div>
-
-      <div style="width:100%; margin-top:30px">
-          <table style="width:100%; margin:auto">
-            <tbody>
-              <tr>
-                <td style="width:25%">
-                  <p class="text-dark text-center">推荐程度</p>
-                </td>
-                <td style="width:25%">
-                  <p class="text-dark text-center">难度</p>
-                </td>
-                <td style="width:25%">
-                  <p class="text-dark text-center">有趣程度</p>
-                </td>
-                <td style="width:25%">
-                    <p class="text-dark text-center">课程收获</p>
-                  </td>
-              </tr>
-              <tr>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                  <p  class="text-center" id="gain_score" style="margin-top:8px"></p>
-                </td>
-                <td>
-                  
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
     </div>
-  </div>
 
   <div class="container py-5">
     <div class="row" style="width:100%;">
-
-      <!--<div style="width:100%">-->
-
-      <div class="row show-grid" style="width:100%;margin-left:16px">
-        <!--<div class="col-md-8"><h3 class="text-dark"> 总分：{{course_scores}}</h3></div>-->
-        <div class="col-md-4"><a class="btn btn-outline-primary btn-lg btn-default" id="toComment" href="#"
-            onclick="AddComment()">撰写评价</a></div>
-      </div>
-
-
-
-      <br />
 
       <div style="margin-top: 20px;margin-bottom: 20px" class="card col-12">
         <div class="card-header">课程简介</div>
@@ -228,34 +192,6 @@
       </div>
 
       <div class="col-md-12">评论</div>
-      <div class="card col-md-12" style="margin-top:8px" id="hot_comment_0">
-          <div class="row align-items-center">
-            <img src="https://i.loli.net/2019/05/16/5cdd6d7d5e4e946297.jpg" width="86" height="86" class="img-responsive mx-2 my-2">
-            <p class="my-4 col-md-4 ">test</p>
-            <p class="my-4 col-md-1">教师</p>
-            <p class="my-4 col-md-2">欧&nbsp; 攀</p>
-          </div>
-
-        
-
-          <div class="row text-center"> 
-            <p style="margin-top:16px;margin-left:16px;text-align:left; width:70%">热评测试</p>
-          </div>
-      
-          <div class="text-center"> 
-            <a>   
-              <i class="fa fa-thumbs-o-up" onclick="thumbUp('agree',35,this)"></i>
-                <nobr>31</nobr>
-              <i class="fa fa-thumbs-o-down" onclick="thumbUp('disagree',35,this)"></i>
-            </a>  <a>  </a>  <a>  </a>  <a>  </a>
-            <a>
-              <p style="float:left;text-align:left;margin-top:16px">2019-05-07 16:54</p>
-            </a>
-          </div>
-          <table>
-      
-          </table>
-        </div>
       <div class="col-md-12" id="comment"></div>
 
       <ul id="c_pagination" class="pagination" style="margin-top:20px;margin-bottom:-10px">
