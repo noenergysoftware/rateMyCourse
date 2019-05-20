@@ -80,11 +80,13 @@ function adddiv(number){
     /*var a=document.getElementById("c_pagination");
     a.parentNode.insertBefore(x , a);*/
     
+
+    
     //console.log("success");
     $.ajax({
         async: true,
         type:"GET",
-        url: "https://api.ratemycourse.tk/getRankByCourse/",
+        url: "https://testapi.ratemycourse.tk/getRankByCourse/",
         dataType:"json",
         data:{
           course_ID:course_id
@@ -246,7 +248,7 @@ $(document).ready(function(){
     ajax_success=$.ajax({
         async: true,
         type:"GET",
-        url: "https://api.ratemycourse.tk/getAllRank/",
+        url: "https://testapi.ratemycourse.tk/getAllRank/",
         dataType:"json",
         success:function(data){
             //console.log(data);
