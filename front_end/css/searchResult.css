@@ -1,0 +1,95 @@
+/*.navbar-brand{
+    line-height: 20px;
+    background-color: #3193B9 100%;
+    font-size: 30px;
+    font-family: 方正圆体-标准;
+    font-style: normal;
+    text-align: center;
+
+}*/
+.navbar-brand2{
+    line-height: 20px;
+    color: rgba(49, 147, 185, 1);
+    font-size: 30px;
+    text-align: center;
+    font-family: 方正圆体-标准;
+    font-style: normal;
+}
+
+.navbar-brand1{
+    line-height: 20px;
+    color: rgba(49, 147, 185, 0.61);
+    font-size: 20px;
+    text-align: center;
+    font-family: 方正圆体-标准;
+    font-style: normal;
+    margin-left: 10px;
+}
+
+/*课程名*/
+a.col-md-4{
+    font-size: 44px;
+    font-family: 方正圆体-标准;
+    color: rgba(4, 73, 100, 1);
+}
+
+/*评分人数*/
+.col-md-3{
+    font-size: 26px;
+    font-family: 方正圆体-标准;
+    color: rgba(4, 73, 100, 0.86);
+    font-style: normal;
+}
+
+/*学校*/
+.col-md-4{
+    font-size: 28px;
+    font-family: 方正圆体-标准;
+    color: rgba(4, 73, 100, 0.86);
+    font-style: normal;
+}
+
+/**/
+.col-md-8{
+    font-size: 28px;
+    font-family: 方正圆体-标准;
+    color: rgba(4, 73, 100, 0.86);
+    font-style: normal;
+}
+
+/*两种不同的背景色*/
+.container.background1{
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(255, 255, 255);
+    border-radius: 0px;
+}
+
+.container.background2{
+    background-color: rgba(150, 212, 236, 0.52);
+    border-color: rgba(150, 212, 236, 0.36);
+    border-radius: 0px;
+    border-style: solid;
+}
+
+/*页码*/
+.page-item{
+    font-size: 14px;
+    border-radius: 2px;
+    border-width: 0px;
+    border-style: solid;
+    position: relative;
+    background-color: rgb(240, 242, 245);
+}
+
+/*版权声明*/
+.col-md-12.mt-3{
+    background-color: rgba(150, 212, 236, 0.36);
+}
+
+/*copyright*/
+.text-center{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    color: rgba(49, 147, 185, 0.61);
+    font-style: normal;
+}

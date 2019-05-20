@@ -21,6 +21,15 @@ function adddiv(number){
     var x = document.createElement("div");
     x.setAttribute("class","container");
     x.setAttribute("id","course"+number);
+    /*添加一个类命为让css识别添加不同背景 */
+    if(number%2 == 1){
+      //x.setAttribute("class", "background1");
+      x.classList.add("background1");
+    }
+    else {
+      //x.setAttribute("class", "background2");
+      x.classList.add("background2");
+    }
     var course_id=window.sessionStorage.getItem("course"+number+"course_ID");
 
     x.innerHTML="<div class=\"row\" >\n"+
@@ -75,7 +84,7 @@ function adddiv(number){
     $.ajax({
         async: true,
         type:"GET",
-        url: "http://testapi.ratemycourse.tk/getRankByCourse/",
+        url: "https://api.ratemycourse.tk/getRankByCourse/",
         dataType:"json",
         data:{
           course_ID:course_id
@@ -123,7 +132,7 @@ function toPage(pagenum){
         return;
     }
     current_page=pagenum;
-    
+
     //2 获得到所要开始加载的课程序号
     var course_to_show=(pagenum-1)*course_num_per_page;
     
@@ -145,7 +154,7 @@ function toPage(pagenum){
             $("#rank_number_"+i).text("评分人数   "+score_data.body[id].rank_number);
         }
     });
-    $("#rank_number_0").text("评分人数   "+100);
+    
     //5 隐藏其余的页码以及上下页
     for(var i=1;i<=total_page_number;i++){
         $("#page"+i).hide();
@@ -237,7 +246,7 @@ $(document).ready(function(){
     ajax_success=$.ajax({
         async: true,
         type:"GET",
-        url: "http://testapi.ratemycourse.tk/getAllRank/",
+        url: "https://api.ratemycourse.tk/getAllRank/",
         dataType:"json",
         success:function(data){
             //console.log(data);
