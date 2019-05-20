@@ -227,6 +227,9 @@ class MakeRank(models.Model):
 
 
 class RankCache(models.Model):
+    """
+    排名缓存
+    """
     course = models.ForeignKey(
         Course,
         on_delete=models.CASCADE,
@@ -239,7 +242,11 @@ class RankCache(models.Model):
     position = models.FloatField(default=-1)
     people = models.IntegerField(default=0)
 
+
 class TeacherRankCache(models.Model):
+    """
+    排名缓存
+    """
     teacher = models.ForeignKey(
         Teacher,
         on_delete=models.CASCADE,
@@ -279,14 +286,14 @@ class Comment(models.Model):
                 (self.create_time +
                  datetime.timedelta(
                      seconds=8 *
-                     60 *
-                     60)).strftime("%Y-%m-%d %H:%M")),
+                             60 *
+                             60)).strftime("%Y-%m-%d %H:%M")),
             'edit_time': str(
                 (self.edit_time +
                  datetime.timedelta(
                      seconds=8 *
-                     60 *
-                     60)).strftime("%Y-%m-%d %H:%M")),
+                             60 *
+                             60)).strftime("%Y-%m-%d %H:%M")),
             'parent_comment': self.parent_comment,
             'teacher': str(
                 self.teacher.name)}
@@ -314,6 +321,9 @@ class MakeComment(models.Model):
 
 
 class HitCount(models.Model):
+    """
+    暂未使用
+    """
     name = models.CharField(max_length=50)
     count = models.BigIntegerField()
 
@@ -325,6 +335,9 @@ class HitCount(models.Model):
 
 
 class RateComment(models.Model):
+    """
+    记录赞踩信息，防止重复
+    """
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

@@ -1,19 +1,14 @@
 import json
-import urllib
-from urllib.parse import urlencode
-import smtplib
-from email.header import Header
-from email.mime.text import MIMEText
-from random import Random  # 用于生成随机码
 
-from django.conf import settings
-from django.http import HttpResponse, JsonResponse
 import django
-from rateMyCourse.models import *
+from django.http import HttpResponse, JsonResponse
+
 import rateMyCourse.views.authentication as auth
 import rateMyCourse.views.logs as logs
+from rateMyCourse.models import *
 
-def sign_up(request):
+
+def sign_up(request) -> HttpResponse:
     """
     注册用户。传入POST，应至少包含 username, password, mail 三个键 \n
     对于正常合法传入，新建用户并返回成功信息（status=1） \n
@@ -33,8 +28,8 @@ def sign_up(request):
             'errMsg': '未能获取到用户名，邮箱或密码',
         }), content_type="application/json")
     try:
-        ret=auth.txrequest(Ticket,Randstr,UserIP)
-        if ret[0]==-1:
+        ret = auth.txrequest(Ticket, Randstr, UserIP)
+        if ret[0] == -1:
             logs.writeLog("IP {0}#$signup failed".format(UserIP))
             return HttpResponse(json.dumps({
                 'status': -15,
@@ -76,14 +71,14 @@ def sign_up(request):
         }), content_type="application/json")
 
 
-def update_user(request):
+def update_user(request) -> HttpResponse:
     """
     注册用户。传入POST，应至少包含 username, 其他可选项是role, gender, self introduction。 \n
     对于正常合法传入，更新用户信息并返回成功信息（status=1） \n
     其他非法情况返回错误信息（status=-1） 错误信息保存在errMsg中 \n
     """
     try:
-        if not auth.auth_with_user(request,request.POST['username']):
+        if not auth.auth_with_user(request, request.POST['username']):
             return HttpResponse(json.dumps({
                 'status': -100,
                 'errMsg': 'cookies 错误',
@@ -116,7 +111,7 @@ def update_user(request):
             }), content_type="application/json")
 
 
-def sign_in(request):
+def sign_in(request) -> HttpResponse:
     '''
     用户登录：提供username或mail信息，password信息
     :param request:
@@ -152,21 +147,22 @@ def sign_in(request):
         }), content_type="application/json")
     else:
         # set cookies and sessions
-        logs.writeLog("{0}#${1}#$login success".format(datetime.date.today(),u.username))
-        request.session['auth_sess']=u.username
-        request.session.set_expiry(3600*2)
-        response=HttpResponse(json.dumps({
+        logs.writeLog("{0}#${1}#$login success".format(datetime.date.today(), u.username))
+        request.session['auth_sess'] = u.username
+        request.session.set_expiry(3600 * 2)
+        response = HttpResponse(json.dumps({
             'status': 1,
             'length': 1,
             'body': {
                 'username': u.username
             }
         }), content_type="application/json")
-        response.set_cookie('username',u.username,max_age=3600*2) # 2 hour
-        response.set_cookie('password',password,max_age=3600*2) # 2 hour
+        response.set_cookie('username', u.username, max_age=3600 * 2)  # 2 hour
+        response.set_cookie('password', password, max_age=3600 * 2)  # 2 hour
         return response
 
-def logout(request):
+
+def logout(request) -> HttpResponse:
     '''
     用户登出：提供username
     '''
@@ -195,6 +191,12 @@ def logout(request):
     else:
         return response
 
-def get_token(request):
+
+def get_token(request) -> JsonResponse:
+    """
+    获得 CSRF Token
+    :param request:
+    :return:
+    """
     token = django.middleware.csrf.get_token(request)
     return JsonResponse({'token': token})

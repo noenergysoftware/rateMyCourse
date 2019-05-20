@@ -1,18 +1,18 @@
 import json
-import smtplib
-from email.header import Header
-from email.mime.text import MIMEText
-from random import Random  # 用于生成随机码
 
-from django.conf import settings
 from django.http import HttpResponse
 
-from rateMyCourse.models import *
 import rateMyCourse.views.authentication as auth
+from rateMyCourse.models import *
 
 
-def update_user_profile_photo(request):
-
+def update_user_profile_photo(request) -> HttpResponse:
+    """
+    用户更新头像接口
+    我们使用了sm.ms的api，因此只保存了图床URL
+    :param request:
+    :return:
+    """
     try:
         if not auth.auth_with_user(request, request.POST['username']):
             return HttpResponse(json.dumps({
@@ -38,11 +38,12 @@ def update_user_profile_photo(request):
     }), content_type="application/json")
 
 
-def add_teacher(request):
+def add_teacher(request) -> HttpResponse:
     """
+    废弃的接口，请使用Django admin修改
     增加教师，需求教师的基本信息：姓名，职称
     """
-    try:
+    '''try:
         if not auth.auth(request):
             return HttpResponse(json.dumps({
                 'status': -100,
@@ -75,11 +76,16 @@ def add_teacher(request):
             }
         }), content_type="application/json")
     finally:
-        pass
+        pass'''
+    return HttpResponse(json.dumps({
+        'status': -11,
+        'errMsg': '废弃的接口',
+    }), content_type="application/json")
 
 
-def add_course(request):
+def add_course(request) -> HttpResponse:
     """
+    废弃的接口，请使用Django admin修改
     增加课程，需求课程的基本信息：名字，网站，ID，描述，类型，学分
     """
     try:
@@ -118,8 +124,9 @@ def add_course(request):
         pass
 
 
-def add_teach_course(request):
+def add_teach_course(request) -> HttpResponse:
     """
+    废弃的接口，请使用Django admin修改
     增加课授课信息，需求教师列表，课程，部门
     """
     try:
@@ -156,8 +163,9 @@ def add_teach_course(request):
         pass
 
 
-def add_select_course(request):
+def add_select_course(request) -> HttpResponse:
     """
+    废弃的接口，请使用Django admin修改
     增加选课信息，需求学生id，课程列表，部门列表
     """
     try:
@@ -195,8 +203,9 @@ def add_select_course(request):
         pass
 
 
-def del_select_course(request):
+def del_select_course(request) -> HttpResponse:
     """
+    废弃的接口，请使用Django admin修改
     去除选课信息，需求学生id，课程列表，部门列表
     """
     try:

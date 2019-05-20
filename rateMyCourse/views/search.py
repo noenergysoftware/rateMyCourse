@@ -1,18 +1,15 @@
-import hashlib
 import json
-from urllib import request, parse
 
 from django.http import HttpResponse
-from django.shortcuts import render, get_list_or_404, get_object_or_404
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
-from rateMyCourse.models import *
-import rateMyCourse.views.authentication as auth
 from django.views.decorators.cache import cache_page
+
+from rateMyCourse.models import *
+
 detail_names = ['有趣程度', '充实程度', '课程难度', '课程收获']
 
 
 @cache_page(60 * 60)
-def search_teacher(request):
+def search_teacher(request) -> HttpResponse:
     """
     搜索教师.
     教师姓名，空为任意教师
@@ -44,7 +41,7 @@ def search_teacher(request):
 
 
 @cache_page(60 * 60)
-def search_course(request):
+def search_course(request) -> HttpResponse:
     """
     搜索课程.
     课程姓名，空为任意课程
@@ -86,7 +83,7 @@ def search_course(request):
 
 
 @cache_page(60 * 60)
-def search_user(request):
+def search_user(request) -> HttpResponse:
     """
     搜索用户.
     用户姓名，空为任意用户
@@ -122,7 +119,7 @@ def search_user(request):
     }), content_type="application/json")
 
 
-def get_user_detail(request):
+def get_user_detail(request) -> HttpResponse:
     """
     搜索用户.
     用户姓名，空为任意用户
@@ -163,7 +160,7 @@ def get_user_detail(request):
     }), content_type="application/json")
 
 
-def get_user_profile_photo(request):
+def get_user_profile_photo(request) -> HttpResponse:
     """
     返回用户头像.
     用户姓名，空为任意用户
@@ -188,7 +185,7 @@ def get_user_profile_photo(request):
 
 
 @cache_page(60 * 60)
-def search_course_by_department(request):
+def search_course_by_department(request) -> HttpResponse:
     '''
     按所属部门搜索课程
     要求准确的部门名称，返回该部门的课程
@@ -235,7 +232,7 @@ def search_course_by_department(request):
 
 
 @cache_page(60 * 60)
-def get_department(request):
+def get_department(request) -> HttpResponse:
     '''
     得到部门列表
     '''

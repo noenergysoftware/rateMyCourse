@@ -24,6 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['DJANGOSK']
+# 为确保安全，我们将这一项存储在环境变量中，具体可联系本开发组（邮箱/qq/issue）
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -153,3 +154,19 @@ STATIC_URL = '/static/'
 FIXTURE_DIRS = [
     "test",
 ]
+# The path of django admin with nginx when debug is false may be confusing.
+# The following lines tries to solve it
+'''
+STATIC_ROOT = os.getcwd()+'/nginx/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)'''
+
+# Please ensure the project has the Permission to the path below
+# A memory based cache is also applicable
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/RMCCache/',
+    }
+}

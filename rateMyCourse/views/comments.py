@@ -2,15 +2,14 @@ import json
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
-from django.views.decorators.cache import cache_page
 
 import rateMyCourse.views.authentication as auth
 from rateMyCourse.models import *
 
 
-def make_comment(request):
+def make_comment(request) -> HttpResponse:
     """
-    发表评论，需要用户名，课程ID，以及内容
+    发表评论，需要用户名，课程ID，教师名字，以及内容。父评论id不是必须选项
     """
     try:
         if not auth.auth_with_user(request, request.POST['username']):
@@ -23,9 +22,9 @@ def make_comment(request):
         content = request.POST['content']
         teacher_name = request.POST['teacher_name']
         try:
-            parent_comment=request.POST['parent_comment']
+            parent_comment = request.POST['parent_comment']
         except:
-            parent_comment=-1
+            parent_comment = -1
     except BaseException:
         return HttpResponse(json.dumps({
             'status': -1,
@@ -34,7 +33,7 @@ def make_comment(request):
     else:
         try:
             c = Comment(
-                content=content,parent_comment=parent_comment,
+                content=content, parent_comment=parent_comment,
                 teacher=Teacher.objects.get(
                     name=teacher_name))
             c.save()
@@ -57,7 +56,7 @@ def make_comment(request):
             }), content_type="application/json")
 
 
-def get_comment_by_course(request):
+def get_comment_by_course(request) -> HttpResponse:
     """
     获取某节课的评论，需求课程号
     返回一个列表，每项为一条评论，时间顺序
@@ -69,7 +68,7 @@ def get_comment_by_course(request):
                 'errMsg': 'cookies 错误',
             }), content_type="application/json")'''
         course_ID = request.GET['course_ID']
-        rawList = MakeComment.objects.filter(course=Course.objects.get(course_ID=course_ID).id,)
+        rawList = MakeComment.objects.filter(course=Course.objects.get(course_ID=course_ID).id, )
 
         retList = []
         for i in rawList:
@@ -80,17 +79,17 @@ def get_comment_by_course(request):
                 (i.comment.create_time +
                  datetime.timedelta(
                      seconds=8 *
-                     60 *
-                     60)).strftime("%Y-%m-%d %H:%M"))
+                             60 *
+                             60)).strftime("%Y-%m-%d %H:%M"))
             rdict['createTime'] = str(
                 (i.comment.edit_time +
                  datetime.timedelta(
                      seconds=8 *
-                     60 *
-                     60)).strftime("%Y-%m-%d %H:%M"))
+                             60 *
+                             60)).strftime("%Y-%m-%d %H:%M"))
             rdict['commentID'] = i.id
             rdict['teacher'] = i.comment.teacher.name
-            rdict['parent_comment']=i.comment.parent_comment
+            rdict['parent_comment'] = i.comment.parent_comment
             rdict['rate'] = i.comment.rate
             rdict['profile_photo'] = i.user.profile_photo
             retList.append(rdict)
@@ -109,7 +108,8 @@ def get_comment_by_course(request):
     finally:
         pass
 
-def get_comment_by_teacher(request):
+
+def get_comment_by_teacher(request) -> HttpResponse:
     """
        获取某个老师所上过的课的评论，需求老师id
        返回一个列表，每项为一条评论，时间顺序
@@ -124,9 +124,9 @@ def get_comment_by_teacher(request):
         rawList0 = MakeComment.objects.filter(course=Course.objects.get(course_ID=course_ID).id, )
 
         teacher_ID = request.GET['teacher_ID']
-        rawList=[]
+        rawList = []
         for i in rawList0:
-            if i.comment.teacher_id==teacher_ID:
+            if i.comment.teacher_id == teacher_ID:
                 rawList.append(i)
         retList = []
         for i in rawList:
@@ -166,7 +166,8 @@ def get_comment_by_teacher(request):
     finally:
         pass
 
-def edit_comment(request):
+
+def edit_comment(request) -> HttpResponse:
     """
     编辑评论，需求评论ID,新的content
     """
@@ -183,7 +184,7 @@ def edit_comment(request):
 
         c.comment.teacher = Teacher.objects.get(
             name=request.POST['teacher_name'])
-        #c.comment.edit_time = datetime.datetime.now()
+        # c.comment.edit_time = datetime.datetime.now()
         c.comment.save()
     except BaseException:
         return HttpResponse(json.dumps({
@@ -198,7 +199,10 @@ def edit_comment(request):
         }), content_type="application/json")
 
 
-def rate_comment(request):
+def rate_comment(request) -> HttpResponse:
+    """
+    赞/踩评论，逻辑同百度贴吧逻辑
+    """
     try:
         if not auth.auth_with_user(request, request.POST['username']):
             return HttpResponse(json.dumps({
@@ -309,8 +313,14 @@ def rate_comment(request):
                         'body': {'message': "已取消反对评论"}
                     }), content_type="application/json")
 
-#@cache_page(5)
-def get_rate_comment(request):
+
+# @cache_page(5)
+def get_rate_comment(request) -> HttpResponse:
+    """
+    获取某条评论的点赞/踩数
+    :param request:
+    :return:
+    """
     try:
         comment_ID = request.GET['comment_ID']
         comment = Comment.objects.get(id=comment_ID)
@@ -327,8 +337,13 @@ def get_rate_comment(request):
         }), content_type="application/json")
 
 
-#@cache_page(60 * 60 * 2)
-def get_high_rate_comment(request):
+# @cache_page(60 * 60 * 2)
+def get_high_rate_comment(request) -> HttpResponse:
+    """
+    获取某课程的高赞评论。返回评论赞同最高且赞数绝对值大于0的至多三条。
+    :param request:
+    :return:
+    """
     try:
         course_ID = request.GET['course_ID']
         course = Course.objects.get(course_ID=course_ID)
@@ -346,7 +361,7 @@ def get_high_rate_comment(request):
         tlist.sort(key=lambda x: x[-1], reverse=True)
         retList = []
         for j in tlist:
-            i=MakeComment.objects.get(comment_id=j[0])
+            i = MakeComment.objects.get(comment_id=j[0])
             rdict = {}
             rdict['username'] = i.user.username
             rdict['content'] = i.comment.content
@@ -365,7 +380,7 @@ def get_high_rate_comment(request):
             rdict['commentID'] = i.id
             rdict['teacher'] = i.comment.teacher.name
             rdict['parent_comment'] = i.comment.parent_comment
-            rdict['rate']=i.comment.rate
+            rdict['rate'] = i.comment.rate
             rdict['profile_photo'] = i.user.profile_photo
             retList.append(rdict)
         return HttpResponse(json.dumps({

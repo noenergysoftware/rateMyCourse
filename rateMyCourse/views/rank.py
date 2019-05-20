@@ -1,15 +1,15 @@
 import json
+
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.views.decorators.cache import cache_page
 
-from rateMyCourse.models import *
-from django.core.exceptions import ObjectDoesNotExist
 import rateMyCourse.views.authentication as auth
 import rateMyCourse.views.calcRank as calcRank
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
+from rateMyCourse.models import *
 
 
-def make_rank(request):
+def make_rank(request) -> HttpResponse:
     """
     发表评分，需要用户名，课程ID，以及分数
     """
@@ -85,7 +85,7 @@ def make_rank(request):
 
 
 @cache_page(60 * 60)
-def get_rank_by_course(request):
+def get_rank_by_course(request) -> HttpResponse:
     """
     获取某节课的评分，需求课程号
     返回一个字典，关键字为四项评分的名字，内容为平均分
@@ -127,7 +127,12 @@ def get_rank_by_course(request):
 
 
 @cache_page(60 * 60)
-def get_all_rank(request):
+def get_all_rank(request) -> HttpResponse:
+    """
+    获得所有课程的评分（不是排名的评分）
+    :param request:
+    :return:
+    """
     all_course_ID = Course.objects.all()
     ret_dict = {}
     for course_ID in all_course_ID:
@@ -154,7 +159,12 @@ def get_all_rank(request):
     }), content_type="application/json")
 
 
-def get_rank_by_sorted_course(request):
+def get_rank_by_sorted_course(request) -> HttpResponse:
+    """
+    获取评价最高的课程
+    :param request:
+    :return:
+    """
     all_rank = RankCache.objects.all()
 
     sorted_course_dict = {}
@@ -176,7 +186,12 @@ def get_rank_by_sorted_course(request):
     }), content_type="application/json")
 
 
-def get_rank_by_sorted_teacher(request):
+def get_rank_by_sorted_teacher(request) -> HttpResponse:
+    """
+    获取评价最高的教师
+    :param request:
+    :return:
+    """
     all_rank = TeacherRankCache.objects.all()
 
     sorted_teacher_dict = {}
@@ -198,7 +213,13 @@ def get_rank_by_sorted_teacher(request):
     }), content_type="application/json")
 
 
-def flush(request):
+def flush(request) -> HttpResponse:
+    """
+    手动刷新评论接口。
+    工作环境请禁用此接口，并使用Django-cronjob 替代
+    :param request:
+    :return:
+    """
     calcRank.calc_rank()
     calcRank.calc_rank_teacher()
     return HttpResponse(json.dumps({
