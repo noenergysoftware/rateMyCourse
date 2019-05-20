@@ -306,8 +306,6 @@ function thumbUp(attitude, comment_ID, node){
                     },"fast");
                     $(i_tags[0]).removeClass("fa-thumbs-o-up");
                     $(i_tags[0]).addClass("fa-thumbs-up");
-                    $(node).removeClass("fa-thumbs-up");
-                    $(node).addClass("fa-thumbs-o-up");
                     var thumb_up_num=parseInt($(node).parent().children("nobr").text());
                     //console.log(thumb_up_num);
                     $(node).parent().children("nobr").text(thumb_up_num+2);
