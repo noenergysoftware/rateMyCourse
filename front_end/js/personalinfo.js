@@ -72,14 +72,14 @@ function modifier() {
     }
 
 
-    console.log($("#personalIntroduce").val().length);
+    console.log($("#personalIntroduce").text().length);
 
-    if($("#personalIntroduce").val().length>256){
+    if($("#personalIntroduce").text().length>256){
         alert("个人简介字数请不要超过256!");
         return;
     }
 
-    console.log($("#name").text()+"**"+role+"**"+gender+"**"+$("#personalIntroduce").val());
+    console.log($("#name").text()+"**"+role+"**"+gender+"**"+$("#personalIntroduce").text());
     $.ajax({
         async: true,
         type: "POST",
@@ -89,7 +89,7 @@ function modifier() {
             username: $("#name").text(),
             role: role,
             gender: gender,
-            self_introduction: $("#personalIntroduce").val(),
+            self_introduction: $("#personalIntroduce").text(),
             csrfmiddlewaretoken:  $.cookie("csrftoken")
         },
         xhrFields: {
