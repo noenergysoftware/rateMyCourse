@@ -2,34 +2,6 @@
 var gender;
 var role;
 var formData;
-function infoCheck() {
-    var errmsg = "";
-    var result = true;
-
-    /*var name = $("#username").val();
-    var uPattern = /^[a-zA-Z0-9_]{3,16}$/;
-    var check_name=uPattern.test(name);
-    console.log(check_name);
-
-    if(check_name==false){
-            errmsg=errmsg+"用户名格式错误\n";
-            result=false;
-    }*/
-
-    var length = document.getElementById("personalIntroduce");
-    if (length.value.length > 256) {
-        errmsg = errmsg + "个人简介字数超过256！\n";
-        result = false;
-    }
-
-    if (result == false) {
-        alert(errmsg);
-        return false;
-    }
-
-    return true;
-    
-}
 
 function getUserData(){
     var name = $.cookie("username");
@@ -65,7 +37,7 @@ function getUserData(){
                 else {
                     $("#gender_secret").prop("checked",true);
                 }
-                document.getElementById("personalIntroduce").value = data.body.self_introduction;
+                $("#personalIntroduce").text(data.body.self_introduction);
                 console.log(data.body.profile_photo);
                 $("#user_profile_photo").prop("src",data.body.profile_photo); 
             }else {
@@ -79,6 +51,9 @@ function getUserData(){
 }
 
 function modifier() {
+
+
+
 
     if ($("#role_teacher").prop("checked") == true){
         role = "T";
@@ -96,7 +71,15 @@ function modifier() {
         gender = "A";
     }
 
-    console.log($("#name").text()+"**"+role+"**"+gender+"**"+$("#personalIntroduce").val());
+
+    console.log($("#personalIntroduce").text().length);
+
+    if($("#personalIntroduce").text().length>256){
+        alert("个人简介字数请不要超过256!");
+        return;
+    }
+
+    console.log($("#name").text()+"**"+role+"**"+gender+"**"+$("#personalIntroduce").text());
     $.ajax({
         async: true,
         type: "POST",
@@ -106,7 +89,7 @@ function modifier() {
             username: $("#name").text(),
             role: role,
             gender: gender,
-            self_introduction: $("#personalIntroduce").val(),
+            self_introduction: $("#personalIntroduce").text(),
             csrfmiddlewaretoken:  $.cookie("csrftoken")
         },
         xhrFields: {
@@ -251,8 +234,8 @@ var initCropperInModal = function(img, input, modal){
 
     var sendPhoto = function(){
         var photo = $('#photo').cropper('getCroppedCanvas', {
-            width: 100,
-            height: 100
+            width: 300,
+            height: 300
         }).toBlob(function (blob) {
             formData=new FormData();
             formData.append('smfile',blob);

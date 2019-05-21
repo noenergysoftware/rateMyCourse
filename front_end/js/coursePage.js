@@ -3,6 +3,28 @@ var total_page_number;
 var filter;
 var teacher_list;
 var enable_filter=-1;
+var current_page=1;
+
+var page_dot = document.createElement("li");
+page_dot.setAttribute("class","page-item");
+page_dot.setAttribute("id","page_dot");
+page_dot.setAttribute("style","display:none");
+page_dot.innerHTML="<a class=\"page-link\" href=\"#c_pagination\">...</a>";
+
+var page_dot2 = document.createElement("li");
+page_dot2.setAttribute("class","page-item");
+page_dot2.setAttribute("id","page_dot2");
+page_dot2.setAttribute("style","display:none");
+page_dot2.innerHTML="<a class=\"page-link\" href=\"#c_pagination\">...</a>";
+
+
+function html2Escape(sHtml) {
+    return sHtml.replace(/[<>&"]/g,function(c){
+      return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];
+    });
+   }
+
+
 //加载评论
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, thumb_up_num, hot) {
     //获取评论的评价-->点赞数目
@@ -16,7 +38,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "</div>\n"+
                 "<hr class=\"my-1\" width=\"70%\">"+
                 "<div class=\"row text-center\">"+
-                "  <p style=\"margin-top:16px;margin-left:16px;text-align:left; width:80%\">"+text+"</p>\n"+
+                "  <p style=\"margin-top:16px;margin-left:16px;text-align:left; width:80%\">"+html2Escape(text)+"</p>\n"+
                 "</div>"+
                 "<div class=\"row text-center\">"+
                 "  <a class=\"col-md-4 col-12\" >"+
@@ -229,7 +251,7 @@ function makeChildComment(id,teacher){
 function thumbUp(attitude, comment_ID, node){
     if ($.cookie("username") == undefined){
         alert("请登录后再进行点赞或踩");
-        return;
+        return; 
     }
     
     $.ajax({
@@ -394,7 +416,7 @@ function hotComment(course_id){
                             for(var j=0; j< data["child_comment_"+comment_ID].length; j++){
                                 var child_comment=$("<div style=\"border:1px solid;\" class=\"my-2\">"+
                                 "<p class=\"my-2\">"+data["child_comment_"+comment_ID][j].username+"</p>\n"+
-                                "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][j].content+"</p>\n"+
+                                "<p class=\"my-2 col-md-12\">"+html2Escape(data["child_comment_"+comment_ID][j].content)+"</p>\n"+
                                 "<p class=\"my-2 mx-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
                                 "</div>");
                                 $("#child_box_"+comment_ID).children().first().append(child_comment);
@@ -440,6 +462,7 @@ function toPage(pagenum){
         return;
     }
 
+    current_page=pagenum;
     
     if(enable_filter == -1){
         //2 获取保存的data数据以及需要加载的评论序号
@@ -457,7 +480,7 @@ function toPage(pagenum){
                 for(var j=0; j< data["child_comment_"+comment_ID].length; j++){
                     var child_comment=$("<div style=\"border:1px solid;\" class=\"my-2\">"+
                     "<p class=\"my-2\">"+data["child_comment_"+comment_ID][j].username+"</p>\n"+
-                    "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][j].content+"</p>\n"+
+                    "<p class=\"my-2 col-md-12\">"+html2Escape(data["child_comment_"+comment_ID][j].content)+"</p>\n"+
                     "<p class=\"my-2 mx-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
                     "</div>");
                     $("#child_box_"+comment_ID).children().first().append(child_comment);
@@ -482,7 +505,7 @@ function toPage(pagenum){
                 for(var j=0; j< data["child_comment_"+comment_ID].length; j++){
                     var child_comment=$("<div style=\"border:1px solid;\" class=\"my-2\">"+
                     "<p class=\"my-2\">"+data["child_comment_"+comment_ID][j].username+"</p>\n"+
-                    "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][j].content+"</p>\n"+
+                    "<p class=\"my-2 col-md-12\">"+html2Escape(data["child_comment_"+comment_ID][j].content)+"</p>\n"+
                     "<p class=\"my-2 mx-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
                     "</div>");
                     $("#child_box_"+comment_ID).children().first().append(child_comment);
@@ -496,22 +519,47 @@ function toPage(pagenum){
         $("#page"+i).hide();
     }
     
-    if(pagenum<=3){
-        for(var i=1;i<=5 && i<=total_page_number ;i++){
-            $("#page"+i).show();
+    $("#page_dot").hide();
+    $("#page_dot2").hide();
+    if(pagenum <= 4){
+        if(total_page_number<=6){
+            for(var i=1; i<=total_page_number ;i++){
+              $("#page"+i).show();
+            }
+        }
+        else{
+            for(var i=1; i<=5 ;i++){
+                $("#page"+i).show();
+            }
+            $("#page_dot2").show();
+            $("#page"+total_page_number).show();
         }
     }
-    else if((total_page_number-pagenum)<=2){
-        for(var i=total_page_number;i>total_page_number-5 && i>=1 ;i--){
-            $("#page"+i).show();
+    else if(pagenum >= (total_page_number-3)){
+        if(total_page_number<=6){
+            for(var i=1; i<=total_page_number ;i++){
+              $("#page"+i).show();
+            }
+        }
+        else{
+            for(var i=total_page_number; i>total_page_number-5; i--){
+                $("#page"+i).show();
+            }
+            $("#page_dot").show();
+            $("#page1").show();
         }
     }
     else{
+        //此时 n>=9
         for(var i=pagenum-2;i<=pagenum+2 ;i++){
             $("#page"+i).show();
         }
+        $("#page_dot").show();
+        $("#page1").show();
+        $("#page_dot2").show();
+        $("#page"+total_page_number).show();
     }
-    //console.log("pagenum before last"+pagenum);
+
     if(pagenum>1){
       $("#lastpage").show();
     }
@@ -526,8 +574,6 @@ function toPage(pagenum){
       $("#nextpage").hide();
     }
     
-    $("#pagenum").html(pagenum);
-    
 }
 
 
@@ -536,10 +582,12 @@ function jumpPage(){
 }
 
 function nextPage(){
-    toPage(parseInt($("#pagenum").text())+1);
+  //  toPage(parseInt($("#pagenum").text())+1);
+    toPage(current_page+1);
 }
 function lastPage(){
-    toPage(parseInt($("#pagenum").text())-1);
+    //toPage(parseInt($("#pagenum").text())-1);
+    toPage(current_page-1);
 }
 
 function selectTeacher(name){
@@ -551,11 +599,11 @@ function genPage(data){
     //console.log(data);
     if(data.length==0){
         $("#noresult").show();
-        $("#jumpbutton").hide();
+      //  $("#jumpbutton").hide();
     }
     else{
         $("#noresult").hide();
-        $("#jumpbutton").show();
+       // $("#jumpbutton").show();
         
         /*for(var i=0;i<data.length;i++){
             var x=generateGrid(i,"#",data.body[i].username,"#",data.body[i].teacher,0,data.body[i].content,data.body[i].editTime,data.body[i].commentID,0,0);
@@ -596,6 +644,12 @@ function genPage(data){
                 $("#page"+i).hide();
             }
         }
+        if(total_page_number>=7){
+            var a=document.getElementById("page2");
+            a.parentNode.insertBefore(page_dot , a);
+            var b=document.getElementById("page"+total_page_number);
+            b.parentNode.insertBefore(page_dot2 , b);
+          }
         toPage(1);
     }
 }
@@ -658,7 +712,12 @@ function filterTeacher(){
                         $("#page"+i).hide();
                     }
                 }
-                
+                if(total_page_number>=7){
+                    var a=document.getElementById("page2");
+                    a.parentNode.insertBefore(page_dot , a);
+                    var b=document.getElementById("page"+total_page_number);
+                    b.parentNode.insertBefore(page_dot2 , b);
+                  }
                 toPage(1);
             }
         }
@@ -690,7 +749,9 @@ $(document).ready(function () {
         }
     });
 
-    
+    if(window.screen.width<768){
+        $("#c_pagination").addClass("pagination-sm");  
+      }
     //generateGrid("#", "aya", "2016", "ruan", 20, "good", "2018", "1", "1", "2");
     if ($.cookie("username") != undefined){
         document.getElementById("signIn").style.display = "none";
