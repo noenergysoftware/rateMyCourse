@@ -28,33 +28,41 @@
 
 /*课程名*/
 a.col-md-4{
+    position: absolute;
     font-size: 34px;
     font-family: 方正圆体-标准;
     color: rgba(4, 73, 100, 0.1);
+    z-index: 5;
 }
 
 /*评分人数*/
 .col-md-3{
+    position: absolute;
     font-size: 26px;
     font-family: 方正圆体-标准;
     color: rgba(4, 73, 100, 0.86);
     font-style: normal;
+    z-index: 5;
 }
 
 /*学校*/
 .col-md-4{
+    position: absolute;
     font-size: 28px;
     font-family: 方正圆体-标准;
     color: rgba(4, 73, 100, 0.86);
     font-style: normal;
+    z-index: 5;
 }
 
 /**/
 .col-md-8{
+    position: absolute;
     font-size: 28px;
     font-family: 方正圆体-标准;
     color: rgba(4, 73, 100, 0.86);
     font-style: normal;
+    z-index: 5;
 }
 
 /*两种不同的背景色*/
