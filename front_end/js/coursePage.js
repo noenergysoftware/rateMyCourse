@@ -4,6 +4,7 @@ var filter;
 var teacher_list;
 var enable_filter=-1;
 var current_page=1;
+
 var page_dot = document.createElement("li");
 page_dot.setAttribute("class","page-item");
 page_dot.setAttribute("id","page_dot");
@@ -748,7 +749,9 @@ $(document).ready(function () {
         }
     });
 
-    
+    if(window.screen.width<768){
+        $("#c_pagination").addClass("pagination-sm");  
+      }
     //generateGrid("#", "aya", "2016", "ruan", 20, "good", "2018", "1", "1", "2");
     if ($.cookie("username") != undefined){
         document.getElementById("signIn").style.display = "none";
