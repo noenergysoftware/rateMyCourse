@@ -7,11 +7,11 @@ var enable_filter=-1;
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, thumb_up_num, hot) {
     //获取评论的评价-->点赞数目
     
-    var comment="<div class=\"col-md-8 offset-md-2\">"+
+    var comment="<div class=\"col-md-10 offset-md-1\">"+
                 "<div class=\"row align-items-center\">\n"+
                 "  <img src=\""+imageUrls+"\" width=\"86\" height=\"86\" class=\"img-responsive mx-2 my-2\">\n"+
-                "  <p class=\"my-4 col-md-4\">"+userName+"</p>\n"+
-                "  <p class=\"my-4 col-md-1\">教师</p>"+
+                "  <p class=\"my-4 col-md-3\">"+userName+"</p>\n"+
+                "  <p class=\"my-4 col-md-2\">教师</p>"+
                 "  <p class=\"my-4 col-md-2\">"+iTeacher+"</p>"+
                 "</div>\n"+
                 "<hr class=\"my-1\" width=\"70%\">"+
@@ -22,7 +22,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "  <a class=\"col-md-4\" >"+
                 "    <p style=\"float:left;text-align:left;\">"+time+"</p>"+
                 "  </a>"+
-                "  <a class=\"col-md-1 offset-md-2\">"+
+                "  <a class=\"col-md-2 offset-md-1\">"+
                 "    <p  id=\"add_child_comment\" onclick=\" showChildCommentTextarea("+comment_ID+")\">评论</p>"+
                 "  </a>"+    
                 "  <a class=\"col-md-2\">"+
