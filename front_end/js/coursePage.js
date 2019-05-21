@@ -3,6 +3,14 @@ var total_page_number;
 var filter;
 var teacher_list;
 var enable_filter=-1;
+
+function html2Escape(sHtml) {
+    return sHtml.replace(/[<>&"]/g,function(c){
+      return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];
+    });
+   }
+
+
 //加载评论
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, thumb_up_num, hot) {
     //获取评论的评价-->点赞数目
@@ -16,7 +24,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "</div>\n"+
                 "<hr class=\"my-1\" width=\"70%\">"+
                 "<div class=\"row text-center\">"+
-                "  <p style=\"margin-top:16px;margin-left:16px;text-align:left; width:80%\">"+text+"</p>\n"+
+                "  <p style=\"margin-top:16px;margin-left:16px;text-align:left; width:80%\">"+html2Escape(text)+"</p>\n"+
                 "</div>"+
                 "<div class=\"row text-center\">"+
                 "  <a class=\"col-md-4 col-12\" >"+
@@ -394,7 +402,7 @@ function hotComment(course_id){
                             for(var j=0; j< data["child_comment_"+comment_ID].length; j++){
                                 var child_comment=$("<div style=\"border:1px solid;\" class=\"my-2\">"+
                                 "<p class=\"my-2\">"+data["child_comment_"+comment_ID][j].username+"</p>\n"+
-                                "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][j].content+"</p>\n"+
+                                "<p class=\"my-2 col-md-12\">"+html2Escape(data["child_comment_"+comment_ID][j].content)+"</p>\n"+
                                 "<p class=\"my-2 mx-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
                                 "</div>");
                                 $("#child_box_"+comment_ID).children().first().append(child_comment);
@@ -457,7 +465,7 @@ function toPage(pagenum){
                 for(var j=0; j< data["child_comment_"+comment_ID].length; j++){
                     var child_comment=$("<div style=\"border:1px solid;\" class=\"my-2\">"+
                     "<p class=\"my-2\">"+data["child_comment_"+comment_ID][j].username+"</p>\n"+
-                    "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][j].content+"</p>\n"+
+                    "<p class=\"my-2 col-md-12\">"+html2Escape(data["child_comment_"+comment_ID][j].content)+"</p>\n"+
                     "<p class=\"my-2 mx-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
                     "</div>");
                     $("#child_box_"+comment_ID).children().first().append(child_comment);
@@ -482,7 +490,7 @@ function toPage(pagenum){
                 for(var j=0; j< data["child_comment_"+comment_ID].length; j++){
                     var child_comment=$("<div style=\"border:1px solid;\" class=\"my-2\">"+
                     "<p class=\"my-2\">"+data["child_comment_"+comment_ID][j].username+"</p>\n"+
-                    "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][j].content+"</p>\n"+
+                    "<p class=\"my-2 col-md-12\">"+html2Escape(data["child_comment_"+comment_ID][j].content)+"</p>\n"+
                     "<p class=\"my-2 mx-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
                     "</div>");
                     $("#child_box_"+comment_ID).children().first().append(child_comment);
