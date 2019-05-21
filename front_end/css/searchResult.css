@@ -83,13 +83,13 @@ a.col-md-4{
 
 /*版权声明*/
 .col-md-12.mt-3{
-    background-color: rgba(150, 212, 236, 0.36);
+    background-color: rgb(187, 232, 250);
 }
 
 /*copyright*/
 .text-center{
     font-family: 'Times New Roman', Times, serif;
     font-size: 20px;
-    color: rgba(49, 147, 185, 0.61);
+    color: rgb(187, 232, 250);
     font-style: normal;
 }
