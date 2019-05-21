@@ -415,7 +415,7 @@ function AddComment(){
     window.setTimeout("location.href='./commentPage.html'", 0);
 }
 
-function raty(number,id){
+function raty(number,id,size){
     $(id).raty({
       score:number,
       starOn:"./resource/star-on.png",
@@ -739,10 +739,10 @@ $(document).ready(function () {
             console.log(data);
             //data=JSON.parse(data);
             if(data.status=="1"){
-              raty(data.body.difficulty_score,"#difficulty_score");
-              raty(data.body.funny_score,"#funny_score");
-              raty(data.body.gain_score,"#gain_score");
-              raty(data.body.recommend_score,"#recommend_score");
+              raty(data.body.difficulty_score,"#difficulty_score",34);
+              raty(data.body.funny_score,"#funny_score",34);
+              raty(data.body.gain_score,"#gain_score",34);
+              raty(data.body.recommend_score,"#recommend_score",40);
               $("#rank_number").text("评分人数   "+data.length);
             }
             else{
