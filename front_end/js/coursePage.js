@@ -441,13 +441,13 @@ function AddComment(){
     window.setTimeout("location.href='./commentPage.html'", 0);
 }
 
-function raty(number,id,size){
+function raty(number,id,size,read){
     $(id).raty({
       score:number,
       starOn:"./resource/star-on.png",
       starOff:"./resource/star-off.png",
       starHalf:"./resource/star-half.png",
-      readOnly:true,
+      readOnly:read,
       halfShow:true,
       size:size,
    })
@@ -804,10 +804,10 @@ $(document).ready(function () {
             console.log(data);
             //data=JSON.parse(data);
             if(data.status=="1"){
-              raty(data.body.difficulty_score,"#difficulty_score",34);
-              raty(data.body.funny_score,"#funny_score",34);
-              raty(data.body.gain_score,"#gain_score",34);
-              raty(data.body.recommend_score,"#recommend_score",40);
+              raty(data.body.difficulty_score,"#difficulty_score",34,true);
+              raty(data.body.funny_score,"#funny_score",34,true);
+              raty(data.body.gain_score,"#gain_score",34,true);
+              raty(data.body.recommend_score,"#recommend_score",40,true);
               $("#rank_number").text("评分人数   "+data.length);
             }
             else{
@@ -911,19 +911,25 @@ $(document).ready(function () {
         console.log(filter);
     });
 
+    
 })
 
 
-$("#rankModal").on('show.bs.modal',function(){
- 
-    //do something ……
-    console.log("111111111111111111111111111");
-    raty(5,"#difficulty",34);
-    raty(5,"#funny",34);
-    raty(5,"#gain",34);
-    raty(5,"#recommend",40);
-     
-})
+var initModal = function( modal){
+    
+    var $modal = modal;
+    // 模态框隐藏后需要保存的数据对象
+    $modal.on('show.bs.modal',function () {
+        raty(5,"#difficulty",34,false);
+        raty(5,"#funny",34,false);
+        raty(5,"#gain",34,false);
+        raty(5,"#recommend",40,false);
+    });
+}
+
+$(function(){
+    initModal($('#rankModal'));
+});
 
 function makeRank(){
     if ($.cookie("username") == undefined){

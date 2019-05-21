@@ -124,6 +124,10 @@
                 </div>
                 <div class="btn col-md-3 offset-md-2" onclick="filterTeacher()">确定</div>
               </div>
+
+              <div class="row ">
+                <div class="text-dark text-md-center" id="rank_number"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -132,12 +136,8 @@
           <!-- 选择教师-->
         <div class="col-md-4">
           <div class="row">
-            <div class="col-md-4">
-              <div class="text-dark text-md-center" id="rank_number"></div>
-            </div>
-            <div class="col-md-4 offset-md-2">
-              <a class="btn mybtn btn-default" id="toComment" href="#" onclick="AddComment()">撰写评价</a>
-            </div>
+            
+            
           </div>
 
           <div class="row" style="font-size: 20px">
@@ -156,6 +156,9 @@
             <p class="text-dark text-md-left col-md-5 col-5">课程收获</p>
             <p  class="text-center col-md-7 col-7" id="gain_score"></p>
           </div>
+          <div class="row">
+            <button type="button" class="col-md-4 offset-md-4 btn mybtn btn-default" data-toggle="modal" data-target="#rankModal" id="show_modal">星级评分</button>
+          </div>
         </div>
       </div>
     </div>
@@ -170,10 +173,15 @@
 
       <!--
       -->
-
-      <div class="col-md-10 offset-md-1" id="hot_comment">热门评论
-        <div class="col-md-12" id="no_hot_comment" style="display:none">暂无热评</div>
+      <div class="row col-md-12 align-items-center">
+          <div class="col-md-6 offset-md-1 ">热门评论</div>
+          <div class="col-md-2 offset-md-3">
+            <a class="btn mybtn btn-default" id="toComment" href="#" onclick="AddComment()">撰写评价</a>
+          </div>
       </div>
+      <div class="col-md-10 offset-md-1" id="no_hot_comment" style="display:none">暂无热评</div>
+      <div class="col-md-10 offset-md-1" id="hot_comment"></div>
+      
 
       <div class="col-md-10 offset-md-1">评论</div>
       <div class="col-md-10 offset-md-1" id="comment"></div>
@@ -215,7 +223,7 @@
     </div>
   </div>
   <hr>
-  <button type="button" class="btn btn-default mybtn float-md-none ml-0 ml-md-5" data-toggle="modal" data-target="#rankModal" id="show_modal">上传头像</button>
+  
 
   <div class="container ">
     <div id="commentDiv"></div>

@@ -56,7 +56,7 @@ body{
     
     min-height: 20px; 
     max-height: 300px;
-    
+    _height: 120px; 
     margin-left: auto; 
     margin-right: auto; 
     padding: 3px; 
