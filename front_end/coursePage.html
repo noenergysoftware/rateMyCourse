@@ -175,8 +175,8 @@
       -->
       <div class="row col-md-12 align-items-center">
           <div class="col-md-6 offset-md-1 ">热门评论</div>
-          <div class="col-md-2 offset-md-3">
-            <a class="btn mybtn btn-default" id="toComment" href="#" onclick="AddComment()">撰写评价</a>
+          <div class="col-md-3 offset-md-2">
+            <button type="button" class="col-md-6 offset-md-3  btn mybtn btn-default" data-toggle="modal" data-target="#commentModal" >撰写评价</button>
           </div>
       </div>
       <div class="col-md-10 offset-md-1" id="no_hot_comment" style="display:none">暂无热评</div>
@@ -273,7 +273,43 @@
             </div>
         </div>
     </div>
-</div>
+  </div>
+
+
+
+  <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content" >
+              <div class="modal-header">
+                  <h4 class="modal-title float-md-none">
+                      发表评价
+                  </h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              </div>
+              <div class="modal-body">
+                  <div class="row" >
+                    <div class="btn-group">
+                      <a class="btn mybtn btn-light dropdown-toggle my-1 ml-4" data-toggle="dropdown" id="buttonSelectTeacher2">选择教师</a>
+                      <ul id="teacherlist" class="dropdown-menu" role="menu">
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="col-md-10 offset-md-1">
+                      <textarea class="w-100 my-2" id="new_comment" rows="15"></textarea>
+                    </div>
+         
+                  
+              </div>
+              <div class="modal-footer">
+                  <div class="container">
+                  <button class="btn mybtn col-md-2 offset-md-7 mb-2" onclick="makeComment();">提交</button>
+                  <button class="btn mybtn col-md-2 mb-2" aria-hidden="true" data-dismiss="modal">取消</button>
+              </div>
+              </div>
+          </div>
+      </div>
+    </div>
   
 </body>
 

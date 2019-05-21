@@ -915,7 +915,7 @@ $(document).ready(function () {
 })
 
 
-var initModal = function( modal){
+var initRankModal = function( modal){
     
     var $modal = modal;
     // 模态框隐藏后需要保存的数据对象
@@ -926,9 +926,36 @@ var initModal = function( modal){
         raty(5,"#recommend",40,false);
     });
 }
+var initCommentModal = function( modal){
+    
+    var $modal = modal;
+    // 模态框隐藏后需要保存的数据对象
+    $modal.on('show.bs.modal',function () {
+        var coursenum=parseInt(window.sessionStorage.getItem("coursetoload"));
+        $("#course_name").html(window.sessionStorage.getItem("course"+coursenum+"name"));
+        var teacher_list=window.sessionStorage.getItem("course"+coursenum+"teacher_list").split(',');
+        //var teacher_list=["教师1"];
+        var data="";
+        for(var i=0; i<teacher_list.length;i++){
+            data+="<li>\n"+
+                    "  <a class=\"dropdown-item\" herf=\"#\" onclick=\"selectTeacher2($(this).text())\">"+teacher_list[i]+"</a>\n"+
+                    "</li>\n";
+            console.log(teacher_list[i]);
+            if(i<(teacher_list.length-1)){
+            data+= "<div class=\"dropdown-divider\"></div>"
+            }
+            $("#teacherlist").html(data);
+        }
+        
+    });
+}
+function selectTeacher2(name){
+    $("#buttonSelectTeacher2").html(name); 
+  }
 
 $(function(){
-    initModal($('#rankModal'));
+    initRankModal($('#rankModal'));
+    initCommentModal($('#commentModal'));
 });
 
 function makeRank(){
@@ -936,7 +963,7 @@ function makeRank(){
         alert("用户未登录！ 登录后即可发表评分");
         return false;
       }
-
+    var coursenum=parseInt(window.sessionStorage.getItem("coursetoload"));
     $.ajax({
         async: true,
         type: "POST",
@@ -964,7 +991,7 @@ function makeRank(){
               //console.log("Successfully makeComment "+coursenum);
               alert("评分发送成功！");
               console.log("评分发送成功");
-              $('#close_modal').click();
+              $('#rankModal').modal('hide');
           }
           else{
               console.log($("#difficulty_score").raty("getScore"));
@@ -976,4 +1003,65 @@ function makeRank(){
             alert(JSON.stringify(data));
         }
       });
+}
+
+function makeComment(){
+    if ($.cookie("username") == undefined){
+        alert("用户未登录！ 登录后即可发表评论");
+        return false;
+      }
+      
+      if($("#new_comment").val().length < 10){
+        alert("评价内容至少需要10字");
+           return false
+      }
+      else if($("#new_comment").val().length > 2048){
+        alert("评价内容不能多于2048字");
+           return false
+      }
+      else if($("#buttonSelectTeacher2").text()=="选择教师"){
+        alert("必须要选择任课教师");
+        return false
+      }
+      var coursenum=parseInt(window.sessionStorage.getItem("coursetoload"));
+      console.log(window.sessionStorage.getItem("course"+coursenum+"course_ID")+" "+$("#new_comment").val()+" "+$("#buttonSelectTeacher2").text());
+      var teacher=$("#buttonSelectTeacher2").text();
+      console.log(teacher);
+      $.ajax({
+          async: true,
+          type: "POST",
+          dataType: "json",
+          url: "http://testapi.ratemycourse.tk/makeComment/",
+          data: {
+            username: $.cookie("username"),
+            course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID"),
+            content : $("#new_comment").val(),
+            teacher_name : $("#buttonSelectTeacher2").text(),
+            csrfmiddlewaretoken:  $.cookie("csrftoken")
+          },
+          xhrFields: {
+            withCredentials: true
+          },
+          success:function(data){
+            //data=JSON.parse(data);
+            //	alert("ajax success");
+            //console.log(data);
+            //console.log(data.status)
+            if(data.status=="1"){
+                //alert(data.body.message);
+                //console.log("Successfully makeComment "+coursenum);
+                //alert("评论成功！");
+                console.log("评论发送成功");
+                //window.setTimeout("location.href='./coursePage.html'", 1000);
+            }
+            else{
+                console.log("评论发送失败");
+                alert(data.errMsg);
+            }  
+          },
+          error:function(data){
+              alert(JSON.stringify(data));
+          }
+        });
+
 }
