@@ -2,34 +2,6 @@
 var gender;
 var role;
 var formData;
-function infoCheck() {
-    var errmsg = "";
-    var result = true;
-
-    /*var name = $("#username").val();
-    var uPattern = /^[a-zA-Z0-9_]{3,16}$/;
-    var check_name=uPattern.test(name);
-    console.log(check_name);
-
-    if(check_name==false){
-            errmsg=errmsg+"用户名格式错误\n";
-            result=false;
-    }*/
-
-    var length = document.getElementById("personalIntroduce");
-    if (length.value.length > 256) {
-        errmsg = errmsg + "个人简介字数超过256！\n";
-        result = false;
-    }
-
-    if (result == false) {
-        alert(errmsg);
-        return false;
-    }
-
-    return true;
-    
-}
 
 function getUserData(){
     var name = $.cookie("username");
@@ -80,6 +52,9 @@ function getUserData(){
 
 function modifier() {
 
+
+
+
     if ($("#role_teacher").prop("checked") == true){
         role = "T";
     }else if($("#role_student").prop("checked") == true){
@@ -94,6 +69,11 @@ function modifier() {
         gender = "F";
     }else {
         gender = "A";
+    }
+
+    if($("#personalIntroduce").val().length>256){
+        alert("个人简介字数请不要超过256!");
+        return;
     }
 
     console.log($("#name").text()+"**"+role+"**"+gender+"**"+$("#personalIntroduce").val());
