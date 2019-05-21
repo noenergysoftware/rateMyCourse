@@ -71,6 +71,9 @@ function modifier() {
         gender = "A";
     }
 
+
+    console.log($("#personalIntroduce").val().length);
+
     if($("#personalIntroduce").val().length>256){
         alert("个人简介字数请不要超过256!");
         return;
