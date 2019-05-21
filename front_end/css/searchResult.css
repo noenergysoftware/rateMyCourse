@@ -7,6 +7,13 @@
     text-align: center;
 
 }*/
+/*搜索结果*/
+#count{
+    color: rgba(123, 216, 251, 1);
+    text-align: center;
+    font-family: 方正圆体-标准;
+    margin: 0 auto;
+}
 .navbar-brand2{
     line-height: 20px;
     color: rgba(49, 147, 185, 1);
@@ -30,30 +37,30 @@
 a.col-md-4{
     font-size: 30px;
     font-family: 方正圆体-标准;
-    color: rgba(6, 56, 97, 0.86);
+    color: rgba(6, 56, 97, 1);
 }
 
 /*评分人数*/
 .col-md-3{
-    font-size: 26px;
+    font-size: 20px;
     font-family: 方正圆体-标准;
-    color: rgba(4, 73, 100, 0.86);
+    color: rgba(6, 56, 97, 0.86);
     font-style: normal;
 }
 
 /*学校*/
 .col-md-4{
-    font-size: 28px;
+    font-size: 20px;
     font-family: 方正圆体-标准;
-    color: rgba(4, 73, 100, 0.86);
+    color: rgba(6, 56, 97, 0.86);
     font-style: normal;
 }
 
 /**/
 .col-md-8{
-    font-size: 28px;
+    font-size: 20px;
     font-family: 方正圆体-标准;
-    color: rgba(4, 73, 100, 0.86);
+    color: rgba(6, 56, 97, 0.7);
     font-style: normal;
 }
 
@@ -86,10 +93,3 @@ a.col-md-4{
     background-color: rgb(187, 232, 250);
 }
 
-/*copyright*/
-.text-center{
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 20px;
-    color: rgb(187, 232, 250);
-    font-style: normal;
-}
