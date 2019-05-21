@@ -32,7 +32,7 @@ a.col-md-4{
     font-size: 34px;
     font-family: 方正圆体-标准;
     color: rgba(4, 73, 100, 0.1);
-    z-index: 5;
+    
 }
 
 /*评分人数*/
@@ -42,7 +42,7 @@ a.col-md-4{
     font-family: 方正圆体-标准;
     color: rgba(4, 73, 100, 0.86);
     font-style: normal;
-    z-index: 5;
+    
 }
 
 /*学校*/
@@ -52,7 +52,7 @@ a.col-md-4{
     font-family: 方正圆体-标准;
     color: rgba(4, 73, 100, 0.86);
     font-style: normal;
-    z-index: 5;
+    
 }
 
 /**/
@@ -62,7 +62,7 @@ a.col-md-4{
     font-family: 方正圆体-标准;
     color: rgba(4, 73, 100, 0.86);
     font-style: normal;
-    z-index: 5;
+    
 }
 
 /*两种不同的背景色*/
