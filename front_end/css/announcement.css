@@ -1,13 +1,12 @@
-
 .navbar-brand1{
     line-height: 20px;
-    opacity: 0.31;
-    color: rgba(20, 83, 116, 1);
+    opacity: 0.7;
     background-color: rgba(185, 215, 234, 1);
     text-align: center;
-    border: 5px solid rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
     border-radius: 20px;
-    font-size: 30px;
+    font-size: 28px;
+    color: rgba(20, 83, 116, 1);
 }
 
 .navbar-brand2{
@@ -23,9 +22,9 @@
 }
 
 
-body{
+.body{
     text-align: center;
-    background-color: rgb(247, 251, 252);
+    background-color: rgba(185, 215, 234);
 }
 
 
@@ -35,7 +34,7 @@ body{
     bottom:270px;
     left: 302px;
     z-index: 23;
-    background-color:rgba(185, 215, 235, 0.5);
+    background-color: #D8ECF5;
     border-color: rgb(247, 251, 252);
     border-radius: 20px;
     height: 300px;
@@ -56,4 +55,3 @@ body{
     font-size: 20px;
     font-family: 方正圆体-标准;
 }
-
