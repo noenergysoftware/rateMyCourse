@@ -86,7 +86,7 @@ function adddiv(number){
     $.ajax({
         async: true,
         type:"GET",
-        url: "https://testapi.ratemycourse.tk/getRankByCourse/",
+        url: "http://testapi.ratemycourse.tk/getRankByCourse/",
         dataType:"json",
         data:{
           course_ID:course_id
@@ -248,7 +248,7 @@ $(document).ready(function(){
     ajax_success=$.ajax({
         async: true,
         type:"GET",
-        url: "https://testapi.ratemycourse.tk/getAllRank/",
+        url: "http://testapi.ratemycourse.tk/getAllRank/",
         dataType:"json",
         success:function(data){
             //console.log(data);

@@ -9,20 +9,23 @@
     <link rel="shortcut icon" href="./resource/favicon.ico" />
     <link rel="bookmark" href="./resource/favicon.ico" />
     <!-- css -->
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+        type="text/css">
 
+    <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
     <link href="./css/css.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/personalInfo.css" type="text/css">
+    <link rel="stylesheet" href="./css/announcement.css" type="text/css">
+    <!--<link rel="stylesheet" href="./css/personalInfo.css" type="text/css"> -->
 
     <!-- js -->
 
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js"></script>
-  <script src="./lib/popper.min.js"></script>
-  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-  <script src="https://cdn.staticfile.org/jquery-validate/1.17.0/jquery.validate.min.js"></script>
-    
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js"></script>
+    <script src="./lib/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+
 
 
     <script src="./js/head.js"></script>
@@ -37,17 +40,17 @@
 </style>
 
 
-<body>
+<body style="background-color: rgb(233, 241, 247)">
     <div style="padding-top:70px">
         <!-- Space used to modify navbar with fixed-top style-->
     </div>
     <!--导航栏-->
     <div>
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+        <nav class="navbar navbar-expand-md navbar-dark bg-info fixed-top">
             <div class="container" id="navbarContainer">
-                <a class="navbar-brand" href="./index.html">公客</a>
+                <a class="navbar-brand1" href="./index.html">公客</a>
                 <!--公告-->
-                <a class="navbar-brand" href="./announcement.html" style="display: none">公告</a>
+                <a class="navbar-brand1" href="./announcement.html" style="display: none">公告</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -57,19 +60,19 @@
                     <ul class="navbar-nav">
 
                         <li class="nav-item">
-                            <a href="javascript:void(0)" class="navbar-brand" onclick="javascript: jumpLogin()"
+                            <a href="javascript:void(0)" class="navbar-brand2" onclick="javascript: jumpLogin()"
                                 id="signIn" style="display:block">登录</a>
                         </li>
                         <li class="nav-item">
-                            <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpSignUp()"
+                            <a href="javascript:void(0)" class="navbar-brand2" onclick="javascript:jumpSignUp()"
                                 id="signUp" style="display:block">注册</a>
                         </li>
                         <li class="item">
-                            <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpPersonalInfo()"
+                            <a href="javascript:void(0)" class="navbar-brand2" onclick="javascript:jumpPersonalInfo()"
                                 id="personalInfo" style="display:none">个人信息</a>
                         </li>
                         <li class="item">
-                            <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpLogOut()"
+                            <a href="javascript:void(0)" class="navbar-brand2" onclick="javascript:jumpLogOut()"
                                 id="logOut" style="display:none">注销</a>
                         </li>
                     </ul>
@@ -78,24 +81,25 @@
         </nav>
     </div>
 
-    <div id="announcement"
-        style=" position: relative;background-color: rgb(60, 184, 241); z-index: 3;margin: auto;width: 300px;height: 200px;">
+    <div id="announcement">
         <div id="contentdiv" style="text-align: center;">
             <!--公告-->
-            <div id="ggdiv">公告</div>
+            <h1 id="ggdiv">公告</h1>
+            <hr />
             <!--内容-->
-            <div id="innerdiv" style="text-align: left;text-indent:30px">
+            <p id="innerdiv" style="text-align: left;text-indent:30px">
                 随便写写，目前没有啥需要公告的，希望大家给个好评～
-            </div>
+            </p>
         </div>
     </div>
+
     <!-- js -->
-    
+
 
     <script src="./lib/base.min.js"></script>
     <script src="./lib/project.min.js"></script>
     <script src="./lib/md5.min.js"></script>
-    <script color="255,0,255" opacity="0.7" count="88" src="https://cdn.staticfile.org/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+
 </body>
 
 </html>
