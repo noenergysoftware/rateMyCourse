@@ -4,7 +4,7 @@ var filter;
 var teacher_list;
 var enable_filter=-1;
 var current_page=1;
-
+var page_dot = document.createElement("li");
 page_dot.setAttribute("class","page-item");
 page_dot.setAttribute("id","page_dot");
 page_dot.setAttribute("style","display:none");
