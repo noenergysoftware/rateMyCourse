@@ -85,7 +85,7 @@
       </nav>
     </div>
     
-    <div class="container py-5">
+    <div class="container py-5 " style="background-color: rgba(185, 215, 234, 0.36);">
       <div class="row">
         <div class="col-md-8">
 
@@ -161,11 +161,10 @@
       </div>
     </div>
 
-  <div class="container py-5">
+  <div class="container py-5" style="background-color: rgba(247, 251, 252, 1);">
     <div class="row" style="width:100%;">
-
-      <div style="margin-top: 20px;margin-bottom: 20px" class="card col-12">
-        <div class="card-header">课程简介</div>
+      <div class="col-md-10 offset-md-1">课程简介</div>
+      <div style="margin-top: 20px;margin-bottom: 20px" class="card col-md-10 offset-md-1 col-12">
         <div id="coursedescription" class="card-body"></div>
       </div>
       <!--</div>-->
@@ -181,17 +180,27 @@
       <div class="col-md-10 offset-md-1" id="comment"></div>
 
       <ul id="c_pagination" class="pagination" style="margin-top:20px;margin-bottom:-10px">
+        <li class="page-item" id="lastpage" style="display: none">
+          <a class="page-link" onclick="lastPage()" href="#">&lt;</a>
+        </li>
+  
+        <!-- use add page to load page data -->
+  
+        <li class="page-item" id="nextpage" style="display: none">
+          <a class="page-link" onclick="nextPage()" href="#">&gt;</a>
+        </li>
 
+        <!--
         <li style="display: none" id="lastpage" class="page-item col-md-1.5">
           <a class="page-link" onclick="lastPage()" href="#">&lt;&lt;</a>
         </li>
 
-        <!-- use add page to load page data -->
+        
 
         <li style="display: none" id="nextpage" class="page-item col-md-1.5">
           <a class="page-link" onclick="nextPage()" href="#">&gt;&gt;</a>
         </li>
-
+        
         <div id="jumpbutton" class="jump ">
           <span class="jump_text">第&nbsp;<nobr id="pagenum"></nobr>&nbsp;页，共&nbsp;<nobr id="totalpage"></nobr>&nbsp;页
 
@@ -201,7 +210,7 @@
             </nobr>
           </span>
         </div>
-
+        -->
       </ul>
 
     </div>
