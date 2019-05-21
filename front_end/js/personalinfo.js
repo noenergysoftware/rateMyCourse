@@ -231,8 +231,8 @@ var initCropperInModal = function(img, input, modal){
 
     var sendPhoto = function(){
         var photo = $('#photo').cropper('getCroppedCanvas', {
-            width: 100,
-            height: 100
+            width: 300,
+            height: 300
         }).toBlob(function (blob) {
             formData=new FormData();
             formData.append('smfile',blob);
