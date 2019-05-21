@@ -7,7 +7,8 @@ var enable_filter=-1;
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, thumb_up_num, hot) {
     //获取评论的评价-->点赞数目
     
-    var comment="<div class=\"row align-items-center\">\n"+
+    var comment="<div class=\"col-md-8 offset-md-2\">"+
+                "<div class=\"row align-items-center\">\n"+
                 "  <img src=\""+imageUrls+"\" width=\"86\" height=\"86\" class=\"img-responsive mx-2 my-2\">\n"+
                 "  <p class=\"my-4 col-md-4\">"+userName+"</p>\n"+
                 "  <p class=\"my-4 col-md-1\">教师</p>"+
@@ -39,6 +40,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "      <div id=\"make_child_comment_"+comment_ID+"\" class=\"btn col-md-2\" onclick=\"makeChildComment("+comment_ID+",\'"+iTeacher+"\')\">发送</div>"+
                 "    </div>"+
                 "  </div>"+
+                "</div>"+
                 "</div>";
 
     
