@@ -914,7 +914,7 @@ $(document).ready(function () {
 })
 
 
-$("#rankModal").on("show.bs.modal",function(e){
+$("#rankModal").on('show.bs.modal',function(){
  
     //do something ……
     console.log("111111111111111111111111111");
@@ -923,7 +923,7 @@ $("#rankModal").on("show.bs.modal",function(e){
     raty(5,"#gain",34);
     raty(5,"#recommend",40);
      
-});
+})
 
 function makeRank(){
     if ($.cookie("username") == undefined){
