@@ -31,7 +31,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "    <i class=\"fa fa-thumbs-o-down\" onclick=\"thumbUp(\'disagree\',"+comment_ID+",this)\"></i>"+
                 "  </a>"+
                 "</div>"+
-                "<div class=\"card\" id=\"child_box_"+comment_ID+"\" style=\"width:70%;display:none;\">"+
+                "<div class=\"card\" id=\"child_box_"+comment_ID+"\" style=\"display:none;\">"+
                 "  <div class=\"card-body\">"+
                 "  </div>"+
                 "  <div class=\"card-footer\">"+
@@ -179,7 +179,11 @@ function makeChildComment(id,teacher){
       
     if($("#textarea_"+id).val().length > 2048){
         alert("评价内容不能多于2048字");
-        return false
+        return false;
+    }
+    else if($("#textarea_"+id).val().length <1){
+        alert("不能发表空白评论！");
+        return false;
     }
     var coursenum=parseInt(window.sessionStorage.getItem("coursetoload"));
     $.ajax({
@@ -308,8 +312,6 @@ function thumbUp(attitude, comment_ID, node){
                     },"fast");
                     $(i_tags[0]).removeClass("fa-thumbs-o-up");
                     $(i_tags[0]).addClass("fa-thumbs-up");
-                    $(node).removeClass("fa-thumbs-up");
-                    $(node).addClass("fa-thumbs-o-up");
                     var thumb_up_num=parseInt($(node).parent().children("nobr").text());
                     //console.log(thumb_up_num);
                     $(node).parent().children("nobr").text(thumb_up_num+2);
