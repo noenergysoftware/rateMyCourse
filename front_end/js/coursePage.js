@@ -58,7 +58,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "  </div>"+
                 "  <div class=\"card-footer\">"+
                 "    <div id=\"comment_area_"+comment_ID+"\" class=\"row \">"+
-                "      <textarea id=\"textarea_"+comment_ID+"\" class=\"col-md-10\" \"></textarea>"+
+                "      <textarea id=\"textarea_"+comment_ID+"\" class=\"col-md-10\" \" style=\"border: 1px solid rgba(185, 215, 234, 0.36);\"></textarea>"+
                 "      <div id=\"make_child_comment_"+comment_ID+"\" class=\"btn col-md-2\" onclick=\"makeChildComment("+comment_ID+",\'"+iTeacher+"\')\">发送</div>"+
                 "    </div>"+
                 "  </div>"+
