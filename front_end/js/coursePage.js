@@ -7,24 +7,25 @@ var enable_filter=-1;
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, thumb_up_num, hot) {
     //获取评论的评价-->点赞数目
     
-    var comment="<div class=\"row align-items-center\">\n"+
+    var comment="<div class=\"col-md-10 offset-md-1\">"+
+                "<div class=\"row align-items-center\">\n"+
                 "  <img src=\""+imageUrls+"\" width=\"86\" height=\"86\" class=\"img-responsive mx-2 my-2\">\n"+
-                "  <p class=\"my-4 col-md-4\">"+userName+"</p>\n"+
-                "  <p class=\"my-4 col-md-1\">教师</p>"+
-                "  <p class=\"my-4 col-md-2\">"+iTeacher+"</p>"+
+                "  <p class=\"my-4 col-md-3 col-6\">"+userName+"</p>\n"+
+                "  <p class=\"my-4 col-md-2 col-4\">教师</p>"+
+                "  <p class=\"my-4 col-md-2 col-6\">"+iTeacher+"</p>"+
                 "</div>\n"+
                 "<hr class=\"my-1\" width=\"70%\">"+
                 "<div class=\"row text-center\">"+
-                "  <p style=\"margin-top:16px;margin-left:16px;text-align:left; width:70%\">"+text+"</p>\n"+
+                "  <p style=\"margin-top:16px;margin-left:16px;text-align:left; width:80%\">"+text+"</p>\n"+
                 "</div>"+
                 "<div class=\"row text-center\">"+
-                "  <a class=\"col-md-4\" >"+
+                "  <a class=\"col-md-4 col-12\" >"+
                 "    <p style=\"float:left;text-align:left;\">"+time+"</p>"+
                 "  </a>"+
-                "  <a class=\"col-md-1 offset-md-2\">"+
+                "  <a class=\"col-md-2 offset-md-1 col-4 offset-3\">"+
                 "    <p  id=\"add_child_comment\" onclick=\" showChildCommentTextarea("+comment_ID+")\">评论</p>"+
                 "  </a>"+    
-                "  <a class=\"col-md-2\">"+
+                "  <a class=\"col-md-2 col-5\">"+
                 "    <i class=\"fa fa-thumbs-o-up\" onclick=\"thumbUp(\'agree\',"+comment_ID+",this)\"></i>"+
                 "    <nobr>"+thumb_up_num+"</nobr>"+
                 "    <i class=\"fa fa-thumbs-o-down\" onclick=\"thumbUp(\'disagree\',"+comment_ID+",this)\"></i>"+
@@ -39,6 +40,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "      <div id=\"make_child_comment_"+comment_ID+"\" class=\"btn col-md-2\" onclick=\"makeChildComment("+comment_ID+",\'"+iTeacher+"\')\">发送</div>"+
                 "    </div>"+
                 "  </div>"+
+                "</div>"+
                 "</div>";
 
     
@@ -415,7 +417,7 @@ function AddComment(){
     window.setTimeout("location.href='./commentPage.html'", 0);
 }
 
-function raty(number,id){
+function raty(number,id,size){
     $(id).raty({
       score:number,
       starOn:"./resource/star-on.png",
@@ -739,10 +741,10 @@ $(document).ready(function () {
             console.log(data);
             //data=JSON.parse(data);
             if(data.status=="1"){
-              raty(data.body.difficulty_score,"#difficulty_score");
-              raty(data.body.funny_score,"#funny_score");
-              raty(data.body.gain_score,"#gain_score");
-              raty(data.body.recommend_score,"#recommend_score");
+              raty(data.body.difficulty_score,"#difficulty_score",34);
+              raty(data.body.funny_score,"#funny_score",34);
+              raty(data.body.gain_score,"#gain_score",34);
+              raty(data.body.recommend_score,"#recommend_score",40);
               $("#rank_number").text("评分人数   "+data.length);
             }
             else{
