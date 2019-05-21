@@ -22,7 +22,7 @@ function adddiv(number){
     x.setAttribute("class","container");
     x.setAttribute("id","course"+number);
     /*添加一个类命为让css识别添加不同背景 */
-    if(number%2 == 1){
+    if(number%2 == 0){
       //x.setAttribute("class", "background1");
       x.classList.add("background1");
     }
