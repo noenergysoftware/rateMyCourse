@@ -10,22 +10,22 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
     var comment="<div class=\"col-md-10 offset-md-1\">"+
                 "<div class=\"row align-items-center\">\n"+
                 "  <img src=\""+imageUrls+"\" width=\"86\" height=\"86\" class=\"img-responsive mx-2 my-2\">\n"+
-                "  <p class=\"my-4 col-md-3\">"+userName+"</p>\n"+
-                "  <p class=\"my-4 col-md-2\">教师</p>"+
-                "  <p class=\"my-4 col-md-2\">"+iTeacher+"</p>"+
+                "  <p class=\"my-4 col-md-3 col-6\">"+userName+"</p>\n"+
+                "  <p class=\"my-4 col-md-2 col-4\">教师</p>"+
+                "  <p class=\"my-4 col-md-2 col-6\">"+iTeacher+"</p>"+
                 "</div>\n"+
                 "<hr class=\"my-1\" width=\"70%\">"+
                 "<div class=\"row text-center\">"+
-                "  <p style=\"margin-top:16px;margin-left:16px;text-align:left; width:70%\">"+text+"</p>\n"+
+                "  <p style=\"margin-top:16px;margin-left:16px;text-align:left; width:80%\">"+text+"</p>\n"+
                 "</div>"+
                 "<div class=\"row text-center\">"+
-                "  <a class=\"col-md-4\" >"+
+                "  <a class=\"col-md-4 col-12\" >"+
                 "    <p style=\"float:left;text-align:left;\">"+time+"</p>"+
                 "  </a>"+
-                "  <a class=\"col-md-2 offset-md-1\">"+
+                "  <a class=\"col-md-2 offset-md-1 col-4 offset-3\">"+
                 "    <p  id=\"add_child_comment\" onclick=\" showChildCommentTextarea("+comment_ID+")\">评论</p>"+
                 "  </a>"+    
-                "  <a class=\"col-md-2\">"+
+                "  <a class=\"col-md-2 col-5\">"+
                 "    <i class=\"fa fa-thumbs-o-up\" onclick=\"thumbUp(\'agree\',"+comment_ID+",this)\"></i>"+
                 "    <nobr>"+thumb_up_num+"</nobr>"+
                 "    <i class=\"fa fa-thumbs-o-down\" onclick=\"thumbUp(\'disagree\',"+comment_ID+",this)\"></i>"+
