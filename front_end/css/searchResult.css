@@ -7,6 +7,13 @@
     text-align: center;
 
 }*/
+/*搜索结果*/
+#count{
+    color: rgba(123, 216, 251, 1);
+    text-align: center;
+    font-family: 方正圆体-标准;
+    margin: 0 auto;
+}
 .navbar-brand2{
     line-height: 20px;
     color: rgba(49, 147, 185, 1);
