@@ -54,6 +54,7 @@ a.col-md-4{
     font-family: 方正圆体-标准;
     color: rgba(6, 56, 97, 0.86);
     font-style: normal;
+    margin-bottom: 10px;
 }
 
 /**/
@@ -62,6 +63,7 @@ a.col-md-4{
     font-family: 方正圆体-标准;
     color: rgba(6, 56, 97, 0.7);
     font-style: normal;
+    margin-bottom: 10px;
 }
 
 /*两种不同的背景色*/
@@ -69,6 +71,8 @@ a.col-md-4{
     background-color: rgb(255, 255, 255);
     border-color: rgba(150, 212, 236, 0.36);
     border-radius: 2px;
+    border-style: solid;
+    
 }
 
 .container.background2{
@@ -76,6 +80,7 @@ a.col-md-4{
     border-color: rgba(150, 212, 236, 0.36);
     border-radius: 2px;
     border-style: solid;
+    
 }
 
 /*页码*/
