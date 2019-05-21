@@ -3,42 +3,66 @@ var total_page_number;
 var filter;
 var teacher_list;
 var enable_filter=-1;
+var current_page=1;
+
+var page_dot = document.createElement("li");
+page_dot.setAttribute("class","page-item");
+page_dot.setAttribute("id","page_dot");
+page_dot.setAttribute("style","display:none");
+page_dot.innerHTML="<a class=\"page-link\" href=\"#c_pagination\">...</a>";
+
+var page_dot2 = document.createElement("li");
+page_dot2.setAttribute("class","page-item");
+page_dot2.setAttribute("id","page_dot2");
+page_dot2.setAttribute("style","display:none");
+page_dot2.innerHTML="<a class=\"page-link\" href=\"#c_pagination\">...</a>";
+
+
+function html2Escape(sHtml) {
+    return sHtml.replace(/[<>&"]/g,function(c){
+      return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];
+    });
+   }
+
+
 //加载评论
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, thumb_up_num, hot) {
     //获取评论的评价-->点赞数目
     
-    var comment="<div class=\"row align-items-center\">\n"+
+    var comment="<div class=\"col-md-10 offset-md-1\">"+
+                "<div class=\"row align-items-center\">\n"+
                 "  <img src=\""+imageUrls+"\" width=\"86\" height=\"86\" class=\"img-responsive mx-2 my-2\">\n"+
-                "  <p class=\"my-4 col-md-4\">"+userName+"</p>\n"+
-                "  <p class=\"my-4 col-md-1\">教师</p>"+
-                "  <p class=\"my-4 col-md-2\">"+iTeacher+"</p>"+
+                "  <p class=\"my-4 col-md-3 col-6\">"+userName+"</p>\n"+
+                "  <p class=\"my-4 col-md-2 col-4\">教师</p>"+
+                "  <p class=\"my-4 col-md-2 col-6\">"+iTeacher+"</p>"+
                 "</div>\n"+
                 "<hr class=\"my-1\" width=\"70%\">"+
                 "<div class=\"row text-center\">"+
-                "  <p style=\"margin-top:16px;margin-left:16px;text-align:left; width:70%\">"+text+"</p>\n"+
+                "  <p style=\"margin-top:16px;margin-left:16px;text-align:left; width:80%\">"+html2Escape(text)+"</p>\n"+
                 "</div>"+
                 "<div class=\"row text-center\">"+
-                "  <a class=\"col-md-4\" >"+
+                "  <a class=\"col-md-4 col-12\" >"+
                 "    <p style=\"float:left;text-align:left;\">"+time+"</p>"+
                 "  </a>"+
-                "  <a class=\"col-md-1 offset-md-2\">"+
+                "  <a class=\"col-md-2 offset-md-1 col-4 offset-3\">"+
                 "    <p  id=\"add_child_comment\" onclick=\" showChildCommentTextarea("+comment_ID+")\">评论</p>"+
                 "  </a>"+    
-                "  <a class=\"col-md-2\">"+
+                "  <a class=\"col-md-2 col-5\">"+
                 "    <i class=\"fa fa-thumbs-o-up\" onclick=\"thumbUp(\'agree\',"+comment_ID+",this)\"></i>"+
                 "    <nobr>"+thumb_up_num+"</nobr>"+
                 "    <i class=\"fa fa-thumbs-o-down\" onclick=\"thumbUp(\'disagree\',"+comment_ID+",this)\"></i>"+
                 "  </a>"+
                 "</div>"+
-                "<div class=\"card\" id=\"child_box_"+comment_ID+"\" style=\"width:70%;display:none;\">"+
+                "<div class=\"card\" id=\"child_box_"+comment_ID+"\" style=\"display:none;\">"+
                 "  <div class=\"card-body\">"+
                 "  </div>"+
                 "  <div class=\"card-footer\">"+
                 "    <div id=\"comment_area_"+comment_ID+"\" class=\"row \">"+
-                "      <textarea id=\"textarea_"+comment_ID+"\" class=\"col-md-10\" \"></textarea>"+
+                "      <textarea id=\"textarea_"+comment_ID+"\" class=\"col-md-10\" \" style=\"border: 1px solid rgba(185, 215, 234, 0.36);\"></textarea>"+
                 "      <div id=\"make_child_comment_"+comment_ID+"\" class=\"btn col-md-2\" onclick=\"makeChildComment("+comment_ID+",\'"+iTeacher+"\')\">发送</div>"+
                 "    </div>"+
                 "  </div>"+
+                "</div>"+
                 "</div>";
 
     
@@ -177,7 +201,11 @@ function makeChildComment(id,teacher){
       
     if($("#textarea_"+id).val().length > 2048){
         alert("评价内容不能多于2048字");
-        return false
+        return false;
+    }
+    else if($("#textarea_"+id).val().length <1){
+        alert("不能发表空白评论！");
+        return false;
     }
     var coursenum=parseInt(window.sessionStorage.getItem("coursetoload"));
     $.ajax({
@@ -223,7 +251,7 @@ function makeChildComment(id,teacher){
 function thumbUp(attitude, comment_ID, node){
     if ($.cookie("username") == undefined){
         alert("请登录后再进行点赞或踩");
-        return;
+        return; 
     }
     
     $.ajax({
@@ -388,7 +416,7 @@ function hotComment(course_id){
                             for(var j=0; j< data["child_comment_"+comment_ID].length; j++){
                                 var child_comment=$("<div style=\"border:1px solid;\" class=\"my-2\">"+
                                 "<p class=\"my-2\">"+data["child_comment_"+comment_ID][j].username+"</p>\n"+
-                                "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][j].content+"</p>\n"+
+                                "<p class=\"my-2 col-md-12\">"+html2Escape(data["child_comment_"+comment_ID][j].content)+"</p>\n"+
                                 "<p class=\"my-2 mx-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
                                 "</div>");
                                 $("#child_box_"+comment_ID).children().first().append(child_comment);
@@ -413,15 +441,15 @@ function AddComment(){
     window.setTimeout("location.href='./commentPage.html'", 0);
 }
 
-function raty(number,id){
+function raty(number,id,size,read){
     $(id).raty({
       score:number,
       starOn:"./resource/star-on.png",
       starOff:"./resource/star-off.png",
       starHalf:"./resource/star-half.png",
-      readOnly:true,
+      readOnly:read,
       halfShow:true,
-      size:34,
+      size:size,
    })
   }
 
@@ -434,6 +462,7 @@ function toPage(pagenum){
         return;
     }
 
+    current_page=pagenum;
     
     if(enable_filter == -1){
         //2 获取保存的data数据以及需要加载的评论序号
@@ -451,7 +480,7 @@ function toPage(pagenum){
                 for(var j=0; j< data["child_comment_"+comment_ID].length; j++){
                     var child_comment=$("<div style=\"border:1px solid;\" class=\"my-2\">"+
                     "<p class=\"my-2\">"+data["child_comment_"+comment_ID][j].username+"</p>\n"+
-                    "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][j].content+"</p>\n"+
+                    "<p class=\"my-2 col-md-12\">"+html2Escape(data["child_comment_"+comment_ID][j].content)+"</p>\n"+
                     "<p class=\"my-2 mx-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
                     "</div>");
                     $("#child_box_"+comment_ID).children().first().append(child_comment);
@@ -476,7 +505,7 @@ function toPage(pagenum){
                 for(var j=0; j< data["child_comment_"+comment_ID].length; j++){
                     var child_comment=$("<div style=\"border:1px solid;\" class=\"my-2\">"+
                     "<p class=\"my-2\">"+data["child_comment_"+comment_ID][j].username+"</p>\n"+
-                    "<p class=\"my-2 col-md-12\">"+data["child_comment_"+comment_ID][j].content+"</p>\n"+
+                    "<p class=\"my-2 col-md-12\">"+html2Escape(data["child_comment_"+comment_ID][j].content)+"</p>\n"+
                     "<p class=\"my-2 mx-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
                     "</div>");
                     $("#child_box_"+comment_ID).children().first().append(child_comment);
@@ -490,22 +519,47 @@ function toPage(pagenum){
         $("#page"+i).hide();
     }
     
-    if(pagenum<=3){
-        for(var i=1;i<=5 && i<=total_page_number ;i++){
-            $("#page"+i).show();
+    $("#page_dot").hide();
+    $("#page_dot2").hide();
+    if(pagenum <= 4){
+        if(total_page_number<=6){
+            for(var i=1; i<=total_page_number ;i++){
+              $("#page"+i).show();
+            }
+        }
+        else{
+            for(var i=1; i<=5 ;i++){
+                $("#page"+i).show();
+            }
+            $("#page_dot2").show();
+            $("#page"+total_page_number).show();
         }
     }
-    else if((total_page_number-pagenum)<=2){
-        for(var i=total_page_number;i>total_page_number-5 && i>=1 ;i--){
-            $("#page"+i).show();
+    else if(pagenum >= (total_page_number-3)){
+        if(total_page_number<=6){
+            for(var i=1; i<=total_page_number ;i++){
+              $("#page"+i).show();
+            }
+        }
+        else{
+            for(var i=total_page_number; i>total_page_number-5; i--){
+                $("#page"+i).show();
+            }
+            $("#page_dot").show();
+            $("#page1").show();
         }
     }
     else{
+        //此时 n>=9
         for(var i=pagenum-2;i<=pagenum+2 ;i++){
             $("#page"+i).show();
         }
+        $("#page_dot").show();
+        $("#page1").show();
+        $("#page_dot2").show();
+        $("#page"+total_page_number).show();
     }
-    //console.log("pagenum before last"+pagenum);
+
     if(pagenum>1){
       $("#lastpage").show();
     }
@@ -520,8 +574,6 @@ function toPage(pagenum){
       $("#nextpage").hide();
     }
     
-    $("#pagenum").html(pagenum);
-    
 }
 
 
@@ -530,10 +582,12 @@ function jumpPage(){
 }
 
 function nextPage(){
-    toPage(parseInt($("#pagenum").text())+1);
+  //  toPage(parseInt($("#pagenum").text())+1);
+    toPage(current_page+1);
 }
 function lastPage(){
-    toPage(parseInt($("#pagenum").text())-1);
+    //toPage(parseInt($("#pagenum").text())-1);
+    toPage(current_page-1);
 }
 
 function selectTeacher(name){
@@ -545,11 +599,11 @@ function genPage(data){
     //console.log(data);
     if(data.length==0){
         $("#noresult").show();
-        $("#jumpbutton").hide();
+      //  $("#jumpbutton").hide();
     }
     else{
         $("#noresult").hide();
-        $("#jumpbutton").show();
+       // $("#jumpbutton").show();
         
         /*for(var i=0;i<data.length;i++){
             var x=generateGrid(i,"#",data.body[i].username,"#",data.body[i].teacher,0,data.body[i].content,data.body[i].editTime,data.body[i].commentID,0,0);
@@ -590,6 +644,12 @@ function genPage(data){
                 $("#page"+i).hide();
             }
         }
+        if(total_page_number>=7){
+            var a=document.getElementById("page2");
+            a.parentNode.insertBefore(page_dot , a);
+            var b=document.getElementById("page"+total_page_number);
+            b.parentNode.insertBefore(page_dot2 , b);
+          }
         toPage(1);
     }
 }
@@ -652,7 +712,12 @@ function filterTeacher(){
                         $("#page"+i).hide();
                     }
                 }
-                
+                if(total_page_number>=7){
+                    var a=document.getElementById("page2");
+                    a.parentNode.insertBefore(page_dot , a);
+                    var b=document.getElementById("page"+total_page_number);
+                    b.parentNode.insertBefore(page_dot2 , b);
+                  }
                 toPage(1);
             }
         }
@@ -684,7 +749,9 @@ $(document).ready(function () {
         }
     });
 
-    
+    if(window.screen.width<768){
+        $("#c_pagination").addClass("pagination-sm");  
+      }
     //generateGrid("#", "aya", "2016", "ruan", 20, "good", "2018", "1", "1", "2");
     if ($.cookie("username") != undefined){
         document.getElementById("signIn").style.display = "none";
@@ -737,10 +804,10 @@ $(document).ready(function () {
             console.log(data);
             //data=JSON.parse(data);
             if(data.status=="1"){
-              raty(data.body.difficulty_score,"#difficulty_score");
-              raty(data.body.funny_score,"#funny_score");
-              raty(data.body.gain_score,"#gain_score");
-              raty(data.body.recommend_score,"#recommend_score");
+              raty(data.body.difficulty_score,"#difficulty_score",34,true);
+              raty(data.body.funny_score,"#funny_score",34,true);
+              raty(data.body.gain_score,"#gain_score",34,true);
+              raty(data.body.recommend_score,"#recommend_score",40,true);
               $("#rank_number").text("评分人数   "+data.length);
             }
             else{
@@ -844,4 +911,158 @@ $(document).ready(function () {
         console.log(filter);
     });
 
+    
 })
+
+
+var initRankModal = function( modal){
+    
+    var $modal = modal;
+    // 模态框隐藏后需要保存的数据对象
+    $modal.on('show.bs.modal',function () {
+        raty(5,"#difficulty",34,false);
+        raty(5,"#funny",34,false);
+        raty(5,"#gain",34,false);
+        raty(5,"#recommend",40,false);
+    });
+}
+var initCommentModal = function( modal){
+    
+    var $modal = modal;
+    // 模态框隐藏后需要保存的数据对象
+    $modal.on('show.bs.modal',function () {
+        var coursenum=parseInt(window.sessionStorage.getItem("coursetoload"));
+        $("#course_name").html(window.sessionStorage.getItem("course"+coursenum+"name"));
+        var teacher_list=window.sessionStorage.getItem("course"+coursenum+"teacher_list").split(',');
+        //var teacher_list=["教师1"];
+        var data="";
+        for(var i=0; i<teacher_list.length;i++){
+            data+="<li>\n"+
+                    "  <a class=\"dropdown-item\" herf=\"#\" onclick=\"selectTeacher2($(this).text())\">"+teacher_list[i]+"</a>\n"+
+                    "</li>\n";
+            console.log(teacher_list[i]);
+            if(i<(teacher_list.length-1)){
+            data+= "<div class=\"dropdown-divider\"></div>"
+            }
+            $("#teacherlist").html(data);
+        }
+        
+    });
+}
+function selectTeacher2(name){
+    $("#buttonSelectTeacher2").html(name); 
+  }
+
+$(function(){
+    initRankModal($('#rankModal'));
+    initCommentModal($('#commentModal'));
+});
+
+function makeRank(){
+    if ($.cookie("username") == undefined){
+        alert("用户未登录！ 登录后即可发表评分");
+        return false;
+      }
+    var coursenum=parseInt(window.sessionStorage.getItem("coursetoload"));
+    $.ajax({
+        async: true,
+        type: "POST",
+        dataType: "json",
+        url: "https://api.ratemycourse.tk/makeRank/",
+        data: {
+          username: $.cookie("username"),
+          course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID"),
+          difficulty_score: $("#difficulty").raty("getScore"),
+          funny_score: $("#funny").raty("getScore"),
+          gain_score: $("#gain").raty("getScore"),
+          recommend_score: $("#recommend").raty("getScore"),
+          csrfmiddlewaretoken:  $.cookie("csrftoken")
+        },
+        xhrFields: {
+          withCredentials: true
+        },
+        success:function(data){
+          //data=JSON.parse(data);
+          //	alert("ajax success");
+          //console.log(data);
+          //console.log(data.status)
+          if(data.status=="1"){
+              //alert(data.body.message);
+              //console.log("Successfully makeComment "+coursenum);
+              alert("评分发送成功！");
+              console.log("评分发送成功");
+              $('#rankModal').modal('hide');
+          }
+          else{
+              console.log($("#difficulty_score").raty("getScore"));
+              console.log("评分发送失败");
+              alert(data.errMsg);
+          }  
+        },
+        error:function(data){
+            alert(JSON.stringify(data));
+        }
+      });
+}
+
+function makeComment(){
+    if ($.cookie("username") == undefined){
+        alert("用户未登录！ 登录后即可发表评论");
+        return false;
+      }
+      
+      if($("#new_comment").val().length < 10){
+        alert("评价内容至少需要10字");
+           return false
+      }
+      else if($("#new_comment").val().length > 2048){
+        alert("评价内容不能多于2048字");
+           return false
+      }
+      else if($("#buttonSelectTeacher2").text()=="选择教师"){
+        alert("必须要选择任课教师");
+        return false
+      }
+      var coursenum=parseInt(window.sessionStorage.getItem("coursetoload"));
+      console.log(window.sessionStorage.getItem("course"+coursenum+"course_ID")+" "+$("#new_comment").val()+" "+$("#buttonSelectTeacher2").text());
+      var teacher=$("#buttonSelectTeacher2").text();
+      console.log(teacher);
+      $.ajax({
+          async: true,
+          type: "POST",
+          dataType: "json",
+          url: "https://api.ratemycourse.tk/makeComment/",
+          data: {
+            username: $.cookie("username"),
+            course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID"),
+            content : $("#new_comment").val(),
+            teacher_name : $("#buttonSelectTeacher2").text(),
+            csrfmiddlewaretoken:  $.cookie("csrftoken")
+          },
+          xhrFields: {
+            withCredentials: true
+          },
+          success:function(data){
+            //data=JSON.parse(data);
+            //	alert("ajax success");
+            //console.log(data);
+            //console.log(data.status)
+            if(data.status=="1"){
+                //alert(data.body.message);
+                //console.log("Successfully makeComment "+coursenum);
+                //alert("评论成功！");
+                console.log("评论发送成功");
+                $('#commentModal').modal('hide');
+                //window.setTimeout("location.href='./coursePage.html'", 1000);
+            }
+            else{
+                console.log("评论发送失败");
+                alert(data.errMsg);
+            }  
+          },
+          error:function(data){
+              alert(JSON.stringify(data));
+          }
+        });
+
+}

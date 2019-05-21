@@ -21,7 +21,6 @@
   <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
   <script src="https://cdn.staticfile.org/jquery-validate/1.17.0/jquery.validate.min.js"></script>
   <script src="https://cdn.staticfile.org/blueimp-md5/2.10.0/js/md5.min.js"></script>
-  <script src="./lib/animations.js"></script>
   <script src="./js/coursePage.js"></script>
   <script src="./js/head.js"></script>
   <script type="text/javascript">
@@ -85,29 +84,29 @@
       </nav>
     </div>
     
-    <div class="container py-5">
+    <div class="container py-md-5 py-2 " style="background-color: rgba(185, 215, 234, 0.36);">
       <div class="row">
         <div class="col-md-8">
 
           <div class="row ">
-            <div class="col-md-4 offset-md-4 text-md-center text-dark" id="course_name" style="font-size: 30px"></div>
+            <a class="col-md-6 offset-md-3 text-md-center text-dark" id="course_name" style="font-size: 30px"></a>
           </div>
           
           <div class="row">
             <div class="col-md-6 align-items-center">
               <div class="row mt-4 mb-3">
-                <div class="col-md-4">开课学院</div>
-                <div class="col-md-8" id="course_school"></div>
+                <div class="col-md-4 col-4">开课学院</div>
+                <div class="col-md-8 col-8" id="course_school"></div>
               </div>
         
               <div class="row my-3">
-                <div class="col-md-4">课程类别</div>
-                <div class="col-md-8" id="course_type"></div>
+                <div class="col-md-4 col-4">课程类别</div>
+                <div class="col-md-8 col-8" id="course_type"></div>
               </div>
         
               <div class="row mt-3 mb-4">
-                <div class="col-md-4">学分</div>
-                <div class="col-md-8" id="course_credit"></div>
+                <div class="col-md-4 col-4">学分</div>
+                <div class="col-md-8 col-8" id="course_credit"></div>
               </div>
             </div>
             
@@ -115,15 +114,19 @@
               <div class="row text-md-center">
                 <div class="col-md-6 offset-md-3 my-2">选择授课教师</div>
               </div>
-              <div class="row my-4">
-                <div class="btn-group col-md-4 offset-md-2 text-center">
-                  <a class="btn dropdown-toggle" data-toggle="dropdown"
+              <div class="row my-md-4">
+                <div class="btn-group col-md-4 offset-md-2 text-center col-6">
+                  <a class="btn dropdown-toggle " data-toggle="dropdown"
                     id="buttonSelectTeacher">全部教师</a>
                   <ul id="teacher_list" class="dropdown-menu col-md-4" role="menu" style="height:214px;overflow:scroll">
                   
                   </ul>
                 </div>
-                <div class="btn col-md-3 offset-md-2" onclick="filterTeacher()">确定</div>
+                <div class="btn col-md-3 offset-md-2 col-2" onclick="filterTeacher()">确定</div>
+              </div>
+
+              <div class="row ">
+                <div class="col-md-6 offset-md-3 text-dark text-md-center" id="rank_number"></div>
               </div>
             </div>
           </div>
@@ -133,79 +136,78 @@
           <!-- 选择教师-->
         <div class="col-md-4">
           <div class="row">
-            <div class="col-md-4">
-              <div class="text-dark text-md-center" id="rank_number"></div>
-            </div>
-            <div class="col-md-4 offset-md-2">
-              <a class="btn mybtn btn-default" id="toComment" href="#" onclick="AddComment()">撰写评价</a>
-            </div>
+            
+            
           </div>
 
-          <div class="row">
-            <p class="text-dark text-md-left col-md-4">推荐程度</p>
-            <p class="text-center  col-md-8" id="recommend_score"></p>
+          <div class="row" style="font-size: 20px">
+            <p class="text-dark text-md-left col-md-5 col-5">推荐程度</p>
+            <p class="text-center  col-md-7 col-7" id="recommend_score"></p>
           </div>
           <div class="row">
-            <p class="text-dark text-md-left col-md-4">难易程度</p>
-            <p class="text-center col-md-8" id="difficulty_score"></p>
+            <p class="text-dark text-md-left col-md-5 col-5">难易程度</p>
+            <p class="text-center col-md-7 col-7" id="difficulty_score"></p>
           </div>
           <div class="row">
-            <p class="text-dark text-md-left col-md-4">有趣程度</p>
-            <p class="text-center col-md-8" id="funny_score"></p>
+            <p class="text-dark text-md-left col-md-5 col-5">有趣程度</p>
+            <p class="text-center col-md-7 col-7" id="funny_score"></p>
           </div>
           <div class="row">
-            <p class="text-dark text-md-left col-md-4">课程收获</p>
-            <p  class="text-center col-md-8" id="gain_score"></p>
+            <p class="text-dark text-md-left col-md-5 col-5">课程收获</p>
+            <p  class="text-center col-md-7 col-7" id="gain_score"></p>
+          </div>
+          <div class="row">
+            <button type="button" class="col-md-4 offset-md-4 col-4 offset-4 btn mybtn btn-default" data-toggle="modal" data-target="#rankModal" id="show_modal">星级评分</button>
           </div>
         </div>
       </div>
     </div>
 
-  <div class="container py-5">
+  <div class="container py-5" style="background-color: rgba(247, 251, 252, 1);">
     <div class="row" style="width:100%;">
-
-      <div style="margin-top: 20px;margin-bottom: 20px" class="card col-12">
-        <div class="card-header">课程简介</div>
-        <div id="coursedescription" class="card-body">
-        </div>
-
+      <div class="col-md-10 offset-md-1">课程简介</div>
+      <div style="margin-top: 20px;margin-bottom: 20px" class="card col-md-10 offset-md-1 col-12">
+        <div id="coursedescription" class="card-body"></div>
       </div>
       <!--</div>-->
 
       <!--
-      <div class="text-center" style="border-left:1px #e4e4e4 solid; width:23%;">
-        <div class="text-dark text-center" style="margin-top:54px">
-          <a href="{{course_website}}">
-         <a>
-            <p class="text-dark">课程网站</p>
-          </a>
-         <a href="{{profession_website}}">
-         <a>
-            <p style="margin-top:32px;" class="text-dark">学院官网</p>
-          </a>
-        </div>
-      </div>
       -->
-
-      <div class="col-md-12" id="hot_comment">热门评论
-        <div class="col-md-12" id="no_hot_comment" style="display:none">暂无热评</div>
+      <div class="row col-md-12 align-items-center">
+          <div class="col-md-6 offset-md-1 ">热门评论</div>
+          <div class="col-md-3 offset-md-2">
+            <button type="button" class="col-md-6 offset-md-3 col-5 btn mybtn btn-default" data-toggle="modal" data-target="#commentModal" >撰写评价</button>
+          </div>
       </div>
+      <div class="col-md-10 offset-md-1" id="no_hot_comment" style="display:none">暂无热评</div>
+      <div class="col-md-10 offset-md-1" id="hot_comment"></div>
+      
 
-      <div class="col-md-12">评论</div>
-      <div class="col-md-12" id="comment"></div>
+      <div class="col-md-10 offset-md-1">评论</div>
+      <div class="col-md-10 offset-md-1" id="comment"></div>
 
-      <ul id="c_pagination" class="pagination" style="margin-top:20px;margin-bottom:-10px">
+      <ul id="c_pagination" class="col-md-6 offset-md-3 pagination" style="margin-top:20px;margin-bottom:-10px;display:flex;justify-content:center; ">
+        <li class="page-item" id="lastpage" style="display: none">
+          <a class="page-link" onclick="lastPage()" href="#">&lt;</a>
+        </li>
+  
+        <!-- use add page to load page data -->
+  
+        <li class="page-item" id="nextpage" style="display: none">
+          <a class="page-link" onclick="nextPage()" href="#">&gt;</a>
+        </li>
 
+        <!--
         <li style="display: none" id="lastpage" class="page-item col-md-1.5">
           <a class="page-link" onclick="lastPage()" href="#">&lt;&lt;</a>
         </li>
 
-        <!-- use add page to load page data -->
+        
 
         <li style="display: none" id="nextpage" class="page-item col-md-1.5">
           <a class="page-link" onclick="nextPage()" href="#">&gt;&gt;</a>
         </li>
-
+        
         <div id="jumpbutton" class="jump ">
           <span class="jump_text">第&nbsp;<nobr id="pagenum"></nobr>&nbsp;页，共&nbsp;<nobr id="totalpage"></nobr>&nbsp;页
 
@@ -215,13 +217,13 @@
             </nobr>
           </span>
         </div>
-
+        -->
       </ul>
 
     </div>
   </div>
   <hr>
-
+  
 
   <div class="container ">
     <div id="commentDiv"></div>
@@ -235,6 +237,79 @@
   </div>
 
 
+
+  <div class="modal fade" id="rankModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" >
+            <div class="modal-header">
+                <h4 class="modal-title float-md-none">
+                    课程评分
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="close_modal">×</button>
+            </div>
+            <div class="modal-body">
+              <div class="row" style="font-size: 20px">
+                <p class="text-dark text-md-left col-md-5 col-5">推荐程度</p>
+                <p class="text-center  col-md-7 col-7" id="recommend"></p>
+              </div>
+              <div class="row">
+                <p class="text-dark text-md-left col-md-5 col-5">难易程度</p>
+                <p class="text-center col-md-7 col-7" id="difficulty"></p>
+              </div>
+              <div class="row">
+                <p class="text-dark text-md-left col-md-5 col-5">有趣程度</p>
+                <p class="text-center col-md-7 col-7" id="funny"></p>
+              </div>
+              <div class="row">
+                <p class="text-dark text-md-left col-md-5 col-5">课程收获</p>
+                <p  class="text-center col-md-7 col-7" id="gain"></p>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <div class="container">
+                <button class="btn mybtn col-md-2 offset-md-7 mb-2" onclick="makeRank();">提交</button>
+                <button class="btn mybtn col-md-2 mb-2" aria-hidden="true" data-dismiss="modal">取消</button>
+            </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content" >
+              <div class="modal-header">
+                  <h4 class="modal-title float-md-none">
+                      发表评价
+                  </h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              </div>
+              <div class="modal-body">
+                  <div class="row" >
+                    <div class="btn-group">
+                      <a class="btn mybtn btn-light dropdown-toggle my-1 ml-4" data-toggle="dropdown" id="buttonSelectTeacher2">选择教师</a>
+                      <ul id="teacherlist" class="dropdown-menu" role="menu">
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="col-md-10 offset-md-1">
+                      <textarea class="w-100 my-md-2 mt-2 " id="new_comment" rows="15"></textarea>
+                    </div>
+         
+                  
+              </div>
+              <div class="modal-footer">
+                  <div class="container">
+                  <button class="btn mybtn col-md-2 offset-md-7 mb-2" onclick="makeComment();">提交</button>
+                  <button class="btn mybtn col-md-2 mb-2" aria-hidden="true" data-dismiss="modal">取消</button>
+              </div>
+              </div>
+          </div>
+      </div>
+    </div>
   
 </body>
 
