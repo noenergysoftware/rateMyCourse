@@ -84,7 +84,7 @@
       </nav>
     </div>
     
-    <div class="container py-5 " style="background-color: rgba(185, 215, 234, 0.36);">
+    <div class="container py-md-5 py-2 " style="background-color: rgba(185, 215, 234, 0.36);">
       <div class="row">
         <div class="col-md-8">
 
@@ -114,15 +114,15 @@
               <div class="row text-md-center">
                 <div class="col-md-6 offset-md-3 my-2">选择授课教师</div>
               </div>
-              <div class="row my-4">
-                <div class="btn-group col-md-4 offset-md-2 text-center">
-                  <a class="btn dropdown-toggle" data-toggle="dropdown"
+              <div class="row my-md-4">
+                <div class="btn-group col-md-4 offset-md-2 text-center col-6">
+                  <a class="btn dropdown-toggle " data-toggle="dropdown"
                     id="buttonSelectTeacher">全部教师</a>
                   <ul id="teacher_list" class="dropdown-menu col-md-4" role="menu" style="height:214px;overflow:scroll">
                   
                   </ul>
                 </div>
-                <div class="btn col-md-3 offset-md-2" onclick="filterTeacher()">确定</div>
+                <div class="btn col-md-3 offset-md-2 col-2" onclick="filterTeacher()">确定</div>
               </div>
 
               <div class="row ">
@@ -157,7 +157,7 @@
             <p  class="text-center col-md-7 col-7" id="gain_score"></p>
           </div>
           <div class="row">
-            <button type="button" class="col-md-4 offset-md-4 btn mybtn btn-default" data-toggle="modal" data-target="#rankModal" id="show_modal">星级评分</button>
+            <button type="button" class="col-md-4 offset-md-4 col-4 offset-4 btn mybtn btn-default" data-toggle="modal" data-target="#rankModal" id="show_modal">星级评分</button>
           </div>
         </div>
       </div>
@@ -176,7 +176,7 @@
       <div class="row col-md-12 align-items-center">
           <div class="col-md-6 offset-md-1 ">热门评论</div>
           <div class="col-md-3 offset-md-2">
-            <button type="button" class="col-md-6 offset-md-3  btn mybtn btn-default" data-toggle="modal" data-target="#commentModal" >撰写评价</button>
+            <button type="button" class="col-md-6 offset-md-3 col-5 btn mybtn btn-default" data-toggle="modal" data-target="#commentModal" >撰写评价</button>
           </div>
       </div>
       <div class="col-md-10 offset-md-1" id="no_hot_comment" style="display:none">暂无热评</div>
@@ -296,7 +296,7 @@
                   </div>
 
                   <div class="col-md-10 offset-md-1">
-                      <textarea class="w-100 my-2" id="new_comment" rows="15"></textarea>
+                      <textarea class="w-100 my-md-2" id="new_comment" rows="15"></textarea>
                     </div>
          
                   

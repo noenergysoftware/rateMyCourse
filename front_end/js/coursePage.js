@@ -1052,6 +1052,7 @@ function makeComment(){
                 //console.log("Successfully makeComment "+coursenum);
                 //alert("评论成功！");
                 console.log("评论发送成功");
+                $('#commentModal').modal('hide');
                 //window.setTimeout("location.href='./coursePage.html'", 1000);
             }
             else{
