@@ -21,7 +21,6 @@
   <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
   <script src="https://cdn.staticfile.org/jquery-validate/1.17.0/jquery.validate.min.js"></script>
   <script src="https://cdn.staticfile.org/blueimp-md5/2.10.0/js/md5.min.js"></script>
-  <script src="./lib/animations.js"></script>
   <script src="./js/coursePage.js"></script>
   <script src="./js/head.js"></script>
   <script type="text/javascript">
@@ -216,7 +215,7 @@
     </div>
   </div>
   <hr>
-
+  <button type="button" class="btn btn-default mybtn float-md-none ml-0 ml-md-5" data-toggle="modal" data-target="#rankModal" id="show_modal">上传头像</button>
 
   <div class="container ">
     <div id="commentDiv"></div>
@@ -230,6 +229,43 @@
   </div>
 
 
+
+  <div class="modal fade" id="rankModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" >
+            <div class="modal-header">
+                <h4 class="modal-title float-md-none">
+                    课程评分
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="close_modal">×</button>
+            </div>
+            <div class="modal-body">
+              <div class="row" style="font-size: 20px">
+                <p class="text-dark text-md-left col-md-5 col-5">推荐程度</p>
+                <p class="text-center  col-md-7 col-7" id="recommend"></p>
+              </div>
+              <div class="row">
+                <p class="text-dark text-md-left col-md-5 col-5">难易程度</p>
+                <p class="text-center col-md-7 col-7" id="difficulty"></p>
+              </div>
+              <div class="row">
+                <p class="text-dark text-md-left col-md-5 col-5">有趣程度</p>
+                <p class="text-center col-md-7 col-7" id="funny"></p>
+              </div>
+              <div class="row">
+                <p class="text-dark text-md-left col-md-5 col-5">课程收获</p>
+                <p  class="text-center col-md-7 col-7" id="gain"></p>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <div class="container">
+                <button class="btn mybtn col-md-2 offset-md-7 mb-2" onclick="makeRank();">提交</button>
+                <button class="btn mybtn col-md-2 mb-2" aria-hidden="true" data-dismiss="modal">取消</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
   
 </body>
 

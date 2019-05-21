@@ -58,7 +58,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "  </div>"+
                 "  <div class=\"card-footer\">"+
                 "    <div id=\"comment_area_"+comment_ID+"\" class=\"row \">"+
-                "      <textarea id=\"textarea_"+comment_ID+"\" class=\"col-md-10\" \"></textarea>"+
+                "      <textarea id=\"textarea_"+comment_ID+"\" class=\"col-md-10\" \" style=\"border: 1px solid rgba(185, 215, 234, 0.36);\"></textarea>"+
                 "      <div id=\"make_child_comment_"+comment_ID+"\" class=\"btn col-md-2\" onclick=\"makeChildComment("+comment_ID+",\'"+iTeacher+"\')\">发送</div>"+
                 "    </div>"+
                 "  </div>"+
@@ -449,7 +449,7 @@ function raty(number,id,size){
       starHalf:"./resource/star-half.png",
       readOnly:true,
       halfShow:true,
-      size:34,
+      size:size,
    })
   }
 
@@ -912,3 +912,62 @@ $(document).ready(function () {
     });
 
 })
+
+
+$("#rankModal").on("show.bs.modal",function(e){
+ 
+    //do something ……
+    console.log("111111111111111111111111111");
+    raty(5,"#difficulty",34);
+    raty(5,"#funny",34);
+    raty(5,"#gain",34);
+    raty(5,"#recommend",40);
+     
+});
+
+function makeRank(){
+    if ($.cookie("username") == undefined){
+        alert("用户未登录！ 登录后即可发表评分");
+        return false;
+      }
+
+    $.ajax({
+        async: true,
+        type: "POST",
+        dataType: "json",
+        url: "http://testapi.ratemycourse.tk/makeRank/",
+        data: {
+          username: $.cookie("username"),
+          course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID"),
+          difficulty_score: $("#difficulty").raty("getScore"),
+          funny_score: $("#funny").raty("getScore"),
+          gain_score: $("#gain").raty("getScore"),
+          recommend_score: $("#recommend").raty("getScore"),
+          csrfmiddlewaretoken:  $.cookie("csrftoken")
+        },
+        xhrFields: {
+          withCredentials: true
+        },
+        success:function(data){
+          //data=JSON.parse(data);
+          //	alert("ajax success");
+          //console.log(data);
+          //console.log(data.status)
+          if(data.status=="1"){
+              //alert(data.body.message);
+              //console.log("Successfully makeComment "+coursenum);
+              alert("评分发送成功！");
+              console.log("评分发送成功");
+              $('#close_modal').click();
+          }
+          else{
+              console.log($("#difficulty_score").raty("getScore"));
+              console.log("评分发送失败");
+              alert(data.errMsg);
+          }  
+        },
+        error:function(data){
+            alert(JSON.stringify(data));
+        }
+      });
+}
