@@ -28,41 +28,33 @@
 
 /*课程名*/
 a.col-md-4{
-    
     font-size: 34px;
     font-family: 方正圆体-标准;
     color: rgba(4, 73, 100, 0.1);
-    
 }
 
 /*评分人数*/
 .col-md-3{
-    
     font-size: 26px;
     font-family: 方正圆体-标准;
     color: rgba(4, 73, 100, 0.86);
     font-style: normal;
-    
 }
 
 /*学校*/
 .col-md-4{
-    
     font-size: 28px;
     font-family: 方正圆体-标准;
     color: rgba(4, 73, 100, 0.86);
     font-style: normal;
-    
 }
 
 /**/
 .col-md-8{
-   
     font-size: 28px;
     font-family: 方正圆体-标准;
     color: rgba(4, 73, 100, 0.86);
     font-style: normal;
-    
 }
 
 /*两种不同的背景色*/
