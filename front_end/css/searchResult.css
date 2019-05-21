@@ -67,14 +67,14 @@ a.col-md-4{
 /*两种不同的背景色*/
 .container.background1{
     background-color: rgb(255, 255, 255);
-    border-color: rgb(255, 255, 255);
-    border-radius: 0px;
+    border-color: rgba(150, 212, 236, 0.36);
+    border-radius: 2px;
 }
 
 .container.background2{
     background-color: rgba(150, 212, 236, 0.52);
     border-color: rgba(150, 212, 236, 0.36);
-    border-radius: 0px;
+    border-radius: 2px;
     border-style: solid;
 }
 
@@ -92,4 +92,5 @@ a.col-md-4{
 .col-md-12.mt-3{
     background-color: rgb(187, 232, 250);
 }
+
 
