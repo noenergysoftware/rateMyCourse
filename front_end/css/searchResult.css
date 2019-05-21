@@ -35,25 +35,25 @@ a.col-md-4{
 
 /*评分人数*/
 .col-md-3{
-    font-size: 26px;
+    font-size: 25px;
     font-family: 方正圆体-标准;
-    color: rgba(4, 73, 100, 0.86);
+    color: rgba(6, 56, 97, 0.86);
     font-style: normal;
 }
 
 /*学校*/
 .col-md-4{
-    font-size: 28px;
+    font-size: 25px;
     font-family: 方正圆体-标准;
-    color: rgba(4, 73, 100, 0.86);
+    color: rgba(6, 56, 97, 0.86);
     font-style: normal;
 }
 
 /**/
 .col-md-8{
-    font-size: 28px;
+    font-size: 25px;
     font-family: 方正圆体-标准;
-    color: rgba(4, 73, 100, 0.86);
+    color: rgba(6, 56, 97, 0.86);
     font-style: normal;
 }
 
