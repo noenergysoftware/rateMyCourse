@@ -711,7 +711,12 @@ function filterTeacher(){
                         $("#page"+i).hide();
                     }
                 }
-                
+                if(total_page_number>=7){
+                    var a=document.getElementById("page2");
+                    a.parentNode.insertBefore(page_dot , a);
+                    var b=document.getElementById("page"+total_page_number);
+                    b.parentNode.insertBefore(page_dot2 , b);
+                  }
                 toPage(1);
             }
         }
