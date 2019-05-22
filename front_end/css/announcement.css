@@ -15,8 +15,6 @@
 
 
 #announcement{
-    position: fixed;
-    z-index: 23;
     background-color: #D8ECF5;
     border-color: rgb(247, 251, 252);
     border-radius: 20px;
@@ -38,3 +36,5 @@
     font-size: 20px;
     font-family: 方正圆体-标准;
 }
+
+

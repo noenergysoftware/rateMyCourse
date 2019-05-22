@@ -66,4 +66,12 @@
     font-weight:bold;
 }
 
+#toSure{
+  border-color: rgba(20, 83, 116, 1);
+  border-radius: 20px;
+}
 
+#toComment{
+  border-color: rgba(20, 83, 116, 1);
+  border-radius: 20px;
+}
