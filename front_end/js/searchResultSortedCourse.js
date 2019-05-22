@@ -20,7 +20,6 @@ var current_page=1;
 
 function adddiv(number){
     console.log(total_data.body[number])
-    console.log(total_data.body[39])
     var x = document.createElement("div");
     x.setAttribute("class","container");
     x.setAttribute("id","course"+number);
@@ -82,12 +81,6 @@ function adddiv(number){
     
 
     
-    console.log(total_data.body[number].difficulty_score/total_data.body[number].people);
-              raty(total_data.body[number].difficulty_score/total_data.body[number].people,"#difficulty_score_"+number);
-              raty(total_data.body[number].funny_score/total_data.body[number].people,"#funny_score_"+number);
-              raty(total_data.body[number].gain_score/total_data.body[number].people,"#gain_score_"+number);
-              raty(total_data.body[number].recommend_score/total_data.body[number].people,"#recommend_score_"+number);
-              $("#rank_number_"+number).text("评分人数"+total_data.body[number].people);
       
     return x;
 }
@@ -123,6 +116,11 @@ function toPage(pagenum){
     for(var i = course_to_show;i < course_num && i < (course_to_show + course_num_per_page); i++){
         //向course_data内插入
         $("#course_data").append(adddiv(i));
+        raty(total_data.body[i].difficulty_score/total_data.body[i].people,"#difficulty_score_"+i);
+        raty(total_data.body[i].funny_score/total_data.body[i].people,"#funny_score_"+i);
+        raty(total_data.body[i].gain_score/total_data.body[i].people,"#gain_score_"+i);
+        raty(total_data.body[i].recommend_score/total_data.body[i].people,"#recommend_score_"+i);
+        $("#rank_i_"+i).text("评分人数"+total_data.body[i].people);
     }
     //4 等待ajax获取评分完毕后加载评分
     
