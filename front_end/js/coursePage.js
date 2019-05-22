@@ -232,7 +232,7 @@ function makeChildComment(id,teacher){
           if(data.status=="1"){
               //alert(data.body.message);
               //console.log("Successfully makeComment "+coursenum);
-              //alert("评论成功！");
+              alert("评论成功！");
               console.log("评论发送成功");
               //window.setTimeout("location.href='./coursePage.html'", 1000);
           }
@@ -1050,7 +1050,7 @@ function makeComment(){
             if(data.status=="1"){
                 //alert(data.body.message);
                 //console.log("Successfully makeComment "+coursenum);
-                //alert("评论成功！");
+                alert("评论成功！");
                 console.log("评论发送成功");
                 $('#commentModal').modal('hide');
                 //window.setTimeout("location.href='./coursePage.html'", 1000);
