@@ -205,6 +205,44 @@ function lastPage(){
 function toCourse(number){
    // console.log("to course"+number);
     window.sessionStorage.setItem("coursetoload",number);
+    $.ajax({
+      async: false,
+      type:"GET",
+      url: "http://testapi.ratemycourse.tk/searchCourse/",
+      dataType:"json",
+      data:{              
+          course_name: total_data.body[number].course_info.name
+      },
+      success:function(data){
+        //data=JSON.parse(data);
+        //	alert("ajax success");
+         // console.log(data);
+          //console.log(data.status)
+          if(data.status=="1"){
+              //alert(data.body.message);
+              //console.log("Successfully searched");
+              window.sessionStorage.setItem("course"+number+"name",data.body[0].name);
+              window.sessionStorage.setItem("course"+number+"website",data.body[0].website);
+              window.sessionStorage.setItem("course"+number+"course_ID",data.body[0].course_ID);
+              window.sessionStorage.setItem("course"+number+"course_type",data.body[0].course_type);
+              window.sessionStorage.setItem("course"+number+"description",data.body[0].description);
+              window.sessionStorage.setItem("course"+number+"credit",data.body[0].credit);
+              window.sessionStorage.setItem("course"+number+"department",data.body[0].department);
+              //console.log(data.body[i].teacher_list);
+              window.sessionStorage.setItem("course"+number+"teacher_list",data.body[0].teacher_list);
+          }
+          else{
+            alert(data.errMsg);
+          }
+          
+      },
+      error:function(data){
+        alert(JSON.stringify(data));
+      }
+  });
+
+    
+
     //console.log("to course"+number);
     window.setTimeout("location.href='./coursePage.html'", 0);
 
