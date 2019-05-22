@@ -19,6 +19,8 @@ page_dot2.innerHTML="<a class=\"page-link\" href=\"#c_pagination\">...</a>";
 var current_page=1;
 
 function adddiv(number){
+    console.log(total_data.body[number])
+    console.log(total_data.body[39])
     var x = document.createElement("div");
     x.setAttribute("class","container");
     x.setAttribute("id","course"+number);
