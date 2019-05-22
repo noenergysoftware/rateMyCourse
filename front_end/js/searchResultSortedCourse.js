@@ -261,6 +261,7 @@ $(document).ready(function(){
     var coursenum;
     $.when(ajax_success).done(function () {
       total_data=JSON.parse(window.sessionStorage.getItem("data"));
+      console.log(total_data);
       coursenum=total_data.length;
       course_num=total_data.length;
     })
