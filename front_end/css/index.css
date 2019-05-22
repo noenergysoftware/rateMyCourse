@@ -60,24 +60,19 @@
     font-family: 方正圆体-标准;
 }
 
+
+
 .navbar-brand{
     line-height: 20px;
     opacity: 0.31;
-    border-radius: 20px;
+    border-radius: 15px;
     background-color: rgba(185, 215, 234, 1);
     text-align: center;
-    border: 5px solid rgba(247, 251, 252, 1);
+    border: 2px solid rgba(247, 251, 252, 1);
 }
 
 
 
-.btn-group{
-    line-height: 31px;
-    opacity: 0.8;
-    color: rgba(20, 83, 116, 1);
-    font-size: 22px;
-    font-family: Roboto;
-}
 
 .input-group{
     height: 50px;
