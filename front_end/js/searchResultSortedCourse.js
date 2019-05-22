@@ -265,8 +265,8 @@ $(document).ready(function(){
     $.when(ajax).done(function () {
       total_data=JSON.parse(window.sessionStorage.getItem("data"));
       console.log(total_data);
-      coursenum=total_data.length;
-      course_num=total_data.length;
+      coursenum=parseInt(total_data.length);
+      course_num=parseInt(total_data.length);
       console.log(coursenum);
     })
 
@@ -275,7 +275,7 @@ $(document).ready(function(){
     $("#noresult").hide();
     //$("#jumpbutton").hide();
     //console.log("coursenum!!!"+coursenum);
-    if(coursenum==0 || coursenum==null){
+    if(coursenum == 0 || coursenum==null){
       $("#noresult").show();
       //$("#jumpbutton").hide();
       $("#serachedCourseNum").html(0);
