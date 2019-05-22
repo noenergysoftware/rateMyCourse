@@ -1,9 +1,10 @@
 var course_num_per_page=5;
 var score_data;
 var total_page_number;
-var course_num=window.sessionStorage.getItem("coursenum");;
+var course_num;
 var ajax_success;
 var page_dot = document.createElement("li");
+var total_data;
 page_dot.setAttribute("class","page-item");
 page_dot.setAttribute("id","page_dot");
 page_dot.setAttribute("style","display:none");
@@ -30,7 +31,8 @@ function adddiv(number){
       //x.setAttribute("class", "background2");
       x.classList.add("background2");
     }
-    var course_id=window.sessionStorage.getItem("course"+number+"course_ID");
+    var course_id=total_data.body[number].course_info.course_ID
+    
 
     x.innerHTML="<div class=\"row\" >\n"+
                 "  <div class=\"col-md-2  col-0\"></div>\n"+
@@ -46,16 +48,12 @@ function adddiv(number){
                 "      <div class=\"col-md-8 col-8 text-md-center text-center align-self-center\">"+"北京航空航天大学"+"</div>\n"+
                 "    </div>\n"+
                 "    <div class=\"row\" >\n"+
-                "      <div class=\"col-md-4 col-4 text-md-center text-center align-self-center\"> 学院</div>\n"+
-                "      <div class=\"col-md-8 col-8 text-md-center text-center align-self-center\">"+window.sessionStorage.getItem("course"+number+"department")+"</div>\n"+
-                "    </div>\n"+
-                "    <div class=\"row\" >\n"+
                 "      <div class=\"col-md-4 col-4 text-md-center text-center align-self-center\"> 类型</div>\n"+
-                "      <div class=\"col-md-8 col-8 text-md-center text-center align-self-center\">"+window.sessionStorage.getItem("course"+number+"course_type")+"</div>\n"+
+                "      <div class=\"col-md-8 col-8 text-md-center text-center align-self-center\">"+total_data.body[number].course_info.course_type+"</div>\n"+
                 "    </div>\n"+
                 "    <div class=\"row\" >\n"+
                 "      <div class=\"col-md-4 col-4 text-md-center text-center align-self-center\"> 学分</div>\n"+
-                "      <div class=\"col-md-8 col-8 text-md-center text-center align-self-center\">"+window.sessionStorage.getItem("course"+number+"credit")+"</div>\n"+
+                "      <div class=\"col-md-8 col-8 text-md-center text-center align-self-center\">"+total_data.body[number].course_info.credit+"</div>\n"+
                 "    </div>\n"+
                 "  </div>\n"+
                 "  <div class=\"col-md-6\" >\n"+
@@ -82,35 +80,13 @@ function adddiv(number){
     
 
     
-    //console.log("success");
-    $.ajax({
-        async: true,
-        type:"GET",
-        url: "http://testapi.ratemycourse.tk/getRankByCourse/",
-        dataType:"json",
-        data:{
-          course_ID:course_id
-        },
-        success:function(data){
-            console.log(data);
-            //data=JSON.parse(data);
-            if(data.status=="1"){
-              raty(data.body.difficulty_score,"#difficulty_score_"+number);
-              raty(data.body.funny_score,"#funny_score_"+number);
-              raty(data.body.gain_score,"#gain_score_"+number);
-              raty(data.body.recommend_score,"#recommend_score_"+number);
-              $("#rank_number_"+number).text("评分人数"+data.length);
-            }
-            else{
-              //alert(data.errMsg);
-              console.log(course_id+" fail to get rank");
-            }
-            
-        },
-        error:function(data){
-          alert(JSON.stringify(data));
-        }
-    });
+    
+              raty(total_data.body[number].difficulty_score/total_data.body[number].people,"#difficulty_score_"+number);
+              raty(total_data.body[number].funny_score/total_data.body[number].people,"#funny_score_"+number);
+              raty(total_data.body[number].gain_score/total_data.body[number].people,"#gain_score_"+number);
+              raty(total_data.body[number].recommend_score/total_data.body[number].people,"#recommend_score_"+number);
+              $("#rank_number_"+number).text("评分人数"+total_data.body[number].people);
+      
     return x;
 }
 
@@ -243,8 +219,8 @@ function toCourse(number){
 }
 
 $(document).ready(function(){
-  $.ajax({
-    async: false,
+  ajax=$.ajax({
+    async: true,
     type:"GET",
     url: "http://testapi.ratemycourse.tk/getRankBySortedCourse/",
     dataType:"json",
@@ -256,7 +232,7 @@ $(document).ready(function(){
         if(data.status=="1"){
             //alert(data.body.message);
            // console.log("Successfully searched");
-            
+            window.sessionStorage.setItem("data",JSON.stringify(data));
         }
         else{
           alert(data.errMsg);
@@ -269,28 +245,6 @@ $(document).ready(function(){
 });
 
 
-    //立即请求课程的评分
-    ajax_success=$.ajax({
-        async: true,
-        type:"GET",
-        url: "http://testapi.ratemycourse.tk/getAllRank/",
-        dataType:"json",
-        success:function(data){
-            //console.log(data);
-            //data=JSON.parse(data);
-            if(data.status=="1"){
-                score_data=data;
-            }
-            else{
-              //alert(data.errMsg);
-              console.log(" fail to get rank");
-            }
-            
-        },
-        error:function(data){
-          alert(JSON.stringify(data));
-        }
-    });
 
     if(window.screen.width<768){
       $("#c_pagination").addClass("pagination-sm");  
@@ -304,7 +258,12 @@ $(document).ready(function(){
     }
     // alert("!!!")
     // Form validation for Sign in / Sign up forms
-    var coursenum=window.sessionStorage.getItem("coursenum");
+    var coursenum;
+    $.when(ajax_success).done(function () {
+      total_data=JSON.parse(window.sessionStorage.getItem("data"));
+      coursenum=total_data.length;
+      course_num=total_data.length;
+    })
 
     $("#serachedCourseNum").html(coursenum);
     
