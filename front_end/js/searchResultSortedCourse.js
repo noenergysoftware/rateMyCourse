@@ -261,7 +261,7 @@ $(document).ready(function(){
     // alert("!!!")
     // Form validation for Sign in / Sign up forms
     var coursenum;
-    $.when(ajax_success).done(function () {
+    $.when(ajax).done(function () {
       total_data=JSON.parse(window.sessionStorage.getItem("data"));
       console.log(total_data);
       coursenum=total_data.length;
