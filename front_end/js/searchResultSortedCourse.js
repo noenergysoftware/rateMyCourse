@@ -38,7 +38,7 @@ function adddiv(number){
 
     x.innerHTML="<div class=\"row\" >\n"+
                 "  <div class=\"col-md-2  col-0\"></div>\n"+
-                "  <a class=\"col-md-4 col-12 align-self-center text-center text-md-left\" href=\"#\" onclick=\"toCourse("+number+")\" style=\"text-decoration:none\">"+window.sessionStorage.getItem("course"+number+"name")+"</a>\n"+
+                "  <a class=\"col-md-4 col-12 align-self-center text-center text-md-left\" href=\"#\" onclick=\"toCourse("+number+")\" style=\"text-decoration:none\">"+total_data.body[number].course_info.name+"</a>\n"+
                 "  <div class=\"col-md-1 col-0\"></div>\n"+
                 "  <div id=\"rank_number_"+number+"\" class=\"col-md-3 col-12 text-md-left text-center align-self-center \" ></div>\n"+
                 "  <div class=\"col-md-2 col-0\"></div>\n"+
@@ -82,7 +82,7 @@ function adddiv(number){
     
 
     
-    
+    console.log(total_data.body[number].difficulty_score/total_data.body[number].people);
               raty(total_data.body[number].difficulty_score/total_data.body[number].people,"#difficulty_score_"+number);
               raty(total_data.body[number].funny_score/total_data.body[number].people,"#funny_score_"+number);
               raty(total_data.body[number].gain_score/total_data.body[number].people,"#gain_score_"+number);
