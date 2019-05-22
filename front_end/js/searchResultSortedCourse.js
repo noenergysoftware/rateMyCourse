@@ -208,7 +208,7 @@ function toCourse(number){
     $.ajax({
       async: false,
       type:"GET",
-      url: "http://testapi.ratemycourse.tk/searchCourse/",
+      url: "https://api.ratemycourse.tk/searchCourse/",
       dataType:"json",
       data:{              
           course_name: total_data.body[number].course_info.name
@@ -252,7 +252,7 @@ $(document).ready(function(){
   ajax=$.ajax({
     async: true,
     type:"GET",
-    url: "http://testapi.ratemycourse.tk/getRankBySortedCourse/",
+    url: "https://api.ratemycourse.tk/getRankBySortedCourse/",
     dataType:"json",
     success:function(data){
       //data=JSON.parse(data);
