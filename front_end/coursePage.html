@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    type="text/css">
+  <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+
+
+  <link rel="stylesheet" href="./css/coursePage.css" type="text/css">
+
+
+  <script src="./js/jquery-3.2.1.min.js"></script>
+  <script src="./js/jquery.raty.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="./js/jquery.cookie.js"></script>
+  <script src="./js/bootstrap.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/jquery.validate.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+
+  <script src="./js/animations.js"></script>
+  <script src="./js/coursePage.js"></script>
+  <script src="./js/head.js"></script>
+  <!--<script src="./js/coursePage_old.js"></script>-->
+
+  <title>课程信息</title>
+  <link rel="shortcut icon" href="./resource/favicon.ico" />
+  <link rel="bookmark" href="./resource/favicon.ico" />
+</head>
+
+<body id="body">
+  <div class="py-5" style="background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);">
+    <div style="padding-top:70px">
+      <!-- Space used to modify navbar with fixed-top style-->
+    </div>
+    <!--
+<div id="head">
+  <iframe src="header1.html" frameborder="0" scrolling="no" width="100%" id="headFrame2"></iframe>
+</div>
+-->
+    <!--导航栏-->
+    <div>
+      <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+        <div class="container" id="navbarContainer">
+          <a class="navbar-brand" href="https://ratemycourse.tk/index.html">公客</a>
+          <!--公告-->
+          <a class="navbar-brand" href="./announcement.html" style="display: none">公告</a>
+          
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+            <ul class="navbar-nav">
+
+              <li class="nav-item">
+                <a href="javascript:void(0)" class="navbar-brand" onclick="javascript: jumpLogin()" id="signIn"
+                  style="display:block">登录</a>
+              </li>
+              <li class="nav-item">
+                <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpSignUp()" id="signUp"
+                  style="display:block">注册</a>
+              </li>
+              <li class="item">
+                <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpPersonalInfo()"
+                  id="personalInfo" style="display:none">个人信息</a>
+              </li>
+              <li class="item">
+                <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpLogOut()" id="logOut"
+                  style="display:none">注销</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="container py-5">
+      <div class="text-center text-dark">
+        <h1 id="course_name" class="lead display-4"></h1>
+      </div>
+      <div style="width:100%; margin-top:86px">
+        <table style="width:100%; margin:auto">
+          <tbody>
+            <tr>
+              <td style="width:33%">
+                <p class="text-dark text-center">学分</p>
+              </td>
+              <td style="width:33%">
+                <p class="text-dark text-center">开课学院</p>
+              </td>
+              <td style="width:33%">
+                <p class="text-dark text-center">课程类别</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p class="text-dark text-center" id="course_credit" style="margin-top:8px"></p>
+              </td>
+              <td>
+                <p class="text-dark text-center" id="course_school" style="margin-top:8px"></p>
+              </td>
+              <td>
+                <p class="text-dark text-center" id="course_type" style="margin-top:8px"></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="text-dark text-center" style="width:25%; margin-top:10px" id="rank_number">
+      
+      </div>
+
+      <div style="width:100%; margin-top:30px">
+          <table style="width:100%; margin:auto">
+            <tbody>
+              <tr>
+                <td style="width:25%">
+                  <p class="text-dark text-center">推荐程度</p>
+                </td>
+                <td style="width:25%">
+                  <p class="text-dark text-center">难度</p>
+                </td>
+                <td style="width:25%">
+                  <p class="text-dark text-center">有趣程度</p>
+                </td>
+                <td style="width:25%">
+                    <p class="text-dark text-center">课程收获</p>
+                  </td>
+              </tr>
+              <tr>
+                <td>
+                  <p  class="text-center" id="difficulty_score" style="margin-top:8px"></p>
+                </td>
+                <td>
+                  <p class="text-center" id="funny_score" style="margin-top:8px"></p>
+                </td>
+                <td>
+                  <p  class="text-center" id="gain_score" style="margin-top:8px"></p>
+                </td>
+                <td>
+                  <p class="text-center"  id="recommend_score" style="margin-top:8px"></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+    </div>
+  </div>
+
+  <div class="container py-5">
+    <div class="row" style="width:100%;">
+
+      <!--<div style="width:100%">-->
+
+      <div class="row show-grid" style="width:100%;margin-left:16px">
+        <!--<div class="col-md-8"><h3 class="text-dark"> 总分：{{course_scores}}</h3></div>-->
+        <div class="col-md-4"><a class="btn btn-outline-primary btn-lg btn-default" id="toComment" href="#"
+            onclick="AddComment()">撰写评价</a></div>
+      </div>
+
+
+
+      <br />
+
+      <div style="margin-top: 20px;margin-bottom: 20px" class="card col-12">
+        <div class="card-header">课程简介</div>
+        <div id="coursedescription" class="card-body">
+        </div>
+
+      </div>
+      <!--</div>-->
+
+      <!--
+      <div class="text-center" style="border-left:1px #e4e4e4 solid; width:23%;">
+        <div class="text-dark text-center" style="margin-top:54px">
+          <a href="{{course_website}}">
+         <a>
+            <p class="text-dark">课程网站</p>
+          </a>
+         <a href="{{profession_website}}">
+         <a>
+            <p style="margin-top:32px;" class="text-dark">学院官网</p>
+          </a>
+        </div>
+      </div>
+      -->
+
+      <div id="locationid"></div>
+
+      <ul id="c_pagination" class="pagination" style="margin-top:20px;margin-bottom:-10px">
+
+        <li style="display: none" id="lastpage" class="page-item col-md-1.5">
+          <a class="page-link" onclick="lastPage()" href="#">&lt;&lt;</a>
+        </li>
+
+        <!-- use add page to load page data -->
+
+        <li style="display: none" id="nextpage" class="page-item col-md-1.5">
+          <a class="page-link" onclick="nextPage()" href="#">&gt;&gt;</a>
+        </li>
+
+        <div id="jumpbutton" class="jump ">
+          <span class="jump_text">第<nobr id="pagenum"></nobr>页，共<nobr id="totalpage"></nobr>页
+
+            <nobr id="jump">,跳到<input type="text" name="jumpPage" id="jumpPage" style="width:12%"
+                onkeyup="this.value=this.value.replace(/[^0-9-]+/,'');">页
+              <button type="button" class="btn btn-primary btn-xs" onclick="jumpPage()">GO</button>
+            </nobr>
+          </span>
+        </div>
+
+      </ul>
+
+    </div>
+  </div>
+  <hr>
+
+
+  <div class="container ">
+    <div id="commentDiv"></div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12 ">
+      <p class="text-center text-dark my-2">© Copyright 2019 flamenco - All rights reserved. </p>
+    </div>
+  </div>
+</body>
+
+
+
+</html>

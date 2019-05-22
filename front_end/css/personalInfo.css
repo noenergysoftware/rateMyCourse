@@ -1,0 +1,100 @@
+.Content-Main{
+    max-width: 500px;
+    margin: auto;
+    border: none;
+    border-radius: 5px; 
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-shadow: 1px 1px 1px #444;
+    color: #D3D3;
+    background: white;
+}
+.Content-Main h1{
+    padding: 8px 0px 40px 10px;
+    display: block;
+    border-bottom: 1px solid #444;
+}
+.text1{
+    margin-left: 3px;
+}
+.Content-Main label{
+    margin: 0px 0px 5px;
+    display: block;
+}
+.fileInputContainer{
+    height: 99px;
+    width: 99px;
+    margin: 20px 20px 20px 20px ;
+    border: none;
+    background: url("img/Example.jpg");
+    overflow: hidden; 
+    position: relative; 
+}
+.fileInput{
+    height: 106px;
+    border: none;
+    font-size: 300px;
+    opacity: 0;  
+    filter:alpha(opacity=0);
+    cursor: pointer;
+    position: absolute;
+}
+.Content-Main label>span{
+    width: 20%;
+    float: left;
+    text-align: right;
+    padding-right: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+.Main-sex{
+    padding-right: 13px;
+    padding-bottom: 13px;
+    font-weight: bold;
+    line-height: 4px; 
+}
+.Main-sex input[type=checkbox]{
+    margin-top:6px;
+    vertical-align:middle; 
+}
+.Content-Main input[type="text"],.Content-Main input[type="email"],.Content-Main textarea{
+    height: 25px;
+    width: 70%;
+    line-height: 15px;
+    padding: 5px 0px 5px 5px; 
+    margin-bottom: 16px;
+    margin-right: 6px;
+    margin-top: 2px;
+    border: none;
+    border-radius:2px;
+    -webkit-border-radius:2px;
+    -moz-border-radius:2px;
+    outline: 0 none; 
+    background:  #DFDFDF;
+    color: #525252;
+}
+.Content-Main textarea{
+    height: 100px;
+    width: 70%;
+    padding: 5px 0px 0px 5px;
+}
+.Content-Main .button{
+    padding: 8px 24px 8px 24px;
+    margin-bottom: 8px;
+    border: none;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #FFE477;
+    box-shadow: 1px 1px 1px  #3D3D3D;
+    -moz-box-shadow: 1px 1px 1px  #3D3D3D;
+    -webkit-box-shadow: 1px 1px 1px  #3D3D3D;
+    color: #585858;
+    background: #f6ff0a;
+}
+.Content-Main .button:hover{
+    color:  #333;
+    background-color:  #EBEBEB ;
+}
