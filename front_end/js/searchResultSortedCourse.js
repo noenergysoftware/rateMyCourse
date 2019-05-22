@@ -268,7 +268,7 @@ $(document).ready(function(){
       coursenum=parseInt(total_data.length);
       course_num=parseInt(total_data.length);
       console.log(coursenum);
-    })
+    
 
     $("#serachedCourseNum").html(coursenum);
     
@@ -337,4 +337,5 @@ $(document).ready(function(){
        // console.log("add page");
     }
     toPage(1);
+  })
 })
