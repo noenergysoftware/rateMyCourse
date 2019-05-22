@@ -106,6 +106,7 @@ function raty(number,id){
 
 
 function toPage(pagenum){
+    console.log("load page"+pagenum)
     //1 超出范围的页码报错
     if(pagenum > total_page_number || pagenum <= 0){
         alert("页码错误"+"***"+pagenum+"***");
@@ -266,6 +267,7 @@ $(document).ready(function(){
       console.log(total_data);
       coursenum=total_data.length;
       course_num=total_data.length;
+      console.log(coursenum);
     })
 
     $("#serachedCourseNum").html(coursenum);
