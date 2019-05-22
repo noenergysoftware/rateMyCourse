@@ -173,12 +173,7 @@ var initCropperInModal = function(img, input, modal){
         var saveData = {};
         var URL = window.URL || window.webkitURL;
         var blobURL;
-        $modal.on('show.bs.modal',function () {
-            // 如果打开模态框时没有选择文件就点击“打开图片”按钮
-            /*if(!$inputImage.val()){
-                $inputImage.click();
-            }*/
-        }).on('shown.bs.modal', function () {
+        $modal.on('shown.bs.modal', function () {
             // 重新创建
             $image.cropper( $.extend(options, {
                 ready: function () {

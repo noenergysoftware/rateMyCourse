@@ -146,42 +146,42 @@
     </div>
     
     <div class="modal fade" id="changeModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content" >
-                    <div class="modal-header">
-                        
-                        <h4 class="modal-title float-md-none">
-                            <i class="fa fa-pencil"></i>更换头像
-                        </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="close_modal">×</button>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    
+                    <h4 class="modal-title float-md-none">
+                        <i class="fa fa-pencil"></i>更换头像
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="close_modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <p class="tip-info text-center">
+                        未选择图片
+                    </p>
+                    <div class="img-container" style="display: none">
+                        <img src="" alt="" id="photo">
                     </div>
-                    <div class="modal-body">
-                        <p class="tip-info text-center">
-                            未选择图片
-                        </p>
-                        <div class="img-container" style="display: none">
-                            <img src="" alt="" id="photo">
+                    <div class="img-preview-box" style="display: none">
+                        <hr>
+                        <span>预览:</span>
+                        <div id="testid" class="img-preview img-preview-md">
                         </div>
-                        <div class="img-preview-box" style="display: none">
-                            <hr>
-                            <span>预览:</span>
-                            <div id="testid" class="img-preview img-preview-md">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="container">
-                        <label class="btn mybtn col-md-3" for="photoInput">
-                            <input type="file" class="sr-only" id="photoInput" accept="image/*">
-                                <span>打开图片</span>
-                        </label>
-                        <button class="btn mybtn disabled col-md-2 offset-md-4 mb-2" disabled="true" onclick="sendPhoto();">提交</button>
-                        <button class="btn mybtn col-md-2 mb-2" aria-hidden="true" data-dismiss="modal">取消</button>
-                    </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <div class="container">
+                    <label class="btn mybtn col-md-3" for="photoInput">
+                        <input type="file" class="sr-only" id="photoInput" accept="image/*">
+                            <span>打开图片</span>
+                    </label>
+                    <button class="btn mybtn disabled col-md-2 offset-md-4 mb-2" disabled="true" onclick="sendPhoto();">提交</button>
+                    <button class="btn mybtn col-md-2 mb-2" aria-hidden="true" data-dismiss="modal">取消</button>
+                </div>
+                </div>
             </div>
-            </div>
+        </div>
+    </div>
             
 
 </body>

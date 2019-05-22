@@ -52,7 +52,9 @@ $(document).ready(function () {
                     console.log(JSON.stringify(data));
                     console.log(data.status);
                     if (data.status == "1") {
-                        $.cookie("username", data.body.username, { path: '/' });
+                        var date = new Date();
+                        date.setTime(date.getTime()+120*60*1000);
+                        $.cookie("username", data.body.username, { expires:date,path: '/' });
                         
                         //window.sessionStorage.setItem("status",data.status);           //登录成功"status"="0",用于切换导航栏
                         //window.sessionStorage.setItem("username",data.body.username);
