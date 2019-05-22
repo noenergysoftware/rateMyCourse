@@ -248,10 +248,6 @@ $(document).ready(function(){
     type:"GET",
     url: "http://testapi.ratemycourse.tk/getRankBySortedCourse/",
     dataType:"json",
-    data:{              
-        course_name: $("#searchboxCourse").val(),
-        department: $("#buttonSelectDepartment").text()
-    },
     success:function(data){
       //data=JSON.parse(data);
       //	alert("ajax success");
