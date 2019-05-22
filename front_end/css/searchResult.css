@@ -8,11 +8,20 @@
 
 }*/
 /*搜索结果*/
+
 #count{
     color: rgba(123, 216, 251, 1);
     text-align: center;
     font-family: 方正圆体-标准;
     margin: 0 auto;
+}
+.navbar-brand{
+    line-height: 20px;
+    opacity: 0.31;
+    border-radius: 15px;
+    background-color: rgba(185, 215, 234, 1);
+    text-align: center;
+    border: 2px solid rgba(247, 251, 252, 1);
 }
 .navbar-brand2{
     line-height: 20px;

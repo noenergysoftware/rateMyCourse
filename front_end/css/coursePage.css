@@ -1,3 +1,11 @@
+.navbar-brand{
+  line-height: 20px;
+  opacity: 0.31;
+  border-radius: 15px;
+  background-color: rgba(185, 215, 234, 1);
+  text-align: center;
+  border: 2px solid rgba(247, 251, 252, 1);
+}
 
 .userName{
   margin-left: 32px;
