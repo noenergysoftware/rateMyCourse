@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.staticfile.org/bootstrap-fileinput/5.0.3/css/fileinput.min.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-    <link href="https://cdn.bootcss.com/cropper/3.1.3/cropper.min.css" rel="stylesheet">
-    <link href="./css/css.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/cropper/3.1.3/cropper.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/css.css" type="text/css">
     <link rel="stylesheet" href="./css/personalInfo.css" type="text/css">
     <!--
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -24,17 +24,18 @@
     <script src="https://cdn.bootcss.com/cropper/3.1.3/cropper.min.js"></script>
     <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js"></script>
-    <script src="./lib/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.12.6/umd/popper.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.staticfile.org/jquery-validate/1.17.0/jquery.validate.min.js"></script>
     <script src="https://cdn.staticfile.org/blueimp-md5/2.10.0/js/md5.min.js"></script>
     <script src="https://cdn.staticfile.org/bootstrap-fileinput/5.0.3/js/fileinput.min.js"></script>
     <script src="https://cdn.staticfile.org/bootstrap-fileinput/5.0.3/js/locales/zh.min.js"></script>
     <script src="https://cdn.staticfile.org/bootstrap-fileinput/5.0.3/js/plugins/piexif.min.js"></script>
-    <script src="./lib/animations.js"></script>
+    <script src="https://cdn.staticfile.org/javascript-canvas-to-blob/3.14.0/js/canvas-to-blob.min.js"></script>
     <script src="./js/personalinfo.js"></script>
     <script src="./js/head.js"></script>
-    <script src="./js/canvas-to-blob.min.js"></script>
+    
+
 
 </head>
 
@@ -44,40 +45,40 @@
     </div>
     <!--导航栏-->
     <div>
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
-            <div class="container" id="navbarContainer">
-                <a class="navbar-brand" href="./index.html">公客</a>
-                <!--公告-->
-                <a class="navbar-brand" href="./announcement.html" style="display: none">公告</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                    data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
-                    <ul class="navbar-nav">
-
-                        <li class="nav-item">
-                            <a href="javascript:void(0)" class="navbar-brand" onclick="javascript: jumpLogin()"
-                                id="signIn" style="display:block">登录</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpSignUp()"
-                                id="signUp" style="display:block">注册</a>
-                        </li>
-                        <li class="item">
-                            <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpPersonalInfo()"
-                                id="personalInfo" style="display:none">个人信息</a>
-                        </li>
-                        <li class="item">
-                            <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpLogOut()"
-                                id="logOut" style="display:none">注销</a>
-                        </li>
-                    </ul>
-                </div>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top"  style="background-color: #29B6F6;border: 1px solid rgba(247, 251, 252, 1);">
+          <div class="container" id="navbarContainer">
+            <a class="navbar-brand" href="./index.html" style="color:#0D47A1;font-weight: 600;">首页</a>
+            <!--公告-->
+            <a class="navbar-brand" href="./announcement.html" style="color:#145374;font-weight: 500;">公告</a>
+            
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+              data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            
+    
+            <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+              <ul class="navbar-nav">
+    
+                <li class="nav-item">
+                  <a href="javascript:void(0)" class="navbar-brand" onclick="javascript: jumpLogin()" id="signIn" style="display:block;color:#145374;font-weight: 500;">登录</a>
+                </li>
+                <li class="nav-item">
+                  <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpSignUp()" id="signUp" style="display:block;color:#145374;font-weight: 500;">注册</a>
+                </li>
+                <li class="item">
+                  <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpPersonalInfo()" id="personalInfo" style="display:none;color:#145374;font-weight: 500;">个人信息</a>
+                </li>
+                <li class="item">
+                    <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpLogOut()" id="logOut" style="display:none;color:#145374;font-weight: 500;">注销</a>
+                </li>
+              </ul>
             </div>
+          </div>
         </nav>
-    </div>
+      </div>
 
 
     <div class="container">
@@ -135,7 +136,7 @@
 
             <div class="row col-md-6 offset-md-3">
                 <span >个人介绍&nbsp;</span>
-                <textarea id="personalIntroduce" class="col-md-10 col-12 my-1 " style="border:solid 1px #f00;" onkeyup="if(this.value.length > 256) this.value=this.value.substr(0,256)"></textarea>
+                <div id="personalIntroduce" class=" textarea col-md-10 col-12 my-1 " contenteditable="true" ></div>
             </div>
             
             <div style="text-align:center">
