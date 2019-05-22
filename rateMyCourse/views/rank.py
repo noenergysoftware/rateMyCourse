@@ -158,7 +158,7 @@ def get_all_rank(request) -> HttpResponse:
         'body': ret_dict
     }), content_type="application/json")
 
-
+#@cache_page(60*60)
 def get_rank_by_sorted_course(request) -> HttpResponse:
     """
     获取评价最高的课程
@@ -167,7 +167,7 @@ def get_rank_by_sorted_course(request) -> HttpResponse:
     """
     all_rank = RankCache.objects.all()
 
-    sorted_course_dict = {}
+    sorted_course_dict = []
     for rank in all_rank:
         if rank.position != -1:
             rank_dict = {}
@@ -177,15 +177,16 @@ def get_rank_by_sorted_course(request) -> HttpResponse:
             rank_dict['recommend_score'] = rank.recommend_score
             rank_dict['course_info'] = rank.course.ret()
             rank_dict['position'] = rank.position
-            sorted_course_dict[rank.position] = rank_dict
-
+            rank_dict['people'] = rank.people
+            sorted_course_dict.append(rank_dict)
+    sorted_course_dict.sort(key=lambda x:x['position'])
     return HttpResponse(json.dumps({
         'status': 1,
         'length': len(sorted_course_dict),
         'body': sorted_course_dict,
     }), content_type="application/json")
 
-
+@cache_page(60*60)
 def get_rank_by_sorted_teacher(request) -> HttpResponse:
     """
     获取评价最高的教师
@@ -204,7 +205,7 @@ def get_rank_by_sorted_teacher(request) -> HttpResponse:
             rank_dict['recommend_score'] = rank.recommend_score
             rank_dict['teacher_info'] = rank.teacher.ret()
             rank_dict['position'] = rank.position
-            sorted_teacher_dict[rank.position] = rank_dict
+            sorted_teacher_dict[rank.teacher_id] = rank_dict
 
     return HttpResponse(json.dumps({
         'status': 1,
