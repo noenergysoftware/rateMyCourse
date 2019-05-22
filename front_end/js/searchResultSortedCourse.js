@@ -120,7 +120,7 @@ function toPage(pagenum){
         raty(total_data.body[i].funny_score/total_data.body[i].people,"#funny_score_"+i);
         raty(total_data.body[i].gain_score/total_data.body[i].people,"#gain_score_"+i);
         raty(total_data.body[i].recommend_score/total_data.body[i].people,"#recommend_score_"+i);
-        $("#rank_i_"+i).text("评分人数"+total_data.body[i].people);
+        $("#rank_number_"+i).text("评分人数"+total_data.body[i].people);
     }
     //4 等待ajax获取评分完毕后加载评分
     
