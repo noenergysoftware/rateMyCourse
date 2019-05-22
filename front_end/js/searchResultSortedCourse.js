@@ -125,16 +125,7 @@ function toPage(pagenum){
         $("#course_data").append(adddiv(i));
     }
     //4 等待ajax获取评分完毕后加载评分
-    $.when(ajax_success).done(function () {
-        for(var i = course_to_show;i < course_num && i < (course_to_show + course_num_per_page); i++){
-            var id=window.sessionStorage.getItem("course"+i+"course_ID");
-            raty(score_data.body[id].difficulty_score,"#difficulty_score_"+i);
-            raty(score_data.body[id].funny_score,"#funny_score_"+i);
-            raty(score_data.body[id].gain_score,"#gain_score_"+i);
-            raty(score_data.body[id].recommend_score,"#recommend_score_"+i);
-            $("#rank_number_"+i).text("评分人数   "+score_data.body[id].rank_number);
-        }
-    });
+    
     
     //5 隐藏其余的页码以及上下页
     for(var i=1;i<=total_page_number;i++){
