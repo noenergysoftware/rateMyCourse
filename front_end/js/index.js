@@ -46,34 +46,6 @@ $(document).ready(function(){
     document.getElementById("personalInfo").style.display = "block";
     document.getElementById("logOut").style.display = "block";
   } 
-  
-
-  $.ajax({
-    async: true,
-    type:"GET",
-    url: "http://testapi.ratemycourse.tk/",
-    dataType:"json",
-    success:function(data){
-      //data=JSON.parse(data);
-      //	alert("ajax success");
-        console.log(data);
-        //console.log(data.status)
-    },
-    error:function(data){
-      if(data.readyState==4){
-        window.sessionStorage.setItem('callBack',data.responseText);
-        window.setTimeout("location.href='./callBack.html'",0);
-      }
-      else if(data.readyState==0){
-        alert("请求发送失败，请稍后再进行尝试");
-      }
-      else{
-        alert(JSON.stringify(data));
-      }
-    }
-});
-
-  
 
   $.ajax({
       async: false,
