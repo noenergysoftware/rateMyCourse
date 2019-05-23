@@ -40,8 +40,6 @@ function storedata(data){
 
 $(document).ready(function(){
   
-
-
   if ($.cookie("username") != undefined){
     document.getElementById("signIn").style.display = "none";
     document.getElementById("signUp").style.display = "none";
@@ -49,6 +47,34 @@ $(document).ready(function(){
     document.getElementById("logOut").style.display = "block";
   } 
   
+
+  $.ajax({
+    async: true,
+    type:"GET",
+    url: "http://testapi.ratemycourse.tk/",
+    dataType:"json",
+    success:function(data){
+      //data=JSON.parse(data);
+      //	alert("ajax success");
+        console.log(data);
+        //console.log(data.status)
+    },
+    error:function(data){
+      if(data.readyState == "4"){
+        window.sessionStorage.setItem('callBack',data.responseText);
+        window.setTimeout("location.href='./callBack.html'",0);
+      }
+      if(data.readyState==4){
+        
+        window.sessionStorage.setItem('callBack',data.responseText);
+        window.setTimeout("location.href='./callBack.html'",0);
+      }
+      
+    }
+});
+
+  
+
   $.ajax({
       async: false,
       type:"GET",
@@ -83,6 +109,7 @@ $(document).ready(function(){
       },
       error:function(data){
         alert(JSON.stringify(data));
+        
       }
   });
 
