@@ -81,7 +81,16 @@ $(document).ready(function(){
           
       },
       error:function(data){
-        alert(JSON.stringify(data));
+        if(data.readyState==4){
+          window.sessionStorage.setItem('callBack',data.responseText);
+          window.setTimeout("location.href='./callBack.html'",0);
+        }
+        else if(data.readyState==0){
+          alert("请求发送失败，请稍后再进行尝试");
+        }
+        else{
+          alert(JSON.stringify(data));
+        }
       }
   });
 
@@ -117,7 +126,16 @@ $(document).ready(function(){
                   
               },
               error:function(data){
-                alert(JSON.stringify(data));
+                if(data.readyState==4){
+                  window.sessionStorage.setItem('callBack',data.responseText);
+                  window.setTimeout("location.href='./callBack.html'",0);
+                }
+                else if(data.readyState==0){
+                  alert("请求发送失败，请稍后再进行尝试");
+                }
+                else{
+                  alert(JSON.stringify(data));
+                }
               }
           });
       }
@@ -149,7 +167,16 @@ $(document).ready(function(){
                   
               },
               error:function(data){
-                alert(JSON.stringify(data));
+                if(data.readyState==4){
+                  window.sessionStorage.setItem('callBack',data.responseText);
+                  window.setTimeout("location.href='./callBack.html'",0);
+                }
+                else if(data.readyState==0){
+                  alert("请求发送失败，请稍后再进行尝试");
+                }
+                else{
+                  alert(JSON.stringify(data));
+                }
               }
           });
       }
