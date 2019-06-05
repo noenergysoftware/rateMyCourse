@@ -69,7 +69,7 @@ def reset_password(request):
                     'errMsg': '用户未设置保护问题，无法重置密码，请联系管理员',
                 }), content_type="application/json")
             else:
-                c: PasswordQuestion = qs[0]
+                c = qs[0]
                 if c.question == question and c.answer == answer:
                     c.user.password = npassword
                     c.save()
