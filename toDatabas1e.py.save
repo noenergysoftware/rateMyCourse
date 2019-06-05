@@ -1,0 +1,14 @@
+import os
+import sys
+
+pro_dir = os.getcwd()
+sys.path.append(pro_dir)
+os.environ['DJANGO_SETTINGS_MODULE'] = 'flamenco.settings'
+import django
+
+django.setup()
+from rateMyCourse.models import *
+import pandas as pd
+
+for m in [User]:
+   m.objects.all().delete()

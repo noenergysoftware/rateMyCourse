@@ -23,4 +23,9 @@ rateMyCourse/templates/rateMyCourse/temp.html
 log.txt
 
 # test
+
 .coverage
+test
+
+#settings.py
+#authentication.py

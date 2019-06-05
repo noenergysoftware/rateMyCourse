@@ -79,6 +79,7 @@ class User(models.Model):
     # attributes
     username = models.CharField(max_length=64, unique=True)  # 用户名不可重复
     mail = models.EmailField(max_length=64, unique=True)
+    profile_photo = models.URLField(blank=True, default="https://i.loli.net/2019/05/14/5cda6706c2f0861301.jpg")
     # TODO md5+salt
     password = models.CharField(max_length=32)
     role = models.CharField(max_length=1, choices=ROLE_CHOICE, default='O')
@@ -138,6 +139,7 @@ class Course(models.Model):
             'credit': self.credit
         }
 
+
 class TeachCourse(models.Model):
     """
     matches courses and their teachers together.\n
@@ -147,6 +149,26 @@ class TeachCourse(models.Model):
     """
     teachers = models.ManyToManyField(
         Teacher,
+    )
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+    )
+    department = models.ForeignKey(
+        Department,
+        on_delete=models.CASCADE,
+    )
+
+
+class SelectCourse(models.Model):
+    """
+    matches courses and their teachers together.\n
+    User: ManyToManyField to table USER, defines who select the course \n
+    course: foreign key to table COURSE, defines the course \n
+    department: foreign key to table DEPARTMENT, defines which department that this course belongs to \n
+    """
+    user = models.ManyToManyField(
+        User,
     )
     course = models.ForeignKey(
         Course,
@@ -203,7 +225,13 @@ class MakeRank(models.Model):
         on_delete=models.CASCADE,
     )
 
-class rankCache(models.Model):
+
+class RankCache(models.Model):
+    """
+    课程排名缓存，
+    保存课程的排名，四项评分，评分人数等。
+    为进入排名序列的课程排名取-1
+    """
     course = models.ForeignKey(
         Course,
         on_delete=models.CASCADE,
@@ -213,11 +241,27 @@ class rankCache(models.Model):
     funny_score = models.FloatField(default=0)
     gain_score = models.FloatField(default=0)
     recommend_score = models.FloatField(default=0)
-    difficulty_position = models.FloatField(default=-1)
-    funny_position = models.FloatField(default=-1)
-    gain_position = models.FloatField(default=-1)
-    recommend_position = models.FloatField(default=-1)
-    total_position = models.FloatField(default=-1)
+    position = models.FloatField(default=-1)
+    people = models.IntegerField(default=0)
+
+
+class TeacherRankCache(models.Model):
+    """
+    教师排名缓存，
+    保存教师的排名，四项评分，评分人数等。
+    为进入排名序列的教师排名取-1
+    """
+    teacher = models.ForeignKey(
+        Teacher,
+        on_delete=models.CASCADE,
+    )
+    count = models.IntegerField(default=0)
+    difficulty_score = models.FloatField(default=0)
+    funny_score = models.FloatField(default=0)
+    gain_score = models.FloatField(default=0)
+    recommend_score = models.FloatField(default=0)
+    position = models.FloatField(default=-1)
+    people = models.IntegerField(default=0)
 
 
 class Comment(models.Model):
@@ -232,20 +276,31 @@ class Comment(models.Model):
     create_time = models.DateTimeField(default=datetime.datetime.now)
     edit_time = models.DateTimeField(auto_now=True)
     parent_comment = models.IntegerField(default=-1)
-
+    rate = models.IntegerField(default=0)
     teacher = models.ForeignKey(
         Teacher,
         on_delete=models.CASCADE,
         default=None,
     )
+
     def ret(self):
         return {
             'content': self.content,
-            'create_time': str((self.create_time+datetime.timedelta(seconds=8*60*60)).strftime("%Y-%m-%d %H:%M")),
-            'edit_time': str((self.edit_time+datetime.timedelta(seconds=8*60*60)).strftime("%Y-%m-%d %H:%M")),
+            'create_time': str(
+                (self.create_time +
+                 datetime.timedelta(
+                     seconds=8 *
+                             60 *
+                             60)).strftime("%Y-%m-%d %H:%M")),
+            'edit_time': str(
+                (self.edit_time +
+                 datetime.timedelta(
+                     seconds=8 *
+                             60 *
+                             60)).strftime("%Y-%m-%d %H:%M")),
             'parent_comment': self.parent_comment,
-            'teacher': str(self.teacher.name)
-        }
+            'teacher': str(
+                self.teacher.name)}
 
 
 class MakeComment(models.Model):
@@ -269,8 +324,10 @@ class MakeComment(models.Model):
     )
 
 
-
 class HitCount(models.Model):
+    """
+    暂未使用
+    """
     name = models.CharField(max_length=50)
     count = models.BigIntegerField()
 
@@ -279,3 +336,30 @@ class HitCount(models.Model):
             'name': self.name,
             'count': self.count
         }
+
+
+class RateComment(models.Model):
+    """
+    记录赞踩信息，防止重复
+    """
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+    comment = models.ForeignKey(
+        Comment,
+        on_delete=models.CASCADE,
+    )
+    rate = models.IntegerField(default=0)
+
+
+class PasswordQuestion(models.Model):
+    """
+    密码重置，保存安全问题及其答案。
+    """
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+    question = models.CharField(max_length=100)
+    answer = models.CharField(max_length=100)

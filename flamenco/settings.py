@@ -23,7 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%uf=tb^nhsu%#xg2!mvj%2!2ftnqahxsg%$!o8c2wh8ob@-2^r'
+SECRET_KEY = os.environ['DJANGOSK']
+# 为确保安全，我们将这一项存储在环境变量中，具体可联系本开发组（邮箱/qq/issue）
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -46,11 +47,11 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -61,15 +62,11 @@ CORS_ORIGIN_WHITELIST = (
     '*',
     '127.0.0.1',
     'ratemycourse.tk',
+    'test.ratemycourse.tk',
 )
 CORS_ALLOW_METHODS = (
-    'DELETE',
     'GET',
-    'OPTIONS',
-    'PATCH',
     'POST',
-    'PUT',
-    'VIEW',
 )
 
 CORS_ALLOW_HEADERS = (
@@ -157,3 +154,19 @@ STATIC_URL = '/static/'
 FIXTURE_DIRS = [
     "test",
 ]
+# The path of django admin with nginx when debug is false may be confusing.
+# The following lines tries to solve it
+'''
+STATIC_ROOT = os.getcwd()+'/nginx/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)'''
+
+# Please ensure the project has the Permission to the path below
+# A memory based cache is also applicable
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/RMCCache/',
+    }
+}
