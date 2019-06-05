@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from .views import search,  register, models, comments,rank,mail
+from .views import search,  register, models, comments,rank,password
 
 
 urlpatterns = [
@@ -45,7 +45,7 @@ urlpatterns = [
     url(r'^getRateComment/$',comments.get_rate_comment,name="getRateComment"),
     url(r'^getHotComment/$',comments.get_high_rate_comment,name="getHotComment"),
 
-    url(r'^findPassword/$',mail.find_password,name="findPassword"),
+    url(r'^setQuestion/$',password.set_question,name="setQuestion"),
 
 ]
 '''
