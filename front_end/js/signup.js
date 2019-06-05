@@ -80,7 +80,7 @@ $(document).ready(function(){
 		});			
 
 
-				var IP=returnCitySN["cip"];
+				IP=returnCitySN["cip"];
 				console.log(IP);
 				
 
