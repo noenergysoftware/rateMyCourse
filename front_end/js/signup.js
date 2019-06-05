@@ -7,9 +7,50 @@ window.callback = function(res){
 		if(res.ret === 0){
 				//alert(res.ticket)   // 票据
 				Captcha=true;
-				$("#TencentCaptcha").text("人机验证通过");
-				$("#TencentCaptcha").attr("disabled","disabled"); 
-				Res=res;
+				//$("#TencentCaptcha").text("人机验证通过");
+				//$("#TencentCaptcha").attr("disabled","disabled"); 
+				if(check(Captcha)==true){
+						console.log(res.ticket);
+						console.log(res.randstr);
+						$.ajax({
+								async: false,
+								type:"POST",
+								url: "http://testapi.ratemycourse.tk/signUp/",
+								dataType:"json",
+								data:{              
+										username: $("#name").val(),
+										mail: $("#email").val(),
+										password: md5($("#passwd").val()),
+										IP:IP,
+										Ticket: res.ticket,
+										Randstr: res.randstr,
+										csrfmiddlewaretoken:  $.cookie("csrftoken")
+								},
+								xhrFields: {
+										withCredentials: true
+								},
+								success:function(data){
+										//data=JSON.parse(data);
+									//	alert("ajax success");
+										console.log(data);
+										console.log(data.status)
+										if(data.status=="1"){
+												alert(data.body.message);
+												window.setTimeout("location.href='./login.html'", 1000);
+										}
+										else{
+											alert(data.errMsg);
+											Captcha=false;
+										//	$("#TencentCaptcha").text("人机验证");
+										//	$("#TencentCaptcha").attr("disabled",false); 
+										}
+										
+								},
+								error:function(data){
+									alert(JSON.stringify(data));
+								}
+						});
+				}
 		}
 }
 
@@ -37,61 +78,22 @@ $(document).ready(function(){
 				
 
 				function register(){
-						console.log(Res.ticket);
-						console.log(Res.randstr);
-						$.ajax({
-								async: false,
-								type:"POST",
-								url: "http://testapi.ratemycourse.tk/signUp/",
-								dataType:"json",
-								data:{              
-										username: $("#name").val(),
-										mail: $("#email").val(),
-										password: md5($("#passwd").val()),
-										IP:IP,
-										Ticket: Res.ticket,
-										Randstr: Res.randstr,
-                    csrfmiddlewaretoken:  $.cookie("csrftoken")
-								},
-								xhrFields: {
-										withCredentials: true
-								},
-								success:function(data){
-										//data=JSON.parse(data);
-									//	alert("ajax success");
-										console.log(data);
-										console.log(data.status)
-										if(data.status=="1"){
-												alert(data.body.message);
-												window.setTimeout("location.href='./login.html'", 1000);
-										}
-										else{
-											alert(data.errMsg);
-											Captcha=false;
-											$("#TencentCaptcha").text("人机验证");
-											$("#TencentCaptcha").attr("disabled",false); 
-										}
-										
-								},
-								error:function(data){
-									alert(JSON.stringify(data));
-								}
-						});
+						
 				}
-				$("#tos").click(function(){
+				/*$("#tos").click(function(){
 						if(check(Captcha)==true){
 							register();
 						}
-        });
+        });*/
 				
-				$("html").keydown(function (event) {
+				/*$("html").keydown(function (event) {
             //13 = enter
             if (event.keyCode == 13) {
 								if(check(Captcha)==true){
 										register();
 								}
             }
-        });
+        });*/
 
     });
 function check(check_Captcha){
