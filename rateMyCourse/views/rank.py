@@ -9,6 +9,7 @@ import rateMyCourse.views.calcRank as calcRank
 from rateMyCourse.models import *
 
 
+# 用户评分（评价）相关函数
 def make_rank(request) -> HttpResponse:
     """
     发表评分，需要用户名，课程ID，以及分数
@@ -25,6 +26,7 @@ def make_rank(request) -> HttpResponse:
         funny_score = int(request.POST['funny_score'])
         gain_score = int(request.POST['gain_score'])
         recommend_score = int(request.POST['recommend_score'])
+        # 获取用户打分并检验合法性
         if difficulty_score > 5 or difficulty_score < 0 or funny_score > 5 or funny_score < 0 or gain_score > 5 or gain_score < 0 or recommend_score > 5 or recommend_score < 0:
             return HttpResponse(json.dumps({
                 'status': -1,
@@ -38,6 +40,7 @@ def make_rank(request) -> HttpResponse:
         }), content_type="application/json")
     else:
         try:
+            # 打分或者更新
             b = MakeRank.objects.get(
                 user=User.objects.get(
                     username=username), course=Course.objects.get(
@@ -158,7 +161,8 @@ def get_all_rank(request) -> HttpResponse:
         'body': ret_dict
     }), content_type="application/json")
 
-#@cache_page(60*60)
+
+# @cache_page(60*60)
 def get_rank_by_sorted_course(request) -> HttpResponse:
     """
     获取评价最高的课程
@@ -179,14 +183,15 @@ def get_rank_by_sorted_course(request) -> HttpResponse:
             rank_dict['position'] = rank.position
             rank_dict['people'] = rank.people
             sorted_course_dict.append(rank_dict)
-    sorted_course_dict.sort(key=lambda x:x['position'])
+    sorted_course_dict.sort(key=lambda x: x['position'])
     return HttpResponse(json.dumps({
         'status': 1,
         'length': len(sorted_course_dict),
         'body': sorted_course_dict,
     }), content_type="application/json")
 
-@cache_page(60*60)
+
+@cache_page(60 * 60)
 def get_rank_by_sorted_teacher(request) -> HttpResponse:
     """
     获取评价最高的教师

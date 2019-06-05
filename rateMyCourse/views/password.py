@@ -6,7 +6,14 @@ import rateMyCourse.views.authentication as auth
 from rateMyCourse.models import *
 
 
-def set_question(request):
+# 密码找回等工作
+
+def set_question(request) -> HttpResponse:
+    """
+    设置密保问题，需求用户名与密保问题和答案
+    :param request:
+    :return:
+    """
     try:
         if not auth.auth_with_user(request, request.POST['username']):
             return HttpResponse(json.dumps({
@@ -24,6 +31,7 @@ def set_question(request):
     else:
         try:
             qs = PasswordQuestion.objects.filter(user__username=username)
+            # 如果之前设置过，则更新
             if len(qs) == 0:
                 c = PasswordQuestion(user=User.objects.get(name=username), question=question, answer=answer)
                 c.save()
@@ -44,7 +52,12 @@ def set_question(request):
         }), content_type="application/json")
 
 
-def reset_password(request):
+def reset_password(request) -> HttpResponse:
+    """
+    重置密码，需求密保问题及答案，以及新的密码。
+    :param request:
+    :return:
+    """
     try:
         if not auth.auth_with_user(request, request.POST['username']):
             return HttpResponse(json.dumps({
@@ -64,6 +77,7 @@ def reset_password(request):
         try:
             qs = PasswordQuestion.objects.filter(user__username=username)
             if len(qs) == 0:
+                # 这种情况只能找管理员重置了
                 return HttpResponse(json.dumps({
                     'status': -1,
                     'errMsg': '用户未设置保护问题，无法重置密码，请联系管理员',

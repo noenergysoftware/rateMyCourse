@@ -1,4 +1,5 @@
-def writeLog(textin):
+# 做简单记录工作用
+def writeLog(textin) -> int:
     """
     简单日志
     :param textin:

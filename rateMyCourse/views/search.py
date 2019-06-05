@@ -8,6 +8,8 @@ from rateMyCourse.models import *
 detail_names = ['有趣程度', '充实程度', '课程难度', '课程收获']
 
 
+# 搜索相关函数
+
 @cache_page(60 * 60)
 def search_teacher(request) -> HttpResponse:
     """

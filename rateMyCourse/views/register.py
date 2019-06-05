@@ -1,4 +1,6 @@
 import json
+import random
+import string
 
 import django
 from django.http import HttpResponse, JsonResponse
@@ -6,8 +8,7 @@ from django.http import HttpResponse, JsonResponse
 import rateMyCourse.views.authentication as auth
 import rateMyCourse.views.logs as logs
 from rateMyCourse.models import *
-import random
-import string
+
 
 def sign_up(request) -> HttpResponse:
     """
@@ -202,16 +203,23 @@ def get_token(request) -> JsonResponse:
     token = django.middleware.csrf.get_token(request)
     return JsonResponse({'token': token})
 
-def delete_user(request):
+
+def delete_user(request) -> HttpResponse:
+    """
+    删除用户
+    :param request:
+    :return:
+    """
     try:
         if not auth.auth_with_user(request, request.POST['username']):
             return HttpResponse(json.dumps({
                 'status': -100,
                 'errMsg': 'cookies 错误',
             }), content_type="application/json")
-        user=User.objects.get(username=request.POST['username'])
-        user.username="已注销"+user.id
-        user.email=""+user.id
+        user = User.objects.get(username=request.POST['username'])
+        # 将用户设置为已注销状态，同时修改其邮箱用户名，密码设置为随机值，确保不会被再次登录。
+        user.username = "已注销" + user.id
+        user.email = "" + user.id
         user.profile_photo = "https://i.loli.net/2019/05/14/5cda6706c2f0861301.jpg"
 
         allchar = string.ascii_letters + string.punctuation + string.digits
