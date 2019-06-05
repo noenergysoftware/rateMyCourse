@@ -6,10 +6,16 @@ from urllib.parse import urlencode
 
 from rateMyCourse.models import *
 
+"""
+认证服务，验证请求的合法性，包括简单认证（只看cookie），完全认证（看cookie和session）以及腾讯验证码服务。
+"""
+
 
 def auth(request) -> bool:
     """
     simple auth, checks if the request has right cookie.
+    如果cookie是合法的返回True，否则返回False
+    这里储存的password是加密过的，下同。
     """
     try:
         username = request.COOKIES.get('username')
@@ -36,6 +42,8 @@ def auth(request) -> bool:
 def auth_with_user(request, usernamein) -> bool:
     """
     Full auth, checks if the request has a correct cookie and if the user corresponds with the cookie.
+    在检验Cookie的合法性外检验Session的合法性。
+    同时要求保证用户操作的username和cookie，session中的username的一致性（防止用户操作其他用户）
     """
     try:
         username = request.COOKIES.get('username')
@@ -65,9 +73,9 @@ def auth_with_user(request, usernamein) -> bool:
 
 def txrequest(Ticket, Randstr, UserIP) -> (int,):
     """
-    Tencent Verification.
-    aid and AppSecretKey is secret and saved in osenv.
-    Contract the development team to get more help.
+    腾讯验证码服务，其中aid和appsecretkey为关键项，保存在环境变量中。
+    验证码服务信息（使用方式，接口）可以参考腾讯防水墙，月免费额度为2000次
+    环境变量储存隐私信息请自行Google，实在搞不清怎么配置请开issue联系开发者。
     """
     params = urlencode({'aid': os.environ['DJANGOAID'],
                         "AppSecretKey": os.environ['DJANGOASK'],

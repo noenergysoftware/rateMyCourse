@@ -228,7 +228,9 @@ class MakeRank(models.Model):
 
 class RankCache(models.Model):
     """
-    排名缓存
+    课程排名缓存，
+    保存课程的排名，四项评分，评分人数等。
+    为进入排名序列的课程排名取-1
     """
     course = models.ForeignKey(
         Course,
@@ -245,7 +247,9 @@ class RankCache(models.Model):
 
 class TeacherRankCache(models.Model):
     """
-    排名缓存
+    教师排名缓存，
+    保存教师的排名，四项评分，评分人数等。
+    为进入排名序列的教师排名取-1
     """
     teacher = models.ForeignKey(
         Teacher,
@@ -348,7 +352,11 @@ class RateComment(models.Model):
     )
     rate = models.IntegerField(default=0)
 
+
 class PasswordQuestion(models.Model):
+    """
+    密码重置，保存安全问题及其答案。
+    """
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE

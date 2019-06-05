@@ -6,8 +6,15 @@ from rankit.Table import Table
 
 from rateMyCourse.models import *
 
+"""
+计算课程，教师排名的科学算法，数学原理请参考团队博客。
+需求rankit库，可以pip直接安装，也可以去GitHub中下源码编译。
+"""
 
 class Rankers:
+    """
+    计算课程排名，使用了梅西法和科利法的波达计数作为
+    """
     def __init__(self) -> None:
         # 考虑到平局与没有平局的情况，我们存两张表
         self.rawTable = pd.DataFrame(columns=["HCourse", "LCourse", "HScore", "LScore"])
@@ -33,7 +40,7 @@ class Rankers:
                 allRankDict[username].append([i.course.course_ID, i.rank.recommend_score])
         tmpTable = []
         tmpTable2 = []
-        print(allRankDict)
+        # print(allRankDict)
         # 处理评价信息，将每个人的评价信息翻译到对比中
         for i in allRankDict.keys():
             tmpl = allRankDict[i]
@@ -132,7 +139,7 @@ class Rankers:
 
 class RankersTeacher:
     """
-    与上面的基本一样，请参考上面的方法
+    计算教师排名，与上面的基本一样，请参考上面的方法
     """
 
     def __init__(self):
