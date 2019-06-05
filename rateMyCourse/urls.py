@@ -46,6 +46,8 @@ urlpatterns = [
     url(r'^getHotComment/$',comments.get_high_rate_comment,name="getHotComment"),
 
     url(r'^setQuestion/$',password.set_question,name="setQuestion"),
+    url(r'^resetPassword/$',password.reset_password,name="resetPassword"),
+    url(r'^deleteUser/$',register.delete_user,name="deleteUser"),
 
 ]
 '''
