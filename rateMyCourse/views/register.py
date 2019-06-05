@@ -6,7 +6,8 @@ from django.http import HttpResponse, JsonResponse
 import rateMyCourse.views.authentication as auth
 import rateMyCourse.views.logs as logs
 from rateMyCourse.models import *
-
+import random
+import string
 
 def sign_up(request) -> HttpResponse:
     """
@@ -200,3 +201,28 @@ def get_token(request) -> JsonResponse:
     """
     token = django.middleware.csrf.get_token(request)
     return JsonResponse({'token': token})
+
+def delete_user(request):
+    try:
+        if not auth.auth_with_user(request, request.POST['username']):
+            return HttpResponse(json.dumps({
+                'status': -100,
+                'errMsg': 'cookies 错误',
+            }), content_type="application/json")
+        user=User.objects.get(username=request.POST['username'])
+        user.username="已注销"+user.id
+        user.email=""+user.id
+        user.profile_photo = "https://i.loli.net/2019/05/14/5cda6706c2f0861301.jpg"
+
+        allchar = string.ascii_letters + string.punctuation + string.digits
+        user.password = "".join(random.choice(allchar) for x in range(random.randint(15, 25)))
+    except:
+        return HttpResponse(json.dumps({
+            'status': -1,
+            'errMsg': '删除失败',
+        }), content_type="application/json")
+    else:
+        return HttpResponse(json.dumps({
+            'status': 1,
+            'body': '删除成功',
+        }), content_type="application/json")
