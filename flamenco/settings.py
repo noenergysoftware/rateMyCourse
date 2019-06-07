@@ -150,10 +150,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Fixture
-FIXTURE_DIRS = [
-    "test",
-]
 # The path of django admin with nginx when debug is false may be confusing.
 # The following lines tries to solve it
 '''
