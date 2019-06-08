@@ -1,0 +1,110 @@
+/*.navbar-brand{
+    line-height: 20px;
+    background-color: #3193B9 100%;
+    font-size: 30px;
+    font-family: 方正圆体-标准;
+    font-style: normal;
+    text-align: center;
+
+}*/
+/*搜索结果*/
+
+#count{
+    color: rgba(123, 216, 251, 1);
+    text-align: center;
+    font-family: 方正圆体-标准;
+    margin: 0 auto;
+}
+.navbar-brand{
+    line-height: 20px;
+    opacity: 0.31;
+    border-radius: 15px;
+    background-color: rgba(185, 215, 234, 1);
+    text-align: center;
+    border: 2px solid rgba(247, 251, 252, 1);
+}
+.navbar-brand2{
+    line-height: 20px;
+    color: rgba(49, 147, 185, 1);
+    font-size: 30px;
+    text-align: center;
+    font-family: 方正圆体-标准;
+    font-style: normal;
+}
+
+.navbar-brand1{
+    line-height: 20px;
+    color: rgba(49, 147, 185, 0.61);
+    font-size: 20px;
+    text-align: center;
+    font-family: 方正圆体-标准;
+    font-style: normal;
+    margin-left: 10px;
+}
+
+/*课程名*/
+a.col-md-4{
+    font-size: 30px;
+    font-family: 方正圆体-标准;
+    color: rgba(6, 56, 97, 1);
+}
+
+/*评分人数*/
+.col-md-3{
+    font-size: 20px;
+    font-family: 方正圆体-标准;
+    color: rgba(6, 56, 97, 0.86);
+    font-style: normal;
+}
+
+/*学校*/
+.col-md-4{
+    font-size: 20px;
+    font-family: 方正圆体-标准;
+    color: rgba(6, 56, 97, 0.86);
+    font-style: normal;
+    margin-bottom: 10px;
+}
+
+/**/
+.col-md-8{
+    font-size: 20px;
+    font-family: 方正圆体-标准;
+    color: rgba(6, 56, 97, 0.7);
+    font-style: normal;
+    margin-bottom: 10px;
+}
+
+/*两种不同的背景色*/
+.container.background1{
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(255, 255, 255);
+    border-radius: 2px;
+    border-style: solid;
+    
+}
+
+.container.background2{
+    background-color: rgba(150, 212, 236, 0.52);
+    border-color: rgba(150, 212, 236, 0.36);
+    border-radius: 2px;
+    border-style: solid;
+    
+}
+
+/*页码*/
+.page-item{
+    font-size: 14px;
+    border-radius: 2px;
+    border-width: 0px;
+    border-style: solid;
+    position: relative;
+    background-color: rgb(240, 242, 245);
+}
+
+/*版权声明*/
+.col-md-12.mt-3{
+    background-color: rgb(187, 232, 250);
+}
+
+

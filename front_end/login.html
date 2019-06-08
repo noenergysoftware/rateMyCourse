@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
+    <meta name="theme-color" content="#4285f4">
+    <title>登录</title>
+    <link rel="shortcut icon" href="./resource/favicon.ico" />
+    <link rel="bookmark" href="./resource/favicon.ico" />
+    <!-- css -->
+    <link href="./css/base.min.css" rel="stylesheet">
+    <link href="./css/project.min.css" rel="stylesheet">
+    <link href="./css/auth.css" rel="stylesheet">
+    <link href="https://fonts.loli.net/css?family=Roboto:300,300italic,400,400italic,500,500italic|Material+Icons"
+        rel="stylesheet">
+
+    <!-- favicon -->
+
+    <!-- ... -->
+</head>
+<style>
+    .divcss5 {
+        position: fixed;
+        bottom: 0;
+    }
+</style>
+
+<body class="page-brand">
+
+
+    <div class="authpage">
+        <div class="container">
+            <form action="javascript:void(0);" method="POST">
+                <div class="auth-main auth-row auth-col-one">
+                    <div class="auth-top auth-row">
+                        <!--点击返回首页的链接-->
+                        <a class="boardtop-left" href="./index.html">
+                            <div>首 页</div>
+                        </a>
+                        <!--添加中间图片-->
+                        <div class="auth-logo">
+                            <img src="./resource/authlogo.jpg" alt="">
+                        </div>
+                        <!--点击跳转至注册链接-->
+                        <a href="./signup.html" class="boardtop-right">
+                            <div>注 册</div>
+                        </a>
+                    </div>
+                    <div class="auth-row">
+                        <div class="form-group-label auth-row row-login">
+                            <label class="" for="name">邮箱/用户名</label>
+                            <input class="form-control maxwidth-auth" id="name" type="text" name="inputEmail">
+                        </div>
+                    </div>
+                    <div class="auth-row">
+                        <div class="form-group-label auth-row row-login">
+                            <label  for="password">密码</label>             <!--class="floating-label"-->
+                            <input class="form-control maxwidth-auth" id="password" type="password" name="Password">
+                        </div>
+                    </div>
+
+                    <div class="btn-auth auth-row">
+                        <button id="login" type="button" class="btn btn-block btn-brand waves-attach waves-light">
+                            确认登录
+                        </button>
+                    </div>
+
+                    <div class="auth-bottom auth-row">
+                        <div class="tgauth">
+                            <button class="btn" style="cursor:unset;"></button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+            
+        </div>
+    </div>
+
+
+    <!-- js -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="./lib/base.min.js"></script>
+    <script src="./lib/project.min.js"></script>
+    <script src="./lib/md5.min.js"></script>
+    <script color="255,0,255" opacity="0.7" count="88" src="https://cdn.staticfile.org/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+
+    <script src="./js/login.js"></script>
+</body>
+
+</html>
+
+
+<!--<script>
+    let calltgbtn = document.querySelector('#calltgauth');
+    let tgboard = document.querySelector('.card.auth-tg.cust-model');
+    if (calltgbtn && tgboard)
+        custModal(calltgbtn, tgboard);
+</script>-->
+
+
+
+
+
+<!--Username 非空验证-->
+

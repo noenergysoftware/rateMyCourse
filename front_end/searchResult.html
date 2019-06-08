@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css"
+    type="text/css">
+
+  <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="./css/searchResult.css" type="text/css">
+
+
+  <title>搜索</title>
+  <link rel="shortcut icon" href="./resource/favicon.ico" />
+  <link rel="bookmark" href="./resource/favicon.ico" />
+  <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/raty/2.8.0/jquery.raty.js"></script>
+  <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js"></script>
+  <script src="./lib/popper.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.staticfile.org/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+  <script src="./js/searchResult.js"></script>
+  <script src="./js/head.js"></script>
+</head>
+
+<body>
+  <div style="padding-top:70px">
+    <!-- Space used to modify navbar with fixed-top style-->
+  </div>
+  <!--
+<div id="head">
+  <iframe src="header1.html" frameborder="0" scrolling="no" width="100%" id="headFrame3"></iframe>
+</div>
+-->
+  <!--导航栏-->
+  <div>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top"  style="background-color: #29B6F6;border: 1px solid rgba(247, 251, 252, 1);">
+      <div class="container" id="navbarContainer">
+        <a class="navbar-brand" href="./index.html" style="color:#0D47A1;font-weight: 600;">首页</a>
+        <!--公告-->
+        <a class="navbar-brand" href="./announcement.html" style="color:#145374;font-weight: 500;">公告</a>
+        <a class="navbar-brand" href="./searchResultSortedCourse.html" style="color:#145374;font-weight: 500;">排名</a>
+        
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+          data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        
+
+        <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+          <ul class="navbar-nav">
+
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="navbar-brand" onclick="javascript: jumpLogin()" id="signIn" style="display:block;color:#145374;font-weight: 500;">登录</a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpSignUp()" id="signUp" style="display:block;color:#145374;font-weight: 500;">注册</a>
+            </li>
+            <li class="item">
+              <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpPersonalInfo()" id="personalInfo" style="display:none;color:#145374;font-weight: 500;">个人信息</a>
+            </li>
+            <li class="item">
+                <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpLogOut()" id="logOut" style="display:none;color:#145374;font-weight: 500;">注销</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="container">
+
+    <p id="count">搜索到<nobr id="serachedCourseNum"></nobr>门课程</p>
+    <h3 id="noresult" style="display: none">没有搜索到相关课程，建议更换关键字</h3>
+    
+    <!-- use adddiv to load course data -->
+    <div id="course_data"></div>
+
+    <ul id="c_pagination" class="pagination" style="display:flex;justify-content:center;">
+      <li class="page-item" id="lastpage" style="display: none">
+        <a class="page-link" onclick="lastPage()" href="#">&lt;</a>
+      </li>
+
+      <!-- use add page to load page data -->
+
+      <li class="page-item" id="nextpage" style="display: none">
+        <a class="page-link" onclick="nextPage()" href="#">&gt;</a>
+      </li>
+    </ul>
+
+  </div>
+  <div class="row">
+    <div class="col-md-12 mt-3">
+      <p class="text-center text-dark my-5">© Copyright 2019 flamenco - All rights reserved. </p>
+    </div>
+  </div>
+
+</body>
+
+</html>
