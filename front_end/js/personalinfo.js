@@ -10,7 +10,7 @@ function getUserData(name){
         type:"get",
         url: "http://testapi.ratemycourse.tk/getUserDetail/",
         data:{
-            username:$.cookie("username")
+            username:name
         },
         dataType:"json",
         success:function(data){
