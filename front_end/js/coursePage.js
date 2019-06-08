@@ -37,7 +37,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
     var comment="<div class=\"col-md-10 offset-md-1\">"+
                 "<div class=\"row align-items-center\">\n"+
                 "  <img src=\""+imageUrls+"\" width=\"86\" height=\"86\" class=\"img-responsive mx-2 my-2\" onclick=\"toUser(\'"+userName+"\')\">\n"+
-                "  <p class=\"my-4 col-md-3 col-6\">"+userName+"</p>\n"+
+                "  <a class=\"my-4 col-md-3 col-6\" onclick=\"toUser(\'"+userName+"\')\">"+userName+"</a>\n"+
                 "  <p class=\"my-4 col-md-2 col-4\">教师</p>"+
                 "  <p class=\"my-4 col-md-2 col-6\">"+iTeacher+"</p>"+
                 "</div>\n"+
@@ -58,7 +58,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "    <i class=\"fa fa-thumbs-o-down\" onclick=\"thumbUp(\'disagree\',"+comment_ID+",this)\"></i>"+
                 "  </a>"+
                 "</div>"+
-                "<div class=\"card\" id=\"child_box_"+comment_ID+"\" style=\"display:none;\">"+
+                "<div class=\"card\" id=\""+hot==0?"":"hot_"+"child_box_"+comment_ID+"\" style=\"display:none;\">"+
                 "  <div class=\"card-body\">"+
                 "  </div>"+
                 "  <div class=\"card-footer\">"+
@@ -101,7 +101,6 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
         commentGrid.setAttribute("style","margin-top:8px");
         if(hot==1){
             commentGrid.id = "hot_comment_"+number;
-            
         }
         else{
             commentGrid.id = "comment_"+number;
@@ -185,12 +184,18 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
 
 function showChildCommentTextarea(id){
     
-    console.log($("#child_box_"+id));
+    //console.log($("#child_box_"+id));
     if($("#child_box_"+id).css("display") =="none"){
         $("#child_box_"+id).show();
     }
     else{
         $("#child_box_"+id).hide();
+    }
+    if($("#hot_child_box_"+id).css("display") =="none"){
+        $("#hot_child_box_"+id).show();
+    }
+    else{
+        $("#hot_child_box_"+id).hide();
     }
     
 }
@@ -424,7 +429,7 @@ function hotComment(course_id){
                                 "<p class=\"my-2 col-md-12\">"+html2Escape(data["child_comment_"+comment_ID][j].content)+"</p>\n"+
                                 "<p class=\"my-2 mx-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
                                 "</div>");
-                                $("#child_box_"+comment_ID).children().first().append(child_comment);
+                                $("#hot_child_box_"+comment_ID).children().first().append(child_comment);
                             }
                         }
                     }
