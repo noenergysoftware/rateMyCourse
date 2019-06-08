@@ -35,7 +35,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
     
     var comment="<div class=\"col-md-10 offset-md-1\">"+
                 "<div class=\"row align-items-center\">\n"+
-                "  <img src=\""+imageUrls+"\" width=\"86\" height=\"86\" class=\"img-responsive mx-2 my-2\" onclick=\"toUser("+userName+")\">\n"+
+                "  <img src=\""+imageUrls+"\" width=\"86\" height=\"86\" class=\"img-responsive mx-2 my-2\" onclick=\"toUser(\'"+userName+"\')\">\n"+
                 "  <p class=\"my-4 col-md-3 col-6\">"+userName+"</p>\n"+
                 "  <p class=\"my-4 col-md-2 col-4\">教师</p>"+
                 "  <p class=\"my-4 col-md-2 col-6\">"+iTeacher+"</p>"+
