@@ -57,7 +57,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "    <p style=\"float:left;text-align:left;\">"+time+"</p>"+
                 "  </a>"+
                 "  <a class=\"col-md-2 offset-md-1 col-4 offset-3\">"+
-                "    <p  id=\"add_child_comment\" onclick=\" showChildCommentTextarea("+comment_ID+")\">评论</p>"+
+                "    <p  id=\"add_child_comment\" onclick=\" showChildCommentTextarea("+comment_ID+","+hot+")\">评论</p>"+
                 "  </a>"+    
                 "  <a class=\"col-md-2 col-5\">"+
                 "    <i class=\"fa fa-thumbs-o-up\" onclick=\"thumbUp(\'agree\',"+comment_ID+",this)\"></i>"+
@@ -189,22 +189,25 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
        
 }
 
-function showChildCommentTextarea(id){
+function showChildCommentTextarea(id,hot){
     
     //console.log($("#child_box_"+id));
-    if($("#child_box_"+id).css("display") =="none"){
-        $("#child_box_"+id).show();
+    if(hot==0){
+        if($("#child_box_"+id).css("display") =="none"){
+            $("#child_box_"+id).show();
+        }
+        else{
+            $("#child_box_"+id).hide();
+        }
     }
     else{
-        $("#child_box_"+id).hide();
+        if($("#hot_child_box_"+id).css("display") =="none"){
+            $("#hot_child_box_"+id).show();
+        }
+        else{
+            $("#hot_child_box_"+id).hide();
+        }
     }
-    if($("#hot_child_box_"+id).css("display") =="none"){
-        $("#hot_child_box_"+id).show();
-    }
-    else{
-        $("#hot_child_box_"+id).hide();
-    }
-    
 }
 
 
