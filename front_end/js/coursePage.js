@@ -33,7 +33,14 @@ function toUser(userName){
 //加载评论
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, thumb_up_num, hot) {
     //获取评论的评价-->点赞数目
-    
+    var hot_box;
+    if(hot==0){
+        hot_box="";
+    }
+    else{
+        hot_box="hot_";
+    }
+
     var comment="<div class=\"col-md-10 offset-md-1\">"+
                 "<div class=\"row align-items-center\">\n"+
                 "  <img src=\""+imageUrls+"\" width=\"86\" height=\"86\" class=\"img-responsive mx-2 my-2\" onclick=\"toUser(\'"+userName+"\')\">\n"+
@@ -58,7 +65,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "    <i class=\"fa fa-thumbs-o-down\" onclick=\"thumbUp(\'disagree\',"+comment_ID+",this)\"></i>"+
                 "  </a>"+
                 "</div>"+
-                "<div class=\"card\" id=\""+hot==0?"":"hot_"+"child_box_"+comment_ID+"\" style=\"display:none;\">"+
+                "<div class=\"card\" id=\""+hot_box+"child_box_"+comment_ID+"\" style=\"display:none;\">"+
                 "  <div class=\"card-body\">"+
                 "  </div>"+
                 "  <div class=\"card-footer\">"+
