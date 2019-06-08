@@ -51,8 +51,10 @@ function getUserData(name){
 }
 
 function modifier() {
-
-
+    if($("#name").text()!=$.cookie("username")){
+        alert("不能修改他人信息！");
+        return;
+    }
 
 
     if ($("#role_teacher").prop("checked") == true){
@@ -72,12 +74,14 @@ function modifier() {
     }
 
 
+
     console.log($("#personalIntroduce").text().length);
 
     if($("#personalIntroduce").text().length>256){
         alert("个人简介字数请不要超过256!");
         return;
     }
+
 
     console.log($("#name").text()+"**"+role+"**"+gender+"**"+$("#personalIntroduce").text());
     $.ajax({
@@ -136,17 +140,32 @@ $(document).ready(function () {
         }
     });
     var name=window.sessionStorage.getItem("username");
+
+    if(name!=$.cookie("username")){
+        $("#modify").hide();
+    }
+    else{
+        $("#modify").show();
+    }
+
     getUserData(name);
 
-    if ($.cookie("username") != undefined){
+    if(name!=$.cookie("username")){
+        $("#role_teacher").attr("disabled","disabled");
+        $("#role_student").attr("disabled","disabled");
+        $("#role_others").attr("disabled","disabled");
+        $("#gender_male").attr("disabled","disabled");
+        $("#gender_female").attr("disabled","disabled");
+        $("#gender_secret").attr("disabled","disabled");
+    }
+
+    if($.cookie("username") != undefined){
         document.getElementById("signIn").style.display = "none";
         document.getElementById("signUp").style.display = "none";
         document.getElementById("personalInfo").style.display = "block";
         document.getElementById("logOut").style.display = "block"
-      } 
+    } 
 
-    
-    
       
   //    console.log("role: "+role.val());
 //      console.log("gender: "+gender.val());
