@@ -3,14 +3,14 @@ var gender;
 var role;
 var formData;
 
-function getUserData(){
-    var name = $.cookie("username");
+function getUserData(name){
+    
     $.ajax({
         async: true,
         type:"get",
         url: "https://api.ratemycourse.tk/getUserDetail/",
         data:{
-            username:$.cookie("username")
+            username:name
         },
         dataType:"json",
         success:function(data){
@@ -60,8 +60,10 @@ function getUserData(){
 }
 
 function modifier() {
-
-
+    if($("#name").text()!=$.cookie("username")){
+        alert("不能修改他人信息！");
+        return;
+    }
 
 
     if ($("#role_teacher").prop("checked") == true){
@@ -161,14 +163,36 @@ $(document).ready(function () {
             }
         }
     });
-    getUserData();
+    var name=window.sessionStorage.getItem("username");
 
-    if ($.cookie("username") != undefined){
+    if(name!=$.cookie("username")){
+        $("#modify").hide();
+        $("show_modal").hide();
+    }
+    else{
+        $("#modify").show();
+        $("show_modal").show();
+    }
+
+    getUserData(name);
+
+    if(name!=$.cookie("username")){
+        $("#role_teacher").attr("disabled","disabled");
+        $("#role_student").attr("disabled","disabled");
+        $("#role_others").attr("disabled","disabled");
+        $("#gender_male").attr("disabled","disabled");
+        $("#gender_female").attr("disabled","disabled");
+        $("#gender_secret").attr("disabled","disabled");
+        $("#personalIntroduce").attr("disabled","disabled");
+        
+    }
+
+    if($.cookie("username") != undefined){
         document.getElementById("signIn").style.display = "none";
         document.getElementById("signUp").style.display = "none";
         document.getElementById("personalInfo").style.display = "block";
         document.getElementById("logOut").style.display = "block"
-      } 
+    } 
 
     
     
