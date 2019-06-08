@@ -143,9 +143,11 @@ $(document).ready(function () {
 
     if(name!=$.cookie("username")){
         $("#modify").hide();
+        $("show_modal").hide();
     }
     else{
         $("#modify").show();
+        $("show_modal").show();
     }
 
     getUserData(name);
@@ -158,7 +160,7 @@ $(document).ready(function () {
         $("#gender_female").attr("disabled","disabled");
         $("#gender_secret").attr("disabled","disabled");
         $("#personalIntroduce").attr("disabled","disabled");
-        $("show_modal").hide();
+        
     }
 
     if($.cookie("username") != undefined){
