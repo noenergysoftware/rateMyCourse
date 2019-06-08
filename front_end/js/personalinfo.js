@@ -4,7 +4,7 @@ var role;
 var formData;
 
 function getUserData(name){
-    
+    console.log(name);
     $.ajax({
         async: true,
         type:"get",
