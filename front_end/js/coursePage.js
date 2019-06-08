@@ -28,7 +28,13 @@ function html2Escape(sHtml) {
 //加载评论
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, thumb_up_num, hot) {
     //获取评论的评价-->点赞数目
-    
+    var hot_box;
+    if(hot==0){
+        hot_box="";
+    }
+    else{
+        hot_box="hot_";
+    }
     var comment="<div class=\"col-md-10 offset-md-1\">"+
                 "<div class=\"row align-items-center\">\n"+
                 "  <img src=\""+imageUrls+"\" width=\"86\" height=\"86\" class=\"img-responsive mx-2 my-2\">\n"+
@@ -45,7 +51,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "    <p style=\"float:left;text-align:left;\">"+time+"</p>"+
                 "  </a>"+
                 "  <a class=\"col-md-2 offset-md-1 col-4 offset-3\">"+
-                "    <p  id=\"add_child_comment\" onclick=\" showChildCommentTextarea("+comment_ID+")\">评论</p>"+
+                "    <p  id=\"add_child_comment\" onclick=\" showChildCommentTextarea("+comment_ID+","+hot+")\">评论</p>"+
                 "  </a>"+    
                 "  <a class=\"col-md-2 col-5\">"+
                 "    <i class=\"fa fa-thumbs-o-up\" onclick=\"thumbUp(\'agree\',"+comment_ID+",this)\"></i>"+
@@ -53,7 +59,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "    <i class=\"fa fa-thumbs-o-down\" onclick=\"thumbUp(\'disagree\',"+comment_ID+",this)\"></i>"+
                 "  </a>"+
                 "</div>"+
-                "<div class=\"card\" id=\"child_box_"+comment_ID+"\" style=\"display:none;\">"+
+                "<div class=\"card\" id=\""+hot_box+"child_box_"+comment_ID+"\" style=\"display:none;\">"+
                 "  <div class=\"card-body\">"+
                 "  </div>"+
                 "  <div class=\"card-footer\">"+
@@ -178,16 +184,24 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
        
 }
 
-function showChildCommentTextarea(id){
+function showChildCommentTextarea(id,hot){
     
-    console.log($("#child_box_"+id));
-    if($("#child_box_"+id).css("display") =="none"){
-        $("#child_box_"+id).show();
+    if(hot==0){
+        if($("#child_box_"+id).css("display") =="none"){
+            $("#child_box_"+id).show();
+        }
+        else{
+            $("#child_box_"+id).hide();
+        }
     }
     else{
-        $("#child_box_"+id).hide();
+        if($("#hot_child_box_"+id).css("display") =="none"){
+            $("#hot_child_box_"+id).show();
+        }
+        else{
+            $("#hot_child_box_"+id).hide();
+        }
     }
-    
 }
 
 
@@ -437,7 +451,7 @@ function hotComment(course_id){
                                 "<p class=\"my-2 col-md-12\">"+html2Escape(data["child_comment_"+comment_ID][j].content)+"</p>\n"+
                                 "<p class=\"my-2 mx-2 text-md-right\">"+data["child_comment_"+comment_ID][j].editTime+"</p>\n"+
                                 "</div>");
-                                $("#child_box_"+comment_ID).children().first().append(child_comment);
+                                $("#hot_child_box_"+comment_ID).children().first().append(child_comment);
                             }
                         }
                     }
