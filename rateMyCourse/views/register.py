@@ -217,6 +217,11 @@ def delete_user(request) -> HttpResponse:
                 'errMsg': 'cookies 错误',
             }), content_type="application/json")
         user = User.objects.get(username=request.POST['username'])
+        if request.POST['password']!=user.password:
+            return HttpResponse(json.dumps({
+                'status': -1,
+                'errMsg': '密码错误',
+            }), content_type="application/json")
         # 将用户设置为已注销状态，同时修改其邮箱用户名，密码设置为随机值，确保不会被再次登录。
         user.username = "已注销" + user.id
         user.email = "" + user.id
