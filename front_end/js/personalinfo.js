@@ -4,13 +4,13 @@ var role;
 var formData;
 
 function getUserData(name){
-    var name = $.cookie("username");
+    
     $.ajax({
         async: true,
         type:"get",
         url: "http://testapi.ratemycourse.tk/getUserDetail/",
         data:{
-            username:name
+            username:$.cookie("username")
         },
         dataType:"json",
         success:function(data){
