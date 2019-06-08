@@ -24,7 +24,7 @@ function html2Escape(sHtml) {
     });
    }
 
-function toUset(userName){
+function toUser(userName){
     window.setTimeout("location.href='./personalinfo.html'",0);
 }
 
