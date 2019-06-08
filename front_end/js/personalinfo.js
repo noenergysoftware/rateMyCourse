@@ -157,6 +157,7 @@ $(document).ready(function () {
         $("#gender_male").attr("disabled","disabled");
         $("#gender_female").attr("disabled","disabled");
         $("#gender_secret").attr("disabled","disabled");
+        $("#personalIntroduce").attr("disabled","disabled");
     }
 
     if($.cookie("username") != undefined){
