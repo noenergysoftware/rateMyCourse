@@ -3,14 +3,14 @@ var gender;
 var role;
 var formData;
 
-function getUserData(){
+function getUserData(name){
     var name = $.cookie("username");
     $.ajax({
         async: true,
         type:"get",
         url: "http://testapi.ratemycourse.tk/getUserDetail/",
         data:{
-            username:$.cookie("username")
+            username:name
         },
         dataType:"json",
         success:function(data){
@@ -135,7 +135,8 @@ $(document).ready(function () {
             alert(JSON.stringify(data));
         }
     });
-    getUserData();
+    var name=window.sessionStorage.getItem("username");
+    getUserData(name);
 
     if ($.cookie("username") != undefined){
         document.getElementById("signIn").style.display = "none";

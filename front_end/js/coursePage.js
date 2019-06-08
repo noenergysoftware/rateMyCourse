@@ -25,6 +25,7 @@ function html2Escape(sHtml) {
    }
 
 function toUser(userName){
+    window.sessionStorage.setItem("username",userName);
     window.setTimeout("location.href='./personalinfo.html'",0);
 }
 

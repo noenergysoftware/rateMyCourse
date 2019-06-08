@@ -9,6 +9,7 @@ function jumpSignUp(){
 }
 
 function jumpPersonalInfo(){
+  window.sessionStorage.setItem("username",$.cookie("username"));
   window.location.href = "./personalinfo.html";
 }
 
