@@ -5,7 +5,7 @@ from django.http import HttpResponse
 
 import rateMyCourse.views.authentication as auth
 from rateMyCourse.models import *
-
+from rateMyCourse.views.exceptions import *
 
 def make_comment(request) -> HttpResponse:
     """
@@ -13,10 +13,7 @@ def make_comment(request) -> HttpResponse:
     """
     try:
         if not auth.auth_with_user(request, request.POST['username']):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-100,'cookies 错误，认证失败'), content_type="application/json")
         # 获取评论信息
         username = request.POST['username']
         course_ID = request.POST['course_ID']
@@ -28,10 +25,7 @@ def make_comment(request) -> HttpResponse:
         except:
             parent_comment = -1
     except BaseException:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': '缺失信息',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-1, '缺失必要的信息'), content_type="application/json")
     else:
         # 发表评论并记录到数据库中
         try:
@@ -45,10 +39,7 @@ def make_comment(request) -> HttpResponse:
                             comment=c)
             b.save()
         except BaseException:
-            return HttpResponse(json.dumps({
-                'status': -1,
-                'errMsg': '发表评论失败',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-2,'评论发表失败'), content_type="application/json")
         else:
             return HttpResponse(json.dumps({
                 'status': 1,
@@ -65,12 +56,6 @@ def get_comment_by_course(request) -> HttpResponse:
     返回一个列表，每项为一条评论，时间顺序
     """
     try:
-        '''if not auth.auth(request):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")'''
-
         # 搜索这门课程的所有评论
         course_ID = request.GET['course_ID']
         rawList = MakeComment.objects.filter(course=Course.objects.get(course_ID=course_ID).id, )
@@ -95,10 +80,7 @@ def get_comment_by_course(request) -> HttpResponse:
             retList.append(rdict)
 
     except BaseException:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': '获取评论失败',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-3, '获取评论失败'), content_type="application/json")
     else:
         return HttpResponse(json.dumps({
             'status': 1,
@@ -115,11 +97,6 @@ def get_comment_by_teacher(request) -> HttpResponse:
        返回一个列表，每项为一条评论，时间顺序
     """
     try:
-        '''if not auth.auth(request):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")'''
         course_ID = request.GET['course_ID']
         # 与上面类似，不过进行二次搜索，只检索课程老师对应的信息
         rawList0 = MakeComment.objects.filter(course=Course.objects.get(course_ID=course_ID).id, )
@@ -154,10 +131,8 @@ def get_comment_by_teacher(request) -> HttpResponse:
             retList.append(rdict)
 
     except BaseException:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': '获取评论失败',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-3, '获取评论失败'), content_type="application/json")
+
     else:
         return HttpResponse(json.dumps({
             'status': 1,
@@ -177,10 +152,7 @@ def edit_comment(request) -> HttpResponse:
         c = MakeComment.objects.get(id=request.POST['comment_ID'])
 
         if not auth.auth_with_user(request, c.user.username):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-100, 'cookies 错误，认证失败'), content_type="application/json")
 
         c.comment.content = request.POST['content']
 
@@ -189,10 +161,8 @@ def edit_comment(request) -> HttpResponse:
         # c.comment.edit_time = datetime.datetime.now()
         c.comment.save()
     except BaseException:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': '更新评论失败',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-4, '更新评论失败'), content_type="application/json")
+
     else:
         return HttpResponse(json.dumps({
             'status': 1,
@@ -207,18 +177,13 @@ def rate_comment(request) -> HttpResponse:
     """
     try:
         if not auth.auth_with_user(request, request.POST['username']):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-100, 'cookies 错误，认证失败'), content_type="application/json")
         username = request.POST['username']
         comment_ID = request.POST['comment_ID']
         type = request.POST['type']
     except BaseException:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': '缺失信息',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-1, '缺失信息'), content_type="application/json")
+
     else:
         # 贴吧逻辑的实现，第一次评价则新建一个model，否则更新，具体逻辑实现略
         try:
@@ -247,10 +212,8 @@ def rate_comment(request) -> HttpResponse:
                 'body': {'message': "评价评论成功"}
             }), content_type="application/json")
         except BaseException:
-            return HttpResponse(json.dumps({
-                'status': -1,
-                'errMsg': '评价评论失败',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-5, '评价评论失败'), content_type="application/json")
+
         else:
             c = Comment.objects.get(id=comment_ID)
             if type == 'agree':
@@ -327,10 +290,8 @@ def get_rate_comment(request) -> HttpResponse:
         comment_ID = request.GET['comment_ID']
         comment = Comment.objects.get(id=comment_ID)
     except BaseException:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': "缺少commentID",
-        }), content_type="application/json")
+        return HttpResponse(formatException(-1, '缺失信息'), content_type="application/json")
+
     else:
         return HttpResponse(json.dumps({
             'status': 1,
@@ -350,10 +311,8 @@ def get_high_rate_comment(request) -> HttpResponse:
         course_ID = request.GET['course_ID']
         course = Course.objects.get(course_ID=course_ID)
     except BaseException:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': "缺少courseID",
-        }), content_type="application/json")
+        return HttpResponse(formatException(-1, '缺失信息'), content_type="application/json")
+
     else:
         tlist = []
         b = MakeComment.objects.filter(course=course)

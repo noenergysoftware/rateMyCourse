@@ -3,6 +3,7 @@ import json
 from django.http import HttpResponse
 
 import rateMyCourse.views.authentication as auth
+from rateMyCourse.views.exceptions import *
 from rateMyCourse.models import *
 
 
@@ -15,20 +16,16 @@ def update_user_profile_photo(request) -> HttpResponse:
     """
     try:
         if not auth.auth_with_user(request, request.POST['username']):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-100, 'cookies 错误，认证失败'), content_type="application/json")
+
         user_name = request.POST['username']
         profile_photo = request.POST['profile_photo']
         user = User.objects.get(username=user_name)
         user.profile_photo = profile_photo
         user.save()
     except Exception:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': 'Update Error',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-6, '上传失败'), content_type="application/json")
+
     return HttpResponse(json.dumps({
         'status': 1,
         'length': 1,

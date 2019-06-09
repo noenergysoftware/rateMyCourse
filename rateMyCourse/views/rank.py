@@ -8,6 +8,7 @@ import rateMyCourse.views.authentication as auth
 import rateMyCourse.views.calcRank as calcRank
 from rateMyCourse.models import *
 
+from rateMyCourse.views.exceptions import *
 
 # 用户评分（评价）相关函数
 def make_rank(request) -> HttpResponse:
@@ -16,10 +17,8 @@ def make_rank(request) -> HttpResponse:
     """
     try:
         if not auth.auth_with_user(request, request.POST['username']):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-100, 'cookies 错误，认证失败'), content_type="application/json")
+
         username = request.POST['username']
         course_ID = request.POST['course_ID']
         difficulty_score = int(request.POST['difficulty_score'])
@@ -28,16 +27,12 @@ def make_rank(request) -> HttpResponse:
         recommend_score = int(request.POST['recommend_score'])
         # 获取用户打分并检验合法性
         if difficulty_score > 5 or difficulty_score < 0 or funny_score > 5 or funny_score < 0 or gain_score > 5 or gain_score < 0 or recommend_score > 5 or recommend_score < 0:
-            return HttpResponse(json.dumps({
-                'status': -1,
-                'errMsg': '非法分数',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-11, '非法分数'), content_type="application/json")
+
 
     except BaseException:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': '缺失信息',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-1, '缺失信息'), content_type="application/json")
+
     else:
         try:
             # 打分或者更新
@@ -65,10 +60,8 @@ def make_rank(request) -> HttpResponse:
                 }
             }), content_type="application/json")
         except BaseException:
-            return HttpResponse(json.dumps({
-                'status': -1,
-                'errMsg': '缺失信息',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-1, '缺失信息'), content_type="application/json")
+
         else:
             # edit
             r = b.rank
@@ -94,11 +87,7 @@ def get_rank_by_course(request) -> HttpResponse:
     返回一个字典，关键字为四项评分的名字，内容为平均分
     """
     try:
-        '''if not auth.auth(request):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")'''
+
         course_ID = request.GET['course_ID']
         # rawList = MakeRank.objects.filter(course_id=Course.objects.get(course_ID=course_ID).id)
         course = RankCache.objects.get(course_id=Course.objects.get(course_ID=course_ID).id)
@@ -115,10 +104,8 @@ def get_rank_by_course(request) -> HttpResponse:
         rank_dict['gain_score'] = course.gain_score / (1 if course.people == 0 else course.people)
         rank_dict['recommend_score'] = course.recommend_score / (1 if course.people == 0 else course.people)
     except BaseException:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': '获取评分失败',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-1, '缺失信息'), content_type="application/json")
+
     else:
         return HttpResponse(json.dumps({
             'status': 1,
