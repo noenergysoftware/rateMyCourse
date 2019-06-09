@@ -42,8 +42,10 @@ def set_question(request) -> HttpResponse:
 
     finally:
         return HttpResponse(json.dumps({
-            'status': 1,
-            'errMsg': '设置成功',
+            'status':1,
+            'length':1,
+            'body':{'message': "问题设置成功"},
+            'errMsg':'',
         }), content_type="application/json")
 
 
@@ -54,8 +56,8 @@ def reset_password(request) -> HttpResponse:
     :return:
     """
     try:
-        if not auth.auth_with_user(request, request.POST['username']):
-            return HttpResponse(formatException(-100, 'cookies 错误，认证失败'), content_type="application/json")
+        #if not auth.auth_with_user(request, request.POST['username']):
+        #    return HttpResponse(formatException(-100, 'cookies 错误，认证失败'), content_type="application/json")
 
         username = request.POST['username']
         question = request.POST['question']
@@ -84,6 +86,8 @@ def reset_password(request) -> HttpResponse:
 
     finally:
         return HttpResponse(json.dumps({
-            'status': 1,
-            'errMsg': '重置成功',
+            'status':1,
+            'length':1,
+            'body':{'message': "密码重置成功"},
+            'errMsg':'',
         }), content_type="application/json")
