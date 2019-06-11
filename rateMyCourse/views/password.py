@@ -30,7 +30,7 @@ def set_question(request) -> HttpResponse:
             qs = PasswordQuestion.objects.filter(user__username=username)
             # 如果之前设置过，则更新
             if len(qs) == 0:
-                c = PasswordQuestion(user=User.objects.get(name=username), question=question, answer=answer)
+                c = PasswordQuestion(user=User.objects.get(username=username), question=question, answer=answer)
                 c.save()
             else:
                 c = qs[0]
@@ -40,13 +40,13 @@ def set_question(request) -> HttpResponse:
         except:
             return HttpResponse(formatException(-7, '设置密保问题失败'), content_type="application/json")
 
-    finally:
-        return HttpResponse(json.dumps({
-            'status':1,
-            'length':1,
-            'body':{'message': "问题设置成功"},
-            'errMsg':'',
-        }), content_type="application/json")
+        else:
+            return HttpResponse(json.dumps({
+                'status':1,
+                'length':1,
+                'body':{'message': "问题设置成功"},
+                'errMsg':'',
+            }), content_type="application/json")
 
 
 def reset_password(request) -> HttpResponse:
@@ -62,7 +62,7 @@ def reset_password(request) -> HttpResponse:
         username = request.POST['username']
         question = request.POST['question']
         answer = request.POST['answer']
-        npassword = request.POST['new_password']
+        npassword = request.POST['npassword']
     except:
         return HttpResponse(formatException(-1, '缺失信息'), content_type="application/json")
 
@@ -84,10 +84,10 @@ def reset_password(request) -> HttpResponse:
         except:
             return HttpResponse(formatException(-10, '重置失败'), content_type="application/json")
 
-    finally:
-        return HttpResponse(json.dumps({
-            'status':1,
-            'length':1,
-            'body':{'message': "密码重置成功"},
-            'errMsg':'',
-        }), content_type="application/json")
+        else:
+            return HttpResponse(json.dumps({
+                'status':1,
+                'length':1,
+                'body':{'message': "密码重置成功"},
+                'errMsg':'',
+            }), content_type="application/json")
