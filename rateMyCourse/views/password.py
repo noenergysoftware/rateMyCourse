@@ -77,7 +77,7 @@ def reset_password(request) -> HttpResponse:
                 c = qs[0]
                 if c.question == question and c.answer == answer:
                     c.user.password = npassword
-                    c.save()
+                    c.user.save()
                 else:
                     return HttpResponse(formatException(-9, '密保问题答案不匹配'), content_type="application/json")
 
