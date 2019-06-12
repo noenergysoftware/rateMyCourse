@@ -54,7 +54,7 @@ function reset(){
 				username: $.cookie("username"),
 				question:"你的高中学校名称和年级是？",
 				answer:$("#question1").val(),
-				npassword:md5($("#password").val()),
+                npassword:md5($("#password").val()),
                 csrfmiddlewaretoken:  $.cookie("csrftoken")
             },
             xhrFields: {
@@ -69,10 +69,10 @@ function reset(){
 				console.log("fail");
             }
         });	
-	}
-	else{
-		alert("密码不符合规定或问题答案过长！")
-	}
+    }
+    else{
+        alert("密码不符合规定或问题答案过长！")
+    }
 }
 
 
