@@ -2,7 +2,7 @@
 var gender;
 var role;
 var formData;
-
+var ajax_success;
 function reset(){
     window.setTimeout("location.href='./safe.html'", 0);
 }
@@ -53,7 +53,7 @@ function setQuestion(){
 
 function getUserData(name){
     console.log(name);
-    $.ajax({
+    ajax_success=$.ajax({
         async: true,
         type:"get",
         url: "http://testapi.ratemycourse.tk/getUserDetail/",
@@ -169,6 +169,7 @@ function modifier() {
 
 function genComment(data){
 
+    console.log(data);
     var comments=data.body.user_comments;
 
     var length=comments.length;
@@ -256,10 +257,10 @@ $(document).ready(function () {
         document.getElementById("logOut").style.display = "block"
     } 
 
-
-    genComment(JSON.parse(window.sessionStorage.getItem("user_data")));
-
-
+    
+    $.when(ajax_success).done(function () {
+        genComment(JSON.parse(window.sessionStorage.getItem("user_data")));
+    }
       
   //    console.log("role: "+role.val());
 //      console.log("gender: "+gender.val());
