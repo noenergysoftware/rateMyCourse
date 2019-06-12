@@ -2,9 +2,15 @@
 var gender;
 var role;
 var formData;
-
+var ajax_success;
 function reset(){
     window.setTimeout("location.href='./safe.html'", 0);
+}
+
+function html2Escape(sHtml) {
+    return sHtml.replace(/[<>&"]/g,function(c){
+      return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];
+    });
 }
 
 function setQuestion(){
@@ -96,6 +102,8 @@ function getUserData(name){
                 $("#personalIntroduce").text(data.body.self_introduction);
                 console.log(data.body.profile_photo);
                 $("#user_profile_photo").prop("src",data.body.profile_photo); 
+
+                window.sessionStorage.setItem("user_data",JSON.stringify(data))
             }else {
                 alert(data.errMsg);
             }
@@ -188,6 +196,38 @@ function modifier() {
     });
 }
 
+function genComment(data){
+
+    console.log(data);
+    var comments=data.body.user_comments;
+
+    var length=comments.length;
+
+    for(i = length - 1; i >= 0; i--){
+        
+        var single_comment= $("<div class=\"card col-md-12\" style=\"margin-top:8px\" id=\"comment_"+i+"\">"+
+                            "<div class=\"col-md-10 offset-md-1\">"+
+                            "   <div class=\"row align-items-center\">\n"+
+                            "       <p class=\"my-4 col-md-2 col-4\">教师</p>"+
+                            "       <p class=\"my-4 col-md-2 col-6\">"+comments[i].teacher+"</p>"+
+                            "   </div>\n"+
+                            "   <hr class=\"my-1\" width=\"70%\">"+
+                            "   <div class=\"row text-center\">"+
+                            "       <p style=\"margin-top:16px;margin-left:16px;text-align:left; width:80%\">"+html2Escape(comments[i].content)+"</p>\n"+
+                            "   </div>"+
+                            "   <div class=\"row text-center\">"+
+                            "       <a class=\"col-md-4 col-12\" >"+
+                            "           <p style=\"float:left;text-align:left;\">"+comments[i].edit_time+"</p>"+
+                            "       </a>"+
+                            "   </div>"+
+                            "</div>"+
+                            "</div>");
+
+       
+        $("#comment").append(single_comment);
+    }
+}
+
 
     //$("#submit").click(function () {
     //    if (infoCheck == true) {
@@ -252,7 +292,9 @@ $(document).ready(function () {
         document.getElementById("logOut").style.display = "block"
     } 
 
-    
+    $.when(ajax_success).done(function () {
+        genComment(JSON.parse(window.sessionStorage.getItem("user_data")));
+    });
     
       
   //    console.log("role: "+role.val());
