@@ -190,10 +190,13 @@ $(document).ready(function () {
     var name=window.sessionStorage.getItem("username");
 
     if(name==$.cookie("username") && name!=undefined){
+        //确定是本人的信息
+        $("#safe").show();
         $("#modify").show();
         $("#show_modal").show();
     }
     else{
+        $("#safe").hide();
         $("#modify").hide();
         $("#show_modal").hide();
     }

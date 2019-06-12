@@ -143,21 +143,22 @@
                 <div id="modify" class="btn text-center my-4 mybtn" style="display: none" onclick="modifier()">确认修改</div>
             </div>
 
-            <div class="row">
-                <div class="text-md-left col-md-10 offset-md-2 personal_data">安全</div>
-           </div>
-            <hr>
-            <div clas="container">
-                <div class="row align-items-center justify-content-center">
-                    <div style="text-align:center">
-                        <button type="button" class="btn btn-default mybtn " data-toggle="modal" data-target="#setModal" id="set_modal">设置问题</button>
-                    </div>
-                    <div class="offset-md-2" style="text-align:center">
-                        <div id="reset" class="btn text-center mybtn" onclick="reset();">修改密码</div>
+            <div id="safe" style="display: none">
+                <div class="row">
+                    <div class="text-md-left col-md-10 offset-md-2 personal_data">安全</div>
+                </div>
+                <hr>
+                <div clas="container">
+                    <div class="row align-items-center justify-content-center">
+                        <div style="text-align:center">
+                            <button type="button" class="btn btn-default mybtn " data-toggle="modal" data-target="#setModal" id="set_modal">设置问题</button>
+                        </div>
+                        <div class="offset-md-2" style="text-align:center">
+                            <div id="reset" class="btn text-center mybtn" onclick="reset();">修改密码</div>
+                        </div>
                     </div>
                 </div>
             </div>
-    
     </div>
     
     <div class="modal fade" id="changeModal" tabindex="-1" role="dialog" aria-hidden="true">
