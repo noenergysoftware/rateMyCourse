@@ -186,11 +186,11 @@ $(document).ready(function () {
 
     if(name==$.cookie("username") && name!=undefined){
         $("#modify").show();
-        $("show_modal").show();
+        $("#show_modal").show();
     }
     else{
         $("#modify").hide();
-        $("show_modal").hide();
+        $("#show_modal").hide();
     }
 
     getUserData(name);

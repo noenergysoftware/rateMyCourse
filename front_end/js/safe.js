@@ -16,29 +16,7 @@ function check_repassword(){
 }
 
 function set(){
-	$.ajax({
-		async: true,
-		type: "POST",
-		url: "http://testapi.ratemycourse.tk/setQuestion/",
-		dataType: "json",
-		data:{
-			username: $.cookie("username"),
-			question:"你的高中学校名称和年级是？",
-			answer:"武汉二中2016",
-			csrfmiddlewaretoken:  $.cookie("csrftoken")
-		},
-		xhrFields: {
-			withCredentials: true
-		},
-		success: function (data) {
-			console.log(data);
-			console.log("success");
-		},
-		error: function (data) {
-			console.log(data);
-			console.log("fail");
-		}
-	});	
+	
 }
 
 function reset(){
@@ -95,7 +73,7 @@ $(document).ready(function () {
     });	
 
     $("#username").keyup(function () {
-		if($("#question1").val().length>100){
+		if($("#username").val().length>100){
 			$("#username_confirm").removeClass("fa-check-circle-o");
             $("#username_confirm").removeClass("fa-check-circle");
             $("#username_confirm").addClass("fa-close");
@@ -133,19 +111,21 @@ $(document).ready(function () {
     });
 
     $("#repassword").keyup(function () {
-      if(check_repassword()==false){
-          $("#repassword_confirm").removeClass("fa-check-circle-o");
-          $("#repassword_confirm").removeClass("fa-check-circle");
-          $("#repassword_confirm").addClass("fa-close");
-      }
-      else{
-          $("#repassword_confirm").removeClass("fa-check-circle-o");
-          $("#repassword_confirm").removeClass("fa-close");
-          $("#repassword_confirm").addClass("fa-check-circle");
-      }
+        if(check_repassword()==false){
+            $("#repassword_confirm").removeClass("fa-check-circle-o");
+            $("#repassword_confirm").removeClass("fa-check-circle");
+            $("#repassword_confirm").addClass("fa-close");
+        }
+        else{
+            $("#repassword_confirm").removeClass("fa-check-circle-o");
+            $("#repassword_confirm").removeClass("fa-close");
+            $("#repassword_confirm").addClass("fa-check-circle");
+        }
     });
 
-
+    if($.cookie("username")!=undefined){
+        $("#username").val($.cookie("username"))
+    }
     
 
 })
