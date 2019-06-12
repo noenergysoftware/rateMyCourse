@@ -184,13 +184,13 @@ $(document).ready(function () {
     });
     var name=window.sessionStorage.getItem("username");
 
-    if(name!=$.cookie("username") || name==undefined){
-        $("#modify").hide();
-        $("show_modal").hide();
-    }
-    else{
+    if(name==$.cookie("username") && name!=undefined){
         $("#modify").show();
         $("show_modal").show();
+    }
+    else{
+        $("#modify").hide();
+        $("show_modal").hide();
     }
 
     getUserData(name);
