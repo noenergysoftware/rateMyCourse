@@ -43,6 +43,8 @@ function set(){
 
 function reset(){
     if(check_password() && check_repassword() && $("#question1").val().length<=100){
+
+        console.log($("#question1").val()+" "+md5($("#password").val()));
         $.ajax({
             async: true,
             type: "POST",
