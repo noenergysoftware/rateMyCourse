@@ -183,7 +183,8 @@ function genComment(data){
 
     for(i = length - 1; i >= 0; i--){
         
-        var single_comment= "<div class=\"col-md-10 offset-md-1\">"+
+        var single_comment= $("<div class=\"card col-md-12\" style=\"margin-top:8px\" id=\"comment_"+i+"\">"+
+                            "<div class=\"col-md-10 offset-md-1\">"+
                             "   <div class=\"row align-items-center\">\n"+
                             "       <p class=\"my-4 col-md-2 col-4\">教师</p>"+
                             "       <p class=\"my-4 col-md-2 col-6\">"+comments[i].teacher+"</p>"+
@@ -197,14 +198,11 @@ function genComment(data){
                             "           <p style=\"float:left;text-align:left;\">"+comments[i].edit_time+"</p>"+
                             "       </a>"+
                             "   </div>"+
-                            "</div>";
+                            "</div>"+
+                            "</div>");
 
-        var commentGrid = document.createElement("div");
-        commentGrid.setAttribute("class", "card col-md-12");
-        commentGrid.setAttribute("style","margin-top:8px");
-        commentGrid.id = "comment_"+i;
-        commentGrid.innerHTML = comment;
-        $("#comment").append(commentGrid);
+       
+        $("#comment").append(single_comment);
     }
 }
 
