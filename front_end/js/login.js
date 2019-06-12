@@ -83,4 +83,8 @@ $(document).ready(function () {
         $("#login").click(function () {
             login();
         });
+
+        $("#reset").click(function(){
+            window.setTimeout("location.href='./safe.html'", 0);
+        });
     })

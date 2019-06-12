@@ -3,6 +3,49 @@ var gender;
 var role;
 var formData;
 
+function reset(){
+    window.setTimeout("location.href='./safe.html'", 0);
+}
+
+function setQuestion(){
+    if($.cookie("username")==undefined){
+        alert("未登录，无法设置安全问题");
+        return
+    }
+
+    if($("#question1").val().length>0 && $("#question1").val().length>0){
+
+        $.ajax({
+            async: true,
+            type: "POST",
+            url: "http://testapi.ratemycourse.tk/setQuestion/",
+            dataType: "json",
+            data:{
+                username:   $.cookie("username"),
+                question:   "你的高中学校名称和年级是？",
+                answer:     $("#question1").val(),
+                csrfmiddlewaretoken:  $.cookie("csrftoken")
+            },
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
+                console.log(data);
+                console.log("success");
+                alert("设置成功");
+                $('#close_modal2').click();
+            },
+            error: function (data) {
+                console.log(data);
+                console.log("fail");
+            }
+        });	
+    }
+    else{
+        alert("问题答案过长或为空");
+    }
+}
+
 function getUserData(name){
     console.log(name);
     $.ajax({
@@ -141,7 +184,7 @@ $(document).ready(function () {
     });
     var name=window.sessionStorage.getItem("username");
 
-    if(name!=$.cookie("username")){
+    if(name!=$.cookie("username") || name==undefined){
         $("#modify").hide();
         $("show_modal").hide();
     }
