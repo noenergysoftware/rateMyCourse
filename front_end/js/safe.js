@@ -39,8 +39,13 @@ function reset(){
                 withCredentials: true
             },
             success: function (data) {
-				console.log(data);
-				console.log("success");
+                console.log(data);
+                if(data.status=="1"){
+                    alert(data.body.message);
+                }
+                else{
+                    alert(data.errMsg);
+                }
             },
             error: function (data) {
                 console.log(data);
@@ -125,8 +130,17 @@ $(document).ready(function () {
 
     if($.cookie("username")!=undefined){
         $("#username").val($.cookie("username"))
+        $("#personalInfo").show();
+        $("#logOut").show();
+        $("#signIn").hide();
+        $("#signUp").hide();
     }
-    
+    else{
+        $("#signIn").show();
+        $("#signUp").show();
+        $("#personalInfo").hide();
+        $("#logOut").hide();
+    }
 
 })
 

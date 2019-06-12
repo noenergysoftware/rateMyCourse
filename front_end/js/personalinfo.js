@@ -32,8 +32,13 @@ function setQuestion(){
             success: function (data) {
                 console.log(data);
                 console.log("success");
-                alert("设置成功");
-                $('#close_modal2').click();
+                if(data.status=="1"){
+                    alert(data.body.message);
+                    $('#close_modal2').click();
+                }
+                else{
+                    alert(data.errMsg);
+                }
             },
             error: function (data) {
                 console.log(data);
