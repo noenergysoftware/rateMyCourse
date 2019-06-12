@@ -3,6 +3,62 @@ var gender;
 var role;
 var formData;
 
+function reset(){
+    window.setTimeout("location.href='./safe.html'", 0);
+}
+
+function setQuestion(){
+    if($.cookie("username")==undefined){
+        alert("未登录，无法设置安全问题");
+        return;
+    }
+
+    if($("#question1").val().length>0 && $("#question1").val().length>0){
+
+        $.ajax({
+            async: true,
+            type: "POST",
+            url: "https://api.ratemycourse.tk/setQuestion/",
+            dataType: "json",
+            data:{
+                username:   $.cookie("username"),
+                question:   "你的高中学校名称和年级是？",
+                answer:     $("#question1").val(),
+                csrfmiddlewaretoken:  $.cookie("csrftoken")
+            },
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
+                console.log(data);
+                if(data.status=="1"){
+                    alert(data.body.message);
+                    $('#close_modal2').click();
+                }
+                else{
+                    alert(data.errMsg);
+                }
+            },
+            error: function (data) {
+                console.log(data);
+                if(data.readyState==4){
+                    window.sessionStorage.setItem('callBack',data.responseText);
+                    window.setTimeout("location.href='./callBack.html'",0);
+                }
+                else if(data.readyState==0){
+                    alert("请求发送失败，请稍后再进行尝试");
+                }
+                else{
+                    alert(JSON.stringify(data));
+                }
+            }
+        });	
+    }
+    else{
+        alert("问题答案过长或为空");
+    }
+}
+
 function getUserData(name){
     
     $.ajax({
@@ -165,15 +221,17 @@ $(document).ready(function () {
     });
     var name=window.sessionStorage.getItem("username");
 
-    if(name!=$.cookie("username")){
-        $("#modify").hide();
-        $("show_modal").hide();
+    if(name==$.cookie("username") && name!=undefined){
+        //确定是本人的信息
+        $("#safe").show();
+        $("#modify").show();
+        $("#show_modal").show();
     }
     else{
-        $("#modify").show();
-        $("show_modal").show();
+        $("#safe").hide();
+        $("#modify").hide();
+        $("#show_modal").hide();
     }
-
     getUserData(name);
 
     if(name!=$.cookie("username")){
