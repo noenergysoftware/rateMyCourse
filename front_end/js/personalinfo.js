@@ -260,7 +260,7 @@ $(document).ready(function () {
     
     $.when(ajax_success).done(function () {
         genComment(JSON.parse(window.sessionStorage.getItem("user_data")));
-    }
+    });
       
   //    console.log("role: "+role.val());
 //      console.log("gender: "+gender.val());
