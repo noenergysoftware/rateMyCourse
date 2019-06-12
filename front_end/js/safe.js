@@ -51,7 +51,7 @@ function reset(){
             url: "http://testapi.ratemycourse.tk/resetPassword/",
             dataType: "json",
             data:{
-				username: $.cookie("username"),
+				username: $("#username").val(),
 				question:"你的高中学校名称和年级是？",
 				answer:$("#question1").val(),
                 npassword:md5($("#password").val()),
@@ -94,6 +94,18 @@ $(document).ready(function () {
         }
     });	
 
+    $("#username").keyup(function () {
+		if($("#question1").val().length>100){
+			$("#username_confirm").removeClass("fa-check-circle-o");
+            $("#username_confirm").removeClass("fa-check-circle");
+            $("#username_confirm").addClass("fa-close");
+		}
+		else{
+			$("#username_confirm").removeClass("fa-check-circle-o");
+            $("#username_confirm").removeClass("fa-close");
+            $("#username_confirm").addClass("fa-check-circle");
+		}
+    });
 
     $("#question1").keyup(function () {
 		if($("#question1").val().length>100){
