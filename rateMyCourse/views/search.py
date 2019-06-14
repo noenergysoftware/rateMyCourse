@@ -120,7 +120,10 @@ def get_user_detail(request) -> HttpResponse:
         retlist['user_comments'] = []
 
         for user_comment in MakeComment.objects.filter(user=user):
-            retlist['user_comments'].append(user_comment.comment.ret())
+            comment = {}
+            comment['comment'] = user_comment.comment.ret()
+            comment['course'] = user_comment.course.ret()
+            retlist['user_comments'].append(comment)
 
     except Exception:
         return HttpResponse(formatException(-1, '缺失必要的信息'), content_type="application/json")
