@@ -4,6 +4,7 @@ var role;
 var formData;
 var ajax_success;
 
+//替换符号，避免被插入恶意JS 
 function html2Escape(sHtml) {
     return sHtml.replace(/[<>&"]/g,function(c){
       return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];
@@ -14,6 +15,7 @@ function reset(){
     window.setTimeout("location.href='./safe.html'", 0);
 }
 
+//设置安全问题
 function setQuestion(){
     if($.cookie("username")==undefined){
         alert("未登录，无法设置安全问题");
@@ -58,6 +60,8 @@ function setQuestion(){
     }
 }
 
+
+//获取用户信息
 function getUserData(name){
     console.log(name);
     ajax_success=$.ajax({
@@ -107,6 +111,8 @@ function getUserData(name){
     });
 }
 
+
+//修改信息
 function modifier() {
     if($("#name").text()!=$.cookie("username")){
         alert("不能修改他人信息！");
@@ -173,7 +179,7 @@ function modifier() {
     });
 }
 
-
+//用于生成在个人信息内的评价
 function genComment(data){
 
     console.log(data);
