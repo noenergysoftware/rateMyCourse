@@ -186,6 +186,7 @@ function genComment(data){
         var single_comment= $("<div class=\"card col-md-12\" style=\"margin-top:8px\" id=\"comment_"+i+"\">"+
                             "<div class=\"col-md-10 offset-md-1\">"+
                             "   <div class=\"row align-items-center\">\n"+
+                            "       <p class=\"my-4 col-md-2 col-4\">"+comments[i].course_name+"</p>"+
                             "       <p class=\"my-4 col-md-2 col-4\">教师</p>"+
                             "       <p class=\"my-4 col-md-2 col-6\">"+comments[i].teacher+"</p>"+
                             "   </div>\n"+
