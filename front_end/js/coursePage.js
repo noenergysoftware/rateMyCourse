@@ -20,10 +20,15 @@ page_dot2.innerHTML="<a class=\"page-link\" href=\"#c_pagination\">...</a>";
 
 function html2Escape(sHtml) {
     return sHtml.replace(/[<>&"]/g,function(c){
-      return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];
+        return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];
     });
-   }
+}
 
+
+function toUser(userName){
+    window.sessionStorage.setItem("username",userName);
+    window.setTimeout("location.href='./personalinfo.html'",0);
+}
 
 //加载评论
 function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text, time, comment_ID, cnum, thumb_up_num, hot) {
