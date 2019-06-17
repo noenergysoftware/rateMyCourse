@@ -202,7 +202,7 @@ function genComment(data){
     var comments=data.body.user_comments;
 
     var length=Object.getOwnPropertyNames(comments).length;
-
+    console.log("?????????"+length);
     for(i = length - 1; i >= 0; i--){
         
         var single_comment= $("<div class=\"card col-md-12\" style=\"margin-top:8px\" id=\"comment_"+i+"\">"+
