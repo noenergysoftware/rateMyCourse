@@ -176,7 +176,7 @@ function modifier() {
             console.log(data.status);
             if (data.status == "1") {
                 alert(data.body.message);
-                window.setTimeout("location.href='./personalinfo.html'", 00);
+                window.location.reload();
             } else {
                 alert(data.errMsg);
             }
@@ -418,6 +418,7 @@ var initCropperInModal = function(img, input, modal){
                                     alert("上传头像成功！");
                                     $('#close_modal').click();
                                     $("#user_profile_photo").prop("src",data.data.url); 
+                                    window.location.reload();
                                 }
                                 else{
                                     console.log(data2.errMsg);

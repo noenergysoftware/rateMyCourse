@@ -1,77 +1,8 @@
-.navbar-brand{
-  line-height: 20px;
-  opacity: 0.31;
-  border-radius: 15px;
-  background-color: rgba(185, 215, 234, 1);
+.mybtn{
+  border-radius: 12px;
+  background-color: rgba(214, 230, 242, 1);
+  color: rgba(20, 83, 116, 1);
   text-align: center;
-  border: 2px solid rgba(247, 251, 252, 1);
-}
-
-.userName{
-  margin-left: 32px;
-  margin-top: 32px;
-}
-
-.cfmbutton
-  {
-    margin-top:8px;
-    float:right;  
-    width: 48px;
-    height: 36px;
-    font-size: 12px;
-    border-color: #bfbfbf;
-  }
- .texta
-  { 
-      margin-top:16px;
-      width:100%;
-      height:64px;
-      font-size: 14px;
-      letter-spacing:2px;
-  }
-  .good
-{
-  float:right;
-  margin-top:16px;
-  margin-right:16px;
-  color:black;
-}
-.goodclick
-{
-  float:right;
-  margin-top:16px;
-  margin-right:16px;
-  color:primary;
-}
-.comments
-{
-    float:right;
-    text-align:right;
-    margin-top:16px;
-    margin-right:16px;
-    color:black;
-}
-.commentsclk
-{
-    float:right;
-    text-align:right;
-    margin-top:16px;
-    margin-right:16px;
-    color:primary;
-}
-.disusername
-{
-    float:left;
-    margin-right:16px;
-    font-weight:bold;
-}
-
-#toSure{
-  border-color: rgba(20, 83, 116, 1);
-  border-radius: 20px;
-}
-
-#toComment{
-  border-color: rgba(20, 83, 116, 1);
-  border-radius: 20px;
+  font-family: Microsoft Yahei;
+  border: 1px solid rgba(150, 212, 236, 0.2);
 }

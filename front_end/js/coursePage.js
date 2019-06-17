@@ -56,7 +56,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "    <p style=\"float:left;text-align:left;\">"+time+"</p>"+
                 "  </a>"+
                 "  <a class=\"col-md-2 offset-md-1 col-4 offset-3\">"+
-                "    <p  id=\"add_child_comment\" onclick=\" showChildCommentTextarea("+comment_ID+","+hot+")\">评论</p>"+
+                "    <p  id=\"add_child_comment\" onclick=\" showChildCommentTextarea("+comment_ID+","+hot+")\" style=\"border: 1px solid rgba(150, 212, 236, 0.2);\">展开评论</p>"+
                 "  </a>"+    
                 "  <a class=\"col-md-2 col-5\">"+
                 "    <i class=\"fa fa-thumbs-o-up\" onclick=\"thumbUp(\'agree\',"+comment_ID+",this)\"></i>"+
@@ -440,7 +440,7 @@ function hotComment(course_id){
                             //删除这一条子评论
                             data.body.splice(i,1);
                             i--;
-                            //console.log(data);
+                            //console.log("delete "+i+" "+data.body[i].commentID);
                         }
                     }
                     //修改评论长度

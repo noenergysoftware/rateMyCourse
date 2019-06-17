@@ -29,9 +29,9 @@ function reset(){
 			url: "https://api.ratemycourse.tk/resetPassword/",
 			dataType: "json",
 			data:{
-		username: $("#username").val(),
-		question:"你的高中学校名称和年级是？",
-		answer:$("#question1").val(),
+				username: $("#username").val(),
+				question:"你的高中学校名称和年级是？",
+				answer:$("#question1").val(),
 				npassword:md5($("#password").val()),
 				csrfmiddlewaretoken:  $.cookie("csrftoken")
 			},
@@ -41,7 +41,9 @@ function reset(){
 			success: function (data) {
 				console.log(data);
 				if(data.status=="1"){
-					alert(data.body.message);
+					alert(data.body.message+" 请重新登陆!");
+					$.removeCookie("username",{ path: '/'});
+					window.location.reload();
 				}
 				else{
 					alert(data.errMsg);
@@ -49,7 +51,7 @@ function reset(){
 			},
 			error: function (data) {
 				console.log(data);
-		if(data.readyState==4){
+				if(data.readyState==4){
 					window.sessionStorage.setItem('callBack',data.responseText);
 					window.setTimeout("location.href='./callBack.html'",0);
 				}
