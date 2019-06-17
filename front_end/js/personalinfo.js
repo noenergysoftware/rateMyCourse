@@ -208,16 +208,17 @@ function genComment(data){
         var single_comment= $("<div class=\"card col-md-12\" style=\"margin-top:8px\" id=\"comment_"+i+"\">"+
                             "<div class=\"col-md-10 offset-md-1\">"+
                             "   <div class=\"row align-items-center\">\n"+
+                            "       <p class=\"my-4 col-md-2 col-4\">"+comments[i].course.name+"</p>"+
                             "       <p class=\"my-4 col-md-2 col-4\">教师</p>"+
-                            "       <p class=\"my-4 col-md-2 col-6\">"+comments[i].teacher+"</p>"+
+                            "       <p class=\"my-4 col-md-2 col-6\">"+comments[i].comment.teacher+"</p>"+
                             "   </div>\n"+
                             "   <hr class=\"my-1\" width=\"70%\">"+
                             "   <div class=\"row text-center\">"+
-                            "       <p style=\"margin-top:16px;margin-left:16px;text-align:left; width:80%\">"+html2Escape(comments[i].content)+"</p>\n"+
+                            "       <p style=\"margin-top:16px;margin-left:16px;text-align:left; width:80%\">"+html2Escape(comments[i].comment.content)+"</p>\n"+
                             "   </div>"+
                             "   <div class=\"row text-center\">"+
                             "       <a class=\"col-md-4 col-12\" >"+
-                            "           <p style=\"float:left;text-align:left;\">"+comments[i].edit_time+"</p>"+
+                            "           <p style=\"float:left;text-align:left;\">"+comments[i].comment.edit_time+"</p>"+
                             "       </a>"+
                             "   </div>"+
                             "</div>"+
