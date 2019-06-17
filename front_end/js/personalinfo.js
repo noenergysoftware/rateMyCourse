@@ -67,7 +67,7 @@ function setQuestion(){
 
 function getUserData(name){
     
-    ajax_succes=$.ajax({
+    ajax_success=$.ajax({
         async: true,
         type:"get",
         url: "https://api.ratemycourse.tk/getUserDetail/",
