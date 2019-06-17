@@ -56,7 +56,7 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "    <p style=\"float:left;text-align:left;\">"+time+"</p>"+
                 "  </a>"+
                 "  <a class=\"col-md-2 offset-md-1 col-4 offset-3\">"+
-                "    <p  id=\"add_child_comment\" onclick=\" showChildCommentTextarea("+comment_ID+","+hot+")\" style=\"border: 1px solid rgba(150, 212, 236, 0.2);\">展开评论</p>"+
+                "    <p  id=\"add_child_comment\" onclick=\" showChildCommentTextarea("+comment_ID+","+hot+")\" class=\"mybtn\">展开评论</p>"+
                 "  </a>"+    
                 "  <a class=\"col-md-2 col-5\">"+
                 "    <i class=\"fa fa-thumbs-o-up\" onclick=\"thumbUp(\'agree\',"+comment_ID+",this)\"></i>"+
@@ -69,8 +69,8 @@ function generateGrid(number,imageUrls, userName, iTerm, iTeacher, iTotal, text,
                 "  </div>"+
                 "  <div class=\"card-footer\">"+
                 "    <div id=\"comment_area_"+comment_ID+"\" class=\"row \">"+
-                "      <textarea id=\"textarea_"+comment_ID+"\" class=\"col-md-10\" \" style=\"border: 1px solid rgba(185, 215, 234, 0.36);\"></textarea>"+
-                "      <div id=\"make_child_comment_"+comment_ID+"\" class=\"btn col-md-2\" onclick=\"makeChildComment("+comment_ID+",\'"+iTeacher+"\')\">发送</div>"+
+                "      <textarea id=\""+hot_box+"textarea_"+comment_ID+"\" class=\"col-md-10\" \" style=\"border: 1px solid rgba(185, 215, 234, 0.36);\"></textarea>"+
+                "      <div id=\"make_child_comment_"+comment_ID+"\" class=\"btn col-md-2\" onclick=\"makeChildComment("+comment_ID+",\'"+iTeacher+"\',"+hot+")\">发送</div>"+
                 "    </div>"+
                 "  </div>"+
                 "</div>"+
@@ -210,19 +210,26 @@ function showChildCommentTextarea(id,hot){
 }
 
 
-function makeChildComment(id,teacher){
-    console.log($("#textarea_"+id).val());
+function makeChildComment(id,teacher,hot){
+    
 
     if ($.cookie("username") == undefined){
         alert("用户未登录！ 登录后即可发表评论");
         return false;
     }
-      
-    if($("#textarea_"+id).val().length > 2048){
+    var textarea_id;
+    if(hot==0){
+        textarea_id="#textarea_"+id;
+    }
+    else{
+        textarea_id="#hot_textarea_"+id;
+    }
+    console.log($(textarea_id).val());
+    if($(textarea_id).val().length > 2048){
         alert("评价内容不能多于2048字");
         return false;
     }
-    else if($("#textarea_"+id).val().length <1){
+    else if($(textarea_id).val().length <1){
         alert("不能发表空白评论！");
         return false;
     }
@@ -235,7 +242,7 @@ function makeChildComment(id,teacher){
         data: {
           username: $.cookie("username"),
           course_ID: window.sessionStorage.getItem("course"+coursenum+"course_ID"),
-          content : $("#textarea_"+id).val(),
+          content : $(textarea_id).val(),
           teacher_name : teacher,
           parent_comment: id,
           csrfmiddlewaretoken:  $.cookie("csrftoken")
