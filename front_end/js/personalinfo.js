@@ -201,7 +201,7 @@ function genComment(data){
     console.log(data);
     var comments=data.body.user_comments;
 
-    var length=Object.getOwnPropertyNames(comments).length;
+    var length=comments.length;
     console.log("?????????"+length);
     for(i = length - 1; i >= 0; i--){
         
