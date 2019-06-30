@@ -1,7 +1,3 @@
-# database
-
-db.sqlite3
-
 .DS_Store
 .idea
 rateMyCourse/templates/rateMyCourse/index.scss
@@ -29,3 +25,6 @@ test
 
 #settings.py
 #authentication.py
+front_end/.DS_Store
+1.py
+front_end/.vscode

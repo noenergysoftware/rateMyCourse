@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html lang="zh-cn" class=" no-touchevents"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+	<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
+	<meta name="theme-color" content="#4285f4">
+	<title>注册</title>
+	<link rel="shortcut icon" href="./resource/favicon.ico" />
+  <link rel="bookmark" href="./resource/favicon.ico" />
+	<!-- css -->
+	<link href="./css/base.min.css" rel="stylesheet">
+	<link href="./css/project.min.css" rel="stylesheet">
+	<link href="./css/auth.css" rel="stylesheet">
+  <link href="./css/css.css" rel="stylesheet">
+
+<style>
+.divcss5{ position:fixed; bottom:0;}
+</style>
+<body class="page-brand">
+	
+
+	<div class="authpage auth-reg">
+			<div class="container">
+				<section class="content-inner">
+					<div class="auth-main auth-row">
+						<div class="auth-top auth-row">
+							<a class="boardtop-left" href="./index.html">
+								<div>首 页</div>
+							</a>
+							<div class="auth-logo">
+								<img src="./resource/authlogo.jpg" alt="">
+							</div>
+							<a href="./login.html" class="boardtop-right">
+								<div>登 录</div>
+							</a>
+						</div>
+
+					
+
+						<div class="rowtocol">
+							<div class="auth-row">
+								<div class="form-group-label auth-row">
+									<label class="floating-label" for="name">用户名，字母、数字或下划线，3-16位</label>
+									<input class="form-control maxwidth-auth" id="name" autocomplete="new-password" name="inputUsername" type="text" maxlength="16" >
+									
+								</div>
+								<div id="namecheck"></div>
+							</div>
+						</div>
+						
+						<div class="rowtocol">
+							<div class="auth-row">
+								<div class="form-group-label auth-row">
+									<label class="floating-label" for="email">邮箱(唯一凭证请认真对待)</label>
+									<input class="form-control maxwidth-auth" id="email" autocomplete="new-password" name="inputEmail" type="email" maxlength="32">
+									
+
+								</div>
+								<div id="emailcheck"></div>
+							</div>
+						</div>
+
+						<div class="rowtocol">
+							<div class="auth-row">
+								<div class="form-group-label auth-row">
+									<label class="floating-label" for="passwd">密码，必须含字母、数字和特称字符，8-30位</label>
+									<input class="form-control maxwidth-auth" id="passwd" autocomplete="new-password" name="inputPassword" type="password">
+								</div>
+							</div>
+						</div>
+
+						<div class="rowtocol">
+							<div class="auth-row">
+								<div class="form-group form-group-label">
+									<label class="floating-label" for="repasswd">重复密码</label>
+									<input class="form-control maxwidth-auth" id="repasswd" autocomplete="new-password" name="inputVerify" type="password">
+								</div>
+							</div>
+						</div>
+								
+
+						<div class="rowtocol">
+							<div class="btn-auth auth-row">
+								<button id="TencentCaptcha" type="submit" data-appid="2091355657" data-cbfn="callback" class="btn-reg btn btn-block btn-brand waves-attach waves-light waves-effect">确认注册</button>
+							</div>
+						</div>
+						
+						<!--<div class="rowtocol">
+							<div class="btn-auth auth-row">
+								<button id="tos"  class="btn-reg btn btn-block btn-brand waves-attach waves-light waves-effect">确认注册</button>
+							</div>
+						</div>-->
+						
+						<div class="auth-bottom auth-row auth-reg" >
+							<div class="tgauth">
+								<button class="btn" style="cursor:unset;"></button>
+							</div>
+						</div>
+
+					
+
+					</div>
+				</section>
+
+				<div class="card auth-tg">
+					<div class="card-main">
+					</div>
+				</div>
+
+			</div>
+
+	</div>
+		
+
+<footer class="ui-footer">
+	<div class="container">
+		<marquee>©2019 公课网开发团队</marquee>
+	</div>
+</footer>
+
+<!-- js -->
+	<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <script src="./lib/gt.js"></script>
+  <script src="./lib/base.min.js"></script>
+	<script src="./lib/project.min.js"></script>
+	<script src="https://cdn.staticfile.org/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+	<script color="255,0,255" opacity="0.7" count="88" src="https://cdn.staticfile.org/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+	<script src="./lib/md5.min.js"></script>
+	<script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+	<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+	<canvas id="c_n5" width="1500" height="600" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas>
+	<script src="./js/signup.js"></script>
+
+</body>
+</html>

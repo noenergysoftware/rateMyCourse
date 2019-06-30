@@ -1,0 +1,40 @@
+.navbar-brand{
+    line-height: 20px;
+    opacity: 0.31;
+    border-radius: 15px;
+    background-color: rgba(185, 215, 234, 1);
+    text-align: center;
+    border: 2px solid rgba(247, 251, 252, 1);
+}
+
+.body{
+    text-align: center;
+    background-color: rgba(185, 215, 234);
+}
+
+
+
+#announcement{
+    background-color: #D8ECF5;
+    border-color: rgb(247, 251, 252);
+    border-radius: 20px;
+    height: 300px;
+    width: 600px;
+    margin: 0 auto;
+}
+
+
+#ggdiv{
+    color: rgba(20, 83, 116, 1);
+    font-size: 50px;
+    text-align: center;
+    font-family: 方正圆体-标准;
+}
+
+#innerdiv{
+    color: rgba(20, 83, 116, 1);
+    font-size: 20px;
+    font-family: 方正圆体-标准;
+}
+
+

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>公告</title>
+    <link rel="shortcut icon" href="./resource/favicon.ico" />
+    <link rel="bookmark" href="./resource/favicon.ico" />
+    <!-- css -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+        type="text/css">
+
+    <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+    <link href="./css/css.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/announcement.css" type="text/css">
+    <!--<link rel="stylesheet" href="./css/personalInfo.css" type="text/css"> -->
+
+    <!-- js -->
+
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js"></script>
+    <script src="./lib/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+
+
+
+    <script src="./js/head.js"></script>
+
+</head>
+
+<style>
+    .divcss5 {
+        position: fixed;
+        bottom: 0;
+    }
+</style>
+
+
+<body style="background-color: rgb(233, 241, 247)">
+    <div style="padding-top:70px">
+        <!-- Space used to modify navbar with fixed-top style-->
+    </div>
+    <!--导航栏-->
+    <div>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top"
+            style="background-color: #29B6F6;border: 1px solid rgba(247, 251, 252, 1);">
+            <div class="container" id="navbarContainer">
+                <a class="navbar-brand" href="./index.html" style="color:#0D47A1;font-weight: 600;">首页</a>
+                <!--公告-->
+                <a class="navbar-brand" href="./announcement.html" style="color:#145374;font-weight: 500;">公告</a>
+                <a class="navbar-brand" href="./searchResultSortedCourse.html" style="color:#145374;font-weight: 500;">排名</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                    data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+
+                <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+                    <ul class="navbar-nav">
+
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="navbar-brand" onclick="javascript: jumpLogin()"
+                                id="signIn" style="display:block;color:#145374;font-weight: 500;">登录</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpSignUp()"
+                                id="signUp" style="display:block;color:#145374;font-weight: 500;">注册</a>
+                        </li>
+                        <li class="item">
+                            <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpPersonalInfo()"
+                                id="personalInfo" style="display:none;color:#145374;font-weight: 500;">个人信息</a>
+                        </li>
+                        <li class="item">
+                            <a href="javascript:void(0)" class="navbar-brand" onclick="javascript:jumpLogOut()"
+                                id="logOut" style="display:none;color:#145374;font-weight: 500;">注销</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div id="announcement" style="text-align: center">
+        <div id="contentdiv" style="text-align: center">
+            <!--公告-->
+            <h1 id="ggdiv">公告</h1>
+            <hr />
+            <!--内容-->
+            <p id="innerdiv" style="text-align: left;text-indent:30px">
+                随便写写，目前没有啥需要公告的，希望大家给个好评～
+            </p>
+        </div>
+    </div>
+
+    <!-- js -->
+
+
+    <script src="./lib/base.min.js"></script>
+    <script src="./lib/project.min.js"></script>
+    <script src="./lib/md5.min.js"></script>
+
+</body>
+
+</html>
