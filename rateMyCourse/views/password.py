@@ -4,28 +4,33 @@ from django.http import HttpResponse
 
 import rateMyCourse.views.authentication as auth
 from rateMyCourse.models import *
+from rateMyCourse.views.exceptions import *
 
 
-def set_question(request):
+# 密码找回等工作
+
+def set_question(request) -> HttpResponse:
+    """
+    设置密保问题，需求用户名与密保问题和答案
+    :param request:
+    :return:
+    """
     try:
         if not auth.auth_with_user(request, request.POST['username']):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-100, 'cookies 错误，认证失败'), content_type="application/json")
+
         username = request.POST['username']
         question = request.POST['question']
         answer = request.POST['answer']
     except:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': '缺失信息',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-1, '缺失信息'), content_type="application/json")
+
     else:
         try:
             qs = PasswordQuestion.objects.filter(user__username=username)
+            # 如果之前设置过，则更新
             if len(qs) == 0:
-                c = PasswordQuestion(user=User.objects.get(name=username), question=question, answer=answer)
+                c = PasswordQuestion(user=User.objects.get(username=username), question=question, answer=answer)
                 c.save()
             else:
                 c = qs[0]
@@ -33,58 +38,56 @@ def set_question(request):
                 c.answer = answer
                 c.save()
         except:
+            return HttpResponse(formatException(-7, '设置密保问题失败'), content_type="application/json")
+
+        else:
             return HttpResponse(json.dumps({
-                'status': -2,
-                'errMsg': '设置失败',
+                'status':1,
+                'length':1,
+                'body':{'message': "问题设置成功"},
+                'errMsg':'',
             }), content_type="application/json")
-    finally:
-        return HttpResponse(json.dumps({
-            'status': 1,
-            'errMsg': '设置成功',
-        }), content_type="application/json")
 
 
-def reset_password(request):
+def reset_password(request) -> HttpResponse:
+    """
+    重置密码，需求密保问题及答案，以及新的密码。
+    :param request:
+    :return:
+    """
     try:
-        if not auth.auth_with_user(request, request.POST['username']):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")
+        #if not auth.auth_with_user(request, request.POST['username']):
+        #    return HttpResponse(formatException(-100, 'cookies 错误，认证失败'), content_type="application/json")
+
         username = request.POST['username']
         question = request.POST['question']
         answer = request.POST['answer']
-        npassword = request.POST['new_password']
+        npassword = request.POST['npassword']
     except:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': '缺失信息',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-1, '缺失信息'), content_type="application/json")
+
     else:
         try:
             qs = PasswordQuestion.objects.filter(user__username=username)
             if len(qs) == 0:
-                return HttpResponse(json.dumps({
-                    'status': -1,
-                    'errMsg': '用户未设置保护问题，无法重置密码，请联系管理员',
-                }), content_type="application/json")
+                # 这种情况只能找管理员重置了
+                return HttpResponse(formatException(-8, '用户未设置密保问题，请联系管理员解决'), content_type="application/json")
+
             else:
                 c = qs[0]
                 if c.question == question and c.answer == answer:
                     c.user.password = npassword
-                    c.save()
+                    c.user.save()
                 else:
-                    return HttpResponse(json.dumps({
-                        'status': -1,
-                        'errMsg': '密码或问题错误',
-                    }), content_type="application/json")
+                    return HttpResponse(formatException(-9, '密保问题答案不匹配'), content_type="application/json")
+
         except:
+            return HttpResponse(formatException(-10, '重置失败'), content_type="application/json")
+
+        else:
             return HttpResponse(json.dumps({
-                'status': -2,
-                'errMsg': '设置失败',
+                'status':1,
+                'length':1,
+                'body':{'message': "密码重置成功"},
+                'errMsg':'',
             }), content_type="application/json")
-    finally:
-        return HttpResponse(json.dumps({
-            'status': 1,
-            'errMsg': '重置成功',
-        }), content_type="application/json")

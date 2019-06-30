@@ -1,4 +1,6 @@
 import json
+import random
+import string
 
 import django
 from django.http import HttpResponse, JsonResponse
@@ -6,8 +8,8 @@ from django.http import HttpResponse, JsonResponse
 import rateMyCourse.views.authentication as auth
 import rateMyCourse.views.logs as logs
 from rateMyCourse.models import *
-import random
-import string
+from rateMyCourse.views.exceptions import *
+
 
 def sign_up(request) -> HttpResponse:
     """
@@ -24,44 +26,32 @@ def sign_up(request) -> HttpResponse:
         UserIP = request.POST['IP']
 
     except Exception:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': '未能获取到用户名，邮箱或密码',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-1, '缺失必要的信息'), content_type="application/json")
+
     try:
         ret = auth.txrequest(Ticket, Randstr, UserIP)
         if ret[0] == -1:
             logs.writeLog("IP {0}#$signup failed".format(UserIP))
-            return HttpResponse(json.dumps({
-                'status': -15,
-                'errMsg': ret[1],
-            }), content_type="application/json")
+            return HttpResponse(formatException(-15, '验证码验证失败'), content_type="application/json")
+
     except:
         logs.writeLog("IP {0}#$signup failed".format(UserIP))
-        return HttpResponse(json.dumps({
-            'status': -10,
-            'errMsg': "Auth failed",
-        }), content_type="application/json")
+        return HttpResponse(formatException(-14, '注册失败'), content_type="application/json")
+
     logs.writeLog("IP {0}#$signup success".format(UserIP))
     try:
         User(username=username, mail=mail, password=password).save()
     except Exception as err:
         errmsg = str(err)
         if "mail" in errmsg:
-            return HttpResponse(json.dumps({
-                'status': -1,
-                'errMsg': '此邮箱已经被注册过',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-13, '该邮箱已被注册'), content_type="application/json")
+
         elif "username" in errmsg:
-            return HttpResponse(json.dumps({
-                'status': -1,
-                'errMsg': '此用户名已经被注册过',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-12, '该用户名已被注册'), content_type="application/json")
+
         else:
-            return HttpResponse(json.dumps({
-                'status': -1,
-                'errMsg': '邮箱或用户名已经被注册过',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-14, '注册失败'), content_type="application/json")
+
     else:
         return HttpResponse(json.dumps({
             'status': 1,
@@ -80,17 +70,13 @@ def update_user(request) -> HttpResponse:
     """
     try:
         if not auth.auth_with_user(request, request.POST['username']):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-100, 'cookies 错误，认证失败'), content_type="application/json")
+
         username = request.POST['username']
         user = User.objects.get(username=username)
     except Exception:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': '不存在此用户',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-16, '用户不存在'), content_type="application/json")
+
     else:
         try:
             user.gender = request.POST['gender']
@@ -98,10 +84,8 @@ def update_user(request) -> HttpResponse:
             user.self_introduction = request.POST['self_introduction']
             user.save()
         except Exception:
-            return HttpResponse(json.dumps({
-                'status': -1,
-                'errMsg': '保存失败，请检查内容正确性',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-1, '缺失必要的信息'), content_type="application/json")
+
         else:
             return HttpResponse(json.dumps({
                 'status': 1,
@@ -126,26 +110,20 @@ def sign_in(request) -> HttpResponse:
             mail = request.POST['mail']
             password = request.POST['password']
         except Exception:
-            return HttpResponse(json.dumps({
-                'status': -1,
-                'errMsg': '未能获取到用户名，邮箱或密码',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-1, '缺失必要的信息'), content_type="application/json")
+
     try:
         u = User.objects.get(username=username)
     except Exception:
         try:
             u = User.objects.get(mail=mail)
         except Exception:
-            return HttpResponse(json.dumps({
-                'status': -2,
-                'errMsg': '用户名或邮箱不存在',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-16, '用户不存在'), content_type="application/json")
+
     if (password != u.password):
         logs.writeLog("{0}#${1}#$login fail".format(datetime.date.today(), u.username))
-        return HttpResponse(json.dumps({
-            'status': -3,
-            'errMsg': '密码错误',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-17, '用户名和密码不匹配'), content_type="application/json")
+
     else:
         # set cookies and sessions
         logs.writeLog("{0}#${1}#$login success".format(datetime.date.today(), u.username))
@@ -169,10 +147,8 @@ def logout(request) -> HttpResponse:
     '''
     try:
         if not auth.auth_with_user(request, request.POST['username']):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-100, 'cookies 错误，认证失败'), content_type="application/json")
+
         del request.session['auth_sess']
         response = HttpResponse(json.dumps({
             'status': 1,
@@ -185,10 +161,8 @@ def logout(request) -> HttpResponse:
         response.delete_cookie('password')
 
     except:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': '登出失败',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-18, '登出失败'), content_type="application/json")
+
     else:
         return response
 
@@ -202,25 +176,30 @@ def get_token(request) -> JsonResponse:
     token = django.middleware.csrf.get_token(request)
     return JsonResponse({'token': token})
 
-def delete_user(request):
+
+def delete_user(request) -> HttpResponse:
+    """
+    删除用户
+    :param request:
+    :return:
+    """
     try:
         if not auth.auth_with_user(request, request.POST['username']):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")
-        user=User.objects.get(username=request.POST['username'])
-        user.username="已注销"+user.id
-        user.email=""+user.id
+            return HttpResponse(formatException(-100, 'cookies 错误，认证失败'), content_type="application/json")
+
+        user = User.objects.get(username=request.POST['username'])
+        if request.POST['password']!=user.password:
+            return HttpResponse(formatException(-17, '用户名和密码不匹配'), content_type="application/json")
+        # 将用户设置为已注销状态，同时修改其邮箱用户名，密码设置为随机值，确保不会被再次登录。
+        user.username = "已注销" + user.id
+        user.email = "" + user.id
         user.profile_photo = "https://i.loli.net/2019/05/14/5cda6706c2f0861301.jpg"
 
         allchar = string.ascii_letters + string.punctuation + string.digits
         user.password = "".join(random.choice(allchar) for x in range(random.randint(15, 25)))
     except:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': '删除失败',
-        }), content_type="application/json")
+
+        return HttpResponse(formatException(-19, '注销用户失败'), content_type="application/json")
     else:
         return HttpResponse(json.dumps({
             'status': 1,

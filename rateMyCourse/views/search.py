@@ -4,9 +4,12 @@ from django.http import HttpResponse
 from django.views.decorators.cache import cache_page
 
 from rateMyCourse.models import *
+from rateMyCourse.views.exceptions import formatException
 
 detail_names = ['有趣程度', '充实程度', '课程难度', '课程收获']
 
+
+# 搜索相关函数
 
 @cache_page(60 * 60)
 def search_teacher(request) -> HttpResponse:
@@ -18,21 +21,13 @@ def search_teacher(request) -> HttpResponse:
     retlist = []
     try:
 
-        '''if not auth.auth(request):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")'''
-
         teacher_name = request.GET['teacher_name']
         teacher_list = Teacher.objects.filter(name__icontains=teacher_name)
         for teacher in teacher_list:
             retlist.append(teacher.ret())
     except Exception:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': 'search teacher Error',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-1, '缺失必要的信息'), content_type="application/json")
+
     return HttpResponse(json.dumps({
         'status': 1,
         'length': len(teacher_list),
@@ -49,13 +44,6 @@ def search_course(request) -> HttpResponse:
     """
     retlist = []
     try:
-
-        '''if not auth.auth(request):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")'''
-
         course_name = request.GET['course_name']
         course_list = Course.objects.filter(name__icontains=course_name)
         for course in course_list:
@@ -71,10 +59,8 @@ def search_course(request) -> HttpResponse:
             retlist[-1]['teacher_list'] = teacher_list
             retlist[-1]['department'] = department
     except Exception:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': 'search course Error',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-1, '缺失必要的信息'), content_type="application/json")
+
     return HttpResponse(json.dumps({
         'status': 1,
         'length': len(course_list),
@@ -91,27 +77,17 @@ def search_user(request) -> HttpResponse:
     """
     retlist = []
     try:
-        '''if not auth.auth(request):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")'''
         username = request.GET['username']
 
         if username == '':
-            return HttpResponse(json.dumps({
-                'status': -1,
-                'errMsg': 'user name Error',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-20, '用户名不能为空'), content_type="application/json")
 
         user_list = User.objects.filter(username__icontains=username)
         for user in user_list:
             retlist.append(user.ret())
     except Exception:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': 'user name Error',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-1, '缺失必要的信息'), content_type="application/json")
+
     return HttpResponse(json.dumps({
         'status': 1,
         'length': len(user_list),
@@ -127,18 +103,11 @@ def get_user_detail(request) -> HttpResponse:
     """
 
     try:
-        '''if not auth.auth(request):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")'''
+
         username = request.GET['username']
 
         if username == '':
-            return HttpResponse(json.dumps({
-                'status': -1,
-                'errMsg': 'user name Error',
-            }), content_type="application/json")
+            return HttpResponse(formatException(-20, '用户名不能为空'), content_type="application/json")
 
         user = User.objects.get(username=username)
         retlist = {}
@@ -148,11 +117,17 @@ def get_user_detail(request) -> HttpResponse:
         retlist['gender'] = user.gender
         retlist['self_introduction'] = user.self_introduction
         retlist['profile_photo'] = user.profile_photo
+        retlist['user_comments'] = []
+
+        for user_comment in MakeComment.objects.filter(user=user):
+            comment = {}
+            comment['comment'] = user_comment.comment.ret()
+            comment['course'] = user_comment.course.ret()
+            retlist['user_comments'].append(comment)
+
     except Exception:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': 'Get Error',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-1, '缺失必要的信息'), content_type="application/json")
+
     return HttpResponse(json.dumps({
         'status': 1,
         'length': 1,
@@ -173,10 +148,8 @@ def get_user_profile_photo(request) -> HttpResponse:
         retlist = {}
         retlist['profile_photo'] = user.profile_photo
     except Exception:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': 'Get Error',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-1, '缺失必要的信息'), content_type="application/json")
+
     return HttpResponse(json.dumps({
         'status': 1,
         'length': 1,
@@ -193,11 +166,7 @@ def search_course_by_department(request) -> HttpResponse:
     retlist = []
     try:
 
-        '''if not auth.auth(request):
-            return HttpResponse(json.dumps({
-                'status': -100,
-                'errMsg': 'cookies 错误',
-            }), content_type="application/json")'''
+
         department = request.GET['department']
         course_name = request.GET['course_name']
         course_list = TeachCourse.objects.filter(
@@ -219,10 +188,8 @@ def search_course_by_department(request) -> HttpResponse:
                 retlist[-1]['department'] = department
 
     except BaseException:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': '获取课程列表失败',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-1, '缺失必要的信息'), content_type="application/json")
+
     return HttpResponse(json.dumps({
         'status': 1,
 
@@ -247,10 +214,8 @@ def get_department(request) -> HttpResponse:
         for dep in department:
             retlist.append(dep.ret())
     except BaseException:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': '获取学院列表失败',
-        }), content_type="application/json")
+        return HttpResponse(formatException(-1, '缺失必要的信息'), content_type="application/json")
+
     return HttpResponse(json.dumps({
         'status': 1,
         'length': len(retlist),

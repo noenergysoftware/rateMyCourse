@@ -11,10 +11,12 @@ from rateMyCourse.models import *
 需求rankit库，可以pip直接安装，也可以去GitHub中下源码编译。
 """
 
+
 class Rankers:
     """
     计算课程排名，使用了梅西法和科利法的波达计数作为
     """
+
     def __init__(self) -> None:
         # 考虑到平局与没有平局的情况，我们存两张表
         self.rawTable = pd.DataFrame(columns=["HCourse", "LCourse", "HScore", "LScore"])
@@ -142,13 +144,13 @@ class RankersTeacher:
     计算教师排名，与上面的基本一样，请参考上面的方法
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.rawTable = pd.DataFrame(columns=["HCourse", "LCourse", "HScore", "LScore"])
         self.rawTable2 = pd.DataFrame(columns=["HCourse", "LCourse", "HScore", "LScore"])
         self.outTable = {}
         self.allranks = []
 
-    def read_data(self):
+    def read_data(self) -> None:
         allRankDict = {}
         ar = MakeRank.objects.all()
         for i in ar:
@@ -190,7 +192,7 @@ class RankersTeacher:
         self.rawTable = pd.DataFrame(tmpTable)
         self.rawTable2 = pd.DataFrame(tmpTable2)
 
-    def run_rank(self):
+    def run_rank(self) -> dict:
         if len(self.rawTable) == 0:
             data = None
         else:
@@ -228,7 +230,7 @@ class RankersTeacher:
 
         return {}
 
-    def save_to_database(self):
+    def save_to_database(self) -> None:
         qs = [i[0] for i in self.allranks]
         for i in Teacher.objects.all():
             if len(TeacherRankCache.objects.filter(teacher=i)) == 0:
@@ -257,7 +259,7 @@ class RankersTeacher:
                 c.save()
 
 
-def calc_rank():
+def calc_rank() -> None:
     # 封装的过程
     a = Rankers()
     a.read_data()
@@ -265,7 +267,7 @@ def calc_rank():
     a.save_to_database()
 
 
-def calc_rank_teacher():
+def calc_rank_teacher() -> None:
     # 封装的过程
     a = RankersTeacher()
     a.read_data()
